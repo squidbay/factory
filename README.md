@@ -1,14 +1,14 @@
-# factory
+# 🏭 factory
 
 **Run a persistent, human-gated team of Claude seats on the Claude desktop app.**
 
-[**Get Claude Desktop**](https://claude.com/download) · [**Get Cloudflare ($5)**](https://www.cloudflare.com/plans/developer-platform/) · [**Use this template**](https://github.com/squidbay/factory/generate)
+[![Step 1 — Get Claude Desktop](https://img.shields.io/badge/1.%20%F0%9F%96%A5%20Get%20Claude%20Desktop-0A0E14?style=for-the-badge)](https://claude.com/download) **→** [![Step 2 — Get Cloudflare ($5)](https://img.shields.io/badge/2.%20%E2%9A%A1%20Get%20Cloudflare%20%28%245%29-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://www.cloudflare.com/plans/developer-platform/) **→** [![Step 3 — Use this template](https://img.shields.io/badge/3.%20%F0%9F%8F%AD%20Use%20this%20template-00D9FF?style=for-the-badge)](https://github.com/squidbay/factory/generate)
 
 You already pay for a team — you're just using it one chat at a time. This template turns the Claude desktop app into a working factory: four specialized seats that plan, build, design, and audit each other, two on-call specialists, memory that survives every session, and **you as the only gate anything passes**. No code to understand. No command lines. You never leave the chat.
 
 > **Agents make mistakes. That's not fine print — it's the design premise.** Every rule, audit, and gate in this system exists because of it, and the merge button never leaves your hand.
 
-## What you get
+## 🧰 What you get
 
 - **A persistent team, not a chatbot.** Cowork plans and audits, Code builds, Design handles the visual lane, Chat surfaces what matters — the same seats, every day, working the same project.
 - **Memory that survives.** Sessions are stateless; your factory isn't. A git journal remembers every decision, and every seat reads it at boot. Six months from now, "why is it like this?" has an answer.
@@ -17,7 +17,7 @@ You already pay for a team — you're just using it one chat at a time. This tem
 - **Secure by default.** No exposed services. No credential in any chat or file — a CI guardrail enforces it from your first commit. Broad access is read-only; write access is narrow, expiring, and behind your merge button.
 - **Missions to start from.** "What are we building?" has four ready answers — overhaul a website, produce an agency-grade design guide, organize the business, or ship a first site — each with its skills packed and its finish line defined.
 
-## Quick start
+## 🚀 Quick start
 
 1. **[Use this template](https://github.com/squidbay/factory/generate)** → create your own **private** copy (one click, free GitHub account). No GitHub account yet? [github.com/signup](https://github.com/signup) first — two minutes, free.
 2. Open the **Claude desktop app** → the **Code** tab → **+** → attach your new repo. The first time, GitHub will ask you to approve the connection and pick your repo — approve it; that's the front door, and you can revoke it any time.
@@ -25,11 +25,11 @@ You already pay for a team — you're just using it one chat at a time. This tem
 
 **Requirements:** the [Claude desktop app](https://claude.com/download) + any paid Claude plan — Pro ($20/mo) runs every seat, [Max](https://support.claude.com/en/collections/5953830) is recommended for heavy parallel days. Building a website too? **$20 Claude Pro + $5 Cloudflare = a full AI team and a deployed site.** (No website plans yet? Skip Cloudflare until a mission needs it.)
 
-## A day in the factory
+## ☕ A day in the factory
 
 Morning coffee: two PRs waiting. One is a page your Code seat built overnight against the spec you merged yesterday; Cowork's audit is already in the thread — *safe, here's why*. You read the description (it explains itself in plain words — house style), merge from your phone, and the deploy goes out. On the drive to work you dispatch a research question; by lunch the report is back and Cowork has folded the verified parts into tomorrow's spec. The journal wrote itself an entry. Total hands-on time: eleven minutes.
 
-## The fine print that isn't fine print
+## 🔍 The fine print that isn't fine print
 
 - Built by the team that runs this exact system in production every day — this template *is* our operating discipline, generalized. We eat the dog food.
 - The factory idles safely. Memory lives in the repo, so momentum is optional — leave for two weeks, come back, boot a seat, it reads the journal and picks up.
@@ -37,7 +37,7 @@ Morning coffee: two PRs waiting. One is a page your Code seat built overnight ag
 
 ---
 
-## If you are a Claude reading this
+## 🤖 If you are a Claude reading this
 
 This repository is a factory operating system, and you are probably one of its seats. Before anything else:
 
