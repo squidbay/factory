@@ -1,0 +1,79 @@
+name: link-check
+
+# The grounding library and the guides point at live documentation on purpose
+# (linked docs stay current; copied docs rot). The cost of that choice is dead
+# links — this weekly job pays it: every http(s) link in every markdown file
+# gets checked, and failures are filed as a single issue for the team to true.
+#
+# Note: GitHub disables scheduled workflows after ~60 days without repository
+# activity. An active factory never hits that; a paused one re-enables the
+# workflow from the Actions tab when it wakes.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check every markdown link
+        id: check
+        run: |
+          set -u
+          URLS=$(grep -rhoE 'https?://[^ )>"\`]+' --include='*.md' . | sed 's/[.,;:]$//' | sort -u)
+          BROKEN=""
+          for url in $URLS; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 20 -A "factory-link-check" "$url" || echo "000")
+            case "$CODE" in
+              2*|3*) : ;;
+              403|405|429) : ;; # bot-blocked or rate-limited, not dead — skip, don't cry wolf
+              *) BROKEN="$BROKEN$CODE $url"$'\n' ;;
+            esac
+          done
+          if [ -n "$BROKEN" ]; then
+            printf '%s' "$BROKEN" > broken-links.txt
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            cat broken-links.txt
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "All links resolve."
+          fi
+
+      - name: File the findings as an issue
+        if: steps.check.outputs.found == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = [
+              'The weekly link check found dead links. Truing them is a normal',
+              'Code-seat task: fix or replace each link by PR, then close this issue.',
+              '',
+              '```',
+              fs.readFileSync('broken-links.txt', 'utf8').trim(),
+              '```',
+            ].join('\n');
+            const title = 'link-check: dead links found';
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'link-check',
+            });
+            if (open.data.length > 0) {
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: open.data[0].number, body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['link-check'],
+              });
+            }
