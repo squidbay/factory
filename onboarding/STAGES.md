@@ -17,12 +17,12 @@
 
 ## Stage 1 — The gate 🎉
 
-*Making your merge button structural, not ceremonial.*
+*Seeing with your own eyes that nothing moves without you.*
 
-- Code walks you through **branch protection** on `main` — the GitHub setting that makes "nobody but you can merge" a rule of the repo itself, not a promise. Exact taps, one at a time (the plain-words version lives in [`hosting/github/`](../hosting/github/README.md)).
-- Then a small test: Code opens a one-line PR and you watch the protection work.
+- First, the honest map of the ground. Your gate holds because **every seat is bound to it**: no seat ever pushes to `main` — every change arrives as a pull request you merge, on any GitHub plan, from day one (RULE 14). GitHub can *additionally* lock that rule into the platform itself with **branch protection** — and that enforcement is free on **public** repos, so your workshop can have it the day it exists. On a **private** repo like your office, GitHub Free lets you create the setting but doesn't enforce it until GitHub Pro — so think of the platform lock as an upgrade waiting on the shelf, not a missing piece. The clicks, and the fuller plain-words picture, live in [`hosting/github/`](../hosting/github/README.md).
+- Then the test you can run on **any** plan — and the real point of this stage: Code changes something the only way it ever will. It opens a one-line PR instead of touching `main`, and you watch the whole discipline work: the proposal, the explanation, your click, and only then the change.
 
-*Done looks like: `main` locked to PRs; your second merge behind you.*
+*Done looks like: you watched a seat propose instead of push; your second merge behind you.*
 
 ## Stage 2 — The center 🎉
 

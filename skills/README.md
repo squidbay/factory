@@ -16,6 +16,7 @@ A **skill** is a set of instructions a Claude seat loads to get better at one sp
 
 - [`factory-coach/`](factory-coach/SKILL.md) — plain-English coaching for the human, one concept at a time. Offer it to the Chat room at Stage 2.
 - [`factory-retro/`](factory-retro/SKILL.md) — the factory learning to run itself better: reads the journal, finds friction, proposes fixes as PRs you gate.
+- [`factory-update/`](factory-update/SKILL.md) — explains and drives the update PRs opened by the workflow of the same name: what changed upstream, hunk by hunk, and how to adopt only the parts you want.
 - [`skill-creator/`](skill-creator/SKILL.md) — a pointer skill for minting NEW custom skills properly, using Anthropic's own skill-creator from [github.com/anthropics/skills](https://github.com/anthropics/skills).
 
 ## When to mint a new skill
