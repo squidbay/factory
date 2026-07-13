@@ -1,0 +1,124 @@
+name: godview-audit
+
+# The factory's "see everything, touch nothing" audit. Configured state lies;
+# runtime state tells the truth — so once a week (or on demand from the
+# Actions tab) this job goes and LOOKS: at the repo itself, at your hosting
+# account if you've given it a read-only key, at your domains if you've named
+# them. Every call it makes is a read. It cannot change anything, anywhere.
+#
+# Configuration is names-only, all optional, and it degrades gracefully —
+# with nothing configured it still audits the repo and says plainly what it
+# couldn't see:
+#
+#   Secret  CLOUDFLARE_READ_TOKEN  — a read-only Cloudflare token (the
+#           click-by-click recipe is in hosting/cloudflare/README.md).
+#           Settings → Secrets and variables → Actions → New repository secret.
+#   Variable  FACTORY_DOMAINS  — comma-separated domains to health-check
+#           (e.g. "example.com,shop.example.com"). Same panel, Variables tab.
+#           Domain checks are public HTTPS requests; no secret involved.
+#
+# The report lands in two places: the run's summary page, and a downloadable
+# artifact kept for 90 days. Reading it is a normal Cowork task: "pull the
+# latest godview report and tell me if anything drifted."
+
+on:
+  schedule:
+    - cron: "0 6 * * 3"   # Wednesdays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit the repo (always possible, no configuration)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -u
+          {
+            echo "# God-view audit — $(date -u +%Y-%m-%dT%H:%MZ)"
+            echo
+            echo "## Repo facts (observed, not assumed)"
+            LAST_COMMIT=$(git log -1 --format='%h — %s (%cr)')
+            echo "- Last commit on \`${GITHUB_REF_NAME}\`: $LAST_COMMIT"
+            OPEN_PRS=$(curl -sf -H "Authorization: Bearer $GH_TOKEN" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&per_page=100" | jq length || echo "?")
+            echo "- Open pull requests: $OPEN_PRS"
+            FAILED_RUNS=$(curl -sf -H "Authorization: Bearer $GH_TOKEN" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs?status=failure&per_page=10" | jq '.workflow_runs | length' || echo "?")
+            echo "- Recent failed workflow runs (last 10 fetched): $FAILED_RUNS"
+            PROTECTED=$(curl -sf -H "Authorization: Bearer $GH_TOKEN" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}" | jq -r '.default_branch as $d | "default branch: \($d)"' || echo "?")
+            echo "- $PROTECTED"
+            echo
+          } > report.md
+
+      - name: Audit Cloudflare (only if a read key is configured)
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_READ_TOKEN }}
+        run: |
+          set -u
+          {
+            echo "## Hosting (Cloudflare)"
+            if [ -z "${CF_TOKEN:-}" ]; then
+              echo "- No \`CLOUDFLARE_READ_TOKEN\` secret configured — nothing to audit here."
+              echo "  (Optional. The read-only key recipe: hosting/cloudflare/README.md.)"
+            else
+              VERIFY=$(curl -sf -H "Authorization: Bearer $CF_TOKEN" \
+                "https://api.cloudflare.com/client/v4/user/tokens/verify" | jq -r '.result.status' || echo "unreachable")
+              echo "- Token verify: **$VERIFY**"
+              if [ "$VERIFY" = "active" ]; then
+                ACCOUNTS=$(curl -sf -H "Authorization: Bearer $CF_TOKEN" \
+                  "https://api.cloudflare.com/client/v4/accounts" | jq -r '.result[]?.id' || true)
+                for acct in $ACCOUNTS; do
+                  WORKERS=$(curl -sf -H "Authorization: Bearer $CF_TOKEN" \
+                    "https://api.cloudflare.com/client/v4/accounts/$acct/workers/scripts" | jq '.result | length' || echo "?")
+                  echo "- Account \`${acct:0:8}…\`: deployed Workers: $WORKERS"
+                done
+                ZONES=$(curl -sf -H "Authorization: Bearer $CF_TOKEN" \
+                  "https://api.cloudflare.com/client/v4/zones?per_page=50" | jq -r '.result[]? | "- Zone \(.name): \(.status)"' || true)
+                [ -n "$ZONES" ] && echo "$ZONES" || echo "- No zones visible to this token."
+              fi
+            fi
+            echo
+          } >> report.md
+
+      - name: Audit the domains (only if named; public checks, no secret)
+        env:
+          DOMAINS: ${{ vars.FACTORY_DOMAINS }}
+        run: |
+          set -u
+          {
+            echo "## Domains"
+            if [ -z "${DOMAINS:-}" ]; then
+              echo "- No \`FACTORY_DOMAINS\` variable configured — nothing to check here. (Optional.)"
+            else
+              IFS=',' read -ra LIST <<< "$DOMAINS"
+              for d in "${LIST[@]}"; do
+                d=$(echo "$d" | xargs)
+                CODE=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 20 "https://$d" || echo "000")
+                case "$CODE" in
+                  2*|3*) echo "- \`$d\`: up (HTTP $CODE)" ;;
+                  *)     echo "- \`$d\`: **NOT healthy** (HTTP $CODE) — worth a look" ;;
+                esac
+              done
+            fi
+            echo
+            echo "*Every call in this audit was a read. Nothing was changed anywhere.*"
+          } >> report.md
+
+      - name: Publish the report
+        run: cat report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: godview-report
+          path: report.md
+          retention-days: 90
