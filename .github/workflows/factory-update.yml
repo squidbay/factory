@@ -19,6 +19,13 @@ name: factory-update
 # What it can never do: touch your journal, your specs, your roster, your
 # denylist, or anything else absent from the manifest; merge; or rewrite
 # its own workflow files (the Actions token physically cannot).
+#
+# One honest mechanic worth knowing: the PRs this workflow opens use the
+# default Actions token, and GitHub does not run other workflows (your
+# guardrails check included) on PRs opened that way. The content in them
+# comes from the public template, which runs its own gates before anything
+# lands there — but your own checks showing as absent on an update PR is
+# expected, not broken.
 
 on:
   schedule:
