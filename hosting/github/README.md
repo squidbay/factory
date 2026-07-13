@@ -15,7 +15,7 @@ GitHub can feel like it was named by engineers for engineers — because it was.
 
 Your factory uses two repos with two different jobs:
 
-- **The office** — your own **private** copy of this template (you created it with the "Use this template" button). It holds the team itself: the journal, the rules, the plans, the seats' boot files. It's the team's memory — the reason a fresh session picks up where the last one left off. Private, because it's your playbook.
+- **The office** — your own **private** copy of this template (you created it with the "Use this template" button). It holds the team itself: the journal, the rules, the plans, the seats' boot files. It's the team's memory — the reason a fresh session picks up where the last one left off. Private, because it's your playbook. One honest detail: a copy made with the button doesn't inherit the template's About description or topics — your office's About starts blank, and that's fine (it's private; write one if you like).
 - **The workshop** — what the team *builds*: your website, your product, your tool. It deploys to Cloudflare (see `hosting/cloudflare/README.md`), and because every secret lives in Cloudflare's secret store rather than in the repo, the workshop can be public or private — your choice, no risk either way.
 
 One team, two rooms: the office is where they think; the workshop is what they make.
