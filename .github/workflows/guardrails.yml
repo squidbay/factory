@@ -1,0 +1,74 @@
+name: guardrails
+
+# The factory's anti-leak floor: no credential VALUE ever appears in any
+# committed file. Runs on every push and every pull request. If this job is
+# red, the fix is never "adjust the pattern" first — it's "find the secret,
+# rotate it, remove it," then look at the pattern.
+#
+# Your team may also add credential NAMES it never wants committed to
+# .github/guardrails-denylist.txt (one term per line, # comments allowed) —
+# useful for keeping private infrastructure names out of a repo you might
+# someday make public.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for credential-shaped strings
+        run: |
+          set -u
+          FAIL=0
+
+          # Value patterns: things that look like real credentials.
+          # Word chosen over cleverness — each pattern catches one well-known shape.
+          declare -A PATTERNS=(
+            [github_pat_classic]='ghp_[A-Za-z0-9]{36}'
+            [github_pat_fine_grained]='github_pat_[A-Za-z0-9_]{22,}'
+            [github_app_tokens]='gh[ousr]_[A-Za-z0-9]{36}'
+            [aws_access_key]='AKIA[0-9A-Z]{16}'
+            [private_key_block]='-----BEGIN [A-Z ]*PRIVATE KEY-----'
+            [anthropic_key]='sk-ant-[A-Za-z0-9_-]{20,}'
+            [generic_api_key_assignment]='[Aa][Pp][Ii][_-]?[Kk][Ee][Yy]["'"'"']?[[:space:]]*[:=][[:space:]]*["'"'"'][A-Za-z0-9_\-]{20,}["'"'"']'
+            [bearer_token]='Bearer [A-Za-z0-9_\-\.=]{30,}'
+          )
+
+          for name in "${!PATTERNS[@]}"; do
+            # Exclude this workflow itself (it contains the patterns) and .git
+            HITS=$(grep -rInE --exclude-dir=.git --exclude='guardrails.yml' "${PATTERNS[$name]}" . || true)
+            if [ -n "$HITS" ]; then
+              echo "::error::guardrails: possible committed credential (pattern: $name)"
+              echo "$HITS"
+              FAIL=1
+            fi
+          done
+
+          # The team's own denylist: names that must never appear in this repo.
+          DENYLIST=".github/guardrails-denylist.txt"
+          if [ -f "$DENYLIST" ]; then
+            while IFS= read -r term; do
+              case "$term" in ''|'#'*) continue ;; esac
+              HITS=$(grep -rInF --exclude-dir=.git --exclude='guardrails-denylist.txt' -- "$term" . || true)
+              if [ -n "$HITS" ]; then
+                echo "::error::guardrails: denylisted term found: $term"
+                echo "$HITS"
+                FAIL=1
+              fi
+            done < "$DENYLIST"
+          fi
+
+          if [ "$FAIL" -ne 0 ]; then
+            echo ""
+            echo "A credential value (or denylisted name) appears to be committed."
+            echo "1. Rotate the credential NOW — committed once is leaked, even after deletion."
+            echo "2. Remove it from the file; put the value where it belongs"
+            echo "   (GitHub Actions secrets, or your host's secret store)."
+            echo "3. Only then consider whether the pattern needs tuning."
+            exit 1
+          fi
+          echo "guardrails: clean."

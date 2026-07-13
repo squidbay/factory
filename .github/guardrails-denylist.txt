@@ -1,0 +1,9 @@
+# guardrails denylist — one term per line, comments start with #
+#
+# Add credential NAMES or private infrastructure terms your team never wants
+# to appear in this repo. The guardrails CI fails any commit containing them.
+# Names only — never put a credential VALUE here or anywhere else in the repo.
+#
+# Example (uncomment and replace):
+# my-company-read-token
+# MY_DEPLOY_SECRET
