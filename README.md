@@ -2,7 +2,7 @@
 
 **Run a persistent, human-gated team of Claude seats on the Claude desktop app.**
 
-[![Step 1 — Get Claude Desktop](https://img.shields.io/badge/1.%20%F0%9F%96%A5%20Get%20Claude%20Desktop-0A0E14?style=for-the-badge)](https://claude.com/download) **→** [![Step 2 — Get Cloudflare ($5)](https://img.shields.io/badge/2.%20%E2%9A%A1%20Get%20Cloudflare%20%28%245%29-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://www.cloudflare.com/plans/developer-platform/) **→** [![Step 3 — Use this template](https://img.shields.io/badge/3.%20%F0%9F%8F%AD%20Use%20this%20template-00D9FF?style=for-the-badge)](https://github.com/squidbay/factory/generate)
+[![Step 1 — Get Claude Desktop](https://img.shields.io/badge/Step%201-Get%20Claude%20Desktop-141D28?style=for-the-badge&logo=anthropic&logoColor=white&labelColor=555555)](https://claude.com/download) **→** [![Step 2 — Get Cloudflare ($5)](https://img.shields.io/badge/Step%202-Get%20Cloudflare%20%28%245%29-F38020?style=for-the-badge&logo=cloudflare&logoColor=white&labelColor=555555)](https://www.cloudflare.com/plans/developer-platform/) **→** [![Step 3 — Use this template](https://img.shields.io/badge/Step%203-Use%20this%20template-1F883D?style=for-the-badge&logo=github&logoColor=white&labelColor=555555)](https://github.com/squidbay/factory/generate)
 
 You already pay for a team — you're just using it one chat at a time. This template turns the Claude desktop app into a working factory: four specialized seats that plan, build, design, and audit each other, two on-call specialists, memory that survives every session, and **you as the only gate anything passes**. No code to understand. No command lines. You never leave the chat.
 
