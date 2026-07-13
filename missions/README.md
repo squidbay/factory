@@ -6,7 +6,7 @@ Your factory exists to build things you care about. A **mission pack** is a read
 
 Day 1 sets the team up. Day 2 asks the only question that matters: **"what are we building?"**
 
-The coach asks it at Stage 0 of onboarding (see [`onboarding/STAGES.md`](../onboarding/STAGES.md)). Your answer picks a mission from this folder, and that mission becomes the factory's first real work — Cowork reads the pack's `MISSION.md`, plans from it, and the loop starts turning on something that's actually yours. A factory with no mission is a very organized empty room; pick one early.
+Code asks it at Stage 0 of onboarding (see [`onboarding/STAGES.md`](../onboarding/STAGES.md)). Your answer picks a mission from this folder, and that mission becomes the factory's first real work — Cowork reads the pack's `MISSION.md`, plans from it, and the loop starts turning on something that's actually yours. A factory with no mission is a very organized empty room; pick one early.
 
 You don't have to pick perfectly. Missions compose: most people who start with [`first-website/`](first-website/MISSION.md) grow into [`website-overhaul/`](website-overhaul/MISSION.md) discipline, and [`organize-my-business/`](organize-my-business/MISSION.md) runs happily alongside anything.
 
