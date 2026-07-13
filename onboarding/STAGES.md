@@ -28,11 +28,11 @@
 
 *Your team leader comes online.*
 
-- Code walks you through the two one-time setups, click by click: the **connectors** that let chat seats read (and only read) your repo, and the **skills upload** for `cowork-boot` (Settings → Skills). It offers the coach skill for your Chat room at the same time — plain-English explanations of anything, whenever you want them.
-- Cowork boots in the Cowork room, reads the repo **itself** — and proves it, by telling you what it sees in the journal. Until a seat proves it can read, it hasn't connected; "should work" doesn't count here (RULE 1 binds the seats, not you).
-- **The handoff:** from this stage on, Cowork is the center — it plans, specs, and audits; Code falls back to what it does best: building. This is the moment the factory starts *running* instead of being installed.
+- Code walks you through the two one-time setups, click by click. First, **the GitHub connection ritual — the whole ceremony, and the only time you'll do it:** in the chat, tap **+** → connect **GitHub** → sign in → select your factory repo → save. That's it — no keys, no settings pages, no jargon. (Fine-grained tokens exist as an upgrade for factories that outgrow this someday — most never do; see [`tokens/TOKEN-MODEL.md`](../tokens/TOKEN-MODEL.md) when that day comes, not before.) Second, the **skills upload** for `cowork-boot` (Settings → Skills). It offers the coach skill for your Chat room at the same time — plain-English explanations of anything, whenever you want them.
+- Cowork boots in the Cowork room, reads the repo **itself** — and proves it, by reading your journal back to you aloud: what the factory did, in its own words. Until a seat proves it can read, it hasn't connected; "should work" doesn't count here (RULE 1 binds the seats, not you). If you want the proof to go one step further, Cowork dictates a one-line journal update and **Code opens the PR on Cowork's words** — the chat seats see and propose; Code holds the pen.
+- **The handoff, worth celebrating on its own:** from this stage on, Cowork is the center — it plans, specs, and audits; Code falls back to what it does best: building. Code was your guide for these first stages *by design* — the seat that connects to your repo effortlessly is the right one to stand the others up — and handing you to the team leader is it finishing that job, not leaving you. This is the moment the factory starts *running* instead of being installed.
 
-*Done looks like: Cowork reads the repo and passes its self-test PR; you merged it; the loop is alive.*
+*Done looks like: Cowork reads your journal back to you; the loop is alive.*
 
 ## Stage 3 — The surfacer 🎉
 

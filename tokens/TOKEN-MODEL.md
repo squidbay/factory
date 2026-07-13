@@ -1,6 +1,8 @@
 # The token model — who can see what, who can do what
 
-You don't need to memorize this page. It exists so that every future question about access — "can my team do X by itself?" — is a lookup, not a decision. When a seat asks you to create a key, it will point you here and walk you through it one step at a time. Read it once now so nothing on that day surprises you.
+**Start here: on day one, you don't need any of this.** The normal way your factory connects to GitHub is the one ritual from onboarding — in the chat, tap **+** → connect **GitHub** → sign in → select your factory repo → save — and that's a sign-in, not a key you manage. Everything below is the **advanced shelf**: upgrades for a factory that outgrows the connector — most never need them. The model is written down now so that if that day comes, it's a lookup, not a decision; the keys themselves stay uncreated until then.
+
+You don't need to memorize this page. When a seat ever does ask you to create a key, it will point you here and walk you through it one step at a time. Read it once now so nothing on that day surprises you.
 
 A **token** is a key. Like a physical key, the whole game is deciding what each key opens and where each key is kept. That's the entire subject. There are only two ideas and three keys, and this page is all of them.
 
@@ -22,7 +24,9 @@ And in every case, one thing never moves: **the merge button stays yours.** No k
 
 ---
 
-## The three keys
+## The three keys — advanced upgrades, when needed
+
+None of these exist in a fresh factory, and a fresh factory is not missing anything: the GitHub connector covers day-one work in full. Each tier below is an upgrade you reach for only when the factory outgrows what the connector reaches — and each one comes with a seat to walk you through it when (if) that happens.
 
 | Tier | Plane | What it is | Where the value lives |
 |---|---|---|---|

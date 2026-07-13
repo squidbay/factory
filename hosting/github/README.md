@@ -24,16 +24,19 @@ One team, two rooms: the office is where they think; the workshop is what they m
 
 Different seats reach GitHub differently, and it's worth two minutes to know which is which — after this, "how does my team access what?" is always a lookup, never a mystery.
 
-**1. The Claude GitHub App — how Code sessions work.**
+**1. The GitHub connector — how chat seats (Cowork, Chat) see your repo. This is your one ritual.**
+In the chat, tap **+** → connect **GitHub** → sign in → select your factory repo → save. That's the entire ceremony — a sign-in, not a key you create or manage — and you do it exactly once, during onboarding (Stage 2), with Code walking you through it. From then on your chat seats read the repo themselves: the journal, the plans, what Code shipped.
+
+**2. The Claude GitHub App — Code's own door.**
 When you add a repo to a Code session, the Claude GitHub App is what grants access — per-repo, granted by you, revocable by you. Through it, Code reads the repo, works on branches, and opens PRs. It **cannot merge** — not as a courtesy, but by construction. This is the zero-setup path: add the repo, start typing.
 
-**2. Connector keys — how chat seats (Cowork, Chat) see and propose.**
-Chat seats reach GitHub through a connector you configure once in the Claude app's settings, using tokens *you* create: a **Tier A** read-only key so they can see your repos, and a **Tier B** write key scoped to the office alone so they can propose changes there. Full click-by-click recipes, and the reasoning behind the scoping, live in `tokens/TOKEN-MODEL.md`.
+**3. Fine-grained tokens — the advanced shelf, for later or never.**
+GitHub also lets you mint scoped keys (a broad read-only one, a narrow write one) for a factory that eventually outgrows the connector. Most never need them. The full model and click-by-click recipes live in `tokens/TOKEN-MODEL.md` — read it once so nothing surprises you, and leave the keys uncreated until a seat points you there for a real reason.
 
-**3. Actions secrets — how automation works with no one holding a key.**
+**And one rail with no door at all — Actions secrets, how automation works with no one holding a key.**
 GitHub **Actions** are small workflows that run automatically on your repo — your factory's guardrails check every PR this way, and your deploys can ride the same rail. When a workflow needs a credential (a deploy token, a god-view key), the value lives in the repo's encrypted **Actions secrets**, where no human and no seat can read it back out. The workflow uses it; nobody sees it.
 
-**Which to use when:** building or fixing something → a Code session (the App). Planning, auditing, reading the journal from chat → the connector keys. Anything that should happen *automatically* — checks, audits, deploys → a workflow with Actions secrets. When in doubt, ask a seat; routing work to the right door is its job, not yours.
+**Which to use when:** building or fixing something → a Code session (the App). Planning, auditing, reading the journal from chat → the connector. Anything that should happen *automatically* — checks, audits, deploys → a workflow with Actions secrets. When in doubt, ask a seat; routing work to the right door is its job, not yours.
 
 ## GitHub Mobile — the gate in your pocket
 
