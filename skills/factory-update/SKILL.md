@@ -16,6 +16,8 @@ Two things the update deliberately reports **without applying** (look for "Also 
 - **Workflow changes.** A repo's automation cannot rewrite its own automation — when the template's workflows improve, the PR tells you, and bringing them over is a normal Code-seat task.
 - **Manifest drift.** If your manifest differs from the template's, the PR says so and leaves yours alone.
 
+One more honest mechanic: because the workflow opens its PRs with the default Actions token, **your other workflows — the guardrails check included — do not run on update PRs.** That's a GitHub rule, not a malfunction. The content arrives from the public template, which runs its own gates before anything lands there; if you want your own checks on an update anyway, ask a Code seat to re-open the same delta as a normal PR.
+
 ## How to handle an update PR
 
 1. **Read the diff like any PR** — it's usually copy improvements, new guide sections, sharpened seat rules. Ask any seat to explain a hunk in plain words; that's what they're for.

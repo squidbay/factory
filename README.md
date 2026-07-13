@@ -19,8 +19,8 @@ You already pay for a team — you're just using it one chat at a time. This tem
 
 ## Quick start
 
-1. **[Use this template](https://github.com/squidbay/factory/generate)** → create your own **private** copy (one click, free GitHub account).
-2. Open the **Claude desktop app** → the **Code** tab → **+** → attach your new repo.
+1. **[Use this template](https://github.com/squidbay/factory/generate)** → create your own **private** copy (one click, free GitHub account). No GitHub account yet? [github.com/signup](https://github.com/signup) first — two minutes, free.
+2. Open the **Claude desktop app** → the **Code** tab → **+** → attach your new repo. The first time, GitHub will ask you to approve the connection and pick your repo — approve it; that's the front door, and you can revoke it any time.
 3. **Claude Code takes it from there.** It introduces the team, walks you through each stage at your pace, and celebrates every step that lands. Your first merge happens in your first session.
 
 **Requirements:** the [Claude desktop app](https://claude.com/download) + any paid Claude plan — Pro ($20/mo) runs every seat, [Max](https://support.claude.com/en/collections/5953830) is recommended for heavy parallel days. Building a website too? **$20 Claude Pro + $5 Cloudflare = a full AI team and a deployed site.** (No website plans yet? Skip Cloudflare until a mission needs it.)

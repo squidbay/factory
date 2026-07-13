@@ -42,9 +42,14 @@ GitHub **Actions** are small workflows that run automatically on your repo — y
 
 Install the **GitHub** app on your phone, next to the Claude app. It can show you a PR — the full changes and the seat's explanation — and let you review, approve, and **merge**, entirely from the phone. The pocket loop looks like this: dispatch a task from the Claude app on the go → the seat works → your phone buzzes with a PR → you read the description over coffee → merge → the journal records it. Your whole role in the factory — the gate — fits in ten minutes and one pocket. This isn't a party trick; for many owners it becomes the main way they run the team.
 
-## Branch protection — making the gate physical, click by click
+## Branch protection — the platform-level lock, and where it's honestly available
 
-Right now, "no seat merges" is a rule the seats follow. Branch protection makes it a fact the platform *enforces* — nothing reaches `main` except through a PR, no matter who or what is pushing. Two minutes, once per repo:
+Your gate already holds by rule: every seat is bound to branch + PR and never pushes `main`, on any plan (RULE 14). **Branch protection** adds a second layer — GitHub itself refuses anything that isn't a PR, no matter who or what is pushing. One honest fact before the clicks: **GitHub enforces branch protection for free on public repos; on a private repo it takes GitHub Pro.** In practice:
+
+- **Your workshop**, if you make it public (it safely can be — its secrets live at the host, not in the repo): protect it the day it exists, free.
+- **Your office** stays private — that's non-negotiable, it's the team's mind — so under GitHub Free the setting can be created but isn't enforced. The seats' PR-only discipline *is* the gate there (and Stage 1 shows it to you working); if you ever upgrade to GitHub Pro, flip the lock on that day.
+
+The clicks, for any repo where it's enforced (two minutes):
 
 1. Open your repo on github.com → **Settings** (the tab on the repo itself)
 2. In the left sidebar: **Branches**
@@ -53,11 +58,11 @@ Right now, "no seat merges" is a rule the seats follow. Branch protection makes 
 5. Check **Require a pull request before merging**
 6. Click **Create** at the bottom
 
-Done. Do it for the office first (it's one of your first-day steps, and a seat will prompt you); do it for the workshop when that repo exists. From then on, even a confused seat — even *you*, on a clumsy day — can't change `main` by accident. The gate stopped being a promise and became a door.
+From then on, even a confused seat — even *you*, on a clumsy day — can't change that repo's `main` by accident.
 
 ## The free tier is genuinely enough
 
-Private repos on a free GitHub account come with **2,000 free Actions minutes every month**. Your office's automation — the guardrails check on each PR, a weekly link check — uses a small fraction of that. You will not be surprised by a GitHub bill; for this factory's purposes, GitHub is free.
+Private repos on a free GitHub account come with **2,000 free Actions minutes every month**. Your office's automation — the guardrails check on each PR, a weekly link check — uses a small fraction of that. You will not be surprised by a GitHub bill; for this factory's purposes, GitHub is free. The one thing the free tier doesn't include: platform-enforced branch protection on *private* repos (see the section above) — the gate still holds there by the seats' PR-only rule, and the platform lock is available free on public repos or with GitHub Pro on private ones.
 
 ## One thing to learn
 
