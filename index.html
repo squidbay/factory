@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>factory — run a team of Claude seats, human-gated, from the Claude desktop app</title>
+<meta name="description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
+<link rel="canonical" href="https://squidbay.github.io/factory/">
+<meta name="theme-color" content="#0A0E14">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230A0E14%22%3E%3C%2Frect%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%3E%F0%9F%8F%AD%3C%2Ftext%3E%3C%2Fsvg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="squidbay/factory">
+<meta property="og:url" content="https://squidbay.github.io/factory/">
+<meta property="og:title" content="factory — run a team of Claude seats, human-gated">
+<meta property="og:description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
+<meta property="og:image" content="https://squidbay.github.io/factory/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="factory: you already pay for a team. You're just using it one chat at a time.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="factory — run a team of Claude seats, human-gated">
+<meta name="twitter:description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
+<meta name="twitter:image" content="https://squidbay.github.io/factory/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+      "name": "factory",
+      "description": "A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and audit each other's work; the human approves every change, even from a phone.",
+      "operatingSystem": "Claude desktop app",
+      "applicationCategory": "BusinessApplication",
+      "license": "https://github.com/squidbay/factory/blob/main/LICENSE",
+      "codeRepository": "https://github.com/squidbay/factory",
+      "url": "https://squidbay.github.io/factory/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need to know how to code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The seats write the code and explain it in plain words. Your job is to read a short summary and decide yes or no. If you can read an email and tap a button, you can run a factory."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does it cost to run?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A paid Claude plan ($20 a month for Pro; Max plans work too) plus $5 flat for Cloudflare when you build something that ships. GitHub is free. That's the whole bill."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to let AI touch my files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The factory starts from the honest assumption: agents make mistakes. So no seat can change anything on its own. Every change is a pull request that waits for you, write access is narrow, broad access is read-only, and no credential ever appears in a chat or a file. You are the gate."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --primary: #00D9FF;
+  --primary-light: #33E5FF;
+  --primary-glow: rgba(0, 217, 255, 0.15);
+  --black: #0A0E14;
+  --dark: #0F1419;
+  --darker: #0C1015;
+  --gray: #1C2630;
+  --gray-light: #2A3744;
+  --white: #E8F4F8;
+  --muted: #7B8FA3;
+  --green: #00D26A;
+  --yellow: #FFBD2E;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(0, 217, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(30, 58, 95, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+main, nav.top, footer { position: relative; z-index: 1; }
+a { color: var(--primary); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--primary-light); }
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 4px; }
+::selection { background: rgba(0, 217, 255, 0.25); }
+img { display: block; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 10;
+  background: var(--primary); color: var(--black); font-weight: 600;
+  padding: 10px 18px; border-radius: 0 0 8px 0;
+}
+.skip:focus { left: 0; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+section .wrap, .section-pad { padding-top: clamp(48px, 7vw, 80px); padding-bottom: clamp(48px, 7vw, 80px); }
+
+.mono-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h2.section-title {
+  margin-top: 16px;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+p { margin: 0; }
+.muted { color: var(--muted); }
+
+/* Nav */
+nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1200px; margin: 0 auto; padding: 20px 24px; }
+.wordmark { display: flex; align-items: center; gap: 12px; }
+.wordmark img { width: 32px; height: 32px; object-fit: contain; }
+.wordmark span { font-family: var(--font-mono); font-size: 0.9rem; }
+.wordmark .slash { color: var(--muted); }
+.wordmark .repo { color: var(--primary); }
+.nav-gh {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border: 1px solid var(--gray-light); border-radius: 8px;
+  color: var(--white); font-size: 0.875rem; font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.nav-gh:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero .glow {
+  position: absolute; top: -220px; right: -160px; width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.09) 0%, transparent 62%);
+  pointer-events: none;
+}
+.hero .wrap { position: relative; padding-top: clamp(64px, 10vw, 128px); padding-bottom: clamp(48px, 7vw, 96px); }
+.hero h1 {
+  margin-top: 20px;
+  max-width: 880px;
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.hero .sub { margin-top: 28px; max-width: 62ch; font-size: 1.125rem; color: var(--muted); text-wrap: pretty; }
+.hero .sub strong { color: var(--white); font-weight: 600; }
+.cta-row { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.cta-note { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 32px; min-height: 52px;
+  background: linear-gradient(135deg, var(--primary) 0%, #00B8D9 100%);
+  color: var(--black); font-family: var(--font-sans); font-size: 1rem; font-weight: 600; line-height: 1;
+  border: 1px solid transparent; border-radius: 8px;
+  box-shadow: 0 4px 20px var(--primary-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+.btn:hover { color: var(--black); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 217, 255, 0.3); }
+
+.premise {
+  margin-top: 48px;
+  display: inline-flex; flex-direction: column; gap: 6px;
+  padding: 20px 24px; max-width: 58ch;
+  border: 1px solid rgba(255, 189, 46, 0.35); border-radius: 16px;
+  background: rgba(255, 189, 46, 0.05);
+}
+.premise .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); }
+.premise p { font-size: 1.0625rem; text-wrap: pretty; }
+
+/* Cards + grids */
+.grid { display: grid; gap: 24px; margin-top: 40px; }
+.grid.min260 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.grid.min250 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid.min280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid.min300 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card {
+  padding: 28px; background: var(--gray);
+  border: 1px solid transparent; border-radius: 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.card h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.card .role { margin: 4px 0 12px; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
+.card .line { font-size: 0.9375rem; color: var(--muted); }
+
+.equation {
+  margin-top: 32px; padding: 20px 24px;
+  background: var(--darker); border: 1px solid var(--gray); border-radius: 8px;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px;
+}
+.equation .eq { font-family: var(--font-mono); font-size: 0.9375rem; }
+.equation .eq b { color: var(--primary); font-weight: 400; }
+.equation .eq .op { color: var(--muted); }
+.equation .max { font-size: 0.8125rem; color: var(--muted); }
+
+/* Seats */
+.poster-card { background: var(--gray); border: 1px solid transparent; border-radius: 16px; overflow: hidden; transition: border-color 0.2s ease, transform 0.2s ease; }
+.poster-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.poster-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+.poster-card .body { padding: 20px 24px 24px; }
+.poster-card .head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.poster-card h3 { font-size: 1.125rem; }
+.poster-card .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); }
+.poster-card .tag.oncall { color: var(--muted); }
+.poster-card .line { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
+.you-card {
+  margin-top: 24px; padding: 28px 32px;
+  background: linear-gradient(135deg, var(--dark), var(--darker));
+  border: 1px solid var(--primary); border-radius: 16px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.you-card .avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 100px;
+  border: 2px solid var(--primary); color: var(--primary); flex-shrink: 0;
+}
+.you-card .body { flex: 1; min-width: 260px; }
+.you-card h3 { font-size: 1.125rem; }
+.you-card p { margin-top: 6px; font-size: 0.9375rem; color: var(--muted); }
+
+/* Loop */
+.loop { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.loop li { padding: 24px; background: var(--gray); border: 1px solid transparent; border-radius: 16px; transition: border-color 0.2s ease; }
+.loop li:hover { border-color: var(--primary); }
+.loop li.gate { background: rgba(0, 217, 255, 0.06); border-color: var(--primary); }
+.loop .num { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--primary); }
+.loop h3 { margin-top: 8px; font-size: 1rem; }
+.loop p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+.feature-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 24px; }
+.feature { padding: 20px 24px; background: var(--darker); border: 1px solid var(--gray); border-radius: 8px; }
+.feature h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); font-weight: 400; }
+.feature p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+.pocket {
+  margin-top: 24px; padding: 28px 32px; background: var(--gray); border-radius: 16px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.pocket .icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 8px;
+  background: rgba(0, 217, 255, 0.1); color: var(--primary); flex-shrink: 0;
+}
+.pocket .body { flex: 1; min-width: 260px; }
+.pocket h3 { font-size: 1.125rem; }
+.pocket p { margin-top: 6px; font-size: 0.9375rem; color: var(--muted); }
+
+/* Day */
+.day { margin-top: 40px; max-width: 760px; }
+.day .row { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--gray); }
+.day .when { flex: 0 0 132px; }
+.day .when .t { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
+.day .when .m { margin-top: 2px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.day .row p.story { font-size: 0.9375rem; }
+.day .total { margin-top: 24px; font-size: 1.0625rem; font-weight: 600; }
+
+/* Skeptic */
+.skeptic { background: var(--darker); border-top: 1px solid var(--gray); border-bottom: 1px solid var(--gray); }
+.claim { display: flex; gap: 14px; }
+.claim .check { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+.claim h3 { font-size: 1rem; }
+.claim p { margin-top: 6px; font-size: 0.875rem; color: var(--muted); }
+
+/* FAQ */
+.faq { margin-top: 32px; max-width: 760px; display: flex; flex-direction: column; gap: 40px; }
+.faq h2 { font-size: 1.375rem; font-weight: 700; letter-spacing: -0.01em; }
+.faq p { margin-top: 12px; color: var(--muted); text-wrap: pretty; }
+
+/* Close */
+.close { position: relative; overflow: hidden; }
+.close .glow {
+  position: absolute; bottom: -260px; left: -180px; width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.07) 0%, transparent 62%);
+  pointer-events: none;
+}
+.close .wrap { position: relative; text-align: center; padding-bottom: clamp(64px, 8vw, 112px); }
+.steps { list-style: none; margin: 40px auto 0; padding: 0; max-width: 960px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
+.steps li { padding: 24px; background: var(--gray); border-radius: 16px; }
+.steps .num { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--primary); }
+.steps p { margin-top: 8px; font-size: 0.9375rem; }
+.close .cta-stack { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.manifesto {
+  margin: 0 auto; max-width: 24ch;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; text-wrap: balance;
+}
+.manifesto span { color: var(--primary); }
+.hero h1 span { color: var(--primary); }
+.stat-strip { margin-top: 24px; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; }
+.stat-strip span { color: var(--primary); padding: 0 4px; }
+
+/* Assembly line */
+.line { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.station { padding: 10px 18px; background: var(--gray); border: 1px solid var(--gray-light); border-radius: 100px; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.5px; }
+.station.gate { background: rgba(0, 217, 255, 0.08); border-color: var(--primary); color: var(--primary); }
+.station.done { background: rgba(0, 210, 106, 0.08); border-color: rgba(0, 210, 106, 0.5); color: var(--green); }
+.line .arrow { color: var(--muted); font-family: var(--font-mono); }
+.line-note { margin-top: 20px; max-width: 62ch; font-size: 0.9375rem; color: var(--muted); }
+
+/* Merge-gate demo */
+.merge-demo { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.gh-card { position: relative; width: 100%; max-width: 560px; background: #ffffff; border: 1px solid #d0d7de; border-radius: 12px; color: #1f2328; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.4; }
+.gh-check { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #d8dee4; align-items: flex-start; }
+.gh-dot { width: 24px; height: 24px; border-radius: 100px; background: #1a7f37; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0; }
+.gh-check strong { display: block; font-size: 0.875rem; }
+.gh-check .d { font-size: 0.8125rem; color: #59636e; }
+.gh-foot { display: flex; align-items: center; gap: 12px; padding: 14px 16px; flex-wrap: wrap; }
+.gh-btn { display: inline-block; padding: 9px 16px; background: #1f883d; color: #ffffff; font-weight: 600; font-size: 0.875rem; border-radius: 6px; animation: gh-press 9s infinite; }
+.gh-hint { font-size: 0.8125rem; color: #59636e; }
+.gh-cursor { position: absolute; bottom: 16px; left: 120px; opacity: 0; animation: gh-cursor 9s infinite; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35)); }
+.gh-cursor svg { display: block; animation: gh-click 9s infinite; }
+.gh-merged { position: absolute; inset: 0; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; opacity: 0; animation: gh-merged 9s infinite; }
+.gh-badge { display: inline-flex; align-items: center; gap: 8px; background: #8250df; color: #ffffff; padding: 8px 18px; border-radius: 100px; font-weight: 600; font-size: 0.875rem; }
+.gh-merged p { font-size: 0.875rem; color: #1f2328; }
+.demo-cap { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+
+/* Merge gate block */
+.gate-block { margin-top: 24px; padding: clamp(24px, 4vw, 40px); background: var(--gray); border-radius: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; align-items: center; }
+.gate-block h3 { font-size: 1.25rem; }
+.gate-p { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
+.devices { margin-top: 20px; display: flex; align-items: center; gap: 14px; color: var(--primary); }
+.devices .arrow { color: var(--muted); font-family: var(--font-mono); }
+
+/* Factory floor */
+.floor { margin: clamp(40px, 6vw, 72px) 0 0; }
+.floor .frame { position: relative; }
+.floor img { display: block; width: 100%; height: auto; }
+.floor .fade { position: absolute; inset: 0; background: linear-gradient(180deg, var(--black) 0%, transparent 4%, transparent 97%, var(--black) 100%); pointer-events: none; }
+.floor figcaption { margin-top: 18px; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+@keyframes gh-cursor { 0%, 10% { transform: translate(280px, -150px); opacity: 0; } 16% { opacity: 1; } 40%, 58% { transform: translate(0, 0); opacity: 1; } 64%, 100% { transform: translate(0, 0); opacity: 0; } }
+@keyframes gh-click { 0%, 41%, 46%, 100% { transform: scale(1); } 43.5% { transform: scale(0.78); } }
+@keyframes gh-press { 0%, 42% { background-color: #1f883d; } 44%, 50% { background-color: #135d26; } 54%, 100% { background-color: #1f883d; } }
+@keyframes gh-merged { 0%, 48% { opacity: 0; } 54%, 86% { opacity: 1; } 93%, 100% { opacity: 0; } }
+@keyframes f-smoke { 0% { transform: translate(0, 0) scale(0.55); opacity: 0; } 12% { opacity: 0.4; } 70% { opacity: 0.22; } 100% { transform: translate(28px, -150px) scale(1.7); opacity: 0; } }
+@keyframes f-spark { 0% { transform: translate(0, 0); opacity: 0; } 15% { opacity: 0.9; } 100% { transform: translate(18px, -180px); opacity: 0; } }
+@keyframes f-cube { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(206px); opacity: 0; } }
+@keyframes f-window { 0%, 90%, 100% { opacity: 0.95; } 95% { opacity: 0.7; } }
+.factory-scene { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+/* Footer */
+footer { border-top: 1px solid var(--gray); background: var(--darker); }
+footer .wrap { padding-top: 40px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 20px; }
+footer .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer .wordmark img { width: 24px; height: 24px; }
+footer .wordmark span { font-size: 0.8125rem; color: var(--muted); }
+footer nav { display: flex; gap: 24px; font-size: 0.875rem; }
+footer nav a { color: var(--muted); }
+footer nav a:hover { color: var(--primary); }
+footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
+
+/* Bubbles: signature flow, bottom to top */
+@keyframes rise {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(-115vh); opacity: 0; }
+}
+.bubbles { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.bubbles span {
+  position: absolute; bottom: -80px;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 217, 255, 0.16);
+  background: radial-gradient(circle at 35% 30%, rgba(0, 217, 255, 0.12), rgba(0, 217, 255, 0.02) 70%);
+  animation: rise 20s linear infinite;
+}
+.bubbles span:nth-child(1) { left: 6%; width: 14px; height: 14px; animation-duration: 19s; animation-delay: -3s; }
+.bubbles span:nth-child(2) { left: 15%; width: 8px; height: 8px; animation-duration: 24s; animation-delay: -14s; }
+.bubbles span:nth-child(3) { left: 27%; width: 20px; height: 20px; animation-duration: 16s; animation-delay: -7s; }
+.bubbles span:nth-child(4) { left: 38%; width: 10px; height: 10px; animation-duration: 22s; animation-delay: -18s; }
+.bubbles span:nth-child(5) { left: 46%; width: 7px; height: 7px; animation-duration: 26s; animation-delay: -21s; }
+.bubbles span:nth-child(6) { left: 52%; width: 26px; height: 26px; animation-duration: 14s; animation-delay: -5s; }
+.bubbles span:nth-child(7) { left: 63%; width: 12px; height: 12px; animation-duration: 21s; animation-delay: -11s; }
+.bubbles span:nth-child(8) { left: 72%; width: 16px; height: 16px; animation-duration: 18s; animation-delay: -1s; }
+.bubbles span:nth-child(9) { left: 84%; width: 9px; height: 9px; animation-duration: 25s; animation-delay: -16s; }
+.bubbles span:nth-child(10) { left: 91%; width: 22px; height: 22px; animation-duration: 15s; animation-delay: -9s; }
+
+/* Runner: the traveling light around the merge-gate card */
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@keyframes runner { to { --angle: 360deg; } }
+.you-card { position: relative; border-color: rgba(0, 217, 255, 0.3); }
+.runner {
+  position: absolute; inset: -1px; border-radius: 16px; padding: 1.5px;
+  background: conic-gradient(from var(--angle), transparent 0turn, transparent 0.7turn, rgba(0, 217, 255, 0.55) 0.82turn, #33E5FF 0.9turn, rgba(0, 217, 255, 0.55) 0.96turn, transparent 1turn);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: runner 5s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .bubbles, .runner { display: none !important; }
+  .gh-cursor, .gh-merged { display: none !important; }
+  .gh-btn { animation: none !important; }
+  [data-fx] { animation: none !important; }
+  .you-card { border-color: var(--primary); }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="bubbles" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<nav class="top" aria-label="Main">
+  <div class="wordmark">
+    <img src="data:image/png;base64,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" alt="SquidBay squid logo" width="32" height="32">
+    <span>squidbay<span class="slash">/</span><span class="repo">factory</span></span>
+  </div>
+  <a class="nav-gh" href="https://github.com/squidbay/factory">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+    GitHub
+  </a>
+</nav>
+
+<main id="main">
+
+<!-- 1 · Hero -->
+<section class="hero">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="mono-label">Open source · MIT license</span>
+    <h1>Stop hiring AI one chat at a time. <span>Build a team instead.</span></h1>
+    <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and check each other's work. Nothing changes until you approve it, and you can approve it from your phone.</p>
+    <p class="stat-strip">One Claude subscription <span>·</span> Six teammates <span>·</span> One human <span>·</span> One merge button</p>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/squidbay/factory">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+        Use this template
+      </a>
+      <span class="cta-note">One click. Your own private copy.</span>
+    </div>
+    <div class="premise">
+      <span class="tag">The design premise</span>
+      <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · The stack -->
+<section>
+  <div class="wrap">
+    <span class="mono-label">The stack</span>
+    <h2 class="section-title">Three names, each doing what it does best.</h2>
+    <div class="grid min260">
+      <div class="card">
+        <h3>Anthropic</h3>
+        <p class="role">The intelligence and the tooling</p>
+        <p class="line">The Claude desktop app, Claude Code, Cowork, and skills. One subscription powers every seat.</p>
+      </div>
+      <div class="card">
+        <h3>GitHub</h3>
+        <p class="role">The memory and the gate</p>
+        <p class="line">Every change is a pull request that you approve, even from your phone. The journal lives here too, so nothing is forgotten.</p>
+      </div>
+      <div class="card">
+        <h3>Cloudflare</h3>
+        <p class="role">The runtime, when you build</p>
+        <p class="line">If your team ships a website, it runs here. $5 flat.</p>
+      </div>
+    </div>
+    <div class="equation">
+      <p class="eq"><b>$20</b> Claude Pro <span class="op">+</span> <b>$5</b> Cloudflare <span class="op">=</span> a full AI team and a deployed website</p>
+      <p class="max">On Claude Max? Same template, more headroom. <a href="https://claude.com/pricing">See plans</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · The seats -->
+<section>
+  <div class="wrap">
+    <span class="mono-label">The seats</span>
+    <h2 class="section-title">Four seats, two specialists, and you.</h2>
+    <div class="grid min300">
+      <div class="poster-card">
+        <img src="seats/cowork.jpg" alt="Cowork seat: a dark factory robot with the squid emblem sketching a project timeline" width="512" height="512" loading="lazy" decoding="async">
+        <div class="body">
+          <div class="head"><h3>Cowork</h3><span class="tag">Seat</span></div>
+          <p class="line">Plans. Audits. Keeps work aligned. Turns what you ask for into a plan, then checks the finished work against it.</p>
+        </div>
+      </div>
+      <div class="poster-card">
+        <img src="seats/code.jpg" alt="Code seat: a dark factory robot at a glowing keyboard with a passing build log" width="512" height="512" loading="lazy" decoding="async">
+        <div class="body">
+          <div class="head"><h3>Code</h3><span class="tag">Seat</span></div>
+          <p class="line">Writes clean. Builds fast. The only seat that writes code, and only as pull requests. It never merges its own work.</p>
+        </div>
+      </div>
+      <div class="poster-card">
+        <img src="seats/design.jpg" alt="Design seat: a dark factory robot drawing wireframes on a blueprint tablet" width="512" height="512" loading="lazy" decoding="async">
+        <div class="body">
+          <div class="head"><h3>Design</h3><span class="tag">Seat</span></div>
+          <p class="line">Designs beautifully. Builds delight. Draws the pages and the screens, then hands them down the line to be built.</p>
+        </div>
+      </div>
+      <div class="poster-card">
+        <img src="seats/chat.jpg" alt="Chat seat: a dark factory robot gesturing beside speech bubbles that ask how it can help" width="512" height="512" loading="lazy" decoding="async">
+        <div class="body">
+          <div class="head"><h3>Chat</h3><span class="tag">Seat</span></div>
+          <p class="line">Answers clearly. Briefs honestly. Your everyday desk: plain words in, plain words out, and a pointer to the right seat for the job.</p>
+        </div>
+      </div>
+      <div class="poster-card">
+        <img src="seats/chrome-inspector.jpg" alt="Chrome inspector specialist: a dark factory robot examining a devtools panel with a magnifying glass" width="512" height="512" loading="lazy" decoding="async">
+        <div class="body">
+          <div class="head"><h3>Chrome inspector</h3><span class="tag oncall">Specialist · on call</span></div>
+          <p class="line">Sees everything. Misses nothing. Opens your live pages in a real browser and reports back. Looks, never touches.</p>
+        </div>
+      </div>
+      <div class="poster-card">
+        <img src="seats/mobile-scout.jpg" alt="Mobile scout specialist: a dark factory robot checking phone screens across devices and networks" width="512" height="512" loading="lazy" decoding="async">
+        <div class="body">
+          <div class="head"><h3>Mobile scout</h3><span class="tag oncall">Specialist · on call</span></div>
+          <p class="line">Tests everywhere. Ships worry-free. Checks the work from the small screen, because that's where you'll approve it.</p>
+        </div>
+      </div>
+    </div>
+    <div class="you-card">
+      <span class="runner" aria-hidden="true"></span>
+      <span class="avatar" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+      <div class="body">
+        <h3>You. The only one who ever merges.</h3>
+        <p>Every seat can propose. None can approve. The gate is yours alone, and it fits in your pocket.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · How it works -->
+<section>
+  <div class="wrap">
+    <span class="mono-label">How it works</span>
+    <h2 class="section-title">The assembly line. You hold the last station.</h2>
+    <div class="line">
+      <span class="station">You ask</span>
+      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station">Cowork plans</span>
+      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station">Code builds</span>
+      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station">Cowork audits</span>
+      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station">Pull request</span>
+      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station gate">You merge</span>
+      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station done">Remembered</span>
+    </div>
+    <p class="line-note">Nobody skips the line. Nobody merges their own work. And the factory journal writes every step into git, so tomorrow's shift starts where today's ended.</p>
+    <div class="feature-row">
+      <div class="feature">
+        <h3>Twenty mechanical rules</h3>
+        <p>Plain, checkable rules that keep every seat in its lane.</p>
+      </div>
+      <div class="feature">
+        <h3>Staged onboarding</h3>
+        <p>You're walked in one stage at a time, with a small celebration when each stage clicks.</p>
+      </div>
+      <div class="feature">
+        <h3>Four mission packs</h3>
+        <p>Ready-made first missions, so the team has real work from day one.</p>
+      </div>
+    </div>
+    <div class="gate-block">
+      <div>
+        <h3>The merge gate</h3>
+        <p class="gate-p">A pull request reads like a plain letter: what changed, why, and what to look at. Dispatch the work from the Claude desktop app, then review and merge at your desk, or from your phone when you're on the go.</p>
+        <div class="devices" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path></svg>
+          <span class="arrow">→</span>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+        </div>
+        <p class="demo-cap" style="margin-top: 12px;">Desk to pocket. Same green button.</p>
+      </div>
+      <div>
+      <div class="gh-card" role="img" aria-label="Animated demonstration: a cursor moves to GitHub's green Merge pull request button, clicks it, and the pull request flips to Merged.">
+        <div class="gh-check">
+          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          <div><strong>All checks have passed</strong><span class="d">guardrails: clean</span></div>
+        </div>
+        <div class="gh-check">
+          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          <div><strong>No conflicts with base branch</strong><span class="d">Merging can be performed automatically.</span></div>
+        </div>
+        <div class="gh-foot">
+          <span class="gh-btn">Merge pull request</span>
+          <span class="gh-hint">Works from your phone too.</span>
+        </div>
+        <span class="gh-cursor"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L6.35 2.85a.5.5 0 0 0-.85.36Z" fill="#111111" stroke="#ffffff" stroke-width="1.5"></path></svg></span>
+        <div class="gh-merged">
+          <span class="gh-badge"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>Merged</span>
+          <p>You merged this pull request.</p>
+        </div>
+      </div>
+      <p class="demo-cap" style="margin-top: 14px;">The green button. That's the whole job.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · A day in the factory -->
+<section>
+  <div class="wrap">
+    <span class="mono-label">A day in the factory</span>
+    <h2 class="section-title">Eleven minutes of hands-on.</h2>
+    <div class="day">
+      <div class="row">
+        <div class="when">
+          <p class="t">Over coffee</p>
+          <p class="m">4 min</p>
+        </div>
+        <p class="story">You tell Chat what you want, in your own words. Cowork turns it into a plan you can actually read. You say yes.</p>
+      </div>
+      <div class="row">
+        <div class="when">
+          <p class="t">While you work</p>
+          <p class="m">0 min</p>
+        </div>
+        <p class="story">Code builds. Design draws. Cowork audits what they made. They settle their disagreements in writing, without you.</p>
+      </div>
+      <div class="row">
+        <div class="when">
+          <p class="t">At lunch</p>
+          <p class="m">3 min</p>
+        </div>
+        <p class="story">Your phone shows a pull request: what changed, why, and what to check. You read it like a note from a careful colleague.</p>
+      </div>
+      <div class="row">
+        <div class="when">
+          <p class="t">After dinner</p>
+          <p class="m">4 min</p>
+        </div>
+        <p class="story">You tap merge. The journal writes down what happened and why, so tomorrow's team wakes up already knowing.</p>
+      </div>
+      <p class="total">Your hands were on it for eleven minutes. The factory ran all day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · For the skeptical developer -->
+<section class="skeptic">
+  <div class="wrap">
+    <span class="mono-label">For the skeptical developer</span>
+    <h2 class="section-title">Boring where it counts.</h2>
+    <p class="muted" style="margin-top: 16px; max-width: 62ch; font-size: 1rem; text-wrap: pretty;"><strong style="color: var(--white); font-weight: 600;">Built with Factory.</strong> SquidBay is built with this exact factory. The copy the template button gives you is the one we use ourselves. No hidden version, no enterprise edition.</p>
+    <div class="grid min280">
+      <div class="claim">
+        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+        <div>
+          <h3>No exposed services</h3>
+          <p>Nothing listens, nothing is reachable from outside. It all runs inside apps you already trust.</p>
+        </div>
+      </div>
+      <div class="claim">
+        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+        <div>
+          <h3>No credential in any chat or file</h3>
+          <p>Enforced in CI, not by good intentions.</p>
+        </div>
+      </div>
+      <div class="claim">
+        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+        <div>
+          <h3>Read broad, write narrow</h3>
+          <p>Broad access is read-only. Write access is narrow, and every write is human-gated.</p>
+        </div>
+      </div>
+      <div class="claim">
+        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+        <div>
+          <h3>MIT, plain markdown</h3>
+          <p>The whole factory is markdown you can read in an afternoon. No binaries, no magic.</p>
+        </div>
+      </div>
+      <div class="claim">
+        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+        <div>
+          <h3>Template-button architecture</h3>
+          <p>One click on GitHub gives you your own private copy, on a free account.</p>
+        </div>
+      </div>
+      <div class="claim">
+        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+        <div>
+          <h3>One merge gate</h3>
+          <p>A human approves every change. That's the architecture, not a setting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Plain answers -->
+<section>
+  <div class="wrap">
+    <span class="mono-label">Plain answers</span>
+    <div class="faq">
+      <div>
+        <h2>Do I need to know how to code?</h2>
+        <p>No. The seats write the code and explain it in plain words. Your job is to read a short summary and decide yes or no. If you can read an email and tap a button, you can run a factory.</p>
+      </div>
+      <div>
+        <h2>What does it cost to run?</h2>
+        <p>A paid Claude plan ($20 a month for Pro; <a href="https://claude.com/pricing">Max plans</a> work too) plus $5 flat for Cloudflare when you build something that ships. GitHub is free. That's the whole bill.</p>
+      </div>
+      <div>
+        <h2>Is it safe to let AI touch my files?</h2>
+        <p>The factory starts from the honest assumption: agents make mistakes. So no seat can change anything on its own. Every change is a pull request that waits for you, write access is narrow, broad access is read-only, and no credential ever appears in a chat or a file. You are the gate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · Close -->
+<section class="close">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap" style="padding-bottom: 0;">
+    <p class="manifesto">Factories don't make products. They make <span>products that make products</span>.</p>
+  </div>
+  <figure class="floor">
+    <div class="factory-scene" role="img" aria-label="A stylized factory at night: cyan smoke drifting from the stack, warm light in the windows, and a conveyor carrying glowing pull requests out the door.">
+      <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; height: auto; overflow: visible;">
+        <defs>
+          <radialGradient id="fglow" cx="0.5" cy="0.6" r="0.55">
+            <stop offset="0" stop-color="#00D9FF" stop-opacity="0.13"></stop>
+            <stop offset="1" stop-color="#00D9FF" stop-opacity="0"></stop>
+          </radialGradient>
+          <linearGradient id="fdoor" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F7931A"></stop>
+            <stop offset="1" stop-color="#FF6B35"></stop>
+          </linearGradient>
+        </defs>
+        <ellipse cx="460" cy="280" rx="340" ry="230" fill="url(#fglow)"></ellipse>
+        <g>
+          <circle data-fx="true" cx="651" cy="114" r="15" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; transform-box: fill-box; transform-origin: center;"></circle>
+          <circle data-fx="true" cx="649" cy="118" r="11" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -1.6s; transform-box: fill-box; transform-origin: center;"></circle>
+          <circle data-fx="true" cx="653" cy="112" r="18" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -3.3s; transform-box: fill-box; transform-origin: center;"></circle>
+          <circle data-fx="true" cx="650" cy="116" r="9" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -4.9s; transform-box: fill-box; transform-origin: center;"></circle>
+          <circle data-fx="true" cx="655" cy="110" r="2" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; transform-box: fill-box;"></circle>
+          <circle data-fx="true" cx="646" cy="108" r="1.6" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; animation-delay: -1.7s; transform-box: fill-box;"></circle>
+          <circle data-fx="true" cx="660" cy="112" r="1.6" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; animation-delay: -3.4s; transform-box: fill-box;"></circle>
+        </g>
+        <rect x="630" y="130" width="42" height="290" fill="#17222E"></rect>
+        <rect x="624" y="122" width="54" height="12" rx="3" fill="#1C2630"></rect>
+        <rect x="560" y="216" width="26" height="204" fill="#121A24"></rect>
+        <rect x="556" y="210" width="34" height="9" rx="2" fill="#18222D"></rect>
+        <rect x="296" y="246" width="130" height="90" fill="#10161F"></rect>
+        <path d="M330 246 v-20 a28 28 0 0 1 56 0 v20 Z" fill="#10161F"></path>
+        <path d="M280 420 L280 290 L340 262 L340 290 L400 262 L400 290 L460 262 L460 290 L520 262 L520 420 Z" fill="#141D28"></path>
+        <rect x="520" y="330" width="104" height="90" fill="#0F151D"></rect>
+        <g fill="#F7931A">
+          <rect data-fx="true" x="298" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite;"></rect>
+          <rect data-fx="true" x="344" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -2s;"></rect>
+          <rect data-fx="true" x="390" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -3.5s;"></rect>
+          <rect data-fx="true" x="436" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -5s;"></rect>
+        </g>
+        <rect x="548" y="354" width="46" height="66" fill="url(#fdoor)"></rect>
+        <ellipse cx="571" cy="421" rx="64" ry="7" fill="#F7931A" opacity="0.1"></ellipse>
+        <rect x="70" y="419" width="770" height="3" rx="1.5" fill="#1C2630"></rect>
+        <rect x="594" y="402" width="230" height="6" rx="3" fill="#1C2630"></rect>
+        <g fill="#2A3744">
+          <circle cx="606" cy="412" r="4"></circle><circle cx="650" cy="412" r="4"></circle><circle cx="694" cy="412" r="4"></circle><circle cx="738" cy="412" r="4"></circle><circle cx="782" cy="412" r="4"></circle><circle cx="816" cy="412" r="4"></circle>
+        </g>
+        <g>
+          <rect data-fx="true" x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite;"></rect>
+          <rect data-fx="true" x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite; animation-delay: -2s;"></rect>
+          <rect data-fx="true" x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite; animation-delay: -4s;"></rect>
+        </g>
+      </svg>
+    </div>
+    <figcaption>The line runs all day. You hold the gate.</figcaption>
+  </figure>
+  <div class="wrap" style="padding-top: clamp(40px, 6vw, 64px);">
+    <h2 class="section-title" style="margin-top: 0;">Take your seat.</h2>
+    <p class="muted" style="margin-top: 16px; font-size: 1.0625rem;">Stop building alone. Your subscription already contains a team. Three steps and the line is running.</p>
+    <ol class="steps">
+      <li>
+        <span class="num">01</span>
+        <p>Get the Claude desktop app and any paid plan.</p>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <p>Use the template. The button on GitHub gives you your own private copy.</p>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <p>Attach it to Claude Code and just start typing.</p>
+      </li>
+    </ol>
+    <div class="cta-stack">
+      <a class="btn" href="https://github.com/squidbay/factory">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+        Use this template
+      </a>
+      <span class="cta-note">Built by Claude · Directed by humans · Runs forever</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div class="wordmark">
+        <img src="data:image/png;base64,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" alt="SquidBay squid logo" width="24" height="24" loading="lazy" decoding="async">
+        <span>squidbay/factory</span>
+      </div>
+      <nav aria-label="Footer">
+        <a href="https://github.com/squidbay/factory">GitHub</a>
+        <a href="https://github.com/squidbay/factory/blob/main/LICENSE">MIT license</a>
+        <a href="https://squidbay.io">SquidBay</a>
+      </nav>
+    </div>
+    <p class="legal">Independent open-source project; not affiliated with or endorsed by Anthropic. Claude is a trademark of Anthropic, PBC.</p>
+  </div>
+</footer>
+
+</body>
+</html>
