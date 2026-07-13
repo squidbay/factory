@@ -1,0 +1,52 @@
+# template-manifest.txt — which paths the template manages in YOUR office
+#
+# The factory-update workflow syncs ONLY the paths listed here from the
+# template (squidbay/factory) into your office, always as a pull request
+# you review and merge. Anything NOT listed is yours alone and is never
+# touched: your journal, your specs, your roster in FACTORY.md, any
+# mission packs you added, and this repo's own denylist.
+#
+# One path per line. A trailing slash means "the whole folder."
+# Lines starting with # are comments.
+#
+# Your office's copy of this file governs — to opt a path out of updates,
+# remove its line here (the update PR may propose restoring it; declining
+# that hunk is your call and the workflow respects the merged result).
+
+CLAUDE.md
+CONTRIBUTING.md
+MECHANICAL-RULES.md
+README.md
+SECURITY.md
+THIRD_PARTY_NOTICES.md
+VERSIONS.md
+grounding/
+hosting/
+inbox/drop/README.md
+journal/README.md
+missions/README.md
+missions/design-guide/
+missions/first-website/
+missions/organize-my-business/
+missions/website-overhaul/
+onboarding/
+seats/
+specialists/
+specs/README.md
+skills/factory-coach/
+skills/factory-retro/
+skills/factory-update/
+skills/skill-creator/
+skills/README.md
+templates/
+tokens/
+
+# Deliberately absent — user-owned, never synced:
+#   FACTORY.md            (carries your roster and your names)
+#   journal.md            (your team's memory)
+#   journal/archive/      (your history)
+#   specs/                (your plans; only its README is managed)
+#   .github/guardrails-denylist.txt  (your private-name denylist)
+#   .github/workflows/    (a repo's automation can't be rewritten by its
+#                          own automation — workflow changes arrive as a
+#                          note in the update PR for a Code seat to apply)
