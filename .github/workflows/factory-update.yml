@@ -1,0 +1,161 @@
+name: factory-update
+
+# The update path across the severed template link. A repo created with the
+# template button keeps NO connection to squidbay/factory — that severing is
+# a feature (your office is private, yours, and can't be reached from here),
+# but it means improvements to the template would never reach you. This
+# workflow is the bridge, built the only way this factory builds bridges:
+# as a pull request you review and merge. It never auto-merges anything.
+#
+# What it does, monthly or whenever you run it from the Actions tab:
+#   1. Fetches the current template (it's public — no token needed).
+#   2. Reads .github/template-manifest.txt — YOUR copy of it — and copies
+#      only those template-managed paths over your office's copies.
+#   3. If anything changed, opens (or refreshes) ONE pull request with the
+#      whole delta, so you see exactly what the template wants to change.
+#   4. Notes — without touching them — any drift in files it deliberately
+#      does not manage: your workflows and the manifest itself.
+#
+# What it can never do: touch your journal, your specs, your roster, your
+# denylist, or anything else absent from the manifest; merge; or rewrite
+# its own workflow files (the Actions token physically cannot).
+
+on:
+  schedule:
+    - cron: "0 7 1 * *"   # the 1st of each month, 07:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: factory-update
+  cancel-in-progress: true
+
+jobs:
+  propose-update:
+    # The template must not try to update itself from itself.
+    if: github.repository != 'squidbay/factory'
+    runs-on: ubuntu-latest
+    env:
+      TEMPLATE_REPO: https://github.com/squidbay/factory
+      UPDATE_BRANCH: factory-update/proposal
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the current template
+        run: |
+          git clone --depth 1 "$TEMPLATE_REPO" "$RUNNER_TEMP/template"
+          echo "Template at: $(git -C "$RUNNER_TEMP/template" rev-parse --short HEAD)"
+
+      - name: Apply template-managed paths from the manifest
+        id: apply
+        run: |
+          set -u
+          MANIFEST=".github/template-manifest.txt"
+          if [ ! -f "$MANIFEST" ]; then
+            echo "No $MANIFEST in this office — nothing is template-managed. Done."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          while IFS= read -r path; do
+            case "$path" in ''|'#'*) continue ;; esac
+            path="${path%% *}"
+            SRC="$RUNNER_TEMP/template/$path"
+            if [ ! -e "$SRC" ]; then
+              # In the manifest but gone from the template: note it, never delete
+              # the office's copy on the template's behalf.
+              echo "note: '$path' is in your manifest but not in the template (skipped)"
+              continue
+            fi
+            case "$path" in
+              */) rm -rf "./$path" && mkdir -p "./$path" && cp -r "$SRC"/. "./$path" ;;
+              *)  mkdir -p "$(dirname "./$path")" && cp "$SRC" "./$path" ;;
+            esac
+          done < "$MANIFEST"
+
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "Office already matches the template on every managed path."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git status --porcelain
+          fi
+
+      - name: Note unmanaged drift (never applied, only reported)
+        id: drift
+        run: |
+          set -u
+          NOTES=""
+          # The manifest itself
+          if [ -f .github/template-manifest.txt ] && [ -f "$RUNNER_TEMP/template/.github/template-manifest.txt" ]; then
+            if ! diff -q .github/template-manifest.txt "$RUNNER_TEMP/template/.github/template-manifest.txt" >/dev/null; then
+              NOTES="$NOTES- Your \`.github/template-manifest.txt\` differs from the template's. If yours was edited on purpose, ignore this; otherwise compare them.\n"
+            fi
+          fi
+          # Workflow files (the Actions token cannot write these by design)
+          if [ -d "$RUNNER_TEMP/template/.github/workflows" ]; then
+            for wf in "$RUNNER_TEMP/template/.github/workflows"/*; do
+              name=$(basename "$wf")
+              if [ ! -f ".github/workflows/$name" ] || ! diff -q ".github/workflows/$name" "$wf" >/dev/null; then
+                NOTES="$NOTES- The template's workflow \`$name\` differs from (or is missing in) your office. Automation can't rewrite automation — ask a Code seat to bring it over by PR.\n"
+              fi
+            done
+          fi
+          {
+            echo "notes<<EOF"
+            printf '%b' "$NOTES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open or refresh the update PR
+        if: steps.apply.outputs.changed == 'true'
+        run: |
+          set -u
+          git config user.name "factory-update"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -B "$UPDATE_BRANCH"
+          git add -A
+          git commit -m "factory-update: sync template-managed paths from the template"
+          git push -f origin "$UPDATE_BRANCH"
+
+      - name: Create the PR if none is open
+        if: steps.apply.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        env:
+          DRIFT_NOTES: ${{ steps.drift.outputs.notes }}
+        with:
+          script: |
+            const head = process.env.UPDATE_BRANCH;
+            const notes = (process.env.DRIFT_NOTES || '').trim();
+            const body = [
+              'The template this factory was created from has improvements on its',
+              'template-managed paths (listed in `.github/template-manifest.txt`).',
+              'This PR is the whole delta — nothing outside the manifest is touched,',
+              'and nothing merges without you.',
+              '',
+              'Review it like any other PR: read the diff, ask a seat to explain any',
+              'part of it, merge when satisfied — or close it to skip this round',
+              '(it will be re-proposed next run while the difference remains).',
+              notes ? '\n**Also noticed, not applied:**\n' + notes : '',
+            ].join('\n');
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', head: `${context.repo.owner}:${head}`,
+            });
+            if (prs.data.length > 0) {
+              await github.rest.pulls.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                pull_number: prs.data[0].number, body,
+              });
+              core.info(`Refreshed existing update PR #${prs.data[0].number}`);
+            } else {
+              const pr = await github.rest.pulls.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: 'Factory update: improvements from the template',
+                head, base: context.payload.repository.default_branch, body,
+              });
+              core.info(`Opened update PR #${pr.data.number}`);
+            }
