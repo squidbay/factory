@@ -55,7 +55,7 @@
 
 *The last two team members, for when the work leaves the repo.*
 
-- **Inspector** (Claude in Chrome): installed once from its official page, kept off by default, summoned when a live page needs real eyes.
+- **Inspector** (Claude in Chrome): installed once from its official page, kept off by default, summoned when a live page needs real eyes — and given its one-time site permission before first use (the step is in [`specialists/inspector.md`](../specialists/inspector.md)).
 - **Dispatch** (from your phone): research that runs while you do something else. Its reports are leads, not facts, until Cowork verifies — the factory's golden rule of recon.
 - And the pocket loop, if you haven't already: GitHub Mobile on your phone means review-and-merge from anywhere ([`MOBILE.md`](MOBILE.md)).
 
