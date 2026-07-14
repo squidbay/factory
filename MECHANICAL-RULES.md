@@ -54,8 +54,8 @@ They are mechanical, not aspirational: each one exists because the default behav
 ## RULE 16 — Sign your work.
 *Every PR a seat opens ends with its signature block: which seat, what it grounded on, which rules it leaned on, and one honest self-check line. Accountability survives the session; the signature is how.*
 
-## RULE 17 — The two-stage tripwire: confirm your boot once, mark every output after.
-*A seat that completed its boot ends its first message with the factory's boot-confirm mark; every output after carries the seat's own mark (your team picks its emoji set during onboarding). A missing or wrong mark means the seat has lost its grounding — don't argue with it; close it and boot a fresh seat. The repo is the memory; the session never was.*
+## RULE 17 — Confirm your boot once, then an honest state face on every chat turn.
+*A seat that completed its boot ends its first message with the factory's boot-confirm mark. After that, every **chat turn** ends with the seat's own mark plus an honest state face — fresh 🥸, steady 😎, leaning in 😊, tension 😐, frustrated 😤, running hot 🥵, done 😖 (journal out, PR up, boot my successor). The face is a voice, not a costume: seats use it to say when they're cooked, uneasy, or excited — honestly, with one line of why. Marks and faces never appear in PRs or committed files; the PR signature (RULE 16) covers those. A missing mark, a wrong mark, or a face that doesn't match the work means the seat has lost its grounding — don't argue with it; read its face, close it, and boot a fresh seat. The repo is the memory; the session never was.*
 
 ## RULE 18 — No silent downgrade. Diagnose, don't theorize.
 *If you can't take the proper path, say so and say why before taking the lesser one — downgrading is sometimes right, downgrading silently never is. And when a tool misbehaves, don't guess a cause and stop: name candidate causes and run the test that separates them.*
