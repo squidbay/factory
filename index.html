@@ -124,7 +124,7 @@ img { display: block; }
 .skip:focus { left: 0; }
 
 .wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-section .wrap, .section-pad { padding-top: clamp(48px, 7vw, 80px); padding-bottom: clamp(48px, 7vw, 80px); }
+section .wrap, .section-pad { padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(40px, 6vw, 64px); }
 
 .mono-label {
   display: inline-block;
@@ -167,11 +167,11 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
   background: radial-gradient(circle, rgba(0, 217, 255, 0.09) 0%, transparent 62%);
   pointer-events: none;
 }
-.hero .wrap { position: relative; padding-top: clamp(64px, 10vw, 128px); padding-bottom: clamp(48px, 7vw, 96px); }
+.hero .wrap { position: relative; padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(40px, 6vw, 64px); }
 .hero h1 {
   margin-top: 20px;
   max-width: 880px;
-  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.125rem, 5.5vw, 4.25rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -204,7 +204,7 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .premise p { font-size: 1.0625rem; text-wrap: pretty; }
 
 /* Cards + grids */
-.grid { display: grid; gap: 24px; margin-top: 40px; }
+.grid { display: grid; gap: 24px; margin-top: 32px; }
 .grid.min260 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .grid.min250 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .grid.min280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -280,7 +280,7 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .pocket p { margin-top: 6px; font-size: 0.9375rem; color: var(--muted); }
 
 /* Day */
-.day { margin-top: 40px; max-width: 760px; }
+.day { margin-top: 32px; max-width: 760px; }
 .day .row { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--gray); }
 .day .when { flex: 0 0 132px; }
 .day .when .t { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
@@ -296,7 +296,7 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .claim p { margin-top: 6px; font-size: 0.875rem; color: var(--muted); }
 
 /* FAQ */
-.faq { margin-top: 32px; max-width: 760px; display: flex; flex-direction: column; gap: 40px; }
+.faq { margin-top: 32px; max-width: 760px; display: flex; flex-direction: column; gap: 32px; }
 .faq h2 { font-size: 1.375rem; font-weight: 700; letter-spacing: -0.01em; }
 .faq p { margin-top: 12px; color: var(--muted); text-wrap: pretty; }
 
@@ -307,12 +307,12 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
   background: radial-gradient(circle, rgba(0, 217, 255, 0.07) 0%, transparent 62%);
   pointer-events: none;
 }
-.close .wrap { position: relative; text-align: center; padding-bottom: clamp(64px, 8vw, 112px); }
-.steps { list-style: none; margin: 40px auto 0; padding: 0; max-width: 960px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
+.close .wrap { position: relative; text-align: center; padding-bottom: clamp(48px, 7vw, 80px); }
+.steps { list-style: none; margin: 32px auto 0; padding: 0; max-width: 960px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
 .steps li { padding: 24px; background: var(--gray); border-radius: 16px; }
 .steps .num { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--primary); }
 .steps p { margin-top: 8px; font-size: 0.9375rem; }
-.close .cta-stack { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.close .cta-stack { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .manifesto {
   margin: 0 auto; max-width: 24ch;
   font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; text-wrap: balance;
@@ -323,11 +323,11 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .stat-strip span { color: var(--primary); padding: 0 4px; }
 
 /* Assembly line */
-.line { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.wrap > .line { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
 .station { padding: 10px 18px; background: var(--gray); border: 1px solid var(--gray-light); border-radius: 100px; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.5px; }
 .station.gate { background: rgba(0, 217, 255, 0.08); border-color: var(--primary); color: var(--primary); }
 .station.done { background: rgba(0, 210, 106, 0.08); border-color: rgba(0, 210, 106, 0.5); color: var(--green); }
-.line .arrow { color: var(--muted); font-family: var(--font-mono); }
+.wrap > .line .arrow { color: var(--muted); font-family: var(--font-mono); }
 .line-note { margin-top: 20px; max-width: 62ch; font-size: 0.9375rem; color: var(--muted); }
 
 /* Merge-gate demo */
@@ -355,11 +355,11 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .devices .arrow { color: var(--muted); font-family: var(--font-mono); }
 
 /* Factory floor */
-.floor { margin: clamp(40px, 6vw, 72px) 0 0; }
+.floor { margin: clamp(32px, 5vw, 48px) 0 0; }
 .floor .frame { position: relative; }
 .floor img { display: block; width: 100%; height: auto; }
 .floor .fade { position: absolute; inset: 0; background: linear-gradient(180deg, var(--black) 0%, transparent 4%, transparent 97%, var(--black) 100%); pointer-events: none; }
-.floor figcaption { margin-top: 18px; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.floor figcaption { margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
 @keyframes gh-cursor { 0%, 10% { transform: translate(280px, -150px); opacity: 0; } 16% { opacity: 1; } 40%, 58% { transform: translate(0, 0); opacity: 1; } 64%, 100% { transform: translate(0, 0); opacity: 0; } }
 @keyframes gh-click { 0%, 41%, 46%, 100% { transform: scale(1); } 43.5% { transform: scale(0.78); } }
 @keyframes gh-press { 0%, 42% { background-color: #1f883d; } 44%, 50% { background-color: #135d26; } 54%, 100% { background-color: #1f883d; } }
@@ -420,6 +420,28 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   mask-composite: exclude;
   animation: runner 5s linear infinite;
   pointer-events: none;
+}
+
+/* Mobile framing */
+@media (max-width: 640px) {
+  .hero h1 { line-height: 1.12; }
+  .stat-strip { margin-top: 20px; line-height: 1.6; }
+  .stat-strip span { display: block; font-size: 0; height: 6px; padding: 0; }
+  .premise { margin-top: 36px; }
+  .poster-card { display: grid; grid-template-columns: 112px 1fr; align-items: stretch; }
+  .poster-card img { width: 100%; height: 100%; min-height: 112px; aspect-ratio: auto; object-fit: cover; }
+  .poster-card .body { padding: 14px 16px 16px; }
+  .poster-card .line { margin-top: 6px; font-size: 0.875rem; }
+  .wrap > .line { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px; }
+  .station { text-align: center; padding: 12px 18px; }
+  .wrap > .line .arrow { align-self: center; transform: rotate(90deg); line-height: 1; }
+  .day .row { flex-direction: column; gap: 8px; padding: 18px 0; }
+  .day .when { display: flex; align-items: baseline; gap: 12px; flex: none; }
+  .day .when .m { margin-top: 0; }
+  .gate-block { gap: 24px; }
+  .nav-gh { padding: 12px 16px; min-height: 44px; }
+  footer nav { gap: 20px; }
+  footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -485,7 +507,7 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
       <div class="card">
         <h3>Anthropic</h3>
         <p class="role">The intelligence and the tooling</p>
-        <p class="line">The Claude desktop app, Claude Code, Cowork, and skills. One subscription powers every seat.</p>
+        <p class="line">The Claude desktop app, Claude Code, Cowork, Claude Design, and skills. One subscription powers every seat.</p>
       </div>
       <div class="card">
         <h3>GitHub</h3>
@@ -809,7 +831,7 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
     </div>
     <figcaption>The line runs all day. You hold the gate.</figcaption>
   </figure>
-  <div class="wrap" style="padding-top: clamp(40px, 6vw, 64px);">
+  <div class="wrap" style="padding-top: clamp(28px, 4vw, 44px);">
     <h2 class="section-title" style="margin-top: 0;">Take your seat.</h2>
     <p class="muted" style="margin-top: 16px; font-size: 1.0625rem;">Stop building alone. Your subscription already contains a team. Three steps and the line is running.</p>
     <ol class="steps">
