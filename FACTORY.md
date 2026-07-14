@@ -20,7 +20,7 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 | Specialist | Surface | Summoned when |
 |---|---|---|
 | **Inspector** | Claude in Chrome (default OFF) | Something on a live page needs real eyes: a deploy check, a layout bug, a competitor's page. Read-only; toggled on for the job, off after. |
-| **Dispatch / Forward Observer** | a session from your phone or desktop, on the go | Research needs doing while you do something else. Reports come back as **leads, not facts** — Cowork verifies before anything enters a plan. |
+| **Mobile Scout · your Dispatch** | a session from your phone or desktop, on the go | Research needs doing while you do something else. Reports come back as **leads, not facts** — Cowork verifies before anything enters a plan. |
 
 **And you.** You are the only person who merges. Ever. That single fact is the whole safety model: however fast the team moves, nothing becomes real without your eyes and your click — and the click works from your phone (see [`onboarding/MOBILE.md`](onboarding/MOBILE.md)).
 
@@ -35,7 +35,7 @@ During onboarding you pick an **anchor emoji** for your factory and — if you w
 
 **Recon → plan → build → audit → your merge → the journal remembers.**
 
-1. Something needs doing (your idea, a Dispatch report, a retro finding).
+1. Something needs doing (your idea, a Mobile Scout report, a retro finding).
 2. **Cowork** settles the frame with you and writes the spec. For anything non-trivial, the spec is merged by you *before* the build — so the plan itself passed your gate.
 3. **Code** executes the spec: branch, build, verify its own work (RULE 1), open the PR with a description that teaches (what changed, why, and one thing worth learning from it).
 4. **Cowork** audits the PR and tells you plainly: safe to merge or not, and why.
@@ -56,7 +56,7 @@ Parallel work is fine — several seats can be busy at once on a Max plan — bu
 | Code | Automatic: attaching this repo loads `CLAUDE.md`. Nothing to install. |
 | Cowork / Manager | One-time: upload the seat's boot skill (`seats/{seat}/{seat}-boot/`) in Settings → Skills, then invoke it by name in the right room. |
 | Designer | Paste `seats/designer/BOOT-PROMPT.md` at the canvas project root, once. |
-| Inspector / Dispatch | No door — summoned per job with plain words. |
+| Inspector / Mobile Scout | No door — summoned per job with plain words. |
 
 A frozen or drifting seat is never argued with: close it, open a fresh one, let it boot from the repo (RULE 17). **The repo is the memory; the session never was.**
 
