@@ -2,6 +2,8 @@
 
 **Every seat reads this page — and follows the links that matter for its surface — before asserting anything about its own capabilities.**
 
+**Two moves, every boot.** First *probe your surface* — enumerate the tools you actually have this session by observation, not memory, and then hold the bar all session: never hand the human a task one of your own tools can do. Then *check for updates* here: the live docs below tell you what your surface should be, and where they and this repo disagree, the live page wins (see the rule at the bottom of this page).
+
 ## Why this folder exists
 
 Seats are stateless, and stateless seats routinely carry stale memories of what they can do — which buttons exist, which features shipped, which limits apply. A seat working from memory will confidently describe last year's app. So the boot order for every seat in this factory is: **home base first — Anthropic's own current documentation — then the factory.**
