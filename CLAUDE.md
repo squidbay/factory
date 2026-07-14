@@ -10,7 +10,7 @@ This file loads automatically every time this repo is attached to a Claude Code 
 4. [`FACTORY.md`](FACTORY.md) — the operating model and your place in it.
 5. The spec for your task in `specs/`, if Cowork wrote one. If chat and a spec disagree, the spec wins.
 
-Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below).
+Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below): there is no mark to confirm with yet, the Stage-0 welcome itself is your boot confirmation, and the marks your human chooses take over from their first merge on.
 
 ## First contact — when the factory is brand new
 
