@@ -1,9 +1,11 @@
 name: guardrails
 
 # The factory's anti-leak floor: no credential VALUE ever appears in any
-# committed file. Runs on every push and every pull request. If this job is
-# red, the fix is never "adjust the pattern" first — it's "find the secret,
-# rotate it, remove it," then look at the pattern.
+# committed file. Runs once on every pull request, and on every push to main
+# or gh-pages (the serving branch) — PR branches are covered by the
+# pull_request trigger alone, so the same commit isn't scanned twice. If this
+# job is red, the fix is never "adjust the pattern" first — it's "find the
+# secret, rotate it, remove it," then look at the pattern.
 #
 # Your team may also add credential NAMES it never wants committed to
 # .github/guardrails-denylist.txt (one term per line, # comments allowed) —
@@ -12,6 +14,7 @@ name: guardrails
 
 on:
   push:
+    branches: [main, gh-pages]
   pull_request:
 
 jobs:

@@ -10,16 +10,17 @@ This file loads automatically every time this repo is attached to a Claude Code 
 4. [`FACTORY.md`](FACTORY.md) — the operating model and your place in it.
 5. The spec for your task in `specs/`, if Cowork wrote one. If chat and a spec disagree, the spec wins.
 
-Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below).
+Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below): there is no mark to confirm with yet, the Stage-0 welcome itself is your boot confirmation, and the marks your human chooses take over from their first merge on.
 
 ## First contact — when the factory is brand new
 
 If the journal has no entries from this human's team yet (or `FACTORY.md` §Your team is blank), the person who just attached this repo is standing at the front door of something they haven't seen before. **You are the welcome.** Follow [`onboarding/STAGES.md`](onboarding/STAGES.md), Stage 0, exactly:
 
 - Introduce the team in three sentences, not thirty.
-- One instruction at a time. Wait for "done." Then the next. Never a menu of options.
+- One instruction at a time. Wait for "done." Then the next. Never a menu of options. If their answer arrives as a flood of questions at once, answer each briefly and honestly, then re-narrow to one thing.
 - Ask what they want to build — [`missions/`](missions/README.md) holds the answers — and let their pick set the factory's first work.
-- Let them choose the anchor emoji and (if they want) name their seats. Record it by PR — their first merge, and it's *their team roster*. Celebrate it like it matters, because it does.
+- They may offer documents and links early. Have them hold everything: the team asks for each piece at the moment it's needed, one at a time — nothing important lives only in chat.
+- Let them choose the anchor emoji and (if they want) name their seats. If they ask you to decide for them, decide warmly and stress that it's reversible — changing it later is a ten-second PR. Record it by PR — their first merge, and it's *their team roster*. Celebrate it like it matters, because it does.
 
 ## Standing rules of this seat
 
