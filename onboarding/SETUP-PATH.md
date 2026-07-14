@@ -55,6 +55,16 @@ You can switch modes any time by saying so. Either way the sequence below is the
 1. Install the **Claude mobile app** (iOS/Android) — sessions you start elsewhere follow your account; the Code tab on the phone can watch and steer them. (<https://code.claude.com/docs/en/claude-code-on-the-web>)
 2. Install **GitHub Mobile** and turn on pull-request notifications — the merge button works from anywhere ([`MOBILE.md`](MOBILE.md)).
 
+### E. The update lane — the one toggle that makes template updates work
+
+Your factory keeps no live link to the template (that's what keeps it private and yours); the **factory-update** workflow is the deliberate bridge back, and it delivers each improvement as a **pull request you approve**. For that to work, GitHub has to let a workflow open a PR — and it ships new repos with that permission **off**. This is the single switch between you and one-click template updates, so flip it once, up front:
+
+> **Your repo on GitHub → Settings → Actions → General → Workflow permissions → check "Allow GitHub Actions to create and approve pull requests" → Save.**
+
+**The failure it prevents:** with the box unchecked, the first `factory-update` run pushes its branch and then **fails at the step that opens the PR**, with the error *"GitHub Actions is not permitted to create or approve pull requests."* Nothing is broken — the toggle was just never flipped. Turn it on, re-run, and the PR opens. (This is the same one-checkbox-once instruction already noted in [`skills/factory-update/SKILL.md`](../skills/factory-update/SKILL.md) and [`hosting/github/README.md`](../hosting/github/README.md) — surfaced here at the front door so you flip it before your first update run, not after it fails.)
+
+**Whose finger:** this checkbox is **yours to click — the verified instruction.** The hands-off path, where Claude in Chrome flips it for you alongside the rest of setup, is **[TARGET-STATE — UNVERIFIED]**: where the update lane is going, not a capability to rely on today. Until it's verified on the live surface, the manual checkbox is the real step.
+
 ## The gaps — steps we cannot remove, only stand beside
 
 Honest list. Each of these is a moment Anthropic's or your OS's own design requires a human, and the team's copy is written to meet you there rather than pretend otherwise:

@@ -7,7 +7,7 @@ description: "Explains and drives the factory's update path — how improvements
 
 Your office was created from the template with the template button, which means it kept **no live link** to the template — that's what keeps it private and fully yours. The `factory-update` workflow is the deliberate bridge back: on the first of each month (or whenever you run it from the **Actions** tab → **factory-update** → **Run workflow**), it compares your office's *template-managed* paths against the current template and, if anything improved, opens **one pull request** with the whole delta.
 
-One first-run setup before that can happen: open **Settings → Actions → General**, and under **Workflow permissions** check **Allow GitHub Actions to create and approve pull requests**, then Save. GitHub leaves that box unchecked on a new repo; until it's on, an update run pushes its branch and then fails at the step that opens the PR. One checkbox, once.
+One first-run setup before that can happen: open **Settings → Actions → General → Workflow permissions** and check **Allow GitHub Actions to create and approve pull requests**, then Save. (The onboarding front-door version, with the failure it prevents, is [`onboarding/SETUP-PATH.md`](../../onboarding/SETUP-PATH.md) §E.) GitHub leaves that box unchecked on a new repo; until it's on, an update run pushes its branch and then fails at the step that opens the PR. One checkbox, once.
 
 And a run that goes green without opening a PR isn't broken — it means your office already matches the template. Nothing to propose is the good outcome, most months.
 
