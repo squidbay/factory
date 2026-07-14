@@ -9,6 +9,8 @@ Your office was created from the template with the template button, which means 
 
 One first-run setup before that can happen: open **Settings → Actions → General**, and under **Workflow permissions** check **Allow GitHub Actions to create and approve pull requests**, then Save. GitHub leaves that box unchecked on a new repo; until it's on, an update run pushes its branch and then fails at the step that opens the PR. One checkbox, once.
 
+And a run that goes green without opening a PR isn't broken — it means your office already matches the template. Nothing to propose is the good outcome, most months.
+
 ## What the update can and cannot touch
 
 The boundary is a file you own: [`.github/template-manifest.txt`](../../.github/template-manifest.txt). Paths listed there (the rulebook, the guides, the seats' boot files, the shipped skills and missions) are template-managed and may appear in an update PR. Everything else is **never touched**: your journal, your specs, your roster in `FACTORY.md`, mission packs you added, your denylist. If you edited a managed file and want to keep your version, remove its line from the manifest — from then on it's yours.
