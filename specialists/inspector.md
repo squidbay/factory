@@ -19,6 +19,10 @@ An inspection ends with a plain report: what was checked, what was observed (RUL
 
 ## How to summon it
 
+**First use — give it permission to see.** Claude in Chrome starts with no site access: navigation is blocked on every site until you allow it in the extension's settings (Settings → Claude in Chrome → Site permissions). Allow all sites, or at least `github.com` plus the domain your live pages are served on. It's a one-time step, and until it's done every inspection fails at the first navigation — that's the permission gate working, not the Inspector broken.
+
+One more surface fact worth knowing while you watch an inspection: sessions in the Chat room pause when you navigate away from them; Code and Cowork sessions keep working while you're elsewhere. Neither is a malfunction — it's just how the surfaces behave, and knowing it saves a "did my team stop?" scare.
+
 Claude in Chrome is a browser capability with its own setup and its own current mechanics — follow Anthropic's live documentation rather than any paraphrase here:
 
 | What | Where | Why |

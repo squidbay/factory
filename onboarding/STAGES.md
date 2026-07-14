@@ -46,7 +46,7 @@
 
 *Only if your missions have a visual side — most do eventually.*
 
-- Claude Design gets a project; your Designer seat's boot text is pasted at its root, once. Bring whatever brand material exists — real assets beat perfect assets, and modest ones are enough to start (the [design-guide mission](../missions/design-guide/MISSION.md) is built for exactly that).
+- Claude Design gets a project, and every design session starts the same way: point the seat at its boot file, [`seats/designer/BOOT-PROMPT.md`](../seats/designer/BOOT-PROMPT.md), by pasting it (or a one-line pointer to it) at the top of the session. The committed file is the mechanism; anything dropped loose at the project's root is a convenience that may not survive into a fresh session. Bring whatever brand material exists — real assets beat perfect assets, and modest ones are enough to start (the [design-guide mission](../missions/design-guide/MISSION.md) is built for exactly that).
 - Design deliverables reach the factory through you: the design lane proposes, Code lands it by PR, you merge. Same gate as everything.
 
 *Done looks like: one real design deliverable through the full loop.*
@@ -55,7 +55,7 @@
 
 *The last two team members, for when the work leaves the repo.*
 
-- **Inspector** (Claude in Chrome): installed once from its official page, kept off by default, summoned when a live page needs real eyes.
+- **Inspector** (Claude in Chrome): installed once from its official page, kept off by default, summoned when a live page needs real eyes — and given its one-time site permission before first use (the step is in [`specialists/inspector.md`](../specialists/inspector.md)).
 - **Dispatch** (from your phone): research that runs while you do something else. Its reports are leads, not facts, until Cowork verifies — the factory's golden rule of recon.
 - And the pocket loop, if you haven't already: GitHub Mobile on your phone means review-and-merge from anywhere ([`MOBILE.md`](MOBILE.md)).
 
