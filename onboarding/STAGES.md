@@ -66,4 +66,4 @@
 
 ## The drift ritual (first-class, not an appendix)
 
-Some session, some day, a seat will go off the rules — confidently wrong, forgetful, weird. This is expected, designed-for, and fixed in two moves: say **"journal out"** (the seat writes an honest entry, misses included), then **close it and boot a fresh seat** — which reads that entry and picks up clean. Never argue a drifting seat back to health; the repo is the memory, the session never was (RULE 17).
+Some session, some day, a seat will go off the rules — confidently wrong, forgetful, weird. This is expected, designed-for, and fixed in two moves: say **"journal out"** (the seat writes an honest entry, misses included), then **close it and boot a fresh seat** — which reads that entry and picks up clean. Never argue a drifting seat back to health; the repo is the memory, the session never was (RULE 17). The state face is the early warning the ritual watches for: a seat sliding to running-hot, or flashing a face that doesn't match the work, is the cue to run these two moves before the drift compounds.
