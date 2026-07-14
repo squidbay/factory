@@ -7,6 +7,8 @@ description: "Explains and drives the factory's update path — how improvements
 
 Your office was created from the template with the template button, which means it kept **no live link** to the template — that's what keeps it private and fully yours. The `factory-update` workflow is the deliberate bridge back: on the first of each month (or whenever you run it from the **Actions** tab → **factory-update** → **Run workflow**), it compares your office's *template-managed* paths against the current template and, if anything improved, opens **one pull request** with the whole delta.
 
+One first-run setup before that can happen: open **Settings → Actions → General**, and under **Workflow permissions** check **Allow GitHub Actions to create and approve pull requests**, then Save. GitHub leaves that box unchecked on a new repo; until it's on, an update run pushes its branch and then fails at the step that opens the PR. One checkbox, once.
+
 ## What the update can and cannot touch
 
 The boundary is a file you own: [`.github/template-manifest.txt`](../../.github/template-manifest.txt). Paths listed there (the rulebook, the guides, the seats' boot files, the shipped skills and missions) are template-managed and may appear in an update PR. Everything else is **never touched**: your journal, your specs, your roster in `FACTORY.md`, mission packs you added, your denylist. If you edited a managed file and want to keep your version, remove its line from the manifest — from then on it's yours.
