@@ -85,9 +85,30 @@
   --muted: #7B8FA3;
   --green: #00D26A;
   --yellow: #FFBD2E;
+  --orange: #F7931A;
+  --ember: #FF6B35;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* 8px spacing scale — one rhythm for the whole page */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 16px; --s-4: 24px;
+  --s-5: 32px; --s-6: 40px; --s-7: 48px; --s-8: 64px;
+  /* radius scale */
+  --r-1: 8px;  --r-2: 12px; --r-3: 16px; --r-pill: 100px;
+  /* fluid type scale (steps down sanely on a 380px screen) */
+  --t-mono: 0.8125rem;
+  --t-body: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
+  --t-lead: clamp(1rem, 0.95rem + 0.4vw, 1.125rem);
+  --t-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
+  --t-h2: clamp(1.625rem, 1.3rem + 1.6vw, 2.25rem);
+  --t-h1: clamp(2rem, 1.3rem + 3.4vw, 4.25rem);
+  /* section rhythm — dense with substance, not airy (polish brief: 40–64) */
+  --pad-section: clamp(40px, 6vw, 64px);
+  --wrap-max: 1200px;
 }
+/* Breakpoint tiers used across the page (documented for maintainers):
+   base 380 (small phone) · 430 (large phone) · short-landscape (<=560px tall & landscape)
+   · 768 desktop/tablet · 1024 wide. No fixed heights anywhere — intrinsic min/auto-fit + wrap. */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -123,8 +144,8 @@ img { display: block; }
 }
 .skip:focus { left: 0; }
 
-.wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-section .wrap, .section-pad { padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(40px, 6vw, 64px); }
+.wrap { max-width: var(--wrap-max); margin: 0 auto; padding-left: clamp(16px, 5vw, 24px); padding-right: clamp(16px, 5vw, 24px); }
+section .wrap, .section-pad { padding-top: var(--pad-section); padding-bottom: var(--pad-section); }
 
 .mono-label {
   display: inline-block;
@@ -167,18 +188,18 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
   background: radial-gradient(circle, rgba(0, 217, 255, 0.09) 0%, transparent 62%);
   pointer-events: none;
 }
-.hero .wrap { position: relative; padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(40px, 6vw, 64px); }
+.hero .wrap { position: relative; padding-top: clamp(24px, 3.5vw, 44px); padding-bottom: var(--pad-section); }
 .hero h1 {
-  margin-top: 20px;
+  margin-top: 12px;
   max-width: 880px;
-  font-size: clamp(2.125rem, 5.5vw, 4.25rem);
+  font-size: var(--t-h1);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
-.hero .sub { margin-top: 28px; max-width: 62ch; font-size: 1.125rem; color: var(--muted); text-wrap: pretty; }
+.hero .sub { margin-top: 18px; max-width: 62ch; font-size: var(--t-lead); color: var(--muted); text-wrap: pretty; }
 .hero .sub strong { color: var(--white); font-weight: 600; }
-.cta-row { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
 .cta-note { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
 
 .btn {
@@ -194,10 +215,10 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .btn:hover { color: var(--black); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 217, 255, 0.3); }
 
 .premise {
-  margin-top: 48px;
+  margin-top: var(--s-6);
   display: inline-flex; flex-direction: column; gap: 6px;
   padding: 20px 24px; max-width: 58ch;
-  border: 1px solid rgba(255, 189, 46, 0.35); border-radius: 16px;
+  border: 1px solid rgba(255, 189, 46, 0.35); border-radius: var(--r-3);
   background: rgba(255, 189, 46, 0.05);
 }
 .premise .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); }
@@ -422,16 +443,67 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   pointer-events: none;
 }
 
-/* Mobile framing */
+/* ===== E12 — Run your factory from anywhere (coded/animated topology, SVG glyphs + CSS flow) ===== */
+.e12-grid { margin-top: var(--s-5); display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+.e12-lead { font-size: var(--t-lead); text-wrap: pretty; }
+.e12-lead strong { color: var(--white); font-weight: 600; }
+.e12-points { list-style: none; margin: var(--s-4) 0 0; padding: 0; display: grid; gap: 14px; }
+.e12-points li { position: relative; padding-left: 28px; font-size: var(--t-body); color: var(--muted); text-wrap: pretty; }
+.e12-points li strong { color: var(--white); font-weight: 600; }
+.e12-points li::before { content: ""; position: absolute; left: 6px; top: 9px; width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--primary); }
+.e12-points li.target::before { background: var(--yellow); }
+.e12-flag { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: var(--r-pill); font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 1px; text-transform: uppercase; color: var(--yellow); border: 1px solid rgba(255, 189, 46, 0.45); vertical-align: middle; }
+
+.e12-topo { margin: 0; padding: clamp(20px, 3vw, 32px); background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-3); display: flex; flex-direction: column; align-items: center; }
+.e12-node { width: 100%; max-width: 340px; display: flex; align-items: center; gap: 14px; padding: 13px 16px; background: var(--darker); border: 1px solid var(--gray-light); border-radius: var(--r-2); }
+.e12-node .ico { position: relative; flex-shrink: 0; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(0, 217, 255, 0.1); color: var(--primary); }
+.e12-node .lab { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.e12-node .lab .n { font-weight: 600; font-size: 0.9375rem; }
+.e12-node .lab .r { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+.e12-node.gate { border-color: rgba(0, 210, 106, 0.55); }
+.e12-node.gate .ico { background: rgba(0, 210, 106, 0.12); color: var(--green); }
+.e12-node.gate .ico::after { content: ""; position: absolute; inset: -4px; border-radius: 13px; border: 2px solid var(--green); opacity: 0; animation: e12-gate 6s ease-in-out infinite; }
+@keyframes e12-gate { 0%, 70%, 100% { opacity: 0; transform: scale(0.88); } 78% { opacity: 0.9; transform: scale(1); } 90% { opacity: 0; transform: scale(1.18); } }
+.e12-wire { position: relative; width: 2px; height: 44px; background: var(--gray-light); }
+.e12-wire .dot { position: absolute; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: var(--r-pill); }
+.e12-wire .dot.out { background: var(--primary); box-shadow: 0 0 8px var(--primary); animation: e12-down 6s linear infinite; }
+.e12-wire .dot.back { background: var(--orange); box-shadow: 0 0 8px var(--orange); animation: e12-up 6s linear infinite; }
+@keyframes e12-down { 0% { top: -6px; opacity: 0; } 8% { opacity: 1; } 42% { top: 42px; opacity: 1; } 50%, 100% { top: 42px; opacity: 0; } }
+@keyframes e12-up { 0%, 50% { bottom: -6px; opacity: 0; } 58% { opacity: 1; } 92% { bottom: 42px; opacity: 1; } 100% { bottom: 42px; opacity: 0; } }
+.e12-seats { width: 100%; max-width: 340px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.e12-seat { padding: 6px 12px; background: var(--darker); border: 1px solid var(--gray-light); border-radius: var(--r-pill); font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.5px; }
+.e12-legend { margin-top: var(--s-3); display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+.e12-legend .k { display: inline-flex; align-items: center; gap: 6px; }
+.e12-legend .sw { width: 10px; height: 10px; border-radius: var(--r-pill); }
+.e12-legend .sw.out { background: var(--primary); }
+.e12-legend .sw.back { background: var(--orange); }
+
+/* ===== E13 — mood-marks (SVG glyph faces, no emoji) ===== */
+.e13-lead { margin-top: var(--s-3); max-width: 64ch; font-size: var(--t-lead); color: var(--muted); text-wrap: pretty; }
+.e13-lead strong { color: var(--white); font-weight: 600; }
+.e13-faces { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
+.e13-face { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 16px; background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-3); text-align: center; }
+.e13-face svg { width: 40px; height: 40px; }
+.e13-face .fl { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: inherit; }
+.e13-face[data-state="fresh"] { color: var(--primary); }
+.e13-face[data-state="steady"] { color: var(--primary-light); }
+.e13-face[data-state="leaning-in"] { color: var(--white); }
+.e13-face[data-state="tension"] { color: var(--yellow); }
+.e13-face[data-state="running-hot"] { color: var(--ember); }
+.e13-face[data-state="done"] { color: var(--green); }
+.e13-note { margin-top: var(--s-4); font-size: var(--t-body); color: var(--muted); text-wrap: pretty; }
+
+/* ===== Responsive architecture — intrinsic min/auto-fit + wrap, no fixed heights ===== */
+
+/* Base → large phone (≤640) */
 @media (max-width: 640px) {
   .hero h1 { line-height: 1.12; }
-  .stat-strip { margin-top: 20px; line-height: 1.6; }
+  .stat-strip { margin-top: 16px; line-height: 1.6; }
   .stat-strip span { display: block; font-size: 0; height: 6px; padding: 0; }
-  .premise { margin-top: 36px; }
-  .poster-card { display: grid; grid-template-columns: 112px 1fr; align-items: stretch; }
-  .poster-card img { width: 100%; height: 100%; min-height: 112px; aspect-ratio: auto; object-fit: cover; }
-  .poster-card .body { padding: 14px 16px 16px; }
-  .poster-card .line { margin-top: 6px; font-size: 0.875rem; }
+  .premise { margin-top: var(--s-5); }
+  /* Single top-band poster card at all sizes — 112px side-crop override removed */
+  .poster-card .body { padding: 16px 18px 18px; }
+  .poster-card .line { margin-top: 8px; font-size: 0.9375rem; }
   .wrap > .line { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 8px; }
   .station { text-align: center; padding: 12px 18px; }
   .wrap > .line .arrow { align-self: center; transform: rotate(90deg); line-height: 1; }
@@ -444,6 +516,37 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
+/* Small phone (≤400 / 380–430 tier): stop nav + CTA overflowing */
+@media (max-width: 400px) {
+  nav.top { padding-left: 16px; padding-right: 16px; gap: 10px; }
+  .btn { width: 100%; }
+  .cta-row { gap: 12px; }
+  .cta-row .cta-note { width: 100%; }
+}
+
+/* Short landscape (phone held sideways): two-column hero — only label/headline/CTA
+   sit above the fold in column 1; the longer supporting copy fills column 2 at/below
+   the CTA row (align-items:start keeps a tall neighbour from pushing the CTA down). */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero .wrap { padding-top: var(--s-3); padding-bottom: var(--s-4); display: grid; grid-template-columns: 1.1fr 0.9fr; column-gap: clamp(20px, 4vw, 40px); row-gap: 6px; align-items: start; }
+  .hero .glow { display: none; }
+  .hero .mono-label { grid-column: 1; grid-row: 1; }
+  .hero h1 { grid-column: 1; grid-row: 2; margin-top: 6px; font-size: clamp(1.6rem, 3.4vw, 2.25rem); }
+  .hero .cta-row { grid-column: 1; grid-row: 3; margin-top: 14px; }
+  .hero .stat-strip { grid-column: 2; grid-row: 1; margin-top: 0; line-height: 1.5; }
+  .hero .sub { grid-column: 2; grid-row: 3; margin-top: 0; font-size: var(--t-body); }
+  .hero .premise { grid-column: 2; grid-row: 4; margin-top: 12px; }
+}
+
+/* Desktop / tablet (≥768): engage the width as a first-class axis */
+@media (min-width: 768px) {
+  .e12-grid { grid-template-columns: 1.05fr 0.95fr; }
+  /* two-up day-timeline + FAQ */
+  .day { max-width: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(32px, 5vw, 64px); }
+  .day .total { grid-column: 1 / -1; }
+  .faq { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
@@ -451,6 +554,9 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   .gh-cursor, .gh-merged { display: none !important; }
   .gh-btn { animation: none !important; }
   [data-fx] { animation: none !important; }
+  /* E12 static fallback: keep the wires + nodes, drop the traveling dots + gate pulse */
+  .e12-wire .dot { display: none !important; }
+  .e12-node.gate .ico::after { display: none !important; }
   .you-card { border-color: var(--primary); }
 }
 </style>
@@ -494,6 +600,51 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
     <div class="premise">
       <span class="tag">The design premise</span>
       <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 1b · E12 · Run your factory from anywhere -->
+<section id="anywhere" aria-labelledby="e12-title">
+  <div class="wrap">
+    <span class="mono-label">Run it from your pocket</span>
+    <h2 class="section-title" id="e12-title">Run your factory from anywhere.</h2>
+    <div class="e12-grid">
+      <div class="e12-copy">
+        <p class="e12-lead">One seat — <strong>Mobile Scout</strong>, your <strong>Dispatch on desktop &amp; mobile</strong> — is the bridge between you and the whole team. It carries your orders to the seats and relays every seat's status back to your phone. <strong>Cowork leads the seats; you hold the one gate that matters.</strong></p>
+        <ul class="e12-points">
+          <li>Built for normal, high-trust people — a parent making it happen between bath time and bedtime, or on a lunch break — not for full-time engineers. <strong>Approachability from your phone is the whole promise.</strong></li>
+          <li>The human is the only one who ever clicks <strong>Merge</strong> — not Mobile Scout, not Code, not the browser seat. Everything else is open season for the team; the merge button is yours alone.</li>
+          <li class="target"><span class="e12-flag">Target-state</span>Where it's heading: connect Code, wake Cowork, then Mobile Scout — grant it your screen and it sets up the rest, hands-off. Not a live capability yet.</li>
+        </ul>
+      </div>
+      <figure class="e12-topo" role="img" aria-label="Topology: your phone dispatches orders through Mobile Scout to Cowork, which leads the seats — Code, Design, Chat, and the Chrome inspector. Each seat's status flows back to your phone. Only you merge.">
+        <div class="e12-node gate">
+          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg></span>
+          <span class="lab"><span class="n">You + your phone</span><span class="r">The one merge gate</span></span>
+        </div>
+        <div class="e12-wire" aria-hidden="true"><span class="dot out"></span><span class="dot back"></span></div>
+        <div class="e12-node">
+          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l3-8 3 16 3-8h4"></path></svg></span>
+          <span class="lab"><span class="n">Mobile Scout</span><span class="r">Your Dispatch · desktop &amp; mobile</span></span>
+        </div>
+        <div class="e12-wire" aria-hidden="true"><span class="dot out"></span><span class="dot back"></span></div>
+        <div class="e12-node">
+          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+          <span class="lab"><span class="n">Cowork</span><span class="r">Leads the seats</span></span>
+        </div>
+        <div class="e12-wire" aria-hidden="true"><span class="dot out"></span><span class="dot back"></span></div>
+        <div class="e12-seats" aria-hidden="true">
+          <span class="e12-seat">Code</span>
+          <span class="e12-seat">Design</span>
+          <span class="e12-seat">Chat</span>
+          <span class="e12-seat">Chrome inspector</span>
+        </div>
+        <div class="e12-legend">
+          <span class="k"><span class="sw out"></span>Orders out</span>
+          <span class="k"><span class="sw back"></span>Status back</span>
+        </div>
+      </figure>
     </div>
   </div>
 </section>
@@ -695,6 +846,42 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
       </div>
       <p class="total">A typical day puts your hands on it for eleven minutes. The factory runs the rest.</p>
     </div>
+  </div>
+</section>
+
+<!-- 5b · E13 · Mood-marks -->
+<section id="mood" aria-labelledby="e13-title">
+  <div class="wrap">
+    <span class="mono-label">The partnership</span>
+    <h2 class="section-title" id="e13-title">Every seat tells you how it's feeling.</h2>
+    <p class="e13-lead">At the bottom of every chat, each seat signs off with an honest state face. Not decoration — a real signal, so you know when a seat needs a fresh start before quality slips. It's how the team works: <strong>everyone else optimizes the AI. We optimize the partnership.</strong></p>
+    <ul class="e13-faces" role="list">
+      <li class="e13-face" data-state="fresh">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><circle cx="11.5" cy="14" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="14" r="0.6" fill="currentColor"></circle><path d="M11 20q5 3 10 0"></path></svg>
+        <span class="fl">Fresh</span>
+      </li>
+      <li class="e13-face" data-state="steady">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M10 14h3"></path><path d="M19 14h3"></path><path d="M11 20q5 1.5 10 0"></path></svg>
+        <span class="fl">Steady</span>
+      </li>
+      <li class="e13-face" data-state="leaning-in">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M9.5 11.5l3 1.5"></path><path d="M22.5 11.5l-3 1.5"></path><circle cx="11.5" cy="14.5" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="14.5" r="0.6" fill="currentColor"></circle><path d="M10 19q6 5 12 0"></path></svg>
+        <span class="fl">Leaning in</span>
+      </li>
+      <li class="e13-face" data-state="tension">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M10 12.5l3 1"></path><path d="M22 12.5l-3 1"></path><circle cx="11.5" cy="15" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="15" r="0.6" fill="currentColor"></circle><path d="M11.5 20.5h9"></path></svg>
+        <span class="fl">Tension</span>
+      </li>
+      <li class="e13-face" data-state="running-hot">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><circle cx="11.5" cy="14" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="14" r="0.6" fill="currentColor"></circle><path d="M11 21q2.5-2 5 0t5 0"></path><path d="M25 9c0 1.4-2.4 2.2-2.4 4a2.4 2.4 0 0 0 4.8 0c0-1.8-2.4-2.6-2.4-4z" fill="currentColor" stroke="none"></path></svg>
+        <span class="fl">Running hot</span>
+      </li>
+      <li class="e13-face" data-state="done">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M9.5 15q2-2.5 4 0"></path><path d="M18.5 15q2-2.5 4 0"></path><path d="M11 20q5 3 10 0"></path></svg>
+        <span class="fl">Done</span>
+      </li>
+    </ul>
+    <p class="e13-note">A chat-only convention — how the team keeps itself honest, grounded in the agent template's relationship-health and emotional-state prior art.</p>
   </div>
 </section>
 
