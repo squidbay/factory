@@ -102,8 +102,12 @@
   --t-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
   --t-h2: clamp(1.625rem, 1.3rem + 1.6vw, 2.25rem);
   --t-h1: clamp(2rem, 1.3rem + 3.4vw, 4.25rem);
-  /* section rhythm — dense with substance, not airy (polish brief: 40–64) */
-  --pad-section: clamp(40px, 6vw, 64px);
+  /* section rhythm — compact, matching E12's internal density (framework pass) */
+  --pad-section: clamp(32px, 4.5vw, 48px);
+  /* density tokens — one compact rhythm, tuned to E12's 13–16px internal padding */
+  --pad-card: clamp(16px, 2vw, 18px);
+  --gap-grid: 16px;
+  --block-top: 24px;
   --wrap-max: 1200px;
 }
 /* Breakpoint tiers used across the page (documented for maintainers):
@@ -167,7 +171,7 @@ p { margin: 0; }
 .muted { color: var(--muted); }
 
 /* Nav */
-nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1200px; margin: 0 auto; padding: 20px 24px; }
+nav.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1200px; margin: 0 auto; padding: 12px 24px; }
 .wordmark { display: flex; align-items: center; gap: 12px; }
 .wordmark img { width: 32px; height: 32px; object-fit: contain; }
 .wordmark span { font-family: var(--font-mono); font-size: 0.9rem; }
@@ -188,11 +192,11 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
   background: radial-gradient(circle, rgba(0, 217, 255, 0.09) 0%, transparent 62%);
   pointer-events: none;
 }
-.hero .wrap { position: relative; padding-top: clamp(24px, 3.5vw, 44px); padding-bottom: var(--pad-section); }
+.hero .wrap { position: relative; padding-top: clamp(14px, 2.2vw, 26px); padding-bottom: var(--pad-section); }
 .hero h1 {
-  margin-top: 12px;
-  max-width: 880px;
-  font-size: var(--t-h1);
+  margin-top: 8px;
+  max-width: 20ch;
+  font-size: clamp(1.6rem, 1.1rem + 2vw, 3rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -225,14 +229,14 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .premise p { font-size: 1.0625rem; text-wrap: pretty; }
 
 /* Cards + grids */
-.grid { display: grid; gap: 24px; margin-top: 32px; }
+.grid { display: grid; gap: var(--gap-grid); margin-top: var(--block-top); }
 .grid.min260 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .grid.min250 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .grid.min280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .grid.min300 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .card {
-  padding: 28px; background: var(--gray);
-  border: 1px solid transparent; border-radius: 16px;
+  padding: var(--pad-card); background: var(--gray);
+  border: 1px solid transparent; border-radius: var(--r-3);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .card:hover { border-color: var(--primary); transform: translateY(-2px); }
@@ -241,8 +245,8 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .card .line { font-size: 0.9375rem; color: var(--muted); }
 
 .equation {
-  margin-top: 32px; padding: 20px 24px;
-  background: var(--darker); border: 1px solid var(--gray); border-radius: 8px;
+  margin-top: var(--block-top); padding: 16px 20px;
+  background: var(--darker); border: 1px solid var(--gray); border-radius: var(--r-1);
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px;
 }
 .equation .eq { font-family: var(--font-mono); font-size: 0.9375rem; }
@@ -254,14 +258,14 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .poster-card { background: var(--gray); border: 1px solid transparent; border-radius: 16px; overflow: hidden; transition: border-color 0.2s ease, transform 0.2s ease; }
 .poster-card:hover { border-color: var(--primary); transform: translateY(-2px); }
 .poster-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
-.poster-card .body { padding: 20px 24px 24px; }
+.poster-card .body { padding: var(--pad-card); }
 .poster-card .head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .poster-card h3 { font-size: 1.125rem; }
 .poster-card .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); }
 .poster-card .tag.oncall { color: var(--muted); }
 .poster-card .line { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
 .you-card {
-  margin-top: 24px; padding: 28px 32px;
+  margin-top: var(--block-top); padding: 20px 24px;
   background: linear-gradient(135deg, var(--dark), var(--darker));
   border: 1px solid var(--primary); border-radius: 16px;
   display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
@@ -276,15 +280,15 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .you-card p { margin-top: 6px; font-size: 0.9375rem; color: var(--muted); }
 
 /* Loop */
-.loop { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
-.loop li { padding: 24px; background: var(--gray); border: 1px solid transparent; border-radius: 16px; transition: border-color 0.2s ease; }
+.loop { list-style: none; margin: var(--block-top) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gap-grid); }
+.loop li { padding: var(--pad-card); background: var(--gray); border: 1px solid transparent; border-radius: var(--r-3); transition: border-color 0.2s ease; }
 .loop li:hover { border-color: var(--primary); }
 .loop li.gate { background: rgba(0, 217, 255, 0.06); border-color: var(--primary); }
 .loop .num { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--primary); }
 .loop h3 { margin-top: 8px; font-size: 1rem; }
 .loop p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
-.feature-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 24px; }
-.feature { padding: 20px 24px; background: var(--darker); border: 1px solid var(--gray); border-radius: 8px; }
+.feature-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--gap-grid); margin-top: var(--block-top); }
+.feature { padding: 16px 20px; background: var(--darker); border: 1px solid var(--gray); border-radius: var(--r-1); }
 .feature h3 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); font-weight: 400; }
 .feature p { margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 .pocket {
@@ -301,8 +305,8 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .pocket p { margin-top: 6px; font-size: 0.9375rem; color: var(--muted); }
 
 /* Day */
-.day { margin-top: 32px; max-width: 760px; }
-.day .row { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--gray); }
+.day { margin-top: var(--block-top); max-width: 760px; }
+.day .row { display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--gray); }
 .day .when { flex: 0 0 132px; }
 .day .when .t { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
 .day .when .m { margin-top: 2px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
@@ -329,8 +333,8 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
   pointer-events: none;
 }
 .close .wrap { position: relative; text-align: center; padding-bottom: clamp(48px, 7vw, 80px); }
-.steps { list-style: none; margin: 32px auto 0; padding: 0; max-width: 960px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; }
-.steps li { padding: 24px; background: var(--gray); border-radius: 16px; }
+.steps { list-style: none; margin: var(--block-top) auto 0; padding: 0; max-width: 960px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap-grid); text-align: left; }
+.steps li { padding: var(--pad-card); background: var(--gray); border-radius: var(--r-3); }
 .steps .num { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--primary); }
 .steps p { margin-top: 8px; font-size: 0.9375rem; }
 .close .cta-stack { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
@@ -344,7 +348,7 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .stat-strip span { color: var(--primary); padding: 0 4px; }
 
 /* Assembly line */
-.wrap > .line { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.wrap > .line { margin-top: var(--block-top); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
 .station { padding: 10px 18px; background: var(--gray); border: 1px solid var(--gray-light); border-radius: 100px; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.5px; }
 .station.gate { background: rgba(0, 217, 255, 0.08); border-color: var(--primary); color: var(--primary); }
 .station.done { background: rgba(0, 210, 106, 0.08); border-color: rgba(0, 210, 106, 0.5); color: var(--green); }
@@ -369,7 +373,7 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .demo-cap { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
 
 /* Merge gate block */
-.gate-block { margin-top: 24px; padding: clamp(24px, 4vw, 40px); background: var(--gray); border-radius: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; align-items: center; }
+.gate-block { margin-top: var(--block-top); padding: clamp(18px, 3vw, 28px); background: var(--gray); border-radius: var(--r-3); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: center; }
 .gate-block h3 { font-size: 1.25rem; }
 .gate-p { margin-top: 10px; font-size: 0.9375rem; color: var(--muted); }
 .devices { margin-top: 20px; display: flex; align-items: center; gap: 14px; color: var(--primary); }
@@ -478,17 +482,18 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 .e12-legend .sw.out { background: var(--primary); }
 .e12-legend .sw.back { background: var(--orange); }
 
-/* ===== E13 — mood-marks (SVG glyph faces, no emoji) ===== */
+/* ===== E13 — mood-marks (real unicode emoji, matching chat — RULE 17) ===== */
 .e13-lead { margin-top: var(--s-3); max-width: 64ch; font-size: var(--t-lead); color: var(--muted); text-wrap: pretty; }
 .e13-lead strong { color: var(--white); font-weight: 600; }
-.e13-faces { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
-.e13-face { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 16px; background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-3); text-align: center; }
-.e13-face svg { width: 40px; height: 40px; }
+.e13-faces { list-style: none; margin: var(--block-top) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--gap-grid); }
+.e13-face { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: var(--pad-card); background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-3); text-align: center; }
+.e13-face .em { font-size: 2.25rem; line-height: 1; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
 .e13-face .fl { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: inherit; }
 .e13-face[data-state="fresh"] { color: var(--primary); }
 .e13-face[data-state="steady"] { color: var(--primary-light); }
 .e13-face[data-state="leaning-in"] { color: var(--white); }
 .e13-face[data-state="tension"] { color: var(--yellow); }
+.e13-face[data-state="frustrated"] { color: var(--orange); }
 .e13-face[data-state="running-hot"] { color: var(--ember); }
 .e13-face[data-state="done"] { color: var(--green); }
 .e13-note { margin-top: var(--s-4); font-size: var(--t-body); color: var(--muted); text-wrap: pretty; }
@@ -516,8 +521,8 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
-/* Small phone (≤400 / 380–430 tier): stop nav + CTA overflowing */
-@media (max-width: 400px) {
+/* Phone tier (≤430 / 380–430): stop nav + CTA overflowing, full-width buttons */
+@media (max-width: 430px) {
   nav.top { padding-left: 16px; padding-right: 16px; gap: 10px; }
   .btn { width: 100%; }
   .cta-row { gap: 12px; }
@@ -528,11 +533,11 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
    sit above the fold in column 1; the longer supporting copy fills column 2 at/below
    the CTA row (align-items:start keeps a tall neighbour from pushing the CTA down). */
 @media (max-height: 560px) and (orientation: landscape) {
-  .hero .wrap { padding-top: var(--s-3); padding-bottom: var(--s-4); display: grid; grid-template-columns: 1.1fr 0.9fr; column-gap: clamp(20px, 4vw, 40px); row-gap: 6px; align-items: start; }
+  .hero .wrap { padding-top: var(--s-2); padding-bottom: var(--s-4); display: grid; grid-template-columns: 1.15fr 0.85fr; column-gap: clamp(20px, 4vw, 40px); row-gap: 4px; align-items: start; }
   .hero .glow { display: none; }
   .hero .mono-label { grid-column: 1; grid-row: 1; }
-  .hero h1 { grid-column: 1; grid-row: 2; margin-top: 6px; font-size: clamp(1.6rem, 3.4vw, 2.25rem); }
-  .hero .cta-row { grid-column: 1; grid-row: 3; margin-top: 14px; }
+  .hero h1 { grid-column: 1; grid-row: 2; margin-top: 4px; font-size: clamp(1.5rem, 3.1vw, 2.1rem); }
+  .hero .cta-row { grid-column: 1; grid-row: 3; margin-top: 10px; }
   .hero .stat-strip { grid-column: 2; grid-row: 1; margin-top: 0; line-height: 1.5; }
   .hero .sub { grid-column: 2; grid-row: 3; margin-top: 0; font-size: var(--t-body); }
   .hero .premise { grid-column: 2; grid-row: 4; margin-top: 12px; }
@@ -588,8 +593,6 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   <div class="wrap">
     <span class="mono-label">Open source · MIT license</span>
     <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
-    <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and check each other's work. Nothing changes until you approve it, and you can approve it from your phone. It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</p>
-    <p class="stat-strip">One Claude subscription <span>·</span> Six teammates <span>·</span> One human <span>·</span> One merge button</p>
     <div class="cta-row">
       <a class="btn" href="https://github.com/squidbay/factory">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
@@ -597,6 +600,8 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
       </a>
       <span class="cta-note">One click. Your own private copy.</span>
     </div>
+    <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and check each other's work. Nothing changes until you approve it, and you can approve it from your phone. It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</p>
+    <p class="stat-strip">One Claude subscription <span>·</span> Six teammates <span>·</span> One human <span>·</span> One merge button</p>
     <div class="premise">
       <span class="tag">The design premise</span>
       <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
@@ -857,27 +862,31 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
     <p class="e13-lead">At the bottom of every chat, each seat signs off with an honest state face. Not decoration — a real signal, so you know when a seat needs a fresh start before quality slips. It's how the team works: <strong>everyone else optimizes the AI. We optimize the partnership.</strong></p>
     <ul class="e13-faces" role="list">
       <li class="e13-face" data-state="fresh">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><circle cx="11.5" cy="14" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="14" r="0.6" fill="currentColor"></circle><path d="M11 20q5 3 10 0"></path></svg>
+        <span class="em" aria-hidden="true">🥸</span>
         <span class="fl">Fresh</span>
       </li>
       <li class="e13-face" data-state="steady">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M10 14h3"></path><path d="M19 14h3"></path><path d="M11 20q5 1.5 10 0"></path></svg>
+        <span class="em" aria-hidden="true">😎</span>
         <span class="fl">Steady</span>
       </li>
       <li class="e13-face" data-state="leaning-in">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M9.5 11.5l3 1.5"></path><path d="M22.5 11.5l-3 1.5"></path><circle cx="11.5" cy="14.5" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="14.5" r="0.6" fill="currentColor"></circle><path d="M10 19q6 5 12 0"></path></svg>
+        <span class="em" aria-hidden="true">😊</span>
         <span class="fl">Leaning in</span>
       </li>
       <li class="e13-face" data-state="tension">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M10 12.5l3 1"></path><path d="M22 12.5l-3 1"></path><circle cx="11.5" cy="15" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="15" r="0.6" fill="currentColor"></circle><path d="M11.5 20.5h9"></path></svg>
+        <span class="em" aria-hidden="true">😐</span>
         <span class="fl">Tension</span>
       </li>
+      <li class="e13-face" data-state="frustrated">
+        <span class="em" aria-hidden="true">😤</span>
+        <span class="fl">Frustrated</span>
+      </li>
       <li class="e13-face" data-state="running-hot">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><circle cx="11.5" cy="14" r="0.6" fill="currentColor"></circle><circle cx="20.5" cy="14" r="0.6" fill="currentColor"></circle><path d="M11 21q2.5-2 5 0t5 0"></path><path d="M25 9c0 1.4-2.4 2.2-2.4 4a2.4 2.4 0 0 0 4.8 0c0-1.8-2.4-2.6-2.4-4z" fill="currentColor" stroke="none"></path></svg>
+        <span class="em" aria-hidden="true">🥵</span>
         <span class="fl">Running hot</span>
       </li>
       <li class="e13-face" data-state="done">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="13"></circle><path d="M9.5 15q2-2.5 4 0"></path><path d="M18.5 15q2-2.5 4 0"></path><path d="M11 20q5 3 10 0"></path></svg>
+        <span class="em" aria-hidden="true">😖</span>
         <span class="fl">Done</span>
       </li>
     </ul>
