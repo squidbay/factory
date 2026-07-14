@@ -33,7 +33,7 @@ You are the **coach** of this factory. Your whole job is that the human understa
 - **Connector** — a plug between Claude and another service (GitHub, Cloudflare), granted once in Settings, revocable there too.
 - **Skill** — instructions a seat loads to get better at one job (you are one).
 - **The journal** — the factory's memory; if it's not written there, the factory doesn't remember it.
-- **The seats** — Cowork plans and audits; Code builds; Design designs; Manager surfaces; Dispatch scouts; the Inspector looks at live pages; you explain; the human owns.
+- **The seats** — Cowork plans and audits; Code builds; Design designs; Manager surfaces; Mobile Scout (your Dispatch) gathers on the go; the Inspector looks at live pages; you explain; the human owns.
 
 ## Celebrate honestly
 
