@@ -1,0 +1,18 @@
+# workshops.txt — the production repos your factory manages besides your office
+#
+# A "workshop" is any repo your team builds and maintains that ISN'T your
+# office: a website, an app, a client project. Listing it here is what turns
+# it on — the god-view audit will start reporting its health, and the
+# workshop-edit workflow will accept it as a target. A workshop not listed
+# here is invisible to both.
+#
+# One repo per line, as owner/repo. Lines starting with # are comments.
+# This file is yours: the factory template never overwrites it.
+#
+# Adding a workshop is a three-step, gated setup (a narrow write key, an
+# Actions secret, and one line in workshop-edit.yml) — the full click-by-click
+# is in guides/WORKSHOPS.md. Nothing here grants any access on its own.
+#
+# Example (uncomment and replace with your real repos):
+# acme/my-site
+# acme/my-app

@@ -16,6 +16,10 @@ name: godview-audit
 #   Variable  FACTORY_DOMAINS  — comma-separated domains to health-check
 #           (e.g. "example.com,shop.example.com"). Same panel, Variables tab.
 #           Domain checks are public HTTPS requests; no secret involved.
+#   Secret  WORKSHOPS_READ_TOKEN  — an optional read-only GitHub token for
+#           auditing the workshops listed in .github/workshops.txt (needed only
+#           for PRIVATE workshops; public ones read without it). The recipe is
+#           in guides/WORKSHOPS.md.
 #
 # The report lands in two places: the run's summary page, and a downloadable
 # artifact kept for 90 days. Reading it is a normal Cowork task: "pull the
@@ -86,6 +90,43 @@ jobs:
                   "https://api.cloudflare.com/client/v4/zones?per_page=50" | jq -r '.result[]? | "- Zone \(.name): \(.status)"' || true)
                 [ -n "$ZONES" ] && echo "$ZONES" || echo "- No zones visible to this token."
               fi
+            fi
+            echo
+          } >> report.md
+
+      - name: Audit the workshops (only those listed; read-only)
+        env:
+          WS_TOKEN: ${{ secrets.WORKSHOPS_READ_TOKEN }}
+        run: |
+          set -u
+          {
+            echo "## Workshops"
+            MANIFEST=".github/workshops.txt"
+            if [ ! -f "$MANIFEST" ] || ! grep -qvE '^[[:space:]]*(#.*)?$' "$MANIFEST"; then
+              echo "- No workshops listed in \`.github/workshops.txt\` — nothing to audit here."
+              echo "  (Optional. Adding a workshop is in guides/WORKSHOPS.md.)"
+            else
+              AUTH=()
+              if [ -n "${WS_TOKEN:-}" ]; then
+                AUTH=(-H "Authorization: Bearer $WS_TOKEN")
+                echo "- Reading with the configured \`WORKSHOPS_READ_TOKEN\` (read-only)."
+              else
+                echo "- No \`WORKSHOPS_READ_TOKEN\` set — public workshops are still readable; private ones show as unreachable."
+              fi
+              while IFS= read -r line; do
+                line="${line%%#*}"
+                line="$(echo "$line" | xargs || true)"
+                [ -z "$line" ] && continue
+                API="https://api.github.com/repos/$line"
+                PRS=$(curl -sf "${AUTH[@]}" "$API/pulls?state=open&per_page=100" | jq 'length' 2>/dev/null || echo "?")
+                FAILS=$(curl -sf "${AUTH[@]}" "$API/actions/runs?status=failure&per_page=10" | jq '.workflow_runs | length' 2>/dev/null || echo "?")
+                LASTC=$(curl -sf "${AUTH[@]}" "$API/commits?per_page=1" | jq -r '.[0].commit.message // "?"' 2>/dev/null | head -1 || echo "?")
+                if [ "$PRS" = "?" ] && [ "$FAILS" = "?" ]; then
+                  echo "- \`$line\`: **unreachable** (private without a read key, renamed, or gone) — worth a look"
+                else
+                  echo "- \`$line\`: open PRs: $PRS · recent failed runs: $FAILS · last commit: \"$LASTC\""
+                fi
+              done < "$MANIFEST"
             fi
             echo
           } >> report.md
