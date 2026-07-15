@@ -203,8 +203,13 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 }
 .hero .sub { margin-top: 18px; max-width: 62ch; font-size: var(--t-lead); color: var(--muted); text-wrap: pretty; }
 .hero .sub strong { color: var(--white); font-weight: 600; }
-.cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.cta-row { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px 24px; }
 .cta-note { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+/* Two-path CTA: each button pairs with its note in a column; columns sit side by side on desktop, stack on phones */
+.cta-item { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.cta-item .cta-note { max-width: 34ch; line-height: 1.5; }
+.cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.nb { white-space: nowrap; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -217,7 +222,7 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
   white-space: nowrap;
 }
 .btn:hover { color: var(--black); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 217, 255, 0.3); }
-.btn.ghost { background: transparent; color: var(--primary); border: 1px solid var(--gray-light); box-shadow: none; white-space: normal; text-align: center; line-height: 1.25; }
+.btn.ghost { background: transparent; color: var(--primary); border: 1px solid var(--gray-light); box-shadow: none; white-space: normal; text-align: center; line-height: 1.25; gap: 0; }
 .btn.ghost:hover { color: var(--primary-light); border-color: var(--primary); background: var(--primary-glow); box-shadow: none; transform: translateY(-2px); }
 
 .hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 44px); align-items: center; }
@@ -690,13 +695,17 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
     <span class="mono-label">Open source · MIT license</span>
     <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
     <div class="cta-row">
-      <a class="btn" href="https://github.com/squidbay/factory">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-        Use this template
-      </a>
-      <span class="cta-note">One click. Your own private copy.</span>
-      <a class="btn ghost" href="managed">Fully managed — we run it for you →</a>
-      <span class="cta-note">Setup + ongoing support. You still click Merge. · <a href="managed">Learn more</a></span>
+      <div class="cta-item">
+        <a class="btn" href="https://github.com/squidbay/factory">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+          Use this template
+        </a>
+        <span class="cta-note">One click. Your own private copy.</span>
+      </div>
+      <div class="cta-item">
+        <a class="btn ghost" href="managed"><span>Fully managed — we run it for <span class="nb">you →</span></span></a>
+        <span class="cta-note">Setup + ongoing support. You still click Merge. · <a href="managed">Learn more</a></span>
+      </div>
     </div>
     <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and check each other's work. Nothing changes until you approve it, and you can approve it from your phone. It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</p>
     <p class="stat-strip">One Claude subscription <span>·</span> Six teammates <span>·</span> One human <span>·</span> One merge button</p>
@@ -1189,11 +1198,13 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
       </li>
     </ol>
     <div class="cta-stack">
-      <a class="btn" href="https://github.com/squidbay/factory">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-        Use this template
-      </a>
-      <a class="btn ghost" href="managed">Fully managed →</a>
+      <div class="cta-buttons">
+        <a class="btn" href="https://github.com/squidbay/factory">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+          Use this template
+        </a>
+        <a class="btn ghost" href="managed"><span>Fully <span class="nb">managed →</span></span></a>
+      </div>
       <span class="cta-note">Built by Claude · Directed by humans · Runs forever</span>
     </div>
   </div>
