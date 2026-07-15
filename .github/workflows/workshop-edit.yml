@@ -1,0 +1,195 @@
+name: workshop-edit
+
+# The write path to a workshop — a production repo your factory manages that
+# ISN'T your office (a website, an app, a client project). It works the only
+# way this factory ever changes anything: it opens a pull request you review
+# and merge. It never auto-merges, and it never touches the workshop's main.
+#
+# The shape mirrors the office's own discipline, pointed at another repo:
+#   1. You stage the COMPLETE new files in a folder in this office
+#      (e.g. staging/my-site/), on a branch you merged like any other work.
+#   2. You dispatch this workflow from the Actions tab (or ask a seat to),
+#      naming the target workshop and that staging folder.
+#   3. It clones the workshop using THAT workshop's own narrow write key,
+#      copies the staged files in, and opens ONE pull request on the workshop.
+#   4. You review and merge that PR on the workshop — same gate as an office PR.
+#
+# What it can never do: merge anything; push to a workshop's main (it refuses
+# that branch name outright); touch a repo not listed in .github/workshops.txt;
+# or reach a workshop it has no wired key for.
+#
+# Two honest mechanics worth knowing:
+#   - GitHub won't let a workflow choose a secret by a name it builds at run
+#     time (a safety limit), so the write keys are listed explicitly in the
+#     WIRING BLOCK below — one line per workshop. Adding a workshop means
+#     adding one line here, which is itself a pull request a Code seat opens.
+#   - Each workshop's write key is its OWN key, scoped to that ONE repo, kept
+#     as an Actions secret named WORKSHOP_<NAME>_WRITE and nowhere else. The
+#     full click-by-click is in guides/WORKSHOPS.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      workshop:
+        description: "Target workshop as owner/repo — must be listed in .github/workshops.txt"
+        required: true
+      staging_path:
+        description: "Folder in THIS office holding the complete files to copy in (e.g. staging/my-site)"
+        required: true
+      branch:
+        description: "Proposal branch to open on the workshop (never main)"
+        required: true
+        default: "factory-edit/proposal"
+      commit_message:
+        description: "Commit message for the change"
+        required: true
+      pr_title:
+        description: "Title for the pull request"
+        required: true
+      pr_body:
+        description: "Optional body for the pull request"
+        required: false
+        default: "Proposed by your factory. Review the diff and merge if it's right — nothing here merges itself."
+
+# This job only READS this office (the staging files + the manifest). The power
+# to write the workshop comes from that workshop's own key, not from this token.
+permissions:
+  contents: read
+
+concurrency:
+  group: workshop-edit-${{ github.event.inputs.workshop }}-${{ github.event.inputs.branch }}
+  cancel-in-progress: false
+
+jobs:
+  propose:
+    # The template ships this workflow but manages no workshops of its own.
+    if: github.repository != 'squidbay/factory'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Guard the inputs (never main, must be on the manifest, staging must exist)
+        id: check
+        env:
+          WORKSHOP: ${{ github.event.inputs.workshop }}
+          BRANCH: ${{ github.event.inputs.branch }}
+          STAGING: ${{ github.event.inputs.staging_path }}
+        run: |
+          set -u
+
+          # Hard guard 1 — never open onto a workshop's main/master.
+          case "$BRANCH" in
+            main|master|"") echo "::error::Refusing branch '$BRANCH' — pick a proposal branch, never main."; exit 1 ;;
+          esac
+
+          # Hard guard 2 — the workshop must be listed in the office's manifest.
+          MANIFEST=".github/workshops.txt"
+          if [ ! -f "$MANIFEST" ]; then
+            echo "::error::No $MANIFEST in this office. List the workshop (owner/repo, one per line) first."
+            exit 1
+          fi
+          FOUND=0
+          while IFS= read -r line; do
+            line="${line%%#*}"
+            line="$(echo "$line" | xargs || true)"
+            [ -z "$line" ] && continue
+            [ "$line" = "$WORKSHOP" ] && FOUND=1
+          done < "$MANIFEST"
+          if [ "$FOUND" -ne 1 ]; then
+            echo "::error::'$WORKSHOP' is not listed in $MANIFEST — add it there first."
+            exit 1
+          fi
+
+          # Hard guard 3 — the staging folder must exist and hold something.
+          if [ ! -d "$STAGING" ] || [ -z "$(ls -A "$STAGING" 2>/dev/null)" ]; then
+            echo "::error::Staging folder '$STAGING' is missing or empty — nothing to propose."
+            exit 1
+          fi
+
+          # Derive the wiring key: repo name in UPPER_SNAKE (acme/my-site -> MY_SITE).
+          REPO="${WORKSHOP##*/}"
+          KEY="$(printf '%s' "$REPO" | tr '[:lower:]' '[:upper:]' | sed 's/[^A-Z0-9]/_/g')"
+          echo "key=$KEY" >> "$GITHUB_OUTPUT"
+          echo "Workshop '$WORKSHOP' is on the manifest; its write key is expected in the wiring var '$KEY'."
+
+      - name: Open a pull request on the workshop (clone -> apply staging -> PR; never merge, never main)
+        env:
+          WORKSHOP: ${{ github.event.inputs.workshop }}
+          BRANCH: ${{ github.event.inputs.branch }}
+          STAGING: ${{ github.event.inputs.staging_path }}
+          COMMIT_MESSAGE: ${{ github.event.inputs.commit_message }}
+          PR_TITLE: ${{ github.event.inputs.pr_title }}
+          PR_BODY: ${{ github.event.inputs.pr_body }}
+          KEY: ${{ steps.check.outputs.key }}
+          # ─────────────────── WIRING BLOCK ───────────────────
+          # One line per workshop. The var name is the workshop's repo name in
+          # UPPER_SNAKE (acme/my-site -> MY_SITE); the value is always that
+          # workshop's own narrow WRITE key (Actions secret WORKSHOP_<NAME>_WRITE).
+          # Leave the examples commented; add your real lines beneath them.
+          #
+          #   MY_SITE: ${{ secrets.WORKSHOP_MY_SITE_WRITE }}
+          #   MY_APP:  ${{ secrets.WORKSHOP_MY_APP_WRITE }}
+          # ─────────────────────────────────────────────────────
+        run: |
+          set -u
+
+          # Pull this workshop's write token out of the wiring block by its key.
+          TOKEN="$(printenv "$KEY" || true)"
+          if [ -z "${TOKEN:-}" ]; then
+            echo "::error::No write key wired for '$WORKSHOP'. In .github/workflows/workshop-edit.yml,"
+            echo "::error::add a line to the WIRING BLOCK:  $KEY: \${{ secrets.WORKSHOP_${KEY}_WRITE }}"
+            echo "::error::and set that Actions secret (see guides/WORKSHOPS.md)."
+            exit 1
+          fi
+
+          OWNER="${WORKSHOP%%/*}"
+          REPO="${WORKSHOP##*/}"
+          WORKDIR="$RUNNER_TEMP/workshop"
+
+          # Clone the workshop with its own write key. main is never written —
+          # we only ever push the proposal branch below.
+          git clone --depth 1 "https://x-access-token:${TOKEN}@github.com/${OWNER}/${REPO}.git" "$WORKDIR"
+          DEFAULT_BRANCH="$(git -C "$WORKDIR" rev-parse --abbrev-ref HEAD)"
+
+          # Apply the staged files over the workshop's tree (nested paths preserved).
+          cp -r "$STAGING"/. "$WORKDIR"/
+
+          cd "$WORKDIR"
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "Staging already matches the workshop — nothing to propose."
+            exit 0
+          fi
+
+          git config user.name "workshop-edit"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "$COMMIT_MESSAGE"
+          git push -u origin "$BRANCH"
+
+          # Open the PR against the workshop's own default branch. This creates a
+          # proposal only — there is no merge call anywhere in this workflow.
+          HTTP=$(curl -sS -o resp.json -w '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${OWNER}/${REPO}/pulls" \
+            -d "$(jq -n --arg t "$PR_TITLE" --arg h "$BRANCH" --arg b "$DEFAULT_BRANCH" --arg body "$PR_BODY" \
+                  '{title:$t, head:$h, base:$b, body:$body}')")
+
+          if [ "$HTTP" = "201" ]; then
+            URL="$(jq -r '.html_url' resp.json)"
+            echo "Opened pull request: $URL"
+            {
+              echo "### Workshop PR opened"
+              echo "- Workshop: \`$OWNER/$REPO\`"
+              echo "- $URL"
+            } >> "$GITHUB_STEP_SUMMARY"
+          elif [ "$HTTP" = "422" ] && grep -q "A pull request already exists" resp.json; then
+            echo "A pull request for '$BRANCH' already exists — the new commit was pushed to it."
+          else
+            echo "::error::Opening the PR failed (HTTP $HTTP):"
+            cat resp.json
+            exit 1
+          fi

@@ -21,6 +21,7 @@ SECURITY.md
 THIRD_PARTY_NOTICES.md
 VERSIONS.md
 grounding/
+guides/
 hosting/
 inbox/drop/README.md
 journal/README.md

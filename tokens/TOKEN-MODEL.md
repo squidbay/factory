@@ -31,16 +31,18 @@ None of these exist in a fresh factory, and a fresh factory is not missing anyth
 | Tier | Plane | What it is | Where the value lives |
 |---|---|---|---|
 | **A — the reading key** | Seeing | A read-only GitHub key across your repos | The Claude app's connector settings |
-| **B — the writing key** | Acting | A GitHub key that can write to **one repo only** — your office | The Claude app's connector settings |
+| **B — the writing key** | Acting | A GitHub key that can write to **exactly one repo** — your office is the first; each workshop you add later gets its own | Office key: the Claude app's connector settings. Each workshop key: an Actions secret in your office |
 | **C — god-view** | Seeing (mostly) | Hosting-account credentials, consumed only by automated workflows | GitHub Actions secrets, or the host's own secret store |
 
 ### Tier A — the reading key
 
 A fine-grained GitHub token, **read-only**, covering your repos. You paste it into the Claude app's connector configuration, and from then on your chat seats (Cowork, Chat) can *read* your repos themselves — open your journal, check a plan, look at what Code shipped — without you copy-pasting files to them. It cannot write, and it cannot merge. This is the key that turns your chat seats from blind advisors into teammates who can see the same repo you do.
 
-### Tier B — the writing key
+### Tier B — the writing key (one per repo)
 
-A fine-grained GitHub token scoped to **exactly one repository: your office** (your private copy of this template — the team's memory). It can read and write contents, open pull requests, and work with Actions in that one repo. Nothing else, anywhere. This is what lets a chat seat propose changes — always as a branch and a pull request that *you* review and merge. Even the writing key cannot touch `main` directly once branch protection is on (see `hosting/github/README.md`), and it never covers your workshop or anything else you own.
+A fine-grained GitHub token scoped to **exactly one repository**. Its first and most common use is **your office** (your private copy of this template — the team's memory): the key can read and write contents, open pull requests, and work with Actions in that one repo, and nothing else, anywhere. This is what lets a chat seat propose changes — always as a branch and a pull request that *you* review and merge. Even the writing key cannot touch `main` directly once branch protection is on (see `hosting/github/README.md`).
+
+**What makes a writing key safe is its narrowness: one key, one repo.** So when your factory grows to manage a second production repo — a **workshop** (your website, an app, a client project) — you don't widen the office key to reach it. You mint a *separate* narrow writing key scoped to that one workshop, and you give it a different home: an **Actions secret** in your office, consumed only by a workflow you dispatch, never pasted into a chat or held by a chat seat. Each workshop you add gets its own key; managing one workshop or ten is the same move repeated, and no key ever reaches past the single repo it was cut for. Seeing a workshop is the other half: you *read* it through a broad, read-only key (the seeing plane — same shape as Tier A), and you *change* it only through that workshop's own narrow writing key. Broad to look, narrow to touch — the two planes, applied per repo. The click-by-click for adding one is in [`guides/WORKSHOPS.md`](../guides/WORKSHOPS.md).
 
 ### Tier C — god-view
 
@@ -80,7 +82,7 @@ If you ever lose track of a token or feel uneasy about one, go back to the same 
 Every credential value has exactly one home, and all three homes share the same property: **seats and repos can use what the key unlocks without ever seeing the key itself.**
 
 - **The Claude app's connector settings** — home of Tiers A and B. You paste the token into the connector configuration in the app's Settings. That's a settings field, not a chat message: the seat gets the *ability*, never the *value*.
-- **GitHub Actions secrets** — home of Tier C values and any deploy token used by a workflow. In the repo: **Settings → Secrets and variables → Actions → New repository secret**. The value is encrypted; workflows use it; nobody — human or seat — can read it back out.
+- **GitHub Actions secrets** — home of Tier C values, each **workshop's** narrow writing key, and any deploy token used by a workflow. In the repo: **Settings → Secrets and variables → Actions → New repository secret**. The value is encrypted; workflows use it; nobody — human or seat — can read it back out.
 - **The host's own secret store** — home of your *workshop's* runtime secrets (API keys your deployed site or Worker needs). On Cloudflare, that's the Variables and Secrets panel on the Worker itself — see `hosting/cloudflare/README.md`.
 
 **Never a repo file.** Not in a config file, not in a "just temporarily" commit, not in an example with the real value filled in. Repos are memory — everything in them is written down forever, and on GitHub even deleted files linger in history. This isn't a discipline you have to maintain alone: **the guardrails CI in your office scans every pull request for anything that looks like a credential and fails the check if it finds one.** The machine enforces the rule so no one has to be perfect.

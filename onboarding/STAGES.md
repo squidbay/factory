@@ -63,6 +63,8 @@
 
 *Done looks like: **graduation** — one full loop, recon → plan → build → audit → your merge → the journal remembers. From here the factory grows by working, and [`USAGE.md`](USAGE.md) is your pacing guide.* 🎓
 
+> **Later, and only if you need it — managing more than your office.** When your factory starts looking after a second production repo (a live website, an app, a client project — a **workshop**), it manages it the same gated way it manages the office: read to audit, change only by a PR you merge, never touching `main`. That's an advanced shelf, not a stage — reach for [`../guides/WORKSHOPS.md`](../guides/WORKSHOPS.md) the day it's real, not before.
+
 ---
 
 ## The drift ritual (first-class, not an appendix)
