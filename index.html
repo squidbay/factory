@@ -218,15 +218,32 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 }
 .btn:hover { color: var(--black); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 217, 255, 0.3); }
 
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 44px); align-items: center; }
+.hero-lead { min-width: 0; }
+.hero-aside { min-width: 0; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr); } }
+
 .premise {
-  margin-top: var(--s-6);
-  display: inline-flex; flex-direction: column; gap: 6px;
-  padding: 20px 24px; max-width: 58ch;
-  border: 1px solid rgba(255, 189, 46, 0.35); border-radius: var(--r-3);
-  background: rgba(255, 189, 46, 0.05);
+  position: relative;
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 26px 28px;
+  border: 1px solid rgba(247, 147, 26, 0.32); border-radius: var(--r-3);
+  background: linear-gradient(135deg, rgba(247, 147, 26, 0.08), rgba(247, 147, 26, 0.02));
 }
-.premise .tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); }
+.premise .tag { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #FBB040; }
+.premise .tag::before { content: ""; width: 22px; height: 1px; background: var(--orange); }
 .premise p { font-size: 1.0625rem; text-wrap: pretty; }
+.runner-gold {
+  position: absolute; inset: -1px; border-radius: var(--r-3); padding: 1.5px;
+  background: conic-gradient(from var(--angle), transparent 0turn, transparent 0.7turn, rgba(247, 147, 26, 0.55) 0.82turn, #FBB040 0.9turn, rgba(247, 147, 26, 0.55) 0.96turn, transparent 1turn);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: runner-gold-once 2.4s ease-out 0.25s 1 both;
+  pointer-events: none;
+}
+@keyframes runner-gold-once { 0% { --angle: 0deg; opacity: 1; } 85% { opacity: 1; } 100% { --angle: 360deg; opacity: 0; } }
 
 /* Cards + grids */
 .grid { display: grid; gap: var(--gap-grid); margin-top: var(--block-top); }
@@ -278,6 +295,25 @@ nav.top { display: flex; align-items: center; justify-content: space-between; ga
 .you-card .body { flex: 1; min-width: 260px; }
 .you-card h3 { font-size: 1.125rem; }
 .you-card p { margin-top: 6px; font-size: 0.9375rem; color: var(--muted); }
+
+/* Seats carousel */
+.seats-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.car-nav { display: flex; gap: 10px; flex-shrink: 0; }
+.car-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-pill); color: var(--white); font-size: 1.375rem; line-height: 1; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease; }
+.car-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 217, 255, 0.06); }
+.car-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.carousel { --per: 1; --gap: var(--gap-grid); margin-top: var(--block-top); }
+.car-track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+.car-track::-webkit-scrollbar { display: none; }
+.car-track:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: var(--r-3); }
+.car-track > .poster-card { flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); scroll-snap-align: start; }
+.car-dots { display: flex; justify-content: center; gap: 6px; margin-top: 4px; }
+.car-dot { width: 26px; height: 44px; padding: 0; border: none; background: transparent; cursor: pointer; position: relative; }
+.car-dot::before { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--gray-light); transition: background 0.2s ease, width 0.2s ease; }
+.car-dot[aria-current="true"]::before { background: var(--primary); width: 22px; }
+.car-dot:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: var(--r-1); }
+@media (min-width: 560px) { .carousel { --per: 2; } }
+@media (min-width: 920px) { .carousel { --per: 3; } }
 
 /* Loop */
 .loop { list-style: none; margin: var(--block-top) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gap-grid); }
@@ -409,8 +445,8 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 /* Bubbles: signature flow, bottom to top */
 @keyframes rise {
   0% { transform: translateY(0); opacity: 0; }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.7; }
+  10% { opacity: 0.35; }
+  90% { opacity: 0.35; }
   100% { transform: translateY(-115vh); opacity: 0; }
 }
 .bubbles { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
@@ -431,6 +467,7 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 .bubbles span:nth-child(8) { left: 72%; width: 16px; height: 16px; animation-duration: 18s; animation-delay: -1s; }
 .bubbles span:nth-child(9) { left: 84%; width: 9px; height: 9px; animation-duration: 25s; animation-delay: -16s; }
 .bubbles span:nth-child(10) { left: 91%; width: 22px; height: 22px; animation-duration: 15s; animation-delay: -9s; }
+.bubbles span:nth-child(3n) { display: none; }
 
 /* Runner: the traveling light around the merge-gate card */
 @property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
@@ -498,6 +535,62 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 .e13-face[data-state="done"] { color: var(--green); }
 .e13-note { margin-top: var(--s-4); font-size: var(--t-body); color: var(--muted); text-wrap: pretty; }
 
+/* ===== Dispatch chat — Mobile Scout (seeing is believing) ===== */
+.dispatch-grid { margin-top: var(--s-5); display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+.dispatch-copy .e12-lead { font-size: var(--t-lead); text-wrap: pretty; }
+.dispatch-copy .e12-lead strong { color: var(--white); font-weight: 600; }
+.dispatch-points { list-style: none; margin: var(--s-4) 0 0; padding: 0; display: grid; gap: 14px; }
+.dispatch-points li { position: relative; padding-left: 28px; font-size: var(--t-body); color: var(--muted); text-wrap: pretty; }
+.dispatch-points li strong { color: var(--white); font-weight: 600; }
+.dispatch-points li::before { content: ""; position: absolute; left: 6px; top: 9px; width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--orange); }
+.phone { justify-self: center; width: 100%; max-width: 400px; background: var(--darker); border: 1px solid var(--gray-light); border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
+.phone-head { display: flex; align-items: center; gap: 12px; padding: 15px 18px; border-bottom: 1px solid var(--gray); background: linear-gradient(180deg, rgba(247, 147, 26, 0.06), transparent); }
+.phone-ava { width: 38px; height: 38px; border-radius: var(--r-pill); display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--orange), var(--ember)); color: #1a1206; flex-shrink: 0; }
+.phone-id { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+.phone-id .n { font-weight: 600; font-size: 0.9375rem; }
+.phone-id .s { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.5px; color: var(--green); display: inline-flex; align-items: center; gap: 6px; text-transform: uppercase; }
+.phone-id .s::before { content: ""; width: 6px; height: 6px; border-radius: var(--r-pill); background: var(--green); box-shadow: 0 0 6px var(--green); }
+.phone-tag { margin-left: auto; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--gray-light); border-radius: var(--r-pill); padding: 3px 10px; flex-shrink: 0; }
+.phone-body { padding: 16px; height: clamp(340px, 46vh, 430px); overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.phone-body::-webkit-scrollbar { width: 6px; }
+.phone-body::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 100px; }
+.msg { display: flex; gap: 8px; max-width: 90%; animation: msg-in 0.35s ease both; }
+@keyframes msg-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.msg .m-ava { width: 26px; height: 26px; border-radius: var(--r-pill); flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; }
+.msg .b { padding: 10px 14px; border-radius: 14px; font-size: 0.875rem; line-height: 1.5; }
+.msg.dispatch .m-ava { background: linear-gradient(135deg, var(--orange), var(--ember)); color: #1a1206; }
+.msg.dispatch .b { background: var(--gray); color: var(--white); border-top-left-radius: 4px; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.msg.user .m-ava { background: rgba(0, 217, 255, 0.14); color: var(--primary); }
+.msg.user .b { background: var(--primary); color: var(--black); border-top-right-radius: 4px; }
+.msg-sys { align-self: center; max-width: 92%; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 1px; color: var(--muted); text-align: center; text-transform: uppercase; text-wrap: balance; animation: msg-in 0.35s ease both; }
+.msg-merged { align-self: center; display: inline-flex; align-items: center; gap: 8px; background: rgba(130, 80, 223, 0.16); color: #c9b0f5; border: 1px solid rgba(130, 80, 223, 0.45); border-radius: var(--r-pill); padding: 7px 16px; font-size: 0.8125rem; font-weight: 600; animation: msg-in 0.35s ease both; }
+.typing { display: inline-flex !important; gap: 4px; padding: 13px 14px !important; align-items: center; }
+.typing span { width: 6px; height: 6px; border-radius: var(--r-pill); background: var(--muted); animation: typing 1.2s infinite; }
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+.pr-card { margin-top: 10px; background: var(--darker); border: 1px solid var(--gray-light); border-radius: 10px; padding: 12px 13px; }
+.pr-card .h { display: flex; align-items: center; gap: 8px; font-size: 0.6875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.pr-card .pt { margin-top: 6px; font-size: 0.875rem; font-weight: 600; color: var(--white); }
+.pr-card .chk { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.pr-card .chk span { display: flex; align-items: flex-start; gap: 8px; font-size: 0.75rem; color: var(--muted); }
+.pr-card .chk svg { color: var(--green); flex-shrink: 0; margin-top: 1px; }
+.phone-foot { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-top: 1px solid var(--gray); }
+.phone-foot .fake-input { flex: 1; background: var(--gray); border-radius: var(--r-pill); padding: 10px 16px; font-size: 0.8125rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.phone-foot .fake-send { width: 36px; height: 36px; border-radius: var(--r-pill); background: var(--primary); color: var(--black); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+@media (min-width: 900px) { .dispatch-grid { grid-template-columns: 0.92fr 1.08fr; } }
+
+/* ===== How-it-works: arrows light up left to right along the path ===== */
+.line.run > .arrow { animation: arrow-run 3.6s linear infinite; }
+.line.run > .arrow:nth-child(2) { animation-delay: 0s; }
+.line.run > .arrow:nth-child(4) { animation-delay: 0.6s; }
+.line.run > .arrow:nth-child(6) { animation-delay: 1.2s; }
+.line.run > .arrow:nth-child(8) { animation-delay: 1.8s; }
+.line.run > .arrow:nth-child(10) { animation-delay: 2.4s; }
+.line.run > .arrow:nth-child(12) { animation-delay: 3s; }
+@keyframes arrow-run { 0% { color: var(--muted); text-shadow: none; } 6% { color: var(--primary); text-shadow: 0 0 12px rgba(0, 217, 255, 0.75); } 16% { color: var(--muted); text-shadow: none; } 100% { color: var(--muted); text-shadow: none; } }
+
 /* ===== Responsive architecture — intrinsic min/auto-fit + wrap, no fixed heights ===== */
 
 /* Base → large phone (≤640) */
@@ -505,7 +598,7 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   .hero h1 { line-height: 1.12; }
   .stat-strip { margin-top: 16px; line-height: 1.6; }
   .stat-strip span { display: block; font-size: 0; height: 6px; padding: 0; }
-  .premise { margin-top: var(--s-5); }
+  .premise { margin-top: 0; }
   /* Single top-band poster card at all sizes — 112px side-crop override removed */
   .poster-card .body { padding: 16px 18px 18px; }
   .poster-card .line { margin-top: 8px; font-size: 0.9375rem; }
@@ -533,14 +626,12 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
    sit above the fold in column 1; the longer supporting copy fills column 2 at/below
    the CTA row (align-items:start keeps a tall neighbour from pushing the CTA down). */
 @media (max-height: 560px) and (orientation: landscape) {
-  .hero .wrap { padding-top: var(--s-2); padding-bottom: var(--s-4); display: grid; grid-template-columns: 1.15fr 0.85fr; column-gap: clamp(20px, 4vw, 40px); row-gap: 4px; align-items: start; }
+  .hero .wrap { padding-top: var(--s-2); padding-bottom: var(--s-4); }
   .hero .glow { display: none; }
-  .hero .mono-label { grid-column: 1; grid-row: 1; }
-  .hero h1 { grid-column: 1; grid-row: 2; margin-top: 4px; font-size: clamp(1.5rem, 3.1vw, 2.1rem); }
-  .hero .cta-row { grid-column: 1; grid-row: 3; margin-top: 10px; }
-  .hero .stat-strip { grid-column: 2; grid-row: 1; margin-top: 0; line-height: 1.5; }
-  .hero .sub { grid-column: 2; grid-row: 3; margin-top: 0; font-size: var(--t-body); }
-  .hero .premise { grid-column: 2; grid-row: 4; margin-top: 12px; }
+  .hero-grid { grid-template-columns: 1.12fr 0.88fr; gap: clamp(18px, 4vw, 36px); align-items: start; }
+  .hero h1 { font-size: clamp(1.5rem, 3.1vw, 2.1rem); }
+  .hero .sub { font-size: var(--t-body); }
+  .premise { margin-top: 4px; }
 }
 
 /* Desktop / tablet (≥768): engage the width as a first-class axis */
@@ -555,10 +646,11 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-  .bubbles, .runner { display: none !important; }
+  .bubbles, .runner, .runner-gold { display: none !important; }
   .gh-cursor, .gh-merged { display: none !important; }
   .gh-btn { animation: none !important; }
   [data-fx] { animation: none !important; }
+  .car-track { scroll-behavior: auto !important; }
   /* E12 static fallback: keep the wires + nodes, drop the traveling dots + gate pulse */
   .e12-wire .dot { display: none !important; }
   .e12-node.gate .ico::after { display: none !important; }
@@ -591,6 +683,8 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 <section class="hero">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap">
+    <div class="hero-grid">
+     <div class="hero-lead">
     <span class="mono-label">Open source · MIT license</span>
     <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
     <div class="cta-row">
@@ -602,9 +696,14 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
     </div>
     <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and check each other's work. Nothing changes until you approve it, and you can approve it from your phone. It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</p>
     <p class="stat-strip">One Claude subscription <span>·</span> Six teammates <span>·</span> One human <span>·</span> One merge button</p>
+     </div>
+     <aside class="hero-aside">
     <div class="premise">
+      <span class="runner-gold" aria-hidden="true"></span>
       <span class="tag">The design premise</span>
       <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
+    </div>
+     </aside>
     </div>
   </div>
 </section>
@@ -654,6 +753,36 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   </div>
 </section>
 
+<!-- 1c · Dispatch chat — seeing is believing -->
+<section id="dispatch" aria-labelledby="dispatch-title">
+  <div class="wrap">
+    <span class="mono-label">Seeing is believing</span>
+    <h2 class="section-title" id="dispatch-title">A whole job, from your phone.</h2>
+    <div class="dispatch-grid">
+      <div class="dispatch-copy">
+        <p class="e12-lead">You send <strong>Mobile Scout</strong>, your Dispatch, a plain order. It carries the work to the team and brings back a pull request you can actually read. <strong>You tap merge. Nothing ships until you do.</strong></p>
+        <ul class="dispatch-points">
+          <li>Talk to it like a person. <strong>No commands, no dashboards.</strong></li>
+          <li>The seats plan, build, and check each other while you get on with your day.</li>
+          <li><strong>The green button is yours alone.</strong> Every merge is a choice you make.</li>
+        </ul>
+      </div>
+      <div class="phone" id="dispatchChat">
+        <div class="phone-head">
+          <span class="phone-ava" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg></span>
+          <span class="phone-id"><span class="n">Mobile Scout</span><span class="s">Dispatch · online</span></span>
+          <span class="phone-tag">Your phone</span>
+        </div>
+        <div class="phone-body" role="log" aria-label="Example conversation with your Dispatch"></div>
+        <div class="phone-foot" aria-hidden="true">
+          <span class="fake-input">Message your Dispatch…</span>
+          <span class="fake-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 2 · The stack -->
 <section>
   <div class="wrap">
@@ -686,9 +815,18 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 <!-- 3 · The seats -->
 <section>
   <div class="wrap">
-    <span class="mono-label">The seats</span>
-    <h2 class="section-title">Four seats, two specialists, and you.</h2>
-    <div class="grid min300">
+    <div class="seats-head">
+      <div>
+        <span class="mono-label">The seats</span>
+        <h2 class="section-title">Four seats, two specialists, and you.</h2>
+      </div>
+      <div class="car-nav">
+        <button type="button" class="car-btn prev" aria-label="Previous seats">‹</button>
+        <button type="button" class="car-btn next" aria-label="Next seats">›</button>
+      </div>
+    </div>
+    <div class="carousel" id="seatsCarousel">
+    <div class="car-track" role="group" aria-label="Factory seats, six in total" tabindex="0">
       <div class="poster-card">
         <img src="seats/cowork.jpg" alt="Cowork seat: a dark factory robot with the squid emblem sketching a project timeline" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
@@ -732,6 +870,8 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
         </div>
       </div>
     </div>
+    <div class="car-dots" aria-label="Seat carousel navigation"></div>
+    </div>
     <div class="you-card">
       <span class="runner" aria-hidden="true"></span>
       <span class="avatar" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
@@ -748,7 +888,7 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
   <div class="wrap">
     <span class="mono-label">How it works</span>
     <h2 class="section-title">The assembly line. You hold the last station.</h2>
-    <div class="line">
+    <div class="line" id="flowLine">
       <span class="station">You ask</span>
       <span class="arrow" aria-hidden="true">→</span>
       <span class="station">Cowork plans</span>
@@ -972,7 +1112,7 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
 <section class="close">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap" style="padding-bottom: 0;">
-    <p class="manifesto">Factories don't make products. They make <span>products that make products</span>.</p>
+    <p class="manifesto">You run the factory. <span>Not the other way around.</span></p>
   </div>
   <figure class="floor">
     <div class="factory-scene" role="img" aria-label="A stylized factory at night: cyan smoke drifting from the stack, warm light in the windows, and a conveyor carrying glowing pull requests out the door.">
@@ -1072,6 +1212,150 @@ footer .legal { font-size: 0.8125rem; color: var(--muted); max-width: 72ch; }
     <p class="legal">Independent open-source project; not affiliated with or endorsed by Anthropic. Claude is a trademark of Anthropic, PBC.</p>
   </div>
 </footer>
+
+<script>
+(function () {
+  var car = document.getElementById('seatsCarousel');
+  if (!car) return;
+  var scope = car.closest('section') || car.parentNode;
+  var track = car.querySelector('.car-track');
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.poster-card'));
+  var prev = scope.querySelector('.car-btn.prev');
+  var next = scope.querySelector('.car-btn.next');
+  var dotsWrap = car.querySelector('.car-dots');
+  if (!prev || !next || !dotsWrap) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (cards.length < 2) { if (prev) prev.style.display = 'none'; if (next) next.style.display = 'none'; return; }
+
+  var dots = cards.map(function (_, i) {
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'car-dot';
+    d.setAttribute('aria-label', 'Go to seat ' + (i + 1));
+    d.addEventListener('click', function () { go(i, false); });
+    dotsWrap.appendChild(d);
+    return d;
+  });
+
+  function step() {
+    return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left || track.clientWidth;
+  }
+  function maxIndex() {
+    return Math.max(0, Math.round((track.scrollWidth - track.clientWidth) / step()));
+  }
+  function activeIndex() {
+    return Math.min(maxIndex(), Math.round(track.scrollLeft / step()));
+  }
+  function go(i, instant) {
+    var m = maxIndex();
+    if (i < 0) i = 0; else if (i > m) i = m;
+    track.scrollTo({ left: i * step(), behavior: (instant || reduce) ? 'auto' : 'smooth' });
+  }
+  function advance(dir, auto) {
+    var m = maxIndex(), t = activeIndex() + dir, wrap = false;
+    if (t > m) { t = 0; wrap = true; } else if (t < 0) { t = m; wrap = true; }
+    go(t, auto && wrap);
+  }
+  function update() {
+    var a = activeIndex();
+    dots.forEach(function (d, i) { d.setAttribute('aria-current', i === a ? 'true' : 'false'); });
+  }
+
+  prev.addEventListener('click', function () { advance(-1, false); });
+  next.addEventListener('click', function () { advance(1, false); });
+  var raf;
+  track.addEventListener('scroll', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+  window.addEventListener('resize', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); });
+  update();
+
+  var timer = null, inView = false;
+  function play() { if (reduce || timer || !inView) return; timer = setInterval(function () { advance(1, true); }, 4500); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  ['mouseenter', 'focusin', 'touchstart', 'pointerdown'].forEach(function (e) { scope.addEventListener(e, stop, { passive: true }); });
+  ['mouseleave', 'focusout'].forEach(function (e) { scope.addEventListener(e, play); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else play(); });
+  new IntersectionObserver(function (es) { es.forEach(function (e) { inView = e.isIntersecting; if (inView) play(); else stop(); }); }, { threshold: 0.3 }).observe(car);
+})();
+
+(function () {
+  var line = document.getElementById('flowLine');
+  if (line && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new IntersectionObserver(function (es) { es.forEach(function (e) { line.classList.toggle('run', e.isIntersecting); }); }, { threshold: 0.4 }).observe(line);
+  }
+})();
+
+(function () {
+  var root = document.getElementById('dispatchChat');
+  if (!root) return;
+  var body = root.querySelector('.phone-body');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CHK = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+  var UAVA = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+  var DAVA = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg>';
+  var PR = '<div class="pr-card"><div class="h"><span>Pull request #128</span></div><div class="pt">Add testimonials section</div><div class="chk"><span>' + CHK + ' Mobile layout passes down to 380px</span><span>' + CHK + ' Guardrails: clean</span><span>' + CHK + ' No conflicts with main</span></div></div>';
+  var convo = [
+    { t: 'user', m: 'Add a testimonials section to the site, and make sure it looks right on a phone.', d: 1275 },
+    { t: 'dispatch', m: 'On it. Sending this down the line to the team.', d: 1500 },
+    { t: 'sys', m: 'Dispatched \u00b7 Cowork plans \u2192 Code builds \u2192 Design draws', d: 1425 },
+    { t: 'dispatch', m: "Plan's approved and the seats are building. I'll ping you the moment there's something to look at. Go live your day.", d: 1800 },
+    { t: 'sys', m: '20 minutes later', d: 1275 },
+    { t: 'dispatch', m: 'Pull request is ready. The browser seat and I checked it on real phones. Here is the gist:', pr: true, d: 2475 },
+    { t: 'user', m: 'Nice, reads well. Merging now.', d: 1500 },
+    { t: 'merged', m: 'Merged by you \u00b7 live in ~1 min', d: 1500 },
+    { t: 'dispatch', m: 'Done. The journal is updated, so tomorrow\u2019s shift starts where this one ended.', d: 1950 },
+    { t: 'sys', m: 'You held the gate. The team did the work.', d: 2250 }
+  ];
+  var i = 0, timer = null, running = false, started = false;
+
+  function bubble(item) {
+    var d = document.createElement('div');
+    d.className = 'msg ' + item.t;
+    var ava = item.t === 'user' ? UAVA : DAVA;
+    d.innerHTML = '<span class="m-ava">' + ava + '</span><div class="b"><span>' + item.m + '</span>' + (item.pr ? PR : '') + '</div>';
+    return d;
+  }
+  function sysLine(item) { var d = document.createElement('div'); d.className = 'msg-sys'; d.textContent = item.m; return d; }
+  function mergedLine(item) { var d = document.createElement('div'); d.className = 'msg-merged'; d.innerHTML = CHK + '<span>' + item.m + '</span>'; return d; }
+  function toBottom() { body.scrollTop = body.scrollHeight; }
+  function render(item) {
+    if (item.t === 'sys') body.appendChild(sysLine(item));
+    else if (item.t === 'merged') body.appendChild(mergedLine(item));
+    else body.appendChild(bubble(item));
+    toBottom();
+  }
+  function showTyping() {
+    var d = document.createElement('div');
+    d.className = 'msg dispatch'; d.id = 'ds-typing';
+    d.innerHTML = '<span class="m-ava">' + DAVA + '</span><div class="b typing"><span></span><span></span><span></span></div>';
+    body.appendChild(d); toBottom();
+  }
+  function clearTyping() { var t = document.getElementById('ds-typing'); if (t) t.remove(); }
+  function next() {
+    if (i >= convo.length) { timer = setTimeout(restart, 5000); return; }
+    var item = convo[i];
+    if (item.t === 'dispatch') {
+      showTyping();
+      timer = setTimeout(function () { clearTyping(); render(item); i++; timer = setTimeout(next, item.d); }, 720);
+    } else {
+      render(item); i++; timer = setTimeout(next, item.d);
+    }
+  }
+  function restart() { i = 0; body.innerHTML = ''; next(); }
+  function start() {
+    if (running) return; running = true;
+    if (reduce) { convo.forEach(render); return; }
+    body.innerHTML = ''; i = 0; timer = setTimeout(next, 400);
+  }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting && !started) { started = true; start(); io.unobserve(e.target); } });
+  }, { threshold: 0.25 });
+  io.observe(root);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { if (timer) { clearTimeout(timer); timer = null; } }
+    else if (started && !reduce) { if (timer) clearTimeout(timer); restart(); }
+  });
+})();
+</script>
 
 </body>
 </html>
