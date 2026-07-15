@@ -18,3 +18,5 @@ The grounding pages (`grounding/`, and each seat's `GROUNDING.md`) point at Anth
 | 2026-07-13 | Initial skeleton built and checked against the live desktop app: Code-tab repo attach, Cowork/Chat rooms, connector browse flow. GitHub Mobile PR review + merge verified against GitHub's own documentation, not hands-on | the factory that ships this template |
 
 *(New rows on top. Add one whenever a real verification pass happens — an entry claiming more than was actually checked is worse than no entry.)*
+
+This active page stays short on purpose. When it grows long — past roughly 20 rows, or at the turn of a calendar quarter — the oldest rows roll into a dated file under [`versions/`](versions/README.md), newest-first there too, so the current picture is always the first thing you read. Rolling never deletes a row and never moves this file; the procedure is in [`versions/README.md`](versions/README.md).

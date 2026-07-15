@@ -40,6 +40,7 @@ skills/skill-creator/
 skills/README.md
 templates/
 tokens/
+versions/
 
 # Deliberately absent — user-owned, never synced:
 #   FACTORY.md            (carries your roster and your names)
