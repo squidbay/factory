@@ -49,7 +49,7 @@ jobs:
       TEMPLATE_REPO: https://github.com/squidbay/factory
       UPDATE_BRANCH: factory-update/proposal
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Fetch the current template
         run: |
@@ -130,7 +130,7 @@ jobs:
 
       - name: Create the PR if none is open
         if: steps.apply.outputs.changed == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           DRIFT_NOTES: ${{ steps.drift.outputs.notes }}
         with:
