@@ -21,6 +21,18 @@ Verified against Anthropic's live documentation on 2026-07-14 (the private-repo 
 
 *Done looks like: you typed one word, and the team introduced itself and asked its question. Total: one download, two sign-ins, one authorize click, one repo pick, and one "hi".*
 
+### Authorize is only HALF — verify the app is INSTALLED (the trap that eats evenings)
+
+The **Authorize** click in step 3 connects GitHub to your *Claude account*. That is **half** the connection. The other half is the Claude **GitHub App** being **Installed** on your *GitHub account* — a different switch, on a different page. People finish half one, see "Connected," and stop — then every change a session tries to make silently fails while the chat acts perfectly healthy. Don't be caught by it — verify both halves once, now:
+
+1. Go to **<https://github.com/settings/installations>**.
+2. Confirm **Claude** appears under **Installed GitHub Apps** (not merely under the separate **Authorized GitHub Apps** tab — *authorized ≠ installed*).
+3. If it's missing under Installed: **<https://github.com/apps/claude>** → **Install** → your account → **All repositories** → the green button.
+
+The full, plain-words version of this — and what to do if a session tells you it can read but can't write — is [`../CONNECT-YOUR-CLAUDE.md`](../CONNECT-YOUR-CLAUDE.md). Your Code session now also **proves this itself** at the start of every session (read + write test) — so if a half-connection ever slips through, the session stops and points you here instead of failing quietly.
+
+**One more rule that saves an evening:** if you fix a connection while sessions are already open, **those old sessions keep dead credentials — never resume them.** Start one brand-new session after connecting, and let it lead.
+
 ### If your repo isn't in the list — the private-repo fix (and you keep it private)
 
 **The symptom:** you connected GitHub, your **public** repos appear in the selector, but your **private** factory repo is missing. **Nothing is broken, and you do NOT need to make it public.** A private repository is invisible to any app you haven't explicitly shared it with — that's GitHub protecting your private code by default, working exactly as designed. Claude's GitHub connection just hasn't been granted this one repo yet. Grant it once:
