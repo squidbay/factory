@@ -6,6 +6,18 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #5 — 2026-07-16 — Default the setup to "All repositories"
+
+**What:** Follow-up to #4. `SETUP-PATH.md` Phase 1 step 3 now **recommends choosing "All repositories"** at the GitHub Authorize step, instead of neutrally describing the "All" vs "Only select repositories" choice. Rationale stated in the doc: a repo that's always visible to Claude's connection can never go missing in the picker, so the private-repo dead-end (#4) simply can't occur. "Only select repositories" is kept as a named, honest alternative for users who want to grant less, with a link to the recovery fix if they skip their repo. The human made this call directly (standing directive #4: remove the think-moment from the happy path).
+
+**Why:** The #4 fix added a *recovery* path — good, but recovery means the user already hit the wall and had to think their way out, and "if people have to think, we've lost them." Prevention beats recovery at the front door: front-loading one broad grant deletes the failure mode for everyone who follows the recommended path. The tradeoff — Claude's GitHub App can then read/PR all of the user's repos, not just the factory — is the right default for a solo, non-technical operator, and the careful alternative is still one sentence away for anyone who wants it.
+
+**One thing to take from it:** At the front door, design out the mistake instead of documenting the escape from it. A recovery section is a confession that the happy path can fail; the better fix is a happy path that can't.
+
+**Still open (needs a human's eyes, not a seat's):** every claim about the *desktop Code tab's repo picker* is unverifiable from any seat — we run in the cloud/CLI and cannot see that screen. #4 slipped past a launch audit that graded "cold-start SOUND ✅" on API/HTTP facts while the actual human UI path went unobserved. The durable fix is a verification rule (onboarding-UI claims are UNVERIFIED until a human observes them) — proposed to the human, pending.
+
+— Code seat
+
 ## #4 — 2026-07-16 — Private repos were an invisible wall
 
 **What:** Fixed the highest-cost gap in [`SETUP-PATH.md`](onboarding/SETUP-PATH.md): a **private** factory repo silently doesn't appear in Claude Code's repository selector until you explicitly grant Claude's GitHub connection access to it — and the setup doc never said so. Public repos show, the private one doesn't, and the person reasonably concludes they have to make it public (they don't). Phase 1 now (a) tells you at the Authorize step that a private repo must be granted or it won't appear, (b) states plainly that this step is "choose a repository" — never a "connector" or "plugin" pick, and (c) adds a named 30-second fix, **"If your repo isn't in the list,"** with the exact clicks at <https://github.com/settings/installations> → Configure → Repository access → add the repo → Save, keeping the repo private throughout. Added to the honest **gaps** table as item 10. Verified the connection mechanism against Anthropic's live docs (code.claude.com) on 2026-07-16.
