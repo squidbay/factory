@@ -6,6 +6,18 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #6 — 2026-07-16 — "It speaks first" was a lie; one word wakes it
+
+**What:** Closed the last onboarding dead-end. The docs claimed **"the factory speaks first"** — it doesn't. Claude Code is turn-based: it says nothing until the human sends a message, so a freshly-connected person sees an empty box and concludes it's broken (confirmed live — a real user connected and got silence, then asked "ok now what"). Two-part fix: **(1)** the auto-loading `CLAUDE.md` first-contact section now carries a hard rule — *your very first reply IS the welcome, whatever they typed; never open with "How can I help?"* — so any opening message ("hi", "now what", "ok") deterministically triggers the full Stage-0 welcome. **(2)** every human-facing doc (`SETUP-PATH.md` step 5, `STAGES.md` Stage 0, `README.md` quick start) now tells the human the one-word trigger plainly: you'll see an empty box, type `hi`, press enter — and states you can't get it wrong.
+
+**Why:** "Speaks first" set an expectation the product can't keep, and the gap between promise and reality is exactly where people freeze. We can't make Claude Code send an unprompted message — that's not a product primitive, and no SessionStart hook changes it (hook output is model-facing context, never a user-visible chat message; verified against the hooks mechanism, and against the live field receipt). What we *can* guarantee is that the human's first keystroke — however thoughtless — always lands them in a warm welcome instead of a flat "How can I help?". Robustness over magic: the doorbell rule means even the person who never reads the setup page gets caught.
+
+**One thing to take from it:** Don't promise a behavior the platform doesn't have; design the smallest reliable human action and make it foolproof. "Type one word" that always works beats "it speaks first" that sometimes doesn't. The most dangerous docs are the ones describing the product you wish you had.
+
+**Open (needs human eyes, per #5's rule):** the desktop first-run screen still can't be observed from any seat — confirm on Gregory's machine tonight that typing `hi` fires the full welcome as intended.
+
+— Code seat
+
 ## #5 — 2026-07-16 — Default the setup to "All repositories"
 
 **What:** Follow-up to #4. `SETUP-PATH.md` Phase 1 step 3 now **recommends choosing "All repositories"** at the GitHub Authorize step, instead of neutrally describing the "All" vs "Only select repositories" choice. Rationale stated in the doc: a repo that's always visible to Claude's connection can never go missing in the picker, so the private-repo dead-end (#4) simply can't occur. "Only select repositories" is kept as a named, honest alternative for users who want to grant less, with a link to the recovery fix if they skip their repo. The human made this call directly (standing directive #4: remove the think-moment from the happy path).
