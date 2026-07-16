@@ -11,6 +11,20 @@ Four things stay true, and the public one-pager says them the same way:
 3. **You hold the one gate that matters.** The human is the only one who ever clicks **Merge** — not Mobile Scout, not Code, not the browser seat. Everything else is open season for the team; the merge button is yours alone (RULE 14).
 4. **[TARGET-STATE — UNVERIFIED]** Where it's heading: connect Code, wake Cowork, then Mobile Scout — grant it your screen and it sets up the rest, hands-off. Not a live capability today; flagged here the same way SETUP-PATH §E flags the update lane.
 
+## It can look at your screen — with your permission
+
+Some questions are about your *setup*, not your project — which setting is on, whether a session is running on your computer or in the cloud, what a permission dialog is actually asking for. A seat can't see those things about itself. Your Mobile Scout can.
+
+When something depends on a **setting** or on **which environment** a session is running in — the kind of thing a seat can't see about itself — your Mobile Scout can, with the screen permission you've granted, **open the relevant settings and take a look**, then report back what's actually there. The team works from what's on your screen, not a guess. It only looks where you point it, it never changes anything, and — like everything here — nothing it finds turns into a change without a pull request you merge.
+
+**The fences, named:**
+
+- **Permissioned.** It looks only under the screen permission you've granted on your own device — the same Accessibility / screen-recording toggle you control. Revoke it and the capability is gone.
+- **Read-only.** It takes a look and reports back — a screenshot and a description. It never changes a setting or touches anything on screen.
+- **Only where you point it.** No wandering, no autonomous snooping. It looks at the thing you asked about, and nothing else.
+
+Same "you're always in control" spine as the merge gate: the scout can *see* to help, but only you ever *act* on it.
+
 ## The iron rule: reports are leads, not facts
 
 **Nothing a scout brings back is treated as verified until Cowork verifies it.** Field research comes back raw — fast, useful, and unchecked. That's not a flaw; it's the job. The failure mode is downstream: a raw lead quietly becoming a "fact" a plan gets built on. So the pipeline is fixed:
