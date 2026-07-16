@@ -6,8 +6,9 @@
 
 ## Stage 0 — First contact 🎉
 
-*You've attached your new repo to Claude Code, and it spoke first.*
+*You've attached your new repo to Claude Code, typed one word to wake it, and the team came to life.*
 
+- **The trigger is one word.** After you attach the repo you'll see an empty message box, not a greeting — Claude Code waits for you to speak first. Type **`hi`** (or anything — "hello", "now what", "let's go") and press enter. That first message wakes the team; you can't get it wrong.
 - Code introduces the team briefly and asks the only question that matters: **"What are we building?"** Your answer picks a [mission](../missions/README.md), and that mission becomes the factory's first real work — this whole system exists to build *your* thing, not to be admired.
 - You choose your factory's **anchor emoji** and, if you like, **names for your seats**. (People who name their seats keep them. There's no wrong answer; there's also no obligation.)
 - Code also asks, once, how you want the rest of the setup to go: **"set it all up for me"** (Code sequences every remaining step and — once Claude in Chrome is installed — drives the browser through them itself, pausing only where a dialog needs your hand) or **"set it up with me"** (one instruction at a time, like now). Both answers are right, you can switch any time, and the full click-map either way — every dialog named, honest gaps included — is [`SETUP-PATH.md`](SETUP-PATH.md).
