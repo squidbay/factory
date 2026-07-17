@@ -100,3 +100,7 @@ Useful precisely because it's light. 🎉
 change is a proposal you say yes to, and no seat ever checks its own work. Boot
 them in that order and the factory runs the way it's meant to — with you as the
 one gate the whole thing turns on.
+
+*Truly stuck on any of this?* A trusted person can help you the safe way —
+their own computer, their own login, fixes arriving as pull requests only you
+can merge: [`../guides/WHEN-YOU-NEED-A-HAND.md`](../guides/WHEN-YOU-NEED-A-HAND.md).

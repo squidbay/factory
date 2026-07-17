@@ -48,3 +48,9 @@ credentials**. They will keep failing even after you fix the switches above.
 
 That's the whole fix. After this, your Claude team runs from this repo, and every
 change it makes reaches you as a pull request — one that only **you** can merge.
+
+**Still stuck after all of the above?** You don't have to fight it alone. A
+trusted helper can get you unstuck the safe way — working from their own
+computer, delivering fixes as pull requests only you can merge. The shape, and
+the hard limits on what a helper may ever do, are in
+[`guides/WHEN-YOU-NEED-A-HAND.md`](guides/WHEN-YOU-NEED-A-HAND.md).
