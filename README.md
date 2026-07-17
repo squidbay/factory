@@ -10,7 +10,7 @@ You already pay for a team — you're just using it one chat at a time. This tem
 
 ## 🧰 What you get
 
-- **A persistent team, not a chatbot.** Cowork plans and audits, Code builds, Design handles the visual lane, Chat surfaces what matters — the same seats, every day, working the same project.
+- **A persistent team, not a chatbot.** Cowork plans and audits every change — with a security read folded into that audit whenever a PR touches credentials, workflows, auth, payments, or personal data — Code builds, Design handles the visual lane, Chat surfaces what matters. The same seats, every day, working the same project.
 - **Memory that survives.** Sessions are stateless; your factory isn't. A git journal remembers every decision, and every seat reads it at boot. Six months from now, "why is it like this?" has an answer.
 - **You are the only gate.** Every change — every one — arrives as a pull request you approve. Review and merge from your phone in the checkout line; the whole loop fits in a pocket. Live actions ask first too: when a seat works in a browser or on your screen, you get an **Allow-once** prompt — approve a single action, or just this session — and you can revoke it any time. Nothing touches your world without a yes.
 - **On-call specialists, summoned per job.** **Mobile Scout — your Dispatch on desktop & mobile** — carries your orders to the seats and relays each seat's status back to your phone, so you can run the team from a waiting room or the couch. The Chrome inspector opens your live pages in a real browser and reports back — it looks, never touches.

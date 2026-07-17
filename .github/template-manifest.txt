@@ -36,6 +36,7 @@ specialists/
 specs/README.md
 skills/factory-coach/
 skills/factory-retro/
+skills/factory-security/
 skills/factory-update/
 skills/skill-creator/
 skills/README.md
