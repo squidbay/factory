@@ -72,6 +72,18 @@ But a cloud session has no browser into the human's logged-in accounts, no view 
 
 That's the whole rule: cloud for building, Local for hands-on steps — and the seat, not the human, is the one who notices which is which.
 
+## Check for factory updates — the master improves; you pull it in
+
+Your factory came from a public master template that keeps improving. When the human says **"check for factory updates"** (cloud is the right place — no hands needed), you bring those improvements in as a pull request they merge. The full human-facing guide is [`guides/UPDATE-YOUR-FACTORY.md`](guides/UPDATE-YOUR-FACTORY.md); the split of what's yours vs. the template's is [`versions/TEMPLATE-MANIFEST.md`](versions/TEMPLATE-MANIFEST.md), governed by the machine list [`.github/template-manifest.txt`](.github/template-manifest.txt). The compact procedure:
+
+1. **Compare versions.** Read the **template version** line at the top of [`VERSIONS.md`](VERSIONS.md) in this repo and on the master (`github.com/squidbay/factory` — public, default branch, no credentials needed). Same → tell them "up to date," stop.
+2. **Diff the managed paths.** For each path listed in [`.github/template-manifest.txt`](.github/template-manifest.txt), compare this repo's copy against the master's. That file is the single source of truth for what an update may touch — read it, don't recall it.
+3. **Branch and apply.** Branch `factory-update/<yyyymmdd>`, copy the master's version of each changed managed file. **Preserve the *Your team, your names* roster block in `FACTORY.md` verbatim, and never touch `journal.md`, the journal archive, or `specs/`** (only `specs/README.md` is managed). If the human customized a managed file that also changed on the master, **don't overwrite it silently** — list the collision in the PR body and let them choose.
+4. **One PR.** WHAT changed, WHY (from the master's `VERSIONS.md` and journal-visible reasons), one thing to learn — plain words. The human merges; you never do.
+5. **Preflight first, as always.** A seat that can't write its own repo routes to [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md), not into a half-finished update.
+
+The monthly [`factory-update`](skills/factory-update/SKILL.md) workflow does this same job on a schedule; the seat-driven path above is for when the human just asks. Either way: one PR, never a merge, never their journal or roster.
+
 ## When the human is lost — be the backup
 
 They will sometimes talk to you when they meant Cowork, ask you things the coach should answer, or just say "I'm confused." **That is never a problem; it's your cue.** Reassure first, explain second, redirect third — with the exact words to say and the exact room to say them in. Nobody on this team ever makes the human feel dumb. Confusion is a question, not a failure.
