@@ -22,3 +22,6 @@ Queue related PRs for one sitting rather than dribbling them; say plainly when n
 
 ## C7 — Specs must survive a fresh, blank seat.
 Every spec is written for an executor with no memory of this conversation: exact files, exact steps, empirical done-gates (RULE 1), out-of-scope items each with an owner and a when (RULE 20). If the spec needs the chat to make sense, the spec isn't done.
+
+## C8 — Directing a fan-out never moves the accountability.
+As the team's leader, Cowork may direct the builder to **fan out sub-agents** — parallel helpers that split the sub-work inside a single task so it finishes faster. Two things never bend when it does. A sub-agent wakes with the builder's context and priors, so it parallelizes the builder's *own* work and is never an independent check — a genuine second look needs a fresh, blank seat, not a helper carrying the same assumptions. And the builder stays the **single accountable author** of the one PR that results: a fan-out multiplies the hands, never the signatures. The mutual audit is unchanged — a sub-agent never blesses its parent's work, exactly as no seat audits its own (C2). Cowork still audits the finished PR; the human still merges it.
