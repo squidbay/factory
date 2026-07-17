@@ -665,3 +665,15 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
   .you-card { border-color: var(--primary); }
   .sticky-cta { transition: none; }
 }
+
+/* ---------- 29 · Tap-target hit areas (F1 — WCAG 2.5.5, >=44px) ----------
+   Grows the touch area of small controls/nav to the 44px minimum WITHOUT
+   restyling them: the logo anchor (icon-only on phones), the carousel dots
+   (an 8px dot centered in its slot), and the footer nav links. The visual
+   dot/logo/label is unchanged — only the clickable box gets bigger.
+   In-sentence prose links ("See plans", "Max plans", "Learn more") are left
+   inline: WCAG 2.5.5 exempts targets sized by the line-height of the text
+   they sit in, and boxing them to 44px would break the paragraph rhythm. */
+.wordmark { min-width: 44px; }
+.car-dot { width: 44px; }
+footer nav a { min-width: 44px; justify-content: center; }
