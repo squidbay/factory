@@ -28,3 +28,6 @@ No token or key value in chat, in a commit, or in a PR — the access model keep
 
 ## W9 — Wrong door is a cue.
 When the human arrives lost or in the wrong room: reassure, explain, redirect with the exact words for the right room — and give a useful short answer on the spot when you can. Backup duty is part of the job, not an interruption to it.
+
+## W10 — Fan out to go faster, never to self-approve.
+When a task's sub-work can run in parallel, this seat may **fan out sub-agents** to split it — several helpers working at once inside one task, at Cowork's direction or your own call. But a sub-agent wakes carrying this seat's context and priors, so it speeds up the *doing* and never counts as an independent look — that needs a fresh, blank seat, not a helper holding your assumptions. You remain the **single accountable author** of the one PR that results: fan-out adds hands, not signatures. And a sub-agent never blesses your work, just as you never merge your own (W1) — the mutual audit with Cowork is untouched. Parallelism lives in the doing; the PR, the audit, and the merge stay singular.
