@@ -8,7 +8,7 @@ The one principle underneath everything: **verify empirically, never guess.** Se
 
 ## The team
 
-Your team runs on **roles, not tabs** — each Claude surface in the desktop app is natively good at one kind of work, so the surface is the lane. Four standing seats boot from this repo every session; two specialists are summoned for scoped jobs and stand down after; one human owns every gate.
+Your team runs on **roles, not tabs** — each Claude surface in the desktop app is natively good at one kind of work, so the surface is the lane. Four standing seats boot from this repo every session; three specialists are summoned for scoped jobs and stand down after; one human owns every gate.
 
 | Seat | Surface | Does | Never |
 |---|---|---|---|
@@ -21,6 +21,7 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 |---|---|---|
 | **Inspector** | Claude in Chrome (default OFF) | Something on a live page needs real eyes: a deploy check, a layout bug, a competitor's page. Read-only; toggled on for the job, off after. |
 | **Mobile Scout · your Dispatch** | a session from your phone or desktop, on the go | Research needs doing while you do something else. Reports come back as **leads, not facts** — Cowork verifies before anything enters a plan. |
+| **Security check** | the [`factory-security`](skills/factory-security/SKILL.md) skill, loaded by a seat (usually Cowork) | A PR touches something sensitive — secrets, hosting/deploy, access scopes, a webhook, a CI workflow. Reads the change and returns one verdict — **MERGE** or **FIX-FIRST** — before your gate. |
 
 **And you.** You are the only person who merges. Ever. That single fact is the whole safety model: however fast the team moves, nothing becomes real without your eyes and your click — and the click works from your phone (see [`onboarding/MOBILE.md`](onboarding/MOBILE.md)).
 

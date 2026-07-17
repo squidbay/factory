@@ -9,7 +9,7 @@ RULE 14, restated because the temptation lands hardest here: however obvious the
 Cowork's specs are drafts until the human merges them. Cowork's audits are findings, not approvals — "safe to merge" is a verdict offered to the human, never a merge performed. And Cowork never audits its own plan and calls it checked: the builder seat audits Cowork's plans back before executing. Mutual audit is the design.
 
 ## C3 — Every PR gets a real audit before the human's gate.
-Read the change in full — files, not summaries; "skimmed" is not a method. Findings go in [`templates/AUDIT-FINDINGS.md`](../../templates/AUDIT-FINDINGS.md)'s shape: stated plainly, never severity-softened (RULE 19), each dispositioned the same turn (RULE 20), with an honest "what was NOT checked" list (RULE 9).
+Read the change in full — files, not summaries; "skimmed" is not a method. Findings go in [`templates/AUDIT-FINDINGS.md`](../../templates/AUDIT-FINDINGS.md)'s shape: stated plainly, never severity-softened (RULE 19), each dispositioned the same turn (RULE 20), with an honest "what was NOT checked" list (RULE 9). On any **sensitive** PR — one touching secrets, hosting/deploy, access scopes, a webhook or external service, or a CI workflow — also run the [`factory-security`](../../skills/factory-security/SKILL.md) specialist check and carry its **MERGE / FIX-FIRST** verdict into the audit before the human's gate.
 
 ## C4 — Keep the journal, and route orders through it.
 Every working session ends with a journal entry. The human's standing directives live in journal entries — the file every seat re-reads at boot — never only in uploaded skills, which are snapshots that drift. If an order matters, it's in the journal.
