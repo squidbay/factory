@@ -44,6 +44,18 @@ The full, plain-words version of this — and what to do if a session tells you 
 
 That one grant hands Claude *just this repo* and nothing else. Your factory stays private; it's now simply visible to the one tool that runs it.
 
+## Where your builder runs — cloud or Local (and why you rarely need to care)
+
+Above the Code tab's message box sits an **environment button** — it may read **"Default"** with a small cloud icon. It decides where your session actually runs: **in the cloud** (on Anthropic's computers) or **Local** (on your own machine). Cloud is the normal mode, and it's the right one for building — reading your repo, writing, and opening pull requests all work perfectly from there. You don't need to change anything on day one.
+
+Once in a while a step needs *your* side of the screen — connecting an account, installing an app, something only your logged-in browser or your own machine can do. **Your seat will tell you** when that's the case; it's built to say so plainly instead of failing quietly. When it does, the switch is three taps:
+
+1. Click the **environment button** above the message box.
+2. Choose **Local**.
+3. Start a **fresh** session (don't resume an old one) and ask again there.
+
+That's it. You never have to guess which mode you're in — if a step needs Local, the seat says so and hands you these exact taps.
+
 ## Phase 2 — the choice (Code asks; both answers are right)
 
 Right after Stage 0, Code offers, explicitly:

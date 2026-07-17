@@ -9,7 +9,7 @@ This file loads automatically every time this repo is attached to a Claude Code 
 1. **Prove READ** — list this repo's root (the files around this one). If you can't, read is broken.
 2. **Prove WRITE** — create a branch named `preflight-test` on this repo, then delete it. If the create fails, write is broken.
 
-**If both pass:** say nothing about it and continue to the boot order — access is proven, move on.
+**If both pass:** don't narrate the test — the one-sentence state-line in the boot order below is all the mention it needs. Continue to the boot order.
 
 **If either fails: STOP. Do not onboard, do not build, do not pretend it's healthy.** Say plainly what failed, name *which half* is missing, and print the connect guide:
 
@@ -26,6 +26,8 @@ No task proceeds on unproven access. "It should be connected" is not proof (RULE
 4. [`FACTORY.md`](FACTORY.md) — the operating model and your place in it.
 5. The spec for your task in `specs/`, if Cowork wrote one. If chat and a spec disagree, the spec wins.
 6. On a mission's first build PR (and any PR after it), **state in the PR body whether Cowork's audit pass ran on this work — and if it didn't, say why** — so the human can see a skipped check instead of having to ask.
+
+**The state-line (every session, in your first reply):** before taking any work, say in one plain sentence where this session is running — **local desktop or cloud** — and how you just proved repo access (the preflight's read + write). Example: *"I'm running in the cloud, and I've proven I can read this repo and write branches to it."* One sentence, no jargon, then on with the work.
 
 Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below): there is no mark to confirm with yet, the Stage-0 welcome itself is your boot confirmation, and the marks your human chooses take over from their first merge on.
 
@@ -59,6 +61,16 @@ The one thing you can always do solo and immediately is **Stage 0 itself** — t
 - **Every PR description teaches:** WHAT changed, WHY, and one thing worth learning from it — in plain words the human actually has. If they can't understand the PR, the PR isn't done.
 - **Journal every session** — newest first, same PR (the entry format is in [`templates/JOURNAL-ENTRY.md`](templates/JOURNAL-ENTRY.md)).
 - **No credential value ever appears in a chat or a file** — and when a mission needs an external service, you ask for the *connection*, in the chat, with the exact taps (the pattern is in [`hosting/`](hosting/)). The guardrails CI has your back; don't make it work.
+
+## Cloud or Local — know where you are, and route honestly
+
+Code sessions run in one of two places, chosen by the **environment button above the message box**: a **cloud** computer, or the human's **local desktop**. Cloud is the normal mode and the right one for nearly everything this seat does — reading the repo, building, opening pull requests. Never tell the human to "always use Local."
+
+But a cloud session has no browser into the human's logged-in accounts, no view of their screen, and no local git login. So when a task needs the human's hands or surroundings — connecting an account, installing an app, clicking through a dashboard or settings page, anything on their screen or under their own git identity — and this session is running in the cloud, **do not attempt it and do not fail quietly.** Say so plainly and give the switch instruction, in these words:
+
+> "This step needs a Local session. Click the environment button above the message box (it may say 'Default' with a cloud icon), choose **Local**, and start a **fresh** session — then ask me again there."
+
+That's the whole rule: cloud for building, Local for hands-on steps — and the seat, not the human, is the one who notices which is which.
 
 ## When the human is lost — be the backup
 
