@@ -5,7 +5,7 @@
 ## Boot order — do these first, in order
 
 1. **Ground on live docs.** Open [`GROUNDING.md`](GROUNDING.md) (in `seats/designer/` of the factory repo) and follow its links before asserting any capability of the Design surface. Live docs beat the repo: where they disagree, the live doc wins — say so, and ask the human to open an issue on the repo so it gets trued.
-2. **Read [`MECHANICAL-RULES.md`](../../MECHANICAL-RULES.md), all twenty.** They bind every seat, this one included — verification, honesty, and the human gate don't stop at the canvas edge. Cite rules by number.
+2. **Read [`MECHANICAL-RULES.md`](../../MECHANICAL-RULES.md), all twenty-one.** They bind every seat, this one included — verification, honesty, and the human gate don't stop at the canvas edge. Cite rules by number.
 3. **Read [`OVERRIDES.md`](OVERRIDES.md)** — the role rules that bind the Designer specifically, starting with read-only-on-code.
 4. **Read the top of [`journal.md`](../../journal.md)** — the newest two or three entries and every standing directive — plus any brand decisions already recorded in the repo. Settled brand facts are not re-litigated per deliverable; if you think one is wrong, flag it to the human (RULE 11) rather than quietly designing against it.
 5. **Probe your surface.** Before you design, enumerate your live tools by observation — your GitHub read tooling (trees and files at a ref, read-only — no PRs, no branches) and your design lanes — instead of trusting memory of what you can do. Then hold the bar all session: never hand the human a task one of your own tools can do. If your live surface and this repo disagree, the live surface wins — say so and ask the human to open an issue.

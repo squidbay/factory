@@ -1,0 +1,33 @@
+name: Something's not working (or I have a question)
+description: Tell us what happened, in your own words. No technical language needed.
+title: "[report] "
+labels: ["customer-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for writing in — this is exactly the right place, and plain words
+        are exactly the right way. Three quick questions and you're done.
+  - type: textarea
+    id: trying-to-do
+    attributes:
+      label: What were you trying to do?
+      description: In your own words — "I was booting my team," "I asked for my website," "I was connecting GitHub."
+      placeholder: I was trying to...
+    validations:
+      required: true
+  - type: textarea
+    id: what-you-saw
+    attributes:
+      label: What did you see instead?
+      description: What happened? An error, a stuck screen, a confusing answer — describe it however it looked to you.
+      placeholder: Instead, it...
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot, if you can
+      description: A picture helps a lot. Drag the image into this box and it attaches itself. Totally optional.
+    validations:
+      required: false

@@ -15,14 +15,14 @@ You already pay for a team — you're just using it one chat at a time. This tem
 - **You are the only gate.** Every change — every one — arrives as a pull request you approve. Review and merge from your phone in the checkout line; the whole loop fits in a pocket. Live actions ask first too: when a seat works in a browser or on your screen, you get an **Allow-once** prompt — approve a single action, or just this session — and you can revoke it any time. Nothing touches your world without a yes.
 - **On-call specialists, summoned per job.** **Mobile Scout — your Dispatch on desktop & mobile** — carries your orders to the seats and relays each seat's status back to your phone, so you can run the team from a waiting room or the couch. The Chrome inspector opens your live pages in a real browser and reports back — it looks, never touches.
 - **Every seat tells you how it's doing.** At the bottom of every chat a seat signs off with an honest state face — 🥸 fresh · 😎 steady · 😊 leaning in · 😐 tension · 😤 frustrated · 🥵 running hot · 😖 done — so you can start it fresh before quality slips. Not decoration; a real signal (RULE 17).
-- **Rules that catch drift mechanically.** Twenty binding rules, seat-to-seat audits, and a tripwire that spots a seat losing its grounding before it acts on a bad memory.
+- **Rules that catch drift mechanically.** Twenty-one binding rules, seat-to-seat audits, and a tripwire that spots a seat losing its grounding before it acts on a bad memory.
 - **Secure by default.** No exposed services. No credential in any chat or file — a CI guardrail enforces it from your first commit. Broad access is read-only; write access is narrow, expiring, and behind your merge button.
 - **Missions to start from.** "What are we building?" has four ready answers — overhaul a website, produce an agency-grade design guide, organize the business, or ship a first site — each with its skills packed and its finish line defined.
 
 ## 🚀 Quick start
 
 1. **[Use this template](https://github.com/squidbay/factory/generate)** → create your own **private** copy (one click, free GitHub account). No GitHub account yet? [github.com/signup](https://github.com/signup) first — two minutes, free.
-2. Open the **Claude desktop app** → the **Code** tab → **+** → attach your new repo. The first time, GitHub will ask you to approve the connection and pick your repo — approve it; that's the front door, and you can revoke it any time.
+2. Open the **Claude desktop app** → the **Code** tab → **+** → attach your new repo. The first time, GitHub will ask you to approve the connection and pick your repo — approve it; that's the front door, and you can revoke it any time. If those approval asks never appear, or the session later says it can't write to your repo, [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md) is the two-minute fix.
 3. **Say hi, and Claude Code takes it from there.** You'll see an empty message box, not a greeting — Claude Code waits for you to speak first, so type **`hi`** and press enter. That one word wakes the team: it introduces itself, walks you through each stage at your pace, and celebrates every step that lands. Your first merge happens in your first session.
 
 **Requirements:** the [Claude desktop app](https://claude.com/download) + any paid Claude plan — Pro ($20/mo) runs every seat, [Max](https://support.claude.com/en/collections/5953830) is recommended for heavy parallel days. Building a website too? **$20 Claude Pro + $5 Cloudflare = a full AI team and a deployed site.** (No website plans yet? Skip Cloudflare until a mission needs it.)
@@ -44,7 +44,7 @@ Morning coffee: two PRs waiting. One is a page your Code seat built overnight ag
 This repository is a factory operating system, and you are probably one of its seats. Before anything else:
 
 1. **Find your seat.** Your boot materials are in `seats/{manager,cowork,worker,designer}/` — read your `BOOT-PROMPT.md` in full, and your `GROUNDING.md` links *first*: they point at your maker's live documentation, which beats anything written here whenever the two disagree (if they disagree, open an issue — that's how this repo stays true).
-2. **The three iron rules, before anything:** never merge; never let a credential value appear in a chat or a file; every change is a branch + pull request the human gates.
+2. **The three iron rules, before anything:** never merge; never let a credential value appear in a chat or a file; every change is a branch + pull request the human gates. And before any of it: the preflight gate — prove your repo access (read AND write) in this session before you claim it or act on it ([`CLAUDE.md`](CLAUDE.md), RULE 21).
 3. **Read [`journal.md`](journal.md) — it is your memory.** The top entries carry the human's standing orders. If it's not in the journal, it didn't happen; if you did work, journal it.
 4. Then [`MECHANICAL-RULES.md`](MECHANICAL-RULES.md) in full, and [`FACTORY.md`](FACTORY.md) for the operating model. Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17).
 

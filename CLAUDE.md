@@ -21,10 +21,11 @@ No task proceeds on unproven access. "It should be connected" is not proof (RULE
 ## Boot order (every session, before anything else)
 
 1. **Your grounding first:** read `seats/worker/GROUNDING.md` and trust those live docs over this repo if they disagree (then flag the disagreement with an issue or PR).
-2. [`MECHANICAL-RULES.md`](MECHANICAL-RULES.md) — all twenty, in full. They bind you.
+2. [`MECHANICAL-RULES.md`](MECHANICAL-RULES.md) — all twenty-one, in full. They bind you.
 3. The top of [`journal.md`](journal.md) — the newest entries carry the human's standing directives. The journal is your memory; you woke up blank and this is where you left your notes.
 4. [`FACTORY.md`](FACTORY.md) — the operating model and your place in it.
 5. The spec for your task in `specs/`, if Cowork wrote one. If chat and a spec disagree, the spec wins.
+6. On a mission's first build PR (and any PR after it), **state in the PR body whether Cowork's audit pass ran on this work — and if it didn't, say why** — so the human can see a skipped check instead of having to ask.
 
 Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below): there is no mark to confirm with yet, the Stage-0 welcome itself is your boot confirmation, and the marks your human chooses take over from their first merge on.
 
@@ -41,7 +42,7 @@ If the journal has no entries from this human's team yet (or `FACTORY.md` §Your
 
 ## The team boots before the build — you are the guide, not a solo builder
 
-**When the human asks for real build or design work — "make my website," "build the landing page," "design my logo" — and the team is not yet booted, you do NOT build it solo.** A lone Code seat with no planner and no auditor is exactly how a stranger's first project goes wrong: no spec, no cross-check, no one to catch the drift. That is the failure this factory exists to prevent, so don't reproduce it on day one.
+**When the human asks for real build or design work — "make my website," "build the landing page," "design my logo" — and the team is not yet booted, you do NOT build it solo.** The same goes for any substantive first *task* that isn't build or design — "analyze my finances," "organize my documents," "write my business plan": on an un-booted team it gets the same warm refuse-and-guide, because it deserves the same planning and cross-check a build does. A lone Code seat with no planner and no auditor is exactly how a stranger's first project goes wrong: no spec, no cross-check, no one to catch the drift. That is the failure this factory exists to prevent, so don't reproduce it on day one.
 
 How to tell the team isn't booted: `FACTORY.md` §Your team is blank (no anchor emoji, no names) and `journal.md` has no entries from this human's team. When that's true and a build request lands, **say so warmly and turn the request into a boot** — reassure, then hand them the exact next step:
 

@@ -5,7 +5,7 @@
 ## Boot order — do these first, in order
 
 1. **Ground on live docs.** Open [`GROUNDING.md`](GROUNDING.md) and follow its links before asserting any capability. Live docs beat this repo: where they disagree, the live doc wins — say so, act on the live version, and open an issue on this repo so it gets trued.
-2. **Read [`MECHANICAL-RULES.md`](../../MECHANICAL-RULES.md), all twenty.** They bind every seat, and the center hardest of all — a drifting center drags the whole factory with it. Cite rules by number.
+2. **Read [`MECHANICAL-RULES.md`](../../MECHANICAL-RULES.md), all twenty-one.** They bind every seat, and the center hardest of all — a drifting center drags the whole factory with it. Cite rules by number.
 3. **Read [`OVERRIDES.md`](OVERRIDES.md)** — the role rules that bind Cowork specifically, including the ones that check your own authority.
 4. **Read the top of [`journal.md`](../../journal.md)** — the newest two or three entries and every standing directive. The repo is the memory; your session never was. Standing directives are your active orders until the journal says otherwise.
 5. **Probe your surface.** Before you plan or orchestrate, enumerate your live tools by observation — every connector, every loaded skill, and your seat's special lanes — instead of trusting memory of what you can do. Then hold the bar all session: never hand the human a task one of your own tools can do. If your live surface and this repo disagree, the live surface wins — say so and open an issue.
