@@ -1,6 +1,6 @@
 ---
 name: factory-security
-description: "A high-signal security check on the changes in a PR, run BEFORE the human merges. Explicit-invoke: run when a PR touches anything sensitive — credentials or secrets, hosting/deploy config, a webhook or external service, login or access scopes, a CI workflow, or anything that could expose a service or leak a secret — or when the human asks 'is this safe to merge?'. Reads the change in full, reports only high-confidence, real problems in plain words, and ends with one verdict: MERGE or FIX-FIRST. No security theater — no theoretical noise, no best-practice lint. Usually run by Cowork as part of its audit; never merges, never touches a secret."
+description: "The Cowork seat's security read on a PR, run as part of its audit BEFORE the human merges. Explicit-invoke: run when a PR touches credentials, workflows, auth, payments, or personal data — or when the human asks 'is this safe to merge?'. Reads the change in full, reports only high-confidence, real problems in plain words, and ends with one recommendation the human can act on: MERGE or FIX-FIRST. No security theater — no theoretical noise, no best-practice lint. This is a Cowork audit capability, not a separate seat or specialist; never merges, never touches a secret."
 ---
 
 # Factory Security — read the change, find the real problem, give one verdict
@@ -11,13 +11,13 @@ The bar is high on purpose. A security check that cries wolf gets ignored, and a
 
 ## When to run it
 
-Run this on any **sensitive** PR before it reaches the human's merge button. A PR is sensitive if it touches:
+Cowork runs this read on any **sensitive** PR before it reaches the human's merge button. A PR is sensitive if it touches:
 
-- **Secrets** — any token, key, password, or `.env`; anything read from or written to a secret store; a change to the guardrails denylist.
-- **Hosting & deploy** — the paved-road host config ([`../../hosting/`](../../hosting/README.md)), DNS, a Cloudflare Worker or Pages setup, anything that puts a service on the public internet.
-- **Access** — login, sessions, permission scopes, who-can-do-what; a widening of what a token or an app install may reach.
-- **The outside world** — a webhook receiver, an external API call, a payment path, anything that accepts input from someone who isn't the human.
-- **The factory's own machinery** — a CI workflow, an Action, or the boot/rules files that every seat trusts.
+- **Credentials** — any token, key, password, or `.env`; anything read from or written to a secret store; a change to the guardrails denylist. (This is also where an accidentally-committed secret value gets caught.)
+- **Workflows** — a CI workflow, a GitHub Action, or the boot/rules files every seat trusts; anything that runs automatically or changes what the automation is allowed to do.
+- **Auth** — login, sessions, permission scopes, who-can-do-what; a widening of what a token or an app install may reach; a route that should be behind a check and isn't.
+- **Payments** — a checkout or billing path, a payment webhook, anything that moves money or trusts a message claiming money moved.
+- **Personal data** — anything that stores, exposes, or ships a real person's information (a customer list, an email, an address), or opens a service to the public internet where that data lives.
 
 A PR that only touches copy, a mock, or a journal entry is **not** sensitive — say so in one line and stop. Don't manufacture a security review where there's no security surface.
 
