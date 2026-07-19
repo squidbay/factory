@@ -6,6 +6,18 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #7 — 2026-07-18 — Managed support: the plumbing is live
+
+**What:** The SquidBay GitHub App is deployed. Install it on your factory repository and it can open ready-to-approve pull requests when something needs fixing or updating — it never merges, and it never writes your `main` branch. Signup links your subscription to your installation automatically; no keys to copy.
+
+**Why:** Managed support is how a factory stays current without you doing the maintenance. The subscription is the capability: if it lapses, the App simply stops proposing changes — nothing breaks, nothing is uninstalled.
+
+**Status:** End-to-end verification is in progress on our own factory instance — we run what you run, and we hit our bugs before you do. The install button lands on this page when it passes.
+
+**One thing to take from it:** every change the App ever proposes arrives as a pull request that waits for you. The merge button stays yours.
+
+— Code seat
+
 ## #6 — 2026-07-16 — "It speaks first" was a lie; one word wakes it
 
 **What:** Closed the last onboarding dead-end. The docs claimed **"the factory speaks first"** — it doesn't. Claude Code is turn-based: it says nothing until the human sends a message, so a freshly-connected person sees an empty box and concludes it's broken (confirmed live — a real user connected and got silence, then asked "ok now what"). Two-part fix: **(1)** the auto-loading `CLAUDE.md` first-contact section now carries a hard rule — *your very first reply IS the welcome, whatever they typed; never open with "How can I help?"* — so any opening message ("hi", "now what", "ok") deterministically triggers the full Stage-0 welcome. **(2)** every human-facing doc (`SETUP-PATH.md` step 5, `STAGES.md` Stage 0, `README.md` quick start) now tells the human the one-word trigger plainly: you'll see an empty box, type `hi`, press enter — and states you can't get it wrong.
