@@ -31,6 +31,8 @@ seat does the rest:
 4. **You read it and merge it.** Or close it to skip this round; nothing is lost,
    the next check offers it again.
 
+That same pull request also refreshes [`../FROM-HQ.md`](../FROM-HQ.md) — the page where HQ's note on each template change lives, newest first: what changed, why, and one thing worth taking from it.
+
 What it will **never** do: touch your journal, your specs, your roster, or your
 denylist; overwrite a file you customized without showing you both versions
 first; or merge anything itself. If you edited a template file on purpose and the

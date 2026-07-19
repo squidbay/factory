@@ -15,6 +15,7 @@
 
 CLAUDE.md
 CONTRIBUTING.md
+FROM-HQ.md
 MECHANICAL-RULES.md
 README.md
 SECURITY.md
@@ -46,7 +47,8 @@ versions/
 
 # Deliberately absent — user-owned, never synced:
 #   FACTORY.md            (carries your roster and your names)
-#   journal.md            (your team's memory)
+#   journal.md            (your team's memory — HQ's own news rides the
+#                          managed FROM-HQ.md instead, never journal.md)
 #   journal/archive/      (your history)
 #   specs/                (your plans; only its README is managed)
 #   .github/guardrails-denylist.txt  (your private-name denylist)

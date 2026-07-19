@@ -24,14 +24,16 @@ stale — that's a normal thing to flag with an issue or a PR.
 **Template-managed — an update may propose changes here.** These are the parts
 of the factory that belong to the template and get better over time: the seat
 rulebooks and boot files, the onboarding path, the guides, the shipped skills
-and mission packs, the shared templates, the verification log. When the master
-sharpens a rule or fixes a typo in a guide, this is where it shows up in your
-update PR. Overwriting is safe *when you haven't edited the file yourself* —
+and mission packs, the shared templates, the verification log, and the news
+from HQ (`FROM-HQ.md`, where each template change is noted for you). When the
+master sharpens a rule or fixes a typo in a guide, this is where it shows up in
+your update PR. Overwriting is safe *when you haven't edited the file yourself* —
 and when you have, see the next section.
 
 **Yours alone — never touched by an update, ever.** These are the parts that are
 your team's, not the template's: your **journal** (`journal.md` and your journal
-archive — your team's memory), your **specs** (`specs/`, your plans; only its
+archive — your team's memory, kept separate from HQ's own news in the managed
+`FROM-HQ.md` so an update never writes your journal), your **specs** (`specs/`, your plans; only its
 README travels with the template), your **roster** (the *Your team, your names*
 block in `FACTORY.md` — your anchor emoji and seat names), your private
 **denylist** (`.github/guardrails-denylist.txt`), and anything else the manifest
