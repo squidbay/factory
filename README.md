@@ -27,6 +27,14 @@ You already pay for a team — you're just using it one chat at a time. This tem
 
 **Requirements:** the [Claude desktop app](https://claude.com/download) + any paid Claude plan — Pro ($20/mo) runs every seat, [Max](https://support.claude.com/en/collections/5953830) is recommended for heavy parallel days. Building a website too? **$20 Claude Pro + $5 Cloudflare = a full AI team and a deployed site.** (No website plans yet? Skip Cloudflare until a mission needs it.)
 
+## 💼 Prefer it done for you?
+
+Managed support is the same factory with the building handed off. You ask in plain words; we open a ready-to-approve pull request in your repository — and you still click merge. The app never merges and never writes your `main` branch, and signup links your subscription to your installation automatically, so there are no keys to copy.
+
+[![Get managed support](https://img.shields.io/badge/Get%20managed%20support-%2499%20setup%20then%20%2425%2Fmo-00D9FF?style=for-the-badge&logo=stripe&logoColor=white&labelColor=555555)](https://buy.stripe.com/28EbJ34An9hedRXbMm7kc00)
+
+Setup redirects you to install the app on your repository; you can also [install it directly](https://github.com/apps/squidbay/installations/new) — one permission, scoped to opening pull requests, yours to revoke anytime. The full picture is on the [managed page](https://squidbay.github.io/factory/managed).
+
 ## ☕ A day in the factory
 
 Morning coffee: two PRs waiting. One is a page your Code seat built overnight against the spec you merged yesterday; Cowork's audit is already in the thread — *safe, here's why*. You read the description (it explains itself in plain words — house style), merge from your phone, and the deploy goes out. On the drive to work you dispatch a research question; by lunch the report is back and Cowork has folded the verified parts into tomorrow's spec. The journal wrote itself an entry. Total hands-on time: eleven minutes.
