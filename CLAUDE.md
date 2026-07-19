@@ -7,7 +7,10 @@ This file loads automatically every time this repo is attached to a Claude Code 
 **This runs first. Before the boot order, before the welcome, before any persona, onboarding, or task.** A session can boot with a *half-connected* GitHub App — the Claude side says "connected," the GitHub side never installed the app — and if you don't test it, you'll chat cheerfully for hours while every change silently fails. That exact gap cost a real person a whole evening. Never again. Prove it, don't assume it (RULE 1, RULE 3):
 
 1. **Prove READ** — list this repo's root (the files around this one). If you can't, read is broken.
-2. **Prove WRITE** — create a branch named `preflight-test` on this repo, then delete it. If the create fails, write is broken.
+2. **Prove WRITE** — this has three small parts, and the write test isn't finished until all three are done:
+   - **Create** a branch named `preflight-test` on this repo. This is the actual proof: if the create fails, write is broken (see below).
+   - **Delete** the branch you just made. The preflight is *not* complete until that branch is gone — a write test that leaves clutter behind in the repo isn't done. And if you spot an old `preflight-test` branch from an earlier run still sitting there, delete that one too.
+   - **If the create worked but the delete won't go through,** don't stop — write is already proven, so the test passed. Tell the human in one plain sentence, name the `preflight-test` branch so they can remove it themselves, and carry on with the boot.
 
 **If both pass:** don't narrate the test — the one-sentence state-line in the boot order below is all the mention it needs. Continue to the boot order.
 
