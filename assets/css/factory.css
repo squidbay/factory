@@ -178,8 +178,14 @@ h2.section-title {
   text-align: center;
 }
 .btn:hover { color: var(--black); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 217, 255, 0.3); }
-.btn.ghost { background: transparent; color: var(--primary); border: 1px solid var(--gray-light); box-shadow: none; }
-.btn.ghost:hover { color: var(--primary-light); border-color: var(--primary); background: var(--primary-glow); box-shadow: none; transform: translateY(-2px); }
+.btn.ghost {
+  background: transparent; color: var(--primary);
+  /* cyan border AT REST (F9) — solid, matched to squidbay.io's secondary button;
+     alpha variants fail 3:1 non-text contrast on --black */
+  border: 1px solid var(--primary); box-shadow: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.btn.ghost:hover { color: var(--primary-light); border-color: var(--primary-light); background: rgba(0, 217, 255, 0.10); box-shadow: none; transform: translateY(-2px); }
 
 /* ---------- 6 · Sticky mobile primary CTA ---------- */
 .sticky-cta {
@@ -235,6 +241,15 @@ h2.section-title {
 .hero-lead, .hero-aside { min-width: 0; }
 @media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr); } }
 
+/* Managed hero aside (F6) — echoes the merge-gate demo at >=900px only;
+   phones and screen readers get it once, in its original section */
+.hero-echo { display: none; }
+@media (min-width: 900px) {
+  .hero.managed .hero-grid { grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.88fr); gap: clamp(32px, 4vw, 56px); }
+  .hero-echo { display: block; justify-self: end; width: 100%; max-width: 480px; }
+  .hero-echo .gh-card { max-width: 480px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
+}
+
 .premise {
   position: relative;
   display: flex; flex-direction: column; gap: 12px;
@@ -245,6 +260,30 @@ h2.section-title {
 .premise .tag { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #FBB040; }
 .premise .tag::before { content: ""; width: 22px; height: 1px; background: var(--orange); }
 .premise p { font-size: var(--t-body); }
+
+/* <=639px (F3/F10): CTA pair side-by-side, ONE joined note (P1), hero rhythm
+   tightened so the next section's title peeks above the fold */
+.cta-note-joined { display: none; }
+.cta-note-joined .join { color: var(--primary); padding: 0 3px; }
+@media (max-width: 639.98px) {
+  .hero .wrap { padding-top: 12px; padding-bottom: 14px; }
+  .hero .sub { margin-top: 12px; font-size: 1rem; line-height: 1.5; }
+  .hero .cta-row { margin-top: 14px; gap: 10px; }
+  .hero .cta-row .btn { padding: 12px 14px; font-size: 0.9375rem; min-height: 48px; }
+  .hero .cta-row .btn svg { width: 16px; height: 16px; }
+  .cta-pair { flex-wrap: nowrap; align-items: stretch; }
+  .cta-pair .cta-item { flex: 1 1 0; }
+  .cta-pair .cta-item:last-child { flex: 1.2 1 0; }
+  .cta-pair .btn { width: 100%; }
+  .cta-pair .cta-item .cta-note { display: none; }
+  .cta-note-joined { display: block; margin-top: 8px; font-size: 0.6875rem; letter-spacing: 0.5px; line-height: 1.55; width: auto; }
+  .stat-strip { margin-top: 10px; font-size: 0.6875rem; letter-spacing: 1px; }
+  .stat-strip span { display: inline; font-size: 0.6875rem; height: auto; padding: 0 4px; }
+  .hero-grid { gap: 14px; }
+  .premise { padding: 12px 14px; gap: 8px; }
+  .premise p { font-size: 0.9375rem; line-height: 1.5; }
+  section .wrap, .section-pad { padding-top: 24px; }
+}
 
 /* ---------- 8 · Cards + grids ---------- */
 .grid { display: grid; gap: var(--gap-grid); margin-top: var(--block-top); }
@@ -262,6 +301,20 @@ h2.section-title {
 .card .role { margin: 4px 0 12px; font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: 1px; text-transform: uppercase; color: var(--primary); }
 .card .line { font-size: 0.9375rem; color: var(--muted); }
 
+/* <=819px (F2): stack cards become compact icon-left rows; >=820px unchanged
+   (.card-ico hidden, .card-head unwraps via display:contents) */
+.card-ico { display: none; }
+.card-head { display: contents; }
+@media (max-width: 819.98px) {
+  .grid.min260 { gap: 10px; }
+  .grid.min260 .card { display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; padding: 12px; border-radius: var(--r-2); }
+  .card-ico { grid-row: 1 / 3; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: rgba(0, 217, 255, 0.10); color: var(--primary); }
+  .card-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; grid-column: 2; line-height: 1.35; }
+  .card-head h3 { font-size: 1.0625rem; }
+  .card-head .role { margin: 0; font-size: 0.6875rem; }
+  .grid.min260 .card .line { grid-column: 2; margin-top: 4px; font-size: 0.875rem; line-height: 1.5; }
+}
+
 .equation {
   margin-top: var(--block-top); padding: 16px 20px;
   background: var(--darker); border: 1px solid var(--gray); border-radius: var(--r-1);
@@ -271,10 +324,15 @@ h2.section-title {
 .equation .eq b { color: var(--primary); font-weight: 400; }
 .equation .eq .op { color: var(--muted); }
 .equation .max { font-size: var(--t-mono); color: var(--muted); }
+@media (max-width: 639.98px) {
+  .equation { padding: 12px 14px; }
+  .equation .eq { font-size: 0.8125rem; }
+}
 
 /* ---------- 9 · Seats: poster cards + carousel ---------- */
-.poster-card { background: var(--gray); border: 1px solid transparent; border-radius: var(--r-3); overflow: hidden; transition: border-color 0.2s ease, transform 0.2s ease; }
-.poster-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+/* hover is border+glow, no vertical lift — the lift is what clipped inside the track (F4) */
+.poster-card { background: var(--gray); border: 1px solid transparent; border-radius: var(--r-3); overflow: hidden; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.poster-card:hover { border-color: var(--primary); box-shadow: 0 0 0 1px rgba(0, 217, 255, 0.35), 0 8px 32px rgba(0, 217, 255, 0.14); }
 .poster-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
 .poster-card .body { padding: var(--pad-card); }
 .poster-card .head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
@@ -301,10 +359,15 @@ h2.section-title {
 
 .seats-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-3); flex-wrap: wrap; }
 .car-nav { display: flex; gap: 10px; flex-shrink: 0; }
-.car-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-pill); color: var(--white); font-size: 1.375rem; line-height: 1; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease; }
-.car-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 217, 255, 0.06); }
-.carousel { --per: 1; --gap: var(--gap-grid); margin-top: var(--block-top); }
-.car-track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+/* arrows read as live controls at rest (F5/F8), not gray-on-gray */
+.car-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: rgba(0, 217, 255, 0.05); border: 1px solid rgba(0, 217, 255, 0.45); border-radius: var(--r-pill); color: var(--primary); font-size: 1.375rem; line-height: 1; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease; }
+.car-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0, 217, 255, 0.10); }
+/* --per: 1.12 <=559px = next-card peek, so swipe is self-evident (F5);
+   the arrows drop out there — peek + dots carry the affordance */
+.carousel { --per: 1.12; --gap: var(--gap-grid); margin-top: var(--block-top); }
+@media (max-width: 559.98px) { .car-nav { display: none; } }
+/* track keeps breathing room it can clip into (F4) — visual position unchanged */
+.car-track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 4px 8px; margin: -6px -4px -4px; }
 .car-track::-webkit-scrollbar { display: none; }
 .car-track:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: var(--r-3); }
 .car-track > .poster-card { flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); scroll-snap-align: start; }
@@ -593,9 +656,11 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
 .phone-foot .fake-input { flex: 1; background: var(--gray); border-radius: var(--r-pill); padding: 10px 16px; font-size: var(--t-mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .phone-foot .fake-send { width: 36px; height: 36px; border-radius: var(--r-pill); background: var(--primary); color: var(--black); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-/* ---------- 24 · .compare (managed: category comparison) ---------- */
-.compare { display: grid; grid-template-columns: 1fr; gap: var(--gap-grid); margin-top: var(--block-top); }
-@media (min-width: 820px) { .compare { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
+/* ---------- 24 · .compare (managed: category comparison) ----------
+   Cards >=820px, verbatim. <=819px the row-per-attribute matrix below
+   replaces them (F1) — one tight table instead of three stacked boxes. */
+.compare { display: none; }
+@media (min-width: 820px) { .compare { display: grid; grid-template-columns: repeat(3, 1fr); align-items: stretch; gap: var(--gap-grid); margin-top: var(--block-top); } }
 .compare .col { display: flex; flex-direction: column; gap: 12px; padding: var(--s-4); background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-3); }
 .compare .col.feature { border-color: var(--primary); background: linear-gradient(135deg, rgba(0, 217, 255, 0.07), var(--gray)); }
 .compare .col .k { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
@@ -607,6 +672,25 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
 .crow .m.ok { color: var(--green); }
 .crow .m.bad { color: var(--muted); }
 .crow.no { color: var(--muted); }
+
+/* .compare-matrix — the <=819px row-per-attribute comparison (F1).
+   Real table semantics; Managed column featured with the cyan edge. */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.compare-matrix { width: 100%; border-collapse: collapse; margin-top: var(--block-top); background: var(--gray); border-radius: var(--r-2); overflow: hidden; }
+.compare-matrix thead td { width: 34%; padding: 12px 10px; }
+.compare-matrix thead th { width: 21%; padding: 12px 4px 10px; vertical-align: top; text-align: center; font-weight: 400; }
+.compare-matrix thead th.feature { width: 24%; padding: 12px 6px 10px; background: linear-gradient(180deg, rgba(0, 217, 255, 0.12), rgba(0, 217, 255, 0.05)); border-left: 1px solid rgba(0, 217, 255, 0.6); border-right: 1px solid rgba(0, 217, 255, 0.6); border-top: 1px solid var(--primary); }
+.compare-matrix .mk { display: block; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+.compare-matrix thead th.feature .mk { color: var(--primary); }
+.compare-matrix .mn { display: block; margin-top: 4px; font-size: 0.8125rem; font-weight: 700; line-height: 1.25; color: var(--white); }
+.compare-matrix tbody th { padding: 14px 10px; text-align: left; font-size: 0.875rem; font-weight: 600; line-height: 1.35; color: var(--white); border-top: 1px solid var(--gray-light); }
+.compare-matrix tbody td { padding: 14px 4px; text-align: center; border-top: 1px solid var(--gray-light); }
+.compare-matrix tbody td.feature { padding: 14px 6px; background: rgba(0, 217, 255, 0.05); border-left: 1px solid rgba(0, 217, 255, 0.6); border-right: 1px solid rgba(0, 217, 255, 0.6); border-top: 1px solid rgba(0, 217, 255, 0.35); }
+.compare-matrix tbody tr:last-child td.feature { border-bottom: 1px solid var(--primary); }
+.compare-matrix .m { display: inline-flex; }
+.compare-matrix .m.ok { color: var(--green); }
+.compare-matrix .m.bad { color: var(--muted); }
+@media (min-width: 820px) { .compare-matrix { display: none; } }
 
 /* ---------- 25 · Guardrail + install lead (managed) ---------- */
 .guardrail { margin-top: var(--block-top); padding: 22px 26px; background: var(--darker); border: 1px solid var(--gray); border-left: 3px solid var(--yellow); border-radius: 0 var(--r-2) var(--r-2) 0; }
@@ -640,15 +724,35 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
 .tier .tdesc { margin-top: 14px; font-size: 0.9375rem; color: var(--muted); }
 .tiers-note { margin-top: 18px; font-size: var(--t-small); color: var(--muted); }
 
-/* ---------- 27 · Short landscape (phone sideways) ---------- */
+/* ---------- 27 · Short landscape (phone sideways) ----------
+   F10: the hero clears ~1 viewport. The lead itself goes two-column
+   (sub in column 2); the hero aside sits out in this orientation (P4). */
 @media (max-height: 560px) and (orientation: landscape) {
   .hero .wrap { padding-top: var(--s-2); padding-bottom: var(--s-4); }
   .hero .glow { display: none; }
-  .hero-grid { grid-template-columns: 1.12fr 0.88fr; gap: clamp(18px, 4vw, 36px); align-items: start; }
-  .hero h1 { font-size: clamp(1.5rem, 3.1vw, 2.1rem); }
-  .hero .sub { font-size: var(--t-body); }
-  .premise { margin-top: 4px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-aside { display: none; }
+  .hero-lead { display: grid; grid-template-columns: 1.05fr 0.95fr; column-gap: 24px; align-items: start; }
+  .hero-lead > * { grid-column: 1; }
+  .hero-lead > .sub { grid-column: 2; grid-row: 1 / span 6; margin-top: 2px; font-size: var(--t-small); line-height: 1.5; }
+  .hero h1 { font-size: clamp(1.375rem, 3vw, 1.75rem); margin-top: 6px; }
+  .hero .cta-row { margin-top: 12px; gap: 10px; }
+  .hero .cta-row .btn { padding: 10px 16px; min-height: 44px; font-size: 0.875rem; }
+  .cta-pair .cta-item .cta-note { display: none; }
+  .cta-note-joined { display: block; margin-top: 8px; font-size: 0.625rem; letter-spacing: 0.5px; line-height: 1.55; width: auto; }
+  .stat-strip { margin-top: 10px; font-size: 0.625rem; letter-spacing: 1px; }
+  .stat-strip span { display: inline; font-size: 0.625rem; height: auto; padding: 0 4px; }
   .sticky-cta { display: none; }
+}
+
+/* ---------- 27b · Desktop rhythm (>=1200px, F7) ---------- */
+@media (min-width: 1200px) {
+  :root { --block-top: 20px; }
+  .hero .wrap { padding-top: 28px; padding-bottom: 44px; }
+  .hero .sub { margin-top: 16px; }
+  .cta-row { margin-top: 20px; }
+  .stat-strip { margin-top: 20px; }
+  .e12-lead, .install-lead, .stateface-lead { margin-top: 12px; }
 }
 
 /* ---------- 28 · Reduced motion ---------- */
