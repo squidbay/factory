@@ -231,23 +231,21 @@ h2.section-title {
 @media (min-width: 640px) { .cta-row { gap: 14px 24px; align-items: center; } .cta-note { width: auto; } }
 
 .stat-strip { margin-top: var(--s-3); font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.6; }
-.stat-strip span { display: block; font-size: 0; height: 6px; padding: 0; color: var(--primary); }
+.stat-strip span { display: inline; padding: 0 4px; color: var(--primary); }
 @media (min-width: 640px) {
   .stat-strip { margin-top: var(--s-4); line-height: 1.7; }
-  .stat-strip span { display: inline; font-size: var(--t-mono); height: auto; padding: 0 4px; }
 }
 
 .hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 44px); align-items: center; }
 .hero-lead, .hero-aside { min-width: 0; }
-@media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr); } }
-
 /* Managed hero aside (F6) — echoes the merge-gate demo at >=900px only;
    phones and screen readers get it once, in its original section */
 .hero-echo { display: none; }
 @media (min-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr); }
   .hero.managed .hero-grid { grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.88fr); gap: clamp(32px, 4vw, 56px); }
   .hero-echo { display: block; justify-self: end; width: 100%; max-width: 480px; }
-  .hero-echo .gh-card { max-width: 480px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
+  .hero-echo .gh-card { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
 }
 
 .premise {
@@ -278,7 +276,6 @@ h2.section-title {
   .cta-pair .cta-item .cta-note { display: none; }
   .cta-note-joined { display: block; margin-top: 8px; font-size: 0.6875rem; letter-spacing: 0.5px; line-height: 1.55; width: auto; }
   .stat-strip { margin-top: 10px; font-size: 0.6875rem; letter-spacing: 1px; }
-  .stat-strip span { display: inline; font-size: 0.6875rem; height: auto; padding: 0 4px; }
   .hero-grid { gap: 14px; }
   .premise { padding: 12px 14px; gap: 8px; }
   .premise p { font-size: 0.9375rem; line-height: 1.5; }
@@ -367,7 +364,7 @@ h2.section-title {
 .carousel { --per: 1.12; --gap: var(--gap-grid); margin-top: var(--block-top); }
 @media (max-width: 559.98px) { .car-nav { display: none; } }
 /* track keeps breathing room it can clip into (F4) — visual position unchanged */
-.car-track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 4px 8px; margin: -6px -4px -4px; }
+.car-track { display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 4px 8px; margin: -6px -4px -4px; scroll-padding: 6px 4px 8px; }
 .car-track::-webkit-scrollbar { display: none; }
 .car-track:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: var(--r-3); }
 .car-track > .poster-card { flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); scroll-snap-align: start; }
@@ -668,15 +665,17 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
 .compare .col h3 { font-size: 1.1875rem; font-weight: 700; letter-spacing: -0.01em; }
 .compare .col .sep { height: 1px; background: var(--gray-light); margin: 2px 0; }
 .crow { display: flex; gap: 10px; align-items: center; font-size: 0.9375rem; }
-.crow .m { flex-shrink: 0; display: inline-flex; }
-.crow .m.ok { color: var(--green); }
-.crow .m.bad { color: var(--muted); }
+.crow .m, .compare-matrix .m { flex-shrink: 0; display: inline-flex; }
+.crow .m.ok, .compare-matrix .m.ok { color: var(--green); }
+.crow .m.bad, .compare-matrix .m.bad { color: var(--muted); }
 .crow.no { color: var(--muted); }
 
 /* .compare-matrix — the <=819px row-per-attribute comparison (F1).
    Real table semantics; Managed column featured with the cyan edge. */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.compare-matrix { width: 100%; border-collapse: collapse; margin-top: var(--block-top); background: var(--gray); border-radius: var(--r-2); overflow: hidden; }
+/* border-collapse: separate — collapsed tables drop border-radius, and every
+   border here is drawn per-cell anyway */
+.compare-matrix { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: var(--block-top); background: var(--gray); border-radius: var(--r-2); overflow: hidden; }
 .compare-matrix thead td { width: 34%; padding: 12px 10px; }
 .compare-matrix thead th { width: 21%; padding: 12px 4px 10px; vertical-align: top; text-align: center; font-weight: 400; }
 .compare-matrix thead th.feature { width: 24%; padding: 12px 6px 10px; background: linear-gradient(180deg, rgba(0, 217, 255, 0.12), rgba(0, 217, 255, 0.05)); border-left: 1px solid rgba(0, 217, 255, 0.6); border-right: 1px solid rgba(0, 217, 255, 0.6); border-top: 1px solid var(--primary); }
@@ -687,9 +686,6 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
 .compare-matrix tbody td { padding: 14px 4px; text-align: center; border-top: 1px solid var(--gray-light); }
 .compare-matrix tbody td.feature { padding: 14px 6px; background: rgba(0, 217, 255, 0.05); border-left: 1px solid rgba(0, 217, 255, 0.6); border-right: 1px solid rgba(0, 217, 255, 0.6); border-top: 1px solid rgba(0, 217, 255, 0.35); }
 .compare-matrix tbody tr:last-child td.feature { border-bottom: 1px solid var(--primary); }
-.compare-matrix .m { display: inline-flex; }
-.compare-matrix .m.ok { color: var(--green); }
-.compare-matrix .m.bad { color: var(--muted); }
 @media (min-width: 820px) { .compare-matrix { display: none; } }
 
 /* ---------- 25 · Guardrail + install lead (managed) ---------- */
@@ -730,7 +726,7 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
 @media (max-height: 560px) and (orientation: landscape) {
   .hero .wrap { padding-top: var(--s-2); padding-bottom: var(--s-4); }
   .hero .glow { display: none; }
-  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-grid, .hero.managed .hero-grid { grid-template-columns: 1fr; gap: 0; }
   .hero-aside { display: none; }
   .hero-lead { display: grid; grid-template-columns: 1.05fr 0.95fr; column-gap: 24px; align-items: start; }
   .hero-lead > * { grid-column: 1; }
@@ -741,7 +737,6 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
   .cta-pair .cta-item .cta-note { display: none; }
   .cta-note-joined { display: block; margin-top: 8px; font-size: 0.625rem; letter-spacing: 0.5px; line-height: 1.55; width: auto; }
   .stat-strip { margin-top: 10px; font-size: 0.625rem; letter-spacing: 1px; }
-  .stat-strip span { display: inline; font-size: 0.625rem; height: auto; padding: 0 4px; }
   .sticky-cta { display: none; }
 }
 
