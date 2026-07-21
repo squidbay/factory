@@ -36,6 +36,7 @@ seats/
 specialists/
 specs/README.md
 skills/factory-coach/
+skills/factory-render-verify/
 skills/factory-retro/
 skills/factory-security/
 skills/factory-update/

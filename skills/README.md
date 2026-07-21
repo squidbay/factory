@@ -15,6 +15,7 @@ A **skill** is a set of instructions a Claude seat loads to get better at one sp
 ## Shipped skills
 
 - [`factory-coach/`](factory-coach/SKILL.md) — plain-English coaching for the human, one concept at a time. Offer it to the Chat room at Stage 2.
+- [`factory-render-verify/`](factory-render-verify/SKILL.md) — the render half of the design quality gate: Code renders any page your factory builds at every screen size, measures what a glance misses (overflow, type sizes, tap targets, safe-area), and pins the source by hash so live can be proven byte-identical to what you approved. Receipts for the PR — a page never ships on trust. Pairs with [`../guides/DESIGN-QUALITY-GATE.md`](../guides/DESIGN-QUALITY-GATE.md).
 - [`factory-retro/`](factory-retro/SKILL.md) — the factory learning to run itself better: reads the journal, finds friction, proposes fixes as PRs you gate.
 - [`factory-security/`](factory-security/SKILL.md) — the security read Cowork folds into its audit on any PR touching credentials, workflows, auth, payments, or personal data: reads the change, reports only real problems in plain words, ends with one recommendation — **MERGE** or **FIX-FIRST**. Cowork's own capability, not a separate seat.
 - [`factory-update/`](factory-update/SKILL.md) — explains and drives the update PRs opened by the workflow of the same name: what changed upstream, hunk by hunk, and how to adopt only the parts you want.

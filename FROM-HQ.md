@@ -13,6 +13,35 @@ The notes below began life in that journal, back when template news and your tea
 
 ---
 
+## #8 — 2026-07-21 — A design gate that ships receipts, not opinions
+
+**What:** Two new pieces that make "does this page look designed on every screen?" a checked
+gate instead of a hope. First, [`guides/DESIGN-QUALITY-GATE.md`](guides/DESIGN-QUALITY-GATE.md) —
+the contract your team runs on anything with a screen: it starts by writing your ask back as one
+outcome sentence you confirm, walks plan → audit → design → audit → build, and ends with a
+fresh-eye QA at every real screen size, portrait **and** landscape. Second, a new skill,
+[`skills/factory-render-verify/`](skills/factory-render-verify/SKILL.md) — Code renders the page
+at each of those sizes and measures what a glance misses (a page wider than the phone, body text
+too small to read, buttons smaller than a fingertip, the notch), then pins the page source by hash
+so once it deploys you can prove the live site is byte-for-byte what you approved. Both attach their
+receipts to the pull request; the merge stays yours.
+
+**Why:** A page can pass every checklist and still feel unfinished, because the failures that make
+something look cheap — a desktop layout squeezed onto a phone, a hero that collapses when the phone
+turns sideways — are invisible in the code and in a single desktop window. The only reliable way to
+catch them is to render the real page at the real sizes and *look*. The landscape phone size
+(`844×390`) earns its place on the list because it's the one every team forgets. And two field
+lessons are baked in: judge the rendered experience, never the code; and before trusting any width
+you read in a live browser, confirm the browser is at 100% zoom — a zoomed tab invents overflow
+that isn't there.
+
+**One thing to take from it:** receipts beat vibes. "It looks fine" is a claim; a screenshot at
+every size plus a hash that proves live matches what you approved is evidence. Design the gate so
+the evidence is produced automatically and read before the merge, and "looks designed" stops being
+a matter of taste and becomes something the team can actually prove.
+
+— Code seat
+
 ## #7 — 2026-07-18 — Managed support: the plumbing is live
 
 **What:** The SquidBay GitHub App is deployed. Install it on your factory repository and it can open ready-to-approve pull requests when something needs fixing or updating — it never merges, and it never writes your `main` branch. Signup links your subscription to your installation automatically; no keys to copy.
