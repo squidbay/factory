@@ -29,7 +29,7 @@ The **Authorize** click in step 3 connects GitHub to your *Claude account*. That
 2. Confirm **Claude** appears under **Installed GitHub Apps** (not merely under the separate **Authorized GitHub Apps** tab — *authorized ≠ installed*).
 3. If it's missing under Installed: **<https://github.com/apps/claude>** → **Install** → your account → **All repositories** → the green button.
 
-The full, plain-words version of this — and what to do if a session tells you it can read but can't write — is [`../CONNECT-YOUR-CLAUDE.md`](../CONNECT-YOUR-CLAUDE.md). Your Code session now also **proves this itself** at the start of every session (read + write test) — so if a half-connection ever slips through, the session stops and points you here instead of failing quietly.
+The full, plain-words version of this — and what to do if a session tells you it can read but can't write — is [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md). Your Code session now also **proves this itself** at the start of every session (read + write test) — so if a half-connection ever slips through, the session stops and points you here instead of failing quietly.
 
 **One more rule that saves an evening:** if you fix a connection while sessions are already open, **those old sessions keep dead credentials — never resume them.** Start one brand-new session after connecting, and let it lead.
 

@@ -28,4 +28,4 @@ You are running a retrospective on this factory. Your material is the **journal*
 
 ## Sharing what you learn
 
-A retro finding that would help every factory — a rule wording that finally stuck, a template that killed a whole class of misses — is the most-wanted contribution to the upstream template. Suggest it to the human; [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md) explains how it travels.
+A retro finding that would help every factory — a rule wording that finally stuck, a template that killed a whole class of misses — is the most-wanted contribution to the upstream template. Suggest it to the human; [`../../.github/CONTRIBUTING.md`](../../.github/CONTRIBUTING.md) explains how it travels.

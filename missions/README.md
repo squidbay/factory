@@ -40,4 +40,4 @@ What makes a pack good:
 4. **It honors the loop.** Missions run branch + PR with the human as the only merge gate (RULE 14), seats verify their own work (RULE 1), and the journal remembers (see [`MECHANICAL-RULES.md`](../MECHANICAL-RULES.md)).
 5. **The celebration is real.** Small, specific, doable in minutes. If you can't name the moment the mission felt finished, it isn't done being written.
 
-Shape it like the four packs here, open a PR, and say in the description what real run it came from. See `CONTRIBUTING.md` at the repo root for the mechanics.
+Shape it like the four packs here, open a PR, and say in the description what real run it came from. See [`CONTRIBUTING.md`](../.github/CONTRIBUTING.md) for the mechanics.

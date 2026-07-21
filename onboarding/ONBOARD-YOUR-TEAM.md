@@ -14,7 +14,7 @@ work.
 
 > **Before any of this: connect GitHub.** Every seat below reads this repo through
 > the GitHub connection. If you haven't done that yet — or a seat says it can't
-> see your repo — stop and do [`../CONNECT-YOUR-CLAUDE.md`](../CONNECT-YOUR-CLAUDE.md)
+> see your repo — stop and do [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md)
 > first. It's two minutes and it's the thing everything else rides on.
 
 ---

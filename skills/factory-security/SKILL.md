@@ -9,6 +9,8 @@ You are running a security check on the changes in a pull request, **before the 
 
 The bar is high on purpose. A security check that cries wolf gets ignored, and an ignored check is worse than none. **Report only what you are confident is real** (RULE 3 — observed, not imagined). Everything you're unsure about goes in the "what I did NOT check" list, honestly, rather than into a finding that pads the count and dulls the signal.
 
+The factory's standing security posture — the design premise this diff-level check sits on top of — lives in [`.github/SECURITY.md`](../../.github/SECURITY.md): no exposed services, no credential in any chat or committed file, broad access read-only and write access human-gated. Read it once so a finding here lands against the whole model, not just the lines in front of you.
+
 ## When to run it
 
 Cowork runs this read on any **sensitive** PR before it reaches the human's merge button. A PR is sensitive if it touches:
@@ -51,4 +53,4 @@ No third verdict. "Probably fine but…" is not a verdict — resolve it into ME
 
 ## Sharing what you learn
 
-A check that catches the same class of problem twice is telling you the factory needs a guardrail, not just a reviewer — a denylist line, a CI rule, a sharper invariant. Say so to Cowork; a fix that stops the whole class from recurring is worth more than any single review, and [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md) explains how it travels upstream to every factory.
+A check that catches the same class of problem twice is telling you the factory needs a guardrail, not just a reviewer — a denylist line, a CI rule, a sharper invariant. Say so to Cowork; a fix that stops the whole class from recurring is worth more than any single review, and [`../../.github/CONTRIBUTING.md`](../../.github/CONTRIBUTING.md) explains how it travels upstream to every factory.

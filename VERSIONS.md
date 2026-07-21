@@ -4,7 +4,7 @@ AI product surfaces change fast — tab names move, features ship, mechanics get
 
 **Last verified against the Claude desktop app: 2026-07-13.**
 
-**Template version: 2026-07-21.** This one line is the update-check anchor. Your factory reads it here and on the master; if the master's is newer, an update is waiting (how to run the check: [`guides/UPDATE-YOUR-FACTORY.md`](guides/UPDATE-YOUR-FACTORY.md)). It's a plain date so newer always wins at a glance; a second change on the same day adds a `.1`, `.2` suffix (`2026-07-17.1`) so the order never blurs. Bump it whenever a template-managed file changes — this is the template's own version, distinct from the "last verified" date above, which tracks when a human last checked the app.
+**Template version: 2026-07-22.1.** This is the current version, shown here for humans to read. The **machine anchor** the update check actually reads now lives in a one-line file — [`.github/template-version.txt`](.github/template-version.txt) — so prose edits to this page can never break the check. The check is release-first: it reads the template's **latest GitHub Release** (`releases/latest`), whose tag is this same version and whose notes are that update's [`FROM-HQ.md`](FROM-HQ.md) entry, and falls back to comparing the raw `.github/template-version.txt` if no release is reachable yet (how to run the check: [`guides/UPDATE-YOUR-FACTORY.md`](guides/UPDATE-YOUR-FACTORY.md)). It's a plain date so newer always wins at a glance; a second change on the same day adds a `.1`, `.2` suffix (`2026-07-22.1`) so the order never blurs. Bump the machine anchor whenever a template-managed file changes — this is the template's own version, distinct from the "last verified" date above, which tracks when a human last checked the app.
 
 ## The empirical rule (binds every seat, every session)
 
@@ -16,6 +16,7 @@ The grounding pages (`grounding/`, and each seat's `GROUNDING.md`) point at Anth
 
 | Date | Verified | By |
 |---|---|---|
+| 2026-07-22 | Root reorg + release-lane migration checked: three root files moved into their owned folders (`onboarding/CONNECT-YOUR-CLAUDE.md`, `.github/SECURITY.md`, `.github/CONTRIBUTING.md`) with every in-repo reference swept and re-resolved; the update-check machine anchor split out to `.github/template-version.txt`, and the check rewritten release-first (`releases/latest`) with a raw-file fallback. GitHub still surfaces the security policy and contributing guide from `.github/`; the manifest parses against the new paths | the factory that ships this template |
 | 2026-07-13 | "Use this template" flow verified by a real human click — the private option is offered, the full file tree carries over, and the generated-from label shows on the new repo. The live one-pager verified serving at squidbay.github.io/factory (all assets 200) | the factory that ships this template |
 | 2026-07-13 | Initial skeleton built and checked against the live desktop app: Code-tab repo attach, Cowork/Chat rooms, connector browse flow. GitHub Mobile PR review + merge verified against GitHub's own documentation, not hands-on | the factory that ships this template |
 

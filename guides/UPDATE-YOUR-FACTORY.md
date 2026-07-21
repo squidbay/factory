@@ -18,10 +18,14 @@ plain words:
 Cloud is the right place for this — no hands needed, nothing to install. Your
 seat does the rest:
 
-1. It reads the **template version** line at the top of your
-   [`../VERSIONS.md`](../VERSIONS.md) and the same line on the master. If they
+1. It checks the **template's latest release** on GitHub (`releases/latest`) and
+   compares that version against your factory's own — a one-line file at
+   [`../.github/template-version.txt`](../.github/template-version.txt). If they
    match, you're current — it says "up to date" and stops. Most months, that's
-   the answer, and that's a good answer.
+   the answer, and that's a good answer. (If the master hasn't cut a release yet,
+   or GitHub's release API can't be reached, the seat falls back to reading that
+   same one-line version file straight from the master — the same check, one path
+   over.)
 2. If the master is newer, it compares your **template-managed** files against
    the master's (the split is explained in
    [`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md)).
@@ -74,4 +78,4 @@ two-minute read before your first update, so you know exactly what a "yes" means
 *If an update PR ever proposes something you don't understand, ask any seat to
 explain a piece of it in plain words — that's what they're for. And if your Code
 seat can't open a PR at all, that's a connection problem, not an update problem:
-start with [`../CONNECT-YOUR-CLAUDE.md`](../CONNECT-YOUR-CLAUDE.md).*
+start with [`../onboarding/CONNECT-YOUR-CLAUDE.md`](../onboarding/CONNECT-YOUR-CLAUDE.md).*

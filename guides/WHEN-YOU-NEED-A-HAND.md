@@ -31,7 +31,7 @@ your connection at all.
 ## What a helper can NEVER do — even a trusted one
 
 - **Never link accounts on your behalf.** Connecting your Claude to your GitHub
-  ([`../CONNECT-YOUR-CLAUDE.md`](../CONNECT-YOUR-CLAUDE.md)) happens on *your*
+  ([`../onboarding/CONNECT-YOUR-CLAUDE.md`](../onboarding/CONNECT-YOUR-CLAUDE.md)) happens on *your*
   screens, signed in as *you*. A helper can read the steps to you; the clicks
   are yours. Nobody else should ever be signed in as you, anywhere.
 - **Never merge.** Not to save time, not because "it's obviously fine." The
@@ -63,7 +63,7 @@ Two rules keep it safe and smooth:
 
 ## When to reach for this
 
-Try [`../CONNECT-YOUR-CLAUDE.md`](../CONNECT-YOUR-CLAUDE.md) first — it fixes
+Try [`../onboarding/CONNECT-YOUR-CLAUDE.md`](../onboarding/CONNECT-YOUR-CLAUDE.md) first — it fixes
 the most common problem (the half-connected GitHub App) in about two minutes,
 no helper needed. Reach for the helper path when you've done that, started a
 fresh session, and things still fail — or when you'd simply rather have a

@@ -51,13 +51,44 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Check whether the template is newer (release-first, raw-file fallback)
+        id: version
+        run: |
+          set -u
+          LOCAL="none"
+          if [ -f .github/template-version.txt ]; then
+            LOCAL="$(head -n1 .github/template-version.txt | tr -d '[:space:]')"
+          fi
+          # Primary signal: the template's latest GitHub Release tag.
+          REMOTE="$(curl -fsSL https://api.github.com/repos/squidbay/factory/releases/latest 2>/dev/null \
+            | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 \
+            | sed 's/.*"\([^"]*\)"[[:space:]]*$/\1/')"
+          VIA="release"
+          # Fallback: the template's raw one-line machine anchor (no release yet,
+          # or the release API is unreachable).
+          if [ -z "$REMOTE" ]; then
+            REMOTE="$(curl -fsSL https://raw.githubusercontent.com/squidbay/factory/main/.github/template-version.txt 2>/dev/null | head -n1 | tr -d '[:space:]')"
+            VIA="raw-file"
+          fi
+          echo "local=$LOCAL remote=${REMOTE:-unknown} via=$VIA"
+          # If the remote can't be read at all, don't block — fall through to the
+          # sync (the diff gate below still prevents a no-op PR).
+          if [ -z "$REMOTE" ] || [ "$LOCAL" != "$REMOTE" ]; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Already on the template's latest ($LOCAL). Nothing to propose."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Fetch the current template
+        if: steps.version.outputs.proceed == 'true'
         run: |
           git clone --depth 1 "$TEMPLATE_REPO" "$RUNNER_TEMP/template"
           echo "Template at: $(git -C "$RUNNER_TEMP/template" rev-parse --short HEAD)"
 
       - name: Apply template-managed paths from the manifest
         id: apply
+        if: steps.version.outputs.proceed == 'true'
         run: |
           set -u
           MANIFEST=".github/template-manifest.txt"
@@ -93,6 +124,7 @@ jobs:
 
       - name: Note unmanaged drift (never applied, only reported)
         id: drift
+        if: steps.version.outputs.proceed == 'true'
         run: |
           set -u
           NOTES=""

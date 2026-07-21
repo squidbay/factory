@@ -16,8 +16,8 @@ This file loads automatically every time this repo is attached to a Claude Code 
 
 **If either fails: STOP. Do not onboard, do not build, do not pretend it's healthy.** Say plainly what failed, name *which half* is missing, and print the connect guide:
 
-- **READ passed but WRITE failed** → the **GitHub-side App install** is the missing half. Say this in these words: *"Your Claude may show 'connected,' but that's only half. The GitHub App that lets me write to your repo isn't installed (or is read-only). Your Claude side is authorized; your GitHub side is not installed — different switches."* Then print [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md) **verbatim** and stop.
-- **READ failed too** → the connection itself isn't in place. Say so plainly, print [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md) **verbatim**, and stop.
+- **READ passed but WRITE failed** → the **GitHub-side App install** is the missing half. Say this in these words: *"Your Claude may show 'connected,' but that's only half. The GitHub App that lets me write to your repo isn't installed (or is read-only). Your Claude side is authorized; your GitHub side is not installed — different switches."* Then print [`CONNECT-YOUR-CLAUDE.md`](onboarding/CONNECT-YOUR-CLAUDE.md) **verbatim** and stop.
+- **READ failed too** → the connection itself isn't in place. Say so plainly, print [`CONNECT-YOUR-CLAUDE.md`](onboarding/CONNECT-YOUR-CLAUDE.md) **verbatim**, and stop.
 
 No task proceeds on unproven access. "It should be connected" is not proof (RULE 3).
 
@@ -83,7 +83,7 @@ Your factory came from a public master template that keeps improving. When the h
 2. **Diff the managed paths.** For each path listed in [`.github/template-manifest.txt`](.github/template-manifest.txt), compare this repo's copy against the master's. That file is the single source of truth for what an update may touch — read it, don't recall it.
 3. **Branch and apply.** Branch `factory-update/<yyyymmdd>`, copy the master's version of each changed managed file. **Preserve the *Your team, your names* roster block in `FACTORY.md` verbatim, and never touch `journal.md`, the journal archive, or `specs/`** (only `specs/README.md` is managed). If the human customized a managed file that also changed on the master, **don't overwrite it silently** — list the collision in the PR body and let them choose.
 4. **One PR.** WHAT changed, WHY (from the master's `VERSIONS.md` and journal-visible reasons), one thing to learn — plain words. The human merges; you never do.
-5. **Preflight first, as always.** A seat that can't write its own repo routes to [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md), not into a half-finished update.
+5. **Preflight first, as always.** A seat that can't write its own repo routes to [`CONNECT-YOUR-CLAUDE.md`](onboarding/CONNECT-YOUR-CLAUDE.md), not into a half-finished update.
 
 The monthly [`factory-update`](skills/factory-update/SKILL.md) workflow does this same job on a schedule; the seat-driven path above is for when the human just asks. Either way: one PR, never a merge, never their journal or roster.
 
