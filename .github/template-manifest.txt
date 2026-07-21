@@ -29,6 +29,7 @@ inbox/drop/README.md
 journal/README.md
 missions/README.md
 missions/design-guide/
+missions/first-app/
 missions/first-website/
 missions/organize-my-business/
 missions/website-overhaul/
