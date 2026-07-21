@@ -11,6 +11,17 @@ One first-run setup before that can happen: open **Settings → Actions → Gene
 
 And a run that goes green without opening a PR isn't broken — it means your office already matches the template. Nothing to propose is the good outcome, most months.
 
+## How the "up to date?" check works
+
+When the human asks whether the factory is current, the check is **release-first**:
+
+- Read this office's own version from the one-line file [`.github/template-version.txt`](../../.github/template-version.txt).
+- Read the template's latest release: `GET /repos/squidbay/factory/releases/latest` — its tag is the template's current version, and its notes are that update's `FROM-HQ.md` entry.
+- If the release tag is newer than the local file, an update is waiting; if they match, say "up to date" and stop.
+- **Fallback** — no release has been cut yet, or the release API is unreachable: compare the master's raw `.github/template-version.txt` instead. Same version compare, one path over. The monthly workflow uses the same order.
+
+The version file is the machine anchor; [`VERSIONS.md`](../../VERSIONS.md) shows the same number for humans to read but is never what the check parses — so prose edits there can't break it.
+
 ## What the update can and cannot touch
 
 The boundary is a file you own: [`.github/template-manifest.txt`](../../.github/template-manifest.txt). Paths listed there (the rulebook, the guides, the seats' boot files, the shipped skills and missions) are template-managed and may appear in an update PR. Everything else is **never touched**: your journal, your specs, your roster in `FACTORY.md`, mission packs you added, your denylist. If you edited a managed file and want to keep your version, remove its line from the manifest — from then on it's yours.

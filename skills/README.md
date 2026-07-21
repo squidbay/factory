@@ -25,4 +25,4 @@ A **skill** is a set of instructions a Claude seat loads to get better at one sp
 
 When your team does the same kind of task a third time and re-explains it a third time — that smell is a skill asking to exist. Say so to Cowork; it will use [`skill-creator/`](skill-creator/SKILL.md) to mint one, and the skill lands here by PR like everything else.
 
-Made a skill other factories would want? That's exactly what [`../CONTRIBUTING.md`](../CONTRIBUTING.md) is for.
+Made a skill other factories would want? That's exactly what [`../.github/CONTRIBUTING.md`](../.github/CONTRIBUTING.md) is for.

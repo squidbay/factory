@@ -53,4 +53,4 @@ change it makes reaches you as a pull request — one that only **you** can merg
 trusted helper can get you unstuck the safe way — working from their own
 computer, delivering fixes as pull requests only you can merge. The shape, and
 the hard limits on what a helper may ever do, are in
-[`guides/WHEN-YOU-NEED-A-HAND.md`](guides/WHEN-YOU-NEED-A-HAND.md).
+[`guides/WHEN-YOU-NEED-A-HAND.md`](../guides/WHEN-YOU-NEED-A-HAND.md).

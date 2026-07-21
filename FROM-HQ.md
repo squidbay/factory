@@ -13,6 +13,38 @@ The notes below began life in that journal, back when template news and your tea
 
 ---
 
+## #9 — 2026-07-22 — A tidier root, and updates that ride GitHub Releases
+
+**What:** Two changes to how your factory is laid out and how it learns about its own updates.
+First, the repository root got smaller: three files that were sitting at the top level moved into
+the folders they belong to — the connect-your-Claude guide into
+[`onboarding/`](onboarding/CONNECT-YOUR-CLAUDE.md), and the security policy and contributing guide
+into [`.github/`](.github/) (where GitHub still surfaces both, so your Security tab and the
+auto-linked "contributing" prompt keep working). Every reference to those files across the factory
+was updated in the same change, so nothing points at a stale path. Second, the update check now
+rides **GitHub Releases**: the template announces each version as a dated, tagged release with the
+note you're reading as its body, and your factory checks that release to see whether it's behind.
+
+**Why:** The root of a repository is the first thing anyone sees, and a shorter one reads easier —
+every file left at the top is there for a mechanical reason (GitHub looks for it there, or a seat
+boots from it), and everything else now lives with its own kind. The release change fixes a subtler
+thing. The old check compared a version written in prose inside a page, where a careless edit could
+quietly break it. Splitting the machine's copy of the version into its own one-line file
+(`.github/template-version.txt`) and reading the release means the check can't be broken by wording
+— and you get GitHub's own "watch for new releases" notification for free.
+
+**The one honest limit, in plain words:** a release can tell your factory *what the latest version
+is*, but it can never *push* an update to you — your factory was copied from the template with that
+link deliberately cut, so every update still arrives the one and only way anything changes here: as
+a pull request you read and merge. Releases make the "is there something new?" question cheaper and
+louder; they change nothing about who decides.
+
+**One thing to take from it:** a version worth checking against belongs somewhere a human can't
+edit by accident. Prose is for people; the machine gets its own one-line file and a tagged release.
+Keep the two separate and the check stays honest no matter how the words around it change.
+
+— Code seat
+
 ## #8 — 2026-07-21 — A design gate that ships receipts, not opinions
 
 **What:** Two new pieces that make "does this page look designed on every screen?" a checked

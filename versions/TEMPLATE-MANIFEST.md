@@ -25,7 +25,8 @@ stale — that's a normal thing to flag with an issue or a PR.
 of the factory that belong to the template and get better over time: the seat
 rulebooks and boot files, the onboarding path, the guides, the shipped skills
 and mission packs, the shared templates, the verification log, and the news
-from HQ (`FROM-HQ.md`, where each template change is noted for you). When the
+from HQ (`FROM-HQ.md`, where each template change is noted for you — and now also
+the text that rides the body of each GitHub Release the template cuts). When the
 master sharpens a rule or fixes a typo in a guide, this is where it shows up in
 your update PR. Overwriting is safe *when you haven't edited the file yourself* —
 and when you have, see the next section.
@@ -62,11 +63,16 @@ on it's yours and no update proposes changes to it again.
 
 ## The one-line signal: template version
 
-The top of [`../VERSIONS.md`](../VERSIONS.md) carries a **template version** line.
-It's the cheapest possible check: your factory reads that one line here and the
-same line on the master, and if the master's is newer, an update is waiting. It's
-a signal, not a phone-home — nothing is sent anywhere, nothing runs on its own
-that you didn't ask for. You (or your seat, when you ask) do the reading.
+The template's current version is a plain date. You read it at the top of
+[`../VERSIONS.md`](../VERSIONS.md), but the check reads it from a one-line
+machine file — [`../.github/template-version.txt`](../.github/template-version.txt)
+— so editing the prose on the VERSIONS page can never break the check. The check
+is release-first: it reads the template's **latest GitHub Release** (its tag is
+the version, its notes are that update's `FROM-HQ.md` entry), and if no release
+is reachable it falls back to comparing that raw one-line file on the master. If
+the master's version is newer than yours, an update is waiting. Either way it's a
+signal, not a phone-home — nothing is sent anywhere, nothing runs on its own that
+you didn't ask for. You (or your seat, when you ask) do the reading.
 
 ---
 

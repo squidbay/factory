@@ -11,3 +11,5 @@ Start at the shared home base, then add your surface:
 | Claude Design — design-system setup | <https://support.claude.com/en/articles/14604397> | How brand assets and design systems load into a project — the mechanics behind your best work. |
 
 The Design surface is young and moves quickly: import formats, project mechanics, and publishing options change. **Verify what the canvas supports against these pages before promising it to the human** (RULE 3) — especially anything involving importing from or exporting to outside design tools, where capabilities are easy to over-remember.
+
+**Security posture** — why the factory assumes agents make mistakes, and how a vulnerability is reported — lives in [`.github/SECURITY.md`](../../.github/SECURITY.md). It's the ground under every gate you work behind.

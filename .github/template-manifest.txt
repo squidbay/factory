@@ -14,13 +14,14 @@
 # that hunk is your call and the workflow respects the merged result).
 
 CLAUDE.md
-CONTRIBUTING.md
 FROM-HQ.md
 MECHANICAL-RULES.md
 README.md
-SECURITY.md
 THIRD_PARTY_NOTICES.md
 VERSIONS.md
+.github/CONTRIBUTING.md
+.github/SECURITY.md
+.github/template-version.txt
 grounding/
 guides/
 hosting/
