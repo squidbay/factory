@@ -103,15 +103,44 @@ def parse_sizes(s):
     return out
 
 
+class BrowserNotFoundError(RuntimeError):
+    """No Chromium build could be located in any known location."""
+
+
+def browser_roots():
+    """Every directory a Chromium build might live in, most-specific first: an explicit
+    PLAYWRIGHT_BROWSERS_PATH, the pre-provisioned /opt/pw-browsers, and Playwright's default
+    per-user cache (~/.cache/ms-playwright). Deduped, preserving order."""
+    roots, seen = [], set()
+    for r in (os.environ.get("PLAYWRIGHT_BROWSERS_PATH"),
+              "/opt/pw-browsers",
+              os.path.expanduser("~/.cache/ms-playwright")):
+        if r and r not in seen:
+            seen.add(r)
+            roots.append(r)
+    return roots
+
+
 def find_chrome():
     """Prefer chromium-headless-shell (the small, headless-only build that launches in more
-    sandboxes, including aarch64); fall back to the full chromium. Newest build wins."""
-    for pat in ("/opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell",
-                "/opt/pw-browsers/chromium-*/chrome-linux/chrome"):
-        hits = sorted(glob.glob(pat), reverse=True)
-        if hits:
-            return hits[0]
-    return None
+    sandboxes, including aarch64); fall back to the full chromium. Newest build wins.
+    Searches every place Playwright may have installed the browser (see browser_roots), and
+    raises BrowserNotFoundError — naming where it looked and how to fix it — when none is
+    found, instead of failing later with a cryptic launch error."""
+    roots = browser_roots()
+    for root in roots:
+        for sub in ("chromium_headless_shell-*/chrome-linux/headless_shell",
+                    "chromium-*/chrome-linux/chrome"):
+            hits = sorted(glob.glob(os.path.join(root, sub)), reverse=True)
+            if hits:
+                return hits[0]
+    raise BrowserNotFoundError(
+        "render-verify could not find a Chromium build. Looked in:\n"
+        + "\n".join("  - " + r for r in roots)
+        + "\nFix: install Playwright's Chromium with\n"
+          "  python3 -m playwright install chromium   (or: npx playwright install chromium)\n"
+          "or point PLAYWRIGHT_BROWSERS_PATH at the directory that holds a chromium-* build."
+    )
 
 
 def check_libs(binary):
@@ -168,15 +197,14 @@ def render(args):
 
     from playwright.sync_api import sync_playwright
     chrome = find_chrome()
-    if chrome:
-        check_libs(chrome)
+    check_libs(chrome)
     proxy = os.environ.get("HTTPS_PROXY")
     report = {}
     with sync_playwright() as p:
         # --allow-file-access-from-files: treat file:// as same-origin so linked stylesheets
         # expose .cssRules (else safe-area / svh counts read 0 on file://).
         chrome_args = ["--no-sandbox", "--allow-file-access-from-files"]
-        launch = {"executable_path": chrome, "args": chrome_args} if chrome else {"args": chrome_args}
+        launch = {"executable_path": chrome, "args": chrome_args}
         if proxy and any(u.startswith("http") for _, u in targets):
             launch["proxy"] = {"server": proxy}
         b = p.chromium.launch(**launch)
@@ -228,13 +256,11 @@ def verify(report_path):
     report = json.load(open(report_path))
     from playwright.sync_api import sync_playwright
     chrome = find_chrome()
-    if chrome:
-        check_libs(chrome)
+    check_libs(chrome)
     proxy = os.environ.get("HTTPS_PROXY")
     ok = True
     with sync_playwright() as p:
-        launch = {"executable_path": chrome, "args": ["--no-sandbox", "--allow-file-access-from-files"]} \
-            if chrome else {"args": ["--no-sandbox", "--allow-file-access-from-files"]}
+        launch = {"executable_path": chrome, "args": ["--no-sandbox", "--allow-file-access-from-files"]}
         if proxy:
             launch["proxy"] = {"server": proxy}
         b = p.chromium.launch(**launch)
