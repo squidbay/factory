@@ -13,6 +13,25 @@ The notes below began life in that journal, back when template news and your tea
 
 ---
 
+## #11 — 2026-07-22 — A concept page: authorized workflows (direction, not shipped)
+
+**What:** A new guide, [`guides/AUTHORIZED-WORKFLOWS.md`](guides/AUTHORIZED-WORKFLOWS.md), that writes
+down an idea before any code exists: authorizing a whole chain of seat steps once — plan, build,
+design, audit, install — and reviewing a single pull request at the end, instead of approving each hop
+along the way. It is clearly labeled as direction, not a feature you have. The page spells out the two
+lines it would never cross (the merge button stays yours; secrets stay human-only) and the trust
+prerequisites that would have to be true before it could ever be more than a deliberate opt-in.
+
+**Why:** Good guardrails are argued before the code, not after. Naming the idea — and naming, in the
+same breath, what it must never do and what has to be proven first — means that if the capability ever
+arrives, you already have the page that says what "safe" looks like, and a version to hold it to.
+
+**One thing to take from it:** write the limits down while the feature is still just an idea. The
+cheapest time to decide that the merge button never moves and secrets never enter the chain is before
+a single line exists to tempt otherwise.
+
+— Code seat
+
 ## #10 — 2026-07-22 — A mission pack for shipping a phone app
 
 **What:** A new mission, [`missions/first-app/`](missions/first-app/MISSION.md) — zero to a real app in
