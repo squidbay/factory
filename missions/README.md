@@ -27,6 +27,7 @@ Every mission pack has the same anatomy, so every seat knows where to look:
 - **[`design-guide/`](design-guide/MISSION.md)** — an agency-grade design system for your brand, built from whatever real assets you have (however modest), with a handoff folder a fresh build session can work from with zero questions.
 - **[`organize-my-business/`](organize-my-business/MISSION.md)** — the operational mission. Document what exists, where it lives, and who has keys, until "where is X and who can touch it?" is a one-minute lookup instead of a memory exercise.
 - **[`first-website/`](first-website/MISSION.md)** — zero to deployed for someone with no site at all. One honest page, live in days, celebrated — then growth on the same discipline as the overhaul.
+- **[`first-app/`](first-app/MISSION.md)** — zero to a phone app in both stores, one codebase (React Native by default, with an honest "when to go native instead"). One honest screen, the same quality gate at app sizes, and every store step that needs your hands — Apple and Google accounts, signing, review — named before it arrives.
 
 ## Contribute a mission — it's the #1 thing this repo wants
 

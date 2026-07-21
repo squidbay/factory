@@ -17,7 +17,7 @@ You already pay for a team — you're just using it one chat at a time. This tem
 - **Every seat tells you how it's doing.** At the bottom of every chat a seat signs off with an honest state face — 🥸 fresh · 😎 steady · 😊 leaning in · 😐 tension · 😤 frustrated · 🥵 running hot · 😖 done — so you can start it fresh before quality slips. Not decoration; a real signal (RULE 17).
 - **Rules that catch drift mechanically.** Twenty-one binding rules, seat-to-seat audits, and a tripwire that spots a seat losing its grounding before it acts on a bad memory.
 - **Secure by default.** No exposed services. No credential in any chat or file — a CI guardrail enforces it from your first commit. Broad access is read-only; write access is narrow, expiring, and behind your merge button.
-- **Missions to start from.** "What are we building?" has four ready answers — overhaul a website, produce an agency-grade design guide, organize the business, or ship a first site — each with its skills packed and its finish line defined.
+- **Missions to start from.** "What are we building?" has five ready answers — overhaul a website, produce an agency-grade design guide, organize the business, ship a first site, or ship a first phone app to both stores — each with its skills packed and its finish line defined.
 
 ## 🚀 Quick start
 

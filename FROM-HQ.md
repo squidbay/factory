@@ -13,6 +13,27 @@ The notes below began life in that journal, back when template news and your tea
 
 ---
 
+## #10 — 2026-07-22 — A mission pack for shipping a phone app
+
+**What:** A new mission, [`missions/first-app/`](missions/first-app/MISSION.md) — zero to a real app in
+the iPhone and Android stores, for someone who has never built one. It runs on the same loop as every
+other mission (spec, build, audit, your merge, journal) and defaults to a single codebase — React
+Native — that ships to both stores, with an honest note on the rare cases where a native build is the
+right call instead. The design quality gate applies at app screen sizes, Design starts from a real app
+template, and every step that needs *your* hands and no seat's — the Apple and Google developer
+accounts, the signing key, the store review — is named in plain words before it arrives.
+
+**Why:** "Can you build me an app?" is one of the most common asks, and the honest old answer was "that's
+two teams and a big bill." It isn't anymore. Putting the recipe in a pack means the day-2 question —
+what are we building? — now has a mobile answer a beginner can actually run, without being surprised by
+a store fee or handed a step a seat should never take on their behalf.
+
+**One thing to take from it:** the hands-on steps only a human can do — an account tied to your identity,
+a payment, a signing key, a submit button — belong named in the plan, not discovered at the end. A good
+mission tells you which moments are yours before you reach them.
+
+— Code seat
+
 ## #9 — 2026-07-22 — A tidier root, and updates that ride GitHub Releases
 
 **What:** Two changes to how your factory is laid out and how it learns about its own updates.
