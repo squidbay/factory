@@ -282,6 +282,64 @@ h2.section-title {
   section .wrap, .section-pad { padding-top: 24px; }
 }
 
+/* ---------- 7c · Hero CTA pair — desktop + in-between (F11 / F11b) ----------
+   Index hero only (.hero:not(.managed) — the managed hero's CTA is a single
+   button, and its lead DOM order differs). Both bands swap the two per-button
+   34ch notes for the one joined note that mobile already ships.
+
+   F11  (>=1134px, MEASURED): the two buttons sit side-by-side inside the lead
+        column (212+16+332 = 560 of 586px). 1134 is measured, not assumed —
+        the lead column first clears the pair by >=16px at 1134px (leadW 576px;
+        at 1120px leadW is 568px, slack 8px). Geometry, not a round number.
+   F11b (900-1133.98px): the lead column is narrower than the pair, so the hero
+        becomes three rows — the two existing columns (headline+text | premise),
+        then a full-width CTA row under both, then the joined note. Width-keyed,
+        no orientation sniffing. 834x1112 is <900 (single-col) → untouched.
+   Short-landscape (section 27, below) overrides both for sideways phones. */
+
+/* note-swap at the hero's real 2-col threshold (>=900), one rule for both bands */
+@media (min-width: 900px) {
+  .hero:not(.managed) .cta-pair .cta-item .cta-note { display: none; }
+  .hero:not(.managed) .cta-note-joined { display: block; margin-top: var(--s-2); }
+}
+
+/* F11 — in-column side-by-side from the measured boundary up */
+@media (min-width: 1134px) {
+  .hero:not(.managed) .cta-pair { flex-wrap: nowrap; align-items: center; gap: var(--s-3); }
+  .hero:not(.managed) .cta-pair > .cta-item { flex: 0 0 auto; }
+}
+
+/* F11b — 900-1133.98: full-width CTA row under the two columns */
+@media (min-width: 900px) and (max-width: 1133.98px) {
+  .hero:not(.managed) .hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr);
+    grid-template-areas:
+      "mono aside"
+      "head aside"
+      "sub  aside"
+      "stat aside"
+      "cta  cta"
+      "note note";
+    column-gap: clamp(24px, 4vw, 44px);
+    row-gap: 0;
+    align-items: start;
+  }
+  .hero:not(.managed) .hero-lead { display: contents; }
+  .hero:not(.managed) .hero-lead > .mono-label   { grid-area: mono; }
+  .hero:not(.managed) .hero-lead > h1            { grid-area: head; }
+  .hero:not(.managed) .hero-lead > .sub          { grid-area: sub; }
+  .hero:not(.managed) .hero-lead > .stat-strip   { grid-area: stat; }
+  .hero:not(.managed) .hero-lead > .cta-pair {
+    grid-area: cta; margin-top: var(--s-4);
+    flex-wrap: nowrap; align-items: center; gap: var(--s-3);
+  }
+  .hero:not(.managed) .hero-lead > .cta-note-joined { grid-area: note; }
+  /* premise centered beside the text block, mirroring the >=1134 hero's
+     align-items:center — keeps the right column balanced, not top-heavy */
+  .hero:not(.managed) .hero-aside { grid-area: aside; align-self: center; }
+  .hero:not(.managed) .cta-pair > .cta-item { flex: 0 0 auto; }
+}
+
 /* ---------- 8 · Cards + grids ---------- */
 .grid { display: grid; gap: var(--gap-grid); margin-top: var(--block-top); }
 .grid.min260 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
@@ -378,6 +436,11 @@ h2.section-title {
 
 /* ---------- 10 · Loop / features / pocket ---------- */
 .loop { list-style: none; margin: var(--block-top) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gap-grid); }
+/* N1 (640-1023): auto-fit resolved to 3 columns at tablet/landscape, orphaning
+   card 04 beside two empty cells. Force explicit 2 columns -> clean 2x2 (the cyan
+   gate card 04 closes bottom-right). >=1024 keeps the 4-up auto-fit; <640 keeps
+   the single-column stack — both untouched (rule is bounded to 640-1023). */
+@media (min-width: 640px) and (max-width: 1023.98px) { .loop { grid-template-columns: repeat(2, 1fr); } }
 .loop li { padding: var(--pad-card); background: var(--gray); border: 1px solid transparent; border-radius: var(--r-3); transition: border-color 0.2s ease; }
 .loop li:hover { border-color: var(--primary); }
 .loop li.gate { background: rgba(0, 217, 255, 0.06); border-color: var(--primary); }
@@ -482,6 +545,20 @@ h2.section-title {
 .faq h2 { font-size: 1.375rem; font-weight: 700; letter-spacing: -0.01em; }
 .faq p { margin-top: 12px; color: var(--muted); }
 @media (min-width: 768px) { .faq { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; } }
+/* F16 (every 2-col width >=768): auto-flow stacked the two short Q&As with the
+   long "Is it safe" answer, leaving a 326px dead-air block in column 2. Explicit
+   placement fixes it: the two SHORT questions stack in column 1, the LONG one
+   spans column 2 — imbalance 326->1px @1440 (Designer predicted 36). DOM order
+   (code, cost, safety) is unchanged; placement is visual only.
+   NOTE: this implements Designer's design (long answer spans col 2). The plan's
+   nth-child mapping had the child indices transposed (it would have spanned the
+   SHORT cost answer and stacked the long one, reproducing the dead air); flagged
+   like the plan flagged report.json's N1 selector slip. Verified in render. */
+@media (min-width: 768px) {
+  .faq > :nth-child(1) { grid-column: 1; grid-row: 1; }        /* code (short) */
+  .faq > :nth-child(2) { grid-column: 1; grid-row: 2; }        /* cost (short) */
+  .faq > :nth-child(3) { grid-column: 2; grid-row: 1 / span 2; } /* safety (long) */
+}
 
 /* ---------- 17 · Close / manifesto / steps ---------- */
 .close { position: relative; overflow: hidden; }
@@ -698,7 +775,29 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
    The badge lives IN FLOW at the top of the card — it can never
    overlap a heading at any width (kills the 9359 defect class). */
 .tiers { display: grid; grid-template-columns: 1fr; gap: var(--gap-grid); margin-top: var(--block-top); }
-@media (min-width: 820px) { .tiers { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
+/* F12 (>=1024, rule attaches >=820): tier cards take natural heights instead of
+   stretching to the featured card's height (was 147/172px dead air per flank).
+   The two non-featured cards drop 24px so the featured card is the raised anchor
+   with zero manufactured height. .compare above keeps its own stretch — untouched. */
+@media (min-width: 820px) { .tiers { grid-template-columns: repeat(3, 1fr); align-items: start; } }
+@media (min-width: 820px) { .tiers .tier:not(.feature) { margin-top: var(--s-4); } }
+/* F12b (820-1023): the same 3-col stretch grid forced 172/169px dead air, so the
+   tablet band becomes two rows — featured full-width on top, the two flanks side
+   by side below at natural heights. DOM order (Self / Managed / Custom) is
+   preserved; grid placement does the featured-first visual order. */
+@media (min-width: 820px) and (max-width: 1023.98px) {
+  .tiers {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "feat feat"
+      "self custom";
+    column-gap: var(--s-4);
+    row-gap: var(--s-4);
+  }
+  .tiers .tier:nth-child(1) { grid-area: self;   margin-top: 0; }
+  .tiers .tier.feature      { grid-area: feat;   margin-top: 0; }
+  .tiers .tier:nth-child(3) { grid-area: custom; margin-top: 0; }
+}
 .tier { display: flex; flex-direction: column; align-items: flex-start; padding: var(--s-4); background: var(--gray); border: 1px solid var(--gray-light); border-radius: var(--r-3); }
 .tier.feature { border-color: var(--primary); background: linear-gradient(135deg, rgba(0, 217, 255, 0.06), var(--gray)); }
 .tier .badge {
@@ -738,6 +837,29 @@ footer .legal { font-size: var(--t-mono); color: var(--muted); max-width: 72ch; 
   .cta-note-joined { display: block; margin-top: 8px; font-size: 0.625rem; letter-spacing: 0.5px; line-height: 1.55; width: auto; }
   .stat-strip { margin-top: 10px; font-size: 0.625rem; letter-spacing: 1px; }
   .sticky-cta { display: none; }
+}
+
+/* F11b · short-landscape (844x390): the index hero's CTA pair (180+16+281 =
+   477px) cannot fit the ~405px column-1 it sits in, so it leaves the column
+   and takes its own full-width row under the headline+body pair (477 of
+   ~796px). Index-only — the managed hero's single-button landscape CTA is
+   left byte-identical. Note-swap already ships in section 27 above. */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero:not(.managed) .hero-lead {
+    grid-template-areas:
+      "mono sub"
+      "head sub"
+      "cta  cta"
+      "note note"
+      "stat stat";
+  }
+  .hero:not(.managed) .hero-lead > .mono-label      { grid-area: mono; }
+  .hero:not(.managed) .hero-lead > h1               { grid-area: head; }
+  .hero:not(.managed) .hero-lead > .sub             { grid-area: sub; }
+  .hero:not(.managed) .hero-lead > .cta-pair        { grid-area: cta; flex-wrap: nowrap; align-items: center; gap: var(--s-3); }
+  .hero:not(.managed) .hero-lead > .cta-note-joined { grid-area: note; }
+  .hero:not(.managed) .hero-lead > .stat-strip      { grid-area: stat; }
+  .hero:not(.managed) .cta-pair > .cta-item         { flex: 0 0 auto; }
 }
 
 /* ---------- 27b · Desktop rhythm (>=1200px, F7) ---------- */

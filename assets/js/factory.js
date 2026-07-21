@@ -97,6 +97,10 @@
       { t: 'sys', m: 'You held the gate. The team did the work.', d: 2250 }
     ];
     var i = 0, timer = null, running = false, started = false;
+    // P6: the first user message + first reply render statically at init (the
+    // strings the script already owns) so the panel is never an empty box before
+    // scroll or when JS runs without motion; animation begins at message three.
+    var START_INDEX = 2;
 
     function bubble(item) {
       var d = document.createElement('div');
@@ -131,12 +135,16 @@
         render(item); i++; timer = setTimeout(next, item.d);
       }
     }
-    function restart() { i = 0; body.innerHTML = ''; next(); }
+    function seed() { body.innerHTML = ''; render(convo[0]); render(convo[1]); }
+    function restart() { seed(); i = START_INDEX; next(); }
     function start() {
       if (running) return; running = true;
-      if (reduce) { convo.forEach(render); return; }
-      body.innerHTML = ''; i = 0; timer = setTimeout(next, 400);
+      // reduce: the two seeded entries are already present; render the rest statically.
+      if (reduce) { for (var k = START_INDEX; k < convo.length; k++) render(convo[k]); return; }
+      // animated: keep the seeded first exchange, animate from message three.
+      i = START_INDEX; timer = setTimeout(next, 400);
     }
+    seed(); // static first exchange, painted before the observer fires (zero CLS)
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting && !started) { started = true; start(); io.unobserve(e.target); } });
     }, { threshold: 0.25 });
