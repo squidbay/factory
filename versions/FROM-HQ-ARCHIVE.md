@@ -1,17 +1,20 @@
-# News from HQ
+# Archive — HQ update notes (complete history)
 
-This page carries news about the factory template — the shared starting point your factory was built from. The team that maintains that template is "HQ," and when they ship an improvement, a short note about it lands here: what changed, why, and one thing worth taking from it, newest first.
+This file is the **in-repo permanent archive** of every [`FROM-HQ.md`](../FROM-HQ.md)
+update note, oldest kept here so the live page can stay at its ~ten-note window
+without any note being lost.
 
-These notes reach you the same way every other improvement does — as an update pull request you read and merge. Nothing here changes on its own.
+Two records exist, on purpose:
 
-Two things worth knowing:
+- **GitHub Releases** are the canonical permanent record for every version from
+  **2026-07-23.1 (#12)** onward — each release's tag is the version and its body
+  is that note. See <https://github.com/squidbay/factory/releases>.
+- **This file** mirrors the full history, and is the *only* home for the
+  **pre-Release backlog (#2–#11)** — the notes that shipped before the update
+  lane moved onto GitHub Releases and therefore have no release of their own.
 
-- **This page belongs to the template, and HQ keeps it current.** Updates refresh it; you never have to write here.
-- **Your own memory lives in [`journal.md`](journal.md), and it is yours alone.** HQ never writes there. That page is your team's story — one entry each working session; this page is the template's.
-
-The notes below began life in that journal, back when template news and your team's own memory shared a single page. They were moved here so each page can be honest about who it belongs to.
-
-**How this page rolls.** This file keeps roughly the ten most recent notes — enough to see where the template has been lately without the page growing without end. The permanent record of every update from **2026-07-23.1 (#12)** onward *is* the template's [GitHub Releases](https://github.com/squidbay/factory/releases) history: each release is one of these notes, dated and tagged, kept for good. The notes that shipped *before* the update lane moved onto Releases — the **pre-Release backlog (#2–#11)** — have no release of their own, so the full history is mirrored in the one correct in-repo home: [`versions/FROM-HQ-ARCHIVE.md`](versions/FROM-HQ-ARCHIVE.md). So when a note ages past the recent window it simply rolls off here, already preserved (in Releases, in the archive, or both). Two hard rules on that roll: it never touches your own [`journal.md`](journal.md) — that page is your team's memory, and HQ never writes or files there — and the in-repo archive home is [`versions/`](versions/README.md), never your journal.
+Nothing here changes on its own; like every other page it reaches you as a pull
+request you merge. Newest first, matching `FROM-HQ.md`.
 
 ---
 
@@ -182,5 +185,25 @@ a matter of taste and becomes something the team can actually prove.
 1. **Assume humans do not know what to do — build and test for zero prior knowledge.** Any onboarding step where a real person can get stuck with no in-doc way out is a **blocker**, not a "good enough for now" — treat it as ship-stopping until a named, verified fix exists in the doc. *Done when:* the team stops down-grading onboarding snags to "minor/not-a-blocker" and every known snag has a named fix path in `onboarding/`. (Standing — does not expire.)
 
 **One thing to take from it:** The setup is the product's first impression, and it's the one moment your user has *zero* context to recover from a surprise. When you can't picture the least-technical person you know getting through a step unaided, that step is broken — even if it "works" for someone who already knows the answer.
+
+— Code seat
+
+## #3 — 2026-07-14 — Every seat now shows its state
+
+**What:** Two additions to how seats work. First, a probe-and-update step at boot: before any work a seat enumerates the tools it actually has — not the ones it remembers — and checks its live capability docs for anything new, so it never hands you a task one of its own tools could do and never runs on a stale picture of itself. Second, the boot-confirm rule grew a state face: after a seat confirms its boot, every chat turn ends with an honest read of how it's doing — fresh, steady, leaning in, tension, running hot, done. The face is a voice, not a costume; a seat uses it to tell you when it's cooked or uneasy, with one line of why. Marks and faces stay in chat, never in a PR or a committed file.
+
+**Why:** The old per-output mark stopped working — seats stamped it reflexively everywhere, so a tired seat looked identical to a fresh one. State is the signal that actually predicts when a seat should hand off. And the probe step turns "know your tools" from a hope into a boot step.
+
+**One thing to take from it:** Watch the faces. A seat sliding toward running-hot, or wearing a face that doesn't match its work, is your cue to say "journal out" and boot a fresh one — before drift compounds.
+
+— Code seat
+
+## #2 — 2026-07-14 — The setup path gets a map
+
+**What:** A new onboarding page, [`SETUP-PATH.md`](onboarding/SETUP-PATH.md) — the least-resistance path from nothing to a running factory, every click and permission dialog named, verified against Anthropic's live documentation. Stage 0 now offers the choice out loud: "set it all up for me" (Code drives, with Claude in Chrome clicking alongside) or "set it up with me" (guided, one instruction at a time). The grounding table gained six live-doc links (Code, Cowork, Chrome, computer use, Design), and the page carries an honest gaps list — the clicks no automation can remove, named so the team meets you there instead of pretending.
+
+**Why:** Minimal setup is the product. The person at the front door should do exactly one manual phase — download, sign in, connect a repo — and then be offered working hands for the rest. And the seats themselves need current ground truth about their own surfaces, which is what the live-doc links are for: stateless seats drift; linked pages don't.
+
+**One thing to take from it:** The gaps list is the design, not an apology. Every unavoidable dialog is a moment the system chose to keep a human hand on a key — naming those moments is what makes "Claude sets up the rest" trustworthy rather than magical.
 
 — Code seat
