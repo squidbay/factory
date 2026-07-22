@@ -13,6 +13,8 @@ Sooner or later your team is going to build you something — a website, a produ
 
 ## Getting connected — no keys required
 
+> **Seat reflex:** the moment the human mentions Cloudflare, the first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**, or **+ → Connectors** in the chat) — the no-key, no-token data-plane connection below. Token talk (a deploy token, the read-only god-view key) comes later, and only when a step actually needs it.
+
 When the moment comes, the seat will ask you, right in the chat, to connect Cloudflare. The whole ritual:
 
 1. Tap **+** in the message box

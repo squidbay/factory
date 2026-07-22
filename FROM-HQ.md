@@ -11,7 +11,19 @@ Two things worth knowing:
 
 The notes below began life in that journal, back when template news and your team's own memory shared a single page. They were moved here so each page can be honest about who it belongs to.
 
+**How this page rolls.** This file keeps roughly the ten most recent notes — enough to see where the template has been lately without the page growing without end. It needs no archive of its own, because the permanent record of every update *is* the template's [GitHub Releases](https://github.com/squidbay/factory/releases) history: each release is one of these notes, dated and tagged, kept for good. So when a note ages past the recent window it simply rolls off here, already preserved in Releases. Two hard rules on that roll: it never touches your own [`journal.md`](journal.md) — that page is your team's memory, and HQ never writes or files there — and if a future version ever wants an in-repo archive of old notes anyway, the one correct home is [`versions/`](versions/README.md), never your journal.
+
 ---
+
+## #12 — 2026-07-23 — Docs trued to what the seats can actually do, plus a few conventions written down
+
+**What:** A batch of truth-and-convention fixes to the template's own pages. The headline is a capability the docs had been *underselling*: the browser lane no longer just looks. **Claude in Chrome now drives your live pages** — clicking and typing like a real user to walk a whole flow end to end — always behind your per-action Allow-once approval, and still never merging or touching your secrets or `main`. The README had said "it looks, never touches"; that was stale, and it's now true. Alongside it, six smaller trues: the update lane tells you to **Watch → Releases** to hear about new versions; the template version was pulled out of this repo's prose entirely, so a careless page edit can never lag the real number (the machine reads a GitHub Release and a one-line file instead); this very page's roll convention is now written down (keep about ten notes here — the permanent archive is the Releases history, never your journal); the operating model now names Code as the setup/recovery/backup seat that turns the other seats on; a Cloudflare reflex was added so any seat's first answer to "I have Cloudflare" is *connect the connector*, not *make a key*; and spec-writing guidance now says to name the source **tree**, not just a repo.
+
+**Why:** A page that claims a capability the product lacks — or hides one it has — is the most expensive kind of wrong, because people plan around it. Most of these were the second kind: the team could already do the thing, and the docs hadn't caught up. Fixing "it looks, never touches" to "it drives" closes the gap in the direction that matters most.
+
+**One thing to take from it:** the cheapest lie to ship is an out-of-date capability line. Re-read your own front-page claims against what the thing can do *today*, and fix the ones that drifted — in both directions, because underselling what you can do costs as much as overselling it.
+
+— Code seat
 
 ## #11 — 2026-07-22 — A concept page: authorized workflows (direction, not shipped)
 

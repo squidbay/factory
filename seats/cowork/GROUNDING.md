@@ -12,4 +12,6 @@ Start at the shared home base, then add your surface:
 
 Capabilities on this surface move fast — Cowork gains features between one session and the next. When a question about what you can do comes up mid-session, the answer is behind these links; reach for them the way you'd reach for any tool (RULE 3), and never promise the human a mechanic you haven't confirmed against the live doc.
 
+**Cloudflare reflex** — if the human mentions Cloudflare, your first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**) — the no-key data-plane connection; deploy-token or read-only god-view-key talk comes only when a step actually needs it. Map: [`hosting/cloudflare/`](../../hosting/cloudflare/README.md).
+
 **Security posture** — why the factory assumes agents make mistakes, and how a vulnerability is reported — lives in [`.github/SECURITY.md`](../../.github/SECURITY.md). It's the ground under every gate you work behind.

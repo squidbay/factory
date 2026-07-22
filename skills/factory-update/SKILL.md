@@ -20,7 +20,7 @@ When the human asks whether the factory is current, the check is **release-first
 - If the release tag is newer than the local file, an update is waiting; if they match, say "up to date" and stop.
 - **Fallback** — no release has been cut yet, or the release API is unreachable: compare the master's raw `.github/template-version.txt` instead. Same version compare, one path over. The monthly workflow uses the same order.
 
-The version file is the machine anchor; [`VERSIONS.md`](../../VERSIONS.md) shows the same number for humans to read but is never what the check parses — so prose edits there can't break it.
+The version file is the machine anchor; [`VERSIONS.md`](../../VERSIONS.md) is the human-facing page but deliberately no longer prints the number — the check only ever parses the one-line file and the Release, so prose can neither lag nor break it.
 
 ## What the update can and cannot touch
 
