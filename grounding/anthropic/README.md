@@ -28,6 +28,8 @@ This folder holds links, not copies. Anthropic updates these pages regularly; a 
 
 Each seat's own `GROUNDING.md` (in `seats/`) adds the links for its specific surface — chat, Cowork, Claude Code, or Design. The specialists' pages (`specialists/`) carry theirs inline.
 
+**GitHub itself has a grounding page too** — [`grounding/github/README.md`](../github/README.md). The factory lives on GitHub, so how the platform works (templates, Releases, branch protection, the changelog) is part of every seat's ground, not just Anthropic's docs.
+
 ## The rule that makes this work
 
 **Live docs beat this repo.** If a linked page disagrees with anything written here — a tab name, a feature, a limit — the live page is right and this repo is stale. Say so plainly (RULE 11), act on the live version, and open an issue (or a PR truing the text) so the next seat lands on current ground. That loop is how a documentation repo stays alive, and you're part of it the moment you notice.

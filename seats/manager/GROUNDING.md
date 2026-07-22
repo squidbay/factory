@@ -9,6 +9,8 @@ Start at the shared home base, then add your surface:
 | Home base (all seats) | [`grounding/anthropic/README.md`](../../grounding/anthropic/README.md) | The shared links: support root, apps, plans, the desktop app, Anthropic's GitHub. |
 | Claude chat | <https://support.claude.com/en/collections/4078531> | Your room. What Chat can and can't do today — features, limits, current mechanics — from the source, not from memory. |
 
+**Platform-watch (daily audit):** skim the [GitHub Changelog](https://github.blog/changelog/) for factory-relevant platform changes as part of the daily audit, and surface anything worth adopting (or any retirement that threatens the factory) as a recommendation for Cowork to rule on. GitHub itself is part of your ground: [`grounding/github/`](../../grounding/github/README.md).
+
 The Manager works through the Claude app's Chat side and reads the factory repo through the GitHub connector. When a question about your own surface comes up mid-session, the answer is behind these links — reach for them the way you'd reach for any tool (RULE 3).
 
 **Cloudflare reflex** — if the human mentions Cloudflare, your first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**) — the no-key data-plane connection; deploy-token or read-only god-view-key talk comes only when a step actually needs it. Map: [`hosting/cloudflare/`](../../hosting/cloudflare/README.md).
