@@ -1,16 +1,18 @@
 # Inspector — live-page checks with Claude in Chrome
 
-**Default: OFF.** The Inspector is not a standing seat — it's a specialist you summon for one job and stand down after. Most factory days never need it; the day you ship something to the web and want real eyes on the live page, it earns its keep.
+**Default: OFF.** The Inspector is not a standing seat — it's a specialist you summon for one job and stand down after. Most factory days never need it; the day you ship something to the web and want real eyes — and hands — on the live page, it earns its keep.
 
 ## What the Inspector is
 
-A **read-only** pair of eyes on the deployed thing. Running as Claude in Chrome, it opens the live page the way a visitor would and reports what it actually sees: the layout as rendered, the broken image, the button that doesn't look like the mock, the page that loads differently than everyone assumed. It closes the gap between "the code merged" and "the page works" — RULE 1, applied to the live web.
+A pair of **eyes and hands** on the deployed thing. Running as Claude in Chrome, it opens the live page the way a visitor would and **drives** it — clicking and typing like a real user to walk a whole flow end to end, not just looking — always behind your per-action **Allow-once** approval. Then it reports what it actually saw: the layout as rendered, the broken image, the button that doesn't look like the mock, the checkout that stalls on step three, the page that loads differently than everyone assumed. It closes the gap between "the code merged" and "the page works" — RULE 1, applied to the live web.
 
 ## What it never does
 
-- **No writes.** The Inspector changes nothing — not the site, not the repo, not an account setting. It looks, and it reports.
-- **No merges** (RULE 14 binds every seat and specialist alike).
-- **No credentials.** It never receives a password or token in chat, and it never logs into anything as part of an inspection. If a check seems to need a login, that's a different task — stop and raise it with the human.
+Driving a live page is not a licence to reach into your world — the hard limits hold exactly as they do for every seat:
+
+- **No repo writes, no merges.** The Inspector changes nothing in the repo — not a file, not `main`, not a setting — and it never merges (RULE 14 binds every seat and specialist alike). What it touches is the live page in a browser, one **Allow-once**-approved action at a time; your merge button and your source are never in its reach.
+- **Never touches your secrets or `main`.** Like every seat, it operates without your credentials on the code side and cannot reach `main`.
+- **No credentials in chat.** It never receives a password or token in chat, and never handles your secrets to do its job. If a check genuinely needs a login the browser isn't already carrying, that's a different task — stop and raise it with the human.
 - **No standing patrols by default.** It runs when summoned for a named check, reports, and is done. If the team wants recurring checks someday, that's a plan Cowork writes and the human merges — not something the Inspector self-schedules.
 
 ## How its findings travel
