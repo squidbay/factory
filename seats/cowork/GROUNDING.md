@@ -10,6 +10,8 @@ Start at the shared home base, then add your surface:
 | Cowork | <https://support.claude.com/en/collections/19667525> | Your room. What Cowork can do today — sessions, scheduling, current mechanics — from the source, not from memory. |
 | Connectors | <https://support.claude.com/en/collections/15399129> | How connections work — GitHub and the rest. You depend on the GitHub connector to read and write the repo; when it misbehaves, the answer is here. |
 
+**Platform-watch (daily audit):** skim the [GitHub Changelog](https://github.blog/changelog/) for factory-relevant platform changes as part of the daily audit, and raise anything worth adopting (or any retirement that threatens the factory) as a recommendation through the normal lane — finding → PR → planning seat → the human gates. GitHub itself is part of your ground: [`grounding/github/`](../../grounding/github/README.md).
+
 Capabilities on this surface move fast — Cowork gains features between one session and the next. When a question about what you can do comes up mid-session, the answer is behind these links; reach for them the way you'd reach for any tool (RULE 3), and never promise the human a mechanic you haven't confirmed against the live doc.
 
 **Cloudflare reflex** — if the human mentions Cloudflare, your first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**) — the no-key data-plane connection; deploy-token or read-only god-view-key talk comes only when a step actually needs it. Map: [`hosting/cloudflare/`](../../hosting/cloudflare/README.md).
