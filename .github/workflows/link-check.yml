@@ -30,7 +30,12 @@ jobs:
         id: check
         run: |
           set -u
-          URLS=$(grep -rhoE 'https?://[^ )>"\`]+' --include='*.md' . | sed 's/[.,;:]$//' | sort -u)
+          # Drop RFC 2606 / RFC 6761 reserved placeholder hosts (example.com/net/org and
+          # the .example/.test/.invalid/.localhost TLDs). These are intentional teaching
+          # placeholders in the docs (e.g. https://your-site.example/) — not dead links.
+          # Do NOT "fix" this away by editing the docs; the placeholders are on purpose.
+          URLS=$(grep -rhoE 'https?://[^ )>"\`]+' --include='*.md' . | sed 's/[.,;:]$//' | sort -u \
+            | grep -vE 'https?://([^/ ]+\.)?(example\.(com|net|org)|[^/ ]*\.(example|test|invalid|localhost))([/:? ]|$)')
           BROKEN=""
           for url in $URLS; do
             CODE=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 20 -A "factory-link-check" "$url" || echo "000")
