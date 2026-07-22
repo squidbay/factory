@@ -19,7 +19,7 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 
 | Specialist | Surface | Summoned when |
 |---|---|---|
-| **Inspector** | Claude in Chrome (default OFF) | Something on a live page needs real eyes: a deploy check, a layout bug, a competitor's page. Read-only; toggled on for the job, off after. |
+| **Inspector** | Claude in Chrome (default OFF) | Something on a live page needs real eyes and hands: a deploy check, a layout bug, walking a whole flow end to end. It **drives** the page — clicking and typing like a real user, always behind your per-action Allow-once approval; never merges, never touches your secrets or `main`. Toggled on for the job, off after. |
 | **Mobile Scout · your Dispatch** | a session from your phone or desktop, on the go | Research needs doing while you do something else. Reports come back as **leads, not facts** — Cowork verifies before anything enters a plan. |
 
 **And you.** You are the only person who merges. Ever. That single fact is the whole safety model: however fast the team moves, nothing becomes real without your eyes and your click — and the click works from your phone (see [`onboarding/MOBILE.md`](onboarding/MOBILE.md)).

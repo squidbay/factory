@@ -64,6 +64,8 @@ From then on, even a confused seat — even *you*, on a clumsy day — can't cha
 
 Private repos on a free GitHub account come with **2,000 free Actions minutes every month**. Your office's automation — the guardrails check on each PR, a weekly link check — uses a small fraction of that. You will not be surprised by a GitHub bill; for this factory's purposes, GitHub is free. The one thing the free tier doesn't include: platform-enforced branch protection on *private* repos (see the section above) — the gate still holds there by the seats' PR-only rule, and the platform lock is available free on public repos or with GitHub Pro on private ones.
 
+**A note on GitHub Pages.** If you ever serve GitHub Pages from this branch and your site has files starting with `_`, ask your Code seat to add an empty `.nojekyll` at the served root — one-second add, only needed then.
+
 ## One thing to learn
 
 Everything on this page is one idea wearing different outfits: **change is always a proposal first, and the proposal is always written down.** The branch is the proposal's draft, the PR is the proposal's pitch, the merge is your signature, and the repo remembers all of it forever. That pattern is older than software — it's how contracts, laws, and medical orders work — and it's worth stealing for the rest of your project too. Anywhere something important can change (your prices, your homepage copy, your supplier list), give it the same shape: a written proposal, one named person who says yes, and a record that survives. You'll never again wonder what changed, when, or who approved it — you'll just look.

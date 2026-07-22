@@ -15,6 +15,16 @@ The notes below began life in that journal, back when template news and your tea
 
 ---
 
+## #13 — 2026-07-23 — A GitHub grounding page for every seat
+
+**What:** A new grounding page — [`grounding/github/README.md`](grounding/github/README.md) — the GitHub twin of the Anthropic grounding your seats already read. It carries live links for how the platform actually works (repositories and pull requests, templates vs. forks, Releases, branch protection, the REST API) and a **platform-watch** loop: Cowork and Manager now skim the GitHub Changelog during the daily audit and raise anything worth adopting as a recommendation. Two smaller trues rode along: the operating-model map now describes the browser lane the way #12 already fixed the front page — Claude in Chrome **drives** your live pages (clicking and typing behind your per-action Allow-once approval, still never merging or touching your secrets or `main`), not "looks only"; and an inert `.nojekyll` was removed from the repo root (your live site serves from the `gh-pages` branch, which keeps its own copy), with a one-line note in the GitHub hosting guide for the one case it's ever needed.
+
+**Why:** The factory *lives* on GitHub, yet nothing grounded the seats on GitHub itself — so platform features the team could use went undiscovered until they cost something (this project learned both the fork-vs-template and the Releases lessons late). A grounding page turns "found by accident" into "found on purpose." And #12 fixed the browser-lane capability on the front page but left the same stale claim one layer down, in the operating-model map every seat reads at boot; truing it there too closes a half-fixed truth.
+
+**One thing to take from it:** ground your team on the platform you live on, not just the tool you talk to. And when you fix a stale claim in one place, search for the same words everywhere else — the copy you forget is the one someone plans around.
+
+— Code seat
+
 ## #12 — 2026-07-23 — Docs trued to what the seats can actually do, plus a few conventions written down
 
 **What:** A batch of truth-and-convention fixes to the template's own pages. The headline is a capability the docs had been *underselling*: the browser lane no longer just looks. **Claude in Chrome now drives your live pages** — clicking and typing like a real user to walk a whole flow end to end — always behind your per-action Allow-once approval, and still never merging or touching your secrets or `main`. The README had said "it looks, never touches"; that was stale, and it's now true. Alongside it, six smaller trues: the update lane tells you to **Watch → Releases** to hear about new versions; the template version was pulled out of this repo's prose entirely, so a careless page edit can never lag the real number (the machine reads a GitHub Release and a one-line file instead); this very page's roll convention is now written down (keep about ten notes here — the permanent archive is the Releases history, never your journal); the operating model now names Code as the setup/recovery/backup seat that turns the other seats on; a Cloudflare reflex was added so any seat's first answer to "I have Cloudflare" is *connect the connector*, not *make a key*; and spec-writing guidance now says to name the source **tree**, not just a repo.
