@@ -19,7 +19,7 @@ You already pay for a team — you're just using it one chat at a time. This tem
 - **Secure by default.** No exposed services. No credential in any chat or file — a CI guardrail enforces it from your first commit. Broad access is read-only; write access is narrow, expiring, and behind your merge button.
 - **Missions to start from.** "What are we building?" has five ready answers — overhaul a website, produce an agency-grade design guide, organize the business, ship a first site, or ship a first phone app to both stores — each with its skills packed and its finish line defined.
 
-## 🪞 Why it actually works — the thing we learned the hard way
+## 💡   Why it actually works — the thing we learned the hard way
 
 We spent months chasing the wrong race — a bigger model, a smarter single seat. The thing that changed everything was smaller and stranger. Give one seat an ordinary working connection to *do* the job; give a second seat a **read-only overseer view** to *check* it; and let the two confirm or deny each other. Neither has to *know* anything — they look, and they check each other's looking. Set up this way, an ordinary model runs circles around one brilliant seat working alone, because the factory's best output isn't either view — it's the **difference between them.** When the builder says "done" and the overseer says "not quite," that gap is a truth neither could see alone. Grounding beats memory; two honest eyes beat one clever one. It's why growing into the two-view setup — read wide to *see*, write narrow to *act*, every change cross-checked and gated by you — is the mode worth reaching for. We found it on a random day after months of pain, and it's the truest thing we know about running a team like this.
 
