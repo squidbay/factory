@@ -48,6 +48,8 @@ That one grant hands Claude *just this repo* and nothing else. Your factory stay
 
 Above the Code tab's message box sits an **environment button** — it may read **"Default"** with a small cloud icon. It decides where your session actually runs: **in the cloud** (on Anthropic's computers) or **Local** (on your own machine). Cloud is the normal mode, and it's the right one for building — reading your repo, writing, and opening pull requests all work perfectly from there. You don't need to change anything on day one.
 
+Here's the plain-words version: **your Code seat can use your computer for you — you never open a terminal yourself.** **Local** runs on your own machine, where your browser logins already work; **cloud** runs on Anthropic's servers and does repo work only. Your seat picks the right one and tells you when it needs you to switch.
+
 Once in a while a step needs *your* side of the screen — connecting an account, installing an app, something only your logged-in browser or your own machine can do. **Your seat will tell you** when that's the case; it's built to say so plainly instead of failing quietly. When it does, the switch is three taps:
 
 1. Click the **environment button** above the message box.

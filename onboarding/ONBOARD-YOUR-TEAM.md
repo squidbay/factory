@@ -46,6 +46,8 @@ connected — not "it should be." Until it does that, don't move on. 🎉
 Skip this one if your first mission is text-only; add it the day you need a look.
 **Cowork tells you when it's time and writes the brief** — you don't have to guess.
 
+**One-time setup:** add the `designer-boot` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Cowork and Manager seats. (Prefer pasting the boot file? The block below still works.)
+
 **The room:** the **Claude Design** canvas.
 **Paste this at the top of a new Design session:**
 

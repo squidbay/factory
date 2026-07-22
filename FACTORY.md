@@ -53,10 +53,12 @@ Parallel work is fine — several seats can be busy at once on a Max plan — bu
 
 | Seat | Door |
 |---|---|
-| Code | Automatic: attaching this repo loads `CLAUDE.md`. Nothing to install. |
-| Cowork / Manager | One-time: upload the seat's boot skill (`seats/{seat}/{seat}-boot/`) in Settings → Skills, then invoke it by name in the right room. |
-| Designer | Paste `seats/designer/BOOT-PROMPT.md` at the canvas project root, once. |
+| Code | Automatic: attaching this repo loads `CLAUDE.md` on the repo root. Nothing to install. |
+| Manager (Chat) / Cowork | One-time: add the seat's boot skill (`seats/{seat}/{seat}-boot/`) in Settings → Skills, then invoke it by name in the right room. |
+| Designer | One-time: add the `designer-boot` skill (`seats/designer/designer-boot/`) via the Claude Design canvas skill picker (live in the canvas as of 2026-07-23), then invoke it — the same shape as the chat seats. |
 | Inspector / Mobile Scout | No door — summoned per job with plain words. |
+
+**One pattern, one exception:** every human seat — Manager (Chat), Cowork, Designer — now boots the same way, a one-time boot skill you add once and invoke by name. Only **Code** is different: it boots on the repo root automatically, nothing to install.
 
 A frozen or drifting seat is never argued with: close it, open a fresh one, let it boot from the repo (RULE 17). **The repo is the memory; the session never was.**
 

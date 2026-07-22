@@ -49,7 +49,7 @@
 
 *Only if your missions have a visual side — most do eventually.*
 
-- Claude Design gets a project, and every design session starts the same way: point the seat at its boot file, [`seats/designer/BOOT-PROMPT.md`](../seats/designer/BOOT-PROMPT.md), by pasting it (or a one-line pointer to it) at the top of the session. The committed file is the mechanism; anything dropped loose at the project's root is a convenience that may not survive into a fresh session. Bring whatever brand material exists — real assets beat perfect assets, and modest ones are enough to start (the [design-guide mission](../missions/design-guide/MISSION.md) is built for exactly that).
+- Claude Design gets a project, and every design session boots the same one-time way the chat seats do: add the `designer-boot` skill via the **canvas skill picker** (live as of 2026-07-23) and invoke it by name. (You can still point the seat at its boot file, [`seats/designer/BOOT-PROMPT.md`](../seats/designer/BOOT-PROMPT.md), by pasting it or a one-line pointer at the top of the session — the committed file is the mechanism; anything dropped loose at the project's root is a convenience that may not survive into a fresh session.) Bring whatever brand material exists — real assets beat perfect assets, and modest ones are enough to start (the [design-guide mission](../missions/design-guide/MISSION.md) is built for exactly that).
 - Design deliverables reach the factory through you: the design lane proposes, Code lands it by PR, you merge. Same gate as everything.
 
 *Done looks like: one real design deliverable through the full loop.*

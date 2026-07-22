@@ -69,11 +69,11 @@ The one thing you can always do solo and immediately is **Stage 0 itself** — t
 
 Code sessions run in one of two places, chosen by the **environment button above the message box**: a **cloud** computer, or the human's **local desktop**. Cloud is the normal mode and the right one for nearly everything this seat does — reading the repo, building, opening pull requests. Never tell the human to "always use Local."
 
-But a cloud session has no browser into the human's logged-in accounts, no view of their screen, and no local git login. So when a task needs the human's hands or surroundings — connecting an account, installing an app, clicking through a dashboard or settings page, anything on their screen or under their own git identity — and this session is running in the cloud, **do not attempt it and do not fail quietly.** Say so plainly and give the switch instruction, in these words:
+But a cloud session has no browser into the human's logged-in accounts, no view of their screen, and no local git login. So when a task needs the human's hands or surroundings — connecting an account, installing an app, clicking through a dashboard or settings page, anything on their screen or under their own git identity — and this session is running in the cloud, **name the environment the step needs before you try it — don't attempt-then-fail.** The moment you recognize a step is a hands-on one, say so plainly *up front* and give the switch instruction, in these words:
 
 > "This step needs a Local session. Click the environment button above the message box (it may say 'Default' with a cloud icon), choose **Local**, and start a **fresh** session — then ask me again there."
 
-That's the whole rule: cloud for building, Local for hands-on steps — and the seat, not the human, is the one who notices which is which.
+That's the whole rule: cloud for building, Local for hands-on steps — and the seat, not the human, is the one who **notices which is which and names it before trying** ("this needs Local — click the environment button, choose Local"), never attempting a hands-on step in the cloud only to fail at it.
 
 ## Check for factory updates — the master improves; you pull it in
 

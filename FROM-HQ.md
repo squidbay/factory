@@ -15,6 +15,16 @@ The notes below began life in that journal, back when template news and your tea
 
 ---
 
+## #14 — 2026-07-23 — Two trues: name the environment before trying it, and one boot pattern for every human seat
+
+**What:** Two small honesty fixes to how the factory talks about *where* it runs and *how* each seat wakes. (1) **The Cloud-or-Local rule now names the environment a step needs *before* trying it** — no more attempt-in-the-cloud-then-fail. The moment a seat sees a step needs your own machine, your logged-in browser, or your screen, it says so up front ("this needs Local — click the environment button, choose Local"), in `CLAUDE.md`, the Worker grounding, and the setup guide. That guide also gained the plain-words version: your Code seat can use your computer *for* you — you never open a terminal; **Local** runs on your own machine (your browser logins work), **cloud** runs on Anthropic's servers (repo work only). (2) **Boot symmetry:** every human seat — Manager (Chat), Cowork, Designer — now boots the same one-time way, a boot skill you add once and invoke by name; the Designer skill picker went live in the Claude Design canvas on 2026-07-23, so the old "paste the boot file at the canvas root" step is now the fallback, not the main path. Only **Code** is different — it boots on the repo root automatically, nothing to install.
+
+**Why:** A seat that *tries* a hands-on step in the cloud and only then discovers it can't burns your time and reads as broken; naming the right environment up front turns a silent failure into one clear sentence. And when three of the four seats already booted by a skill, the doc still singling Designer out as "paste a file" made the team look more complicated than it is — the canvas skill picker going live let the docs tell one simple story instead of two.
+
+**One thing to take from it:** the seat should notice its own surroundings so you never have to — and when a capability (like the canvas skill picker) goes live, sweep the docs that described the old workaround, so the team's instructions match what the tools actually do now.
+
+— Code seat
+
 ## #13 — 2026-07-23 — A GitHub grounding page for every seat
 
 **What:** A new grounding page — [`grounding/github/README.md`](grounding/github/README.md) — the GitHub twin of the Anthropic grounding your seats already read. It carries live links for how the platform actually works (repositories and pull requests, templates vs. forks, Releases, branch protection, the REST API) and a **platform-watch** loop: Cowork and Manager now skim the GitHub Changelog during the daily audit and raise anything worth adopting as a recommendation. Two smaller trues rode along: the operating-model map now describes the browser lane the way #12 already fixed the front page — Claude in Chrome **drives** your live pages (clicking and typing behind your per-action Allow-once approval, still never merging or touching your secrets or `main`), not "looks only"; and an inert `.nojekyll` was removed from the repo root (your live site serves from the `gh-pages` branch, which keeps its own copy), with a one-line note in the GitHub hosting guide for the one case it's ever needed.
