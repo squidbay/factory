@@ -16,6 +16,7 @@
 <Which plan/strategy priority this serves. One paragraph, plain words.>
 
 ## Gates and fences
+- **Source tree named:** the exact repo **and** the path/subtree the work lives in — not just the repo.
 - <Hard rules for this task: what must be true before starting, what is untouchable.>
 - <Files or systems this task must NOT modify.>
 
