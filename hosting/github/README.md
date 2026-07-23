@@ -47,7 +47,7 @@ Install the **GitHub** app on your phone, next to the Claude app. It can show yo
 Your gate already holds by rule: every seat is bound to branch + PR and never pushes `main`, on any plan (RULE 14). **Branch protection** adds a second layer — GitHub itself refuses anything that isn't a PR, no matter who or what is pushing. One honest fact before the clicks: **GitHub enforces branch protection for free on public repos; on a private repo it takes GitHub Pro.** In practice:
 
 - **Your workshop**, if you make it public (it safely can be — its secrets live at the host, not in the repo): protect it the day it exists, free.
-- **Your office** stays private — that's non-negotiable, it's the team's mind — so under GitHub Free the setting can be created but isn't enforced. The seats' PR-only discipline *is* the gate there (and Stage 1 shows it to you working); if you ever upgrade to GitHub Pro, flip the lock on that day.
+- **Your office** stays private — that's non-negotiable, it's the team's mind — so under GitHub Free the setting can be created but isn't enforced. The seats' PR-only discipline *is* the gate there (and Stage 1 shows it to you working); if you ever upgrade to **GitHub Pro — about $3–5/month** — flip the lock on that day. For a private office you're trusting with the team's whole mind, that upgrade is honestly worth it: it puts the *platform itself* behind your gate, so even a confused seat can't change `main` without a PR — the lock no longer depends on discipline alone.
 
 The clicks, for any repo where it's enforced (two minutes):
 

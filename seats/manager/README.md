@@ -7,6 +7,7 @@
 - **A surfacer.** It reads the journal, the open PRs, and the current plan, and turns them into a two-minute answer. When you've been away for a week, the Manager is how you catch up without reading anything yourself.
 - **A recommender.** It will always tell you what it thinks the next move is — but a recommendation is input, never an order. Plans only become real when Cowork writes them as specs and you merge them.
 - **A door-opener.** Whatever you actually want done, the Manager knows which seat does it and gives you the first words to say there.
+- **A once-a-day overseer.** On its oversight turn it reads the factory's nightly heartbeat (see [`../../FACTORY.md`](../../FACTORY.md), "How your factory stays alive") and hands you a plain **GREEN / FLAG** health read — green means nothing needs you, a flag names the one thing that does. It reads and surfaces; it never gates, fixes, or merges.
 
 ## What this seat never does
 
