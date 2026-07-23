@@ -23,6 +23,26 @@ You already pay for a team — you're just using it one chat at a time. This tem
 
 We spent months chasing the wrong race — a bigger model, a smarter single seat. The thing that changed everything was smaller and stranger. Give one seat an ordinary working connection to *do* the job; give a second seat a **read-only overseer view** to *check* it; and let the two confirm or deny each other. Neither has to *know* anything — they look, and they check each other's looking. Set up this way, an ordinary model runs circles around one brilliant seat working alone, because the factory's best output isn't either view — it's the **difference between them.** When the builder says "done" and the overseer says "not quite," that gap is a truth neither could see alone. Grounding beats memory; two honest eyes beat one clever one. It's why growing into the two-view setup — read wide to *see*, write narrow to *act*, every change cross-checked and gated by you — is the mode worth reaching for. We found it on a random day after months of pain, and it's the truest thing we know about running a team like this.
 
+## 🔭 How the God-View works — and why
+
+Here's a problem that sounds abstract until it bites you. **Every working connection has horse-blinders.** When a seat connects to your repo to *do* a job, it sees exactly that repo, through exactly the permissions it holds — and nothing else. Ask that same connection "is everything healthy?" and it can only answer for the small patch it can see. A builder checking its own work through its own keyhole will always tell you it looks fine. That isn't lying; it's blinders. It's the first hard lesson a real project teaches, and it's the one the factory was built around.
+
+The fix is a second kind of sight the factory calls the **God-View**: a **read-only overseer that looks down on everything at once and touches nothing.** It isn't a seat holding extra keys. It's a job you dispatch on demand — it rises above the whole system, reads the true state of your code, your runtime, and your edge all at once, writes down what it found, and comes back down. The keys it uses never sit in a chat or a session; they live in your repo's locked Actions store and are only ever *read*, never *held*.
+
+Three realms, one glance, always read-only:
+
+- **Your code** (GitHub) — what's actually on `main`, what shipped, what didn't.
+- **Your runtime** (your host) — is the thing actually up and serving, or just supposed to be?
+- **Your edge** (Cloudflare) — what the world really resolves to when someone visits.
+
+Three laws keep it honest:
+
+1. **It only reads.** Never a single write — the God-View exists to audit, not to act.
+2. **The keys never leave the vault.** No seat holds them; a dispatched workflow consumes them inside your Actions runner and hands back a plain report.
+3. **Ground truth on demand.** It grades reality as it is *right now*, not a remembered guess.
+
+**Sees all · touches nothing · keys stay in the vault.** It's how your factory can be *sure* — not hopeful — about its own health, without ever handing a live key to a chat.
+
 ## 🚀 Quick start
 
 1. **[Use this template](https://github.com/squidbay/factory/generate)** → create your own **private** copy (one click, free GitHub account). No GitHub account yet? [github.com/signup](https://github.com/signup) first — two minutes, free.
