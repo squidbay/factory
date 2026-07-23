@@ -14,8 +14,8 @@
     var prev = scope.querySelector('.car-btn.prev');
     var next = scope.querySelector('.car-btn.next');
     var dotsWrap = car.querySelector('.car-dots');
-    if (!prev || !next || !dotsWrap) return;
-    if (cards.length < 2) { prev.style.display = 'none'; next.style.display = 'none'; return; }
+    if (!dotsWrap) return;
+    if (cards.length < 2) { if (prev) prev.style.display = 'none'; if (next) next.style.display = 'none'; return; }
 
     var dots = cards.map(function (_, i) {
       var d = document.createElement('button');
@@ -51,8 +51,8 @@
       dots.forEach(function (d, i) { d.setAttribute('aria-current', i === a ? 'true' : 'false'); });
     }
 
-    prev.addEventListener('click', function () { advance(-1, false); });
-    next.addEventListener('click', function () { advance(1, false); });
+    if (prev) prev.addEventListener('click', function () { advance(-1, false); });
+    if (next) next.addEventListener('click', function () { advance(1, false); });
     var raf;
     track.addEventListener('scroll', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
     window.addEventListener('resize', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); });
@@ -87,19 +87,16 @@
     var convo = [
       { t: 'user', m: 'Add a testimonials section to the site, and make sure it looks right on a phone.', d: 1275 },
       { t: 'dispatch', m: 'On it. Sending this down the line to the team.', d: 1500 },
-      { t: 'sys', m: 'Dispatched \u00b7 Cowork plans \u2192 Code builds \u2192 Design draws', d: 1425 },
+      { t: 'sys', m: 'Dispatched · Cowork plans → Code builds → Design draws', d: 1425 },
       { t: 'dispatch', m: "Plan's approved and the seats are building. I'll ping you the moment there's something to look at. Go live your day.", d: 1800 },
       { t: 'sys', m: '20 minutes later', d: 1275 },
       { t: 'dispatch', m: 'Pull request is ready. The browser seat and I checked it on real phones. Here is the gist:', pr: true, d: 2475 },
       { t: 'user', m: 'Nice, reads well. Merging now.', d: 1500 },
-      { t: 'merged', m: 'Merged by you \u00b7 live in ~1 min', d: 1500 },
-      { t: 'dispatch', m: 'Done. The journal is updated, so tomorrow\u2019s shift starts where this one ended.', d: 1950 },
+      { t: 'merged', m: 'Merged by you · live in ~1 min', d: 1500 },
+      { t: 'dispatch', m: 'Done. The journal is updated, so tomorrow’s shift starts where this one ended.', d: 1950 },
       { t: 'sys', m: 'You held the gate. The team did the work.', d: 2250 }
     ];
     var i = 0, timer = null, running = false, started = false;
-    // P6: the first user message + first reply render statically at init (the
-    // strings the script already owns) so the panel is never an empty box before
-    // scroll or when JS runs without motion; animation begins at message three.
     var START_INDEX = 2;
 
     function bubble(item) {
@@ -139,12 +136,10 @@
     function restart() { seed(); i = START_INDEX; next(); }
     function start() {
       if (running) return; running = true;
-      // reduce: the two seeded entries are already present; render the rest statically.
       if (reduce) { for (var k = START_INDEX; k < convo.length; k++) render(convo[k]); return; }
-      // animated: keep the seeded first exchange, animate from message three.
       i = START_INDEX; timer = setTimeout(next, 400);
     }
-    seed(); // static first exchange, painted before the observer fires (zero CLS)
+    seed();
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting && !started) { started = true; start(); io.unobserve(e.target); } });
     }, { threshold: 0.25 });
@@ -155,24 +150,78 @@
     });
   })();
 
-  /* ---------- Sticky mobile primary CTA (both pages) ----------
-     Shows the one full-width CTA only while no inline CTA anchor
-     ([data-cta-anchor]) is on screen. CSS hides it >= 640px. */
+  /* ---------- App-shell dock: scroll-to tabs + scroll-spy + floating CTA (both pages) ---------- */
   (function () {
-    var bar = document.querySelector('.sticky-cta');
-    if (!bar || !('IntersectionObserver' in window)) return;
-    var anchors = document.querySelectorAll('[data-cta-anchor]');
-    if (!anchors.length) { bar.setAttribute('data-show', 'true'); return; }
-    var visible = 0;
-    var seen = new WeakMap();
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        var was = seen.get(e.target) || false;
-        if (e.isIntersecting && !was) { visible++; seen.set(e.target, true); }
-        else if (!e.isIntersecting && was) { visible--; seen.set(e.target, false); }
+    var dock = document.querySelector('.dock');
+    if (!dock) return;
+    var appbar = document.querySelector('.appbar');
+    var tabs = Array.prototype.slice.call(dock.querySelectorAll('.dock-tab'));
+
+    /* map each tab to its target section element ("top" => document top) */
+    var targets = tabs.map(function (t) {
+      var sel = t.getAttribute('data-target');
+      if (!sel || sel === 'top') return { tab: t, el: null };
+      return { tab: t, el: document.querySelector(sel) };
+    });
+
+    function barOffset() { return (appbar ? appbar.offsetHeight : 56) + 12; }
+
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var sel = t.getAttribute('data-target');
+        if (!sel || sel === 'top') {
+          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        } else {
+          var el = document.querySelector(sel);
+          if (el) {
+            var y = el.getBoundingClientRect().top + window.pageYOffset - barOffset();
+            window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+          }
+        }
+        setActive(t);
       });
-      bar.setAttribute('data-show', visible === 0 ? 'true' : 'false');
-    }, { threshold: 0.1 });
-    anchors.forEach ? anchors.forEach(function (a) { io.observe(a); }) : Array.prototype.forEach.call(anchors, function (a) { io.observe(a); });
+    });
+
+    function setActive(active) {
+      tabs.forEach(function (t) { t.setAttribute('aria-current', t === active ? 'true' : 'false'); });
+    }
+
+    /* scroll-spy: the last section whose top has passed the app-bar line wins */
+    var spyRaf;
+    function spy() {
+      var line = barOffset() + 8;
+      var current = targets[0].tab;
+      for (var k = 0; k < targets.length; k++) {
+        var el = targets[k].el;
+        if (!el) { if (window.pageYOffset < 40) current = targets[k].tab; continue; }
+        if (el.getBoundingClientRect().top <= line) current = targets[k].tab;
+      }
+      /* near the very bottom, light the last tab */
+      if ((window.innerHeight + window.pageYOffset) >= (document.body.scrollHeight - 4)) {
+        current = targets[targets.length - 1].tab;
+      }
+      setActive(current);
+    }
+    window.addEventListener('scroll', function () { cancelAnimationFrame(spyRaf); spyRaf = requestAnimationFrame(spy); }, { passive: true });
+    window.addEventListener('resize', function () { cancelAnimationFrame(spyRaf); spyRaf = requestAnimationFrame(spy); });
+    spy();
+
+    /* floating CTA pill: show only while no inline CTA anchor is on screen */
+    if ('IntersectionObserver' in window) {
+      var anchors = document.querySelectorAll('[data-cta-anchor]');
+      if (!anchors.length) { dock.setAttribute('data-show', 'true'); }
+      else {
+        var visible = 0, seen = new WeakMap();
+        var cio = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            var was = seen.get(e.target) || false;
+            if (e.isIntersecting && !was) { visible++; seen.set(e.target, true); }
+            else if (!e.isIntersecting && was) { visible--; seen.set(e.target, false); }
+          });
+          dock.setAttribute('data-show', visible === 0 ? 'true' : 'false');
+        }, { threshold: 0.1 });
+        Array.prototype.forEach.call(anchors, function (a) { cio.observe(a); });
+      }
+    }
   })();
 })();
