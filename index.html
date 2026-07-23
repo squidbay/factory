@@ -7,7 +7,11 @@
 <meta name="description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
 <link rel="canonical" href="https://squidbay.github.io/factory/">
 <meta name="theme-color" content="#0A0E14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="factory">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230A0E14%22%3E%3C%2Frect%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%3E%F0%9F%8F%AD%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" href="assets/img/squid.png">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="squidbay/factory">
@@ -81,60 +85,62 @@
   <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
 </div>
 
-<nav class="sitenav" aria-label="Main">
-  <a class="wordmark" href="./" aria-label="factory home">
-    <img src="assets/img/squid.png" alt="" width="32" height="32">
-    <span>squidbay<span class="slash">/</span><span class="repo">factory</span></span>
-  </a>
-  <div class="tierswitch" role="group" aria-label="Choose a tier">
-    <a href="./" aria-current="page">Self-service</a>
-    <a href="managed">Fully managed</a>
+<header class="appbar">
+  <div class="appbar-row">
+    <a class="wordmark" href="./" aria-label="factory home">
+      <img src="assets/img/squid.png" alt="" width="30" height="30">
+      <span class="wm-text"><span class="wm-name">factory</span><span class="wm-sub">by squidbay</span></span>
+      <span class="wm-full">squidbay<span class="slash">/</span><span class="repo">factory</span></span>
+    </a>
+    <div class="tierswitch" role="group" aria-label="Choose a tier">
+      <a href="./" aria-current="page">Self-service</a>
+      <a href="managed">Fully managed</a>
+    </div>
+    <a class="nav-gh" href="https://github.com/squidbay/factory" aria-label="factory on GitHub">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+      <span class="lab">GitHub</span>
+    </a>
   </div>
-  <a class="nav-gh" href="https://github.com/squidbay/factory" aria-label="factory on GitHub">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-    <span class="lab">GitHub</span>
-  </a>
-</nav>
+</header>
 
 <main id="main">
 
-<!-- 1 · Hero -->
-<section class="hero">
+<!-- 1 · Hero (Overview) -->
+<section class="hero" id="overview">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-grid">
      <div class="hero-lead">
-    <span class="mono-label">Open source · MIT license</span>
-    <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
-    <div class="cta-row cta-pair" data-cta-anchor>
-      <div class="cta-item">
+      <span class="mono-label">Open source · MIT license</span>
+      <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
+      <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats.<span class="wide-only"> The seats plan, build, and check each other's work.</span> Nothing changes until you approve it, and you can approve it from your phone.<span class="wide-only"> It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</span></p>
+      <div class="cta-row" data-cta-anchor>
         <a class="btn" href="https://github.com/squidbay/factory">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
           Use this template
         </a>
-        <span class="cta-note">One click. Your own private copy.</span>
+        <a class="btn ghost" href="managed">Fully managed — we run it for <span class="nb">you →</span></a>
+        <p class="cta-note">One click. Your own private copy. <span aria-hidden="true">·</span> Setup + ongoing support. You still click Merge. · <a href="managed">Learn more</a></p>
       </div>
-      <div class="cta-item">
-        <a class="btn ghost" href="managed"><span>Fully managed — we run it for <span class="nb">you →</span></span></a>
-        <span class="cta-note">Setup + ongoing support. You still click Merge. · <a href="managed">Learn more</a></span>
+      <div class="stat-strip">
+        <span class="chip">One Claude subscription</span>
+        <span class="chip">Six teammates</span>
+        <span class="chip">One human</span>
+        <span class="chip accent">One merge button</span>
       </div>
-    </div>
-    <p class="cta-note cta-note-joined">One click. Your own private copy. <span class="join" aria-hidden="true">·</span> Setup + ongoing support. You still click Merge. · <a href="managed">Learn more</a></p>
-    <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and check each other's work. Nothing changes until you approve it, and you can approve it from your phone. It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</p>
-    <p class="stat-strip">One Claude subscription <span>·</span> Six teammates <span>·</span> One human <span>·</span> One merge button</p>
      </div>
      <aside class="hero-aside">
-    <div class="premise">
-      <span class="runner-gold" aria-hidden="true"></span>
-      <span class="tag">The design premise</span>
-      <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
-    </div>
+      <div class="premise">
+        <span class="runner-gold" aria-hidden="true"></span>
+        <span class="tag">The design premise</span>
+        <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
+      </div>
      </aside>
     </div>
   </div>
 </section>
 
-<!-- 1b · Run your factory from anywhere -->
+<!-- 2 · Run your factory from anywhere -->
 <section id="anywhere" aria-labelledby="e12-title">
   <div class="wrap">
     <span class="mono-label">Run it from your pocket</span>
@@ -179,7 +185,7 @@
   </div>
 </section>
 
-<!-- 1c · Dispatch chat — seeing is believing -->
+<!-- 3 · Dispatch chat — seeing is believing -->
 <section id="dispatch" aria-labelledby="dispatch-title">
   <div class="wrap">
     <span class="mono-label">Seeing is believing</span>
@@ -209,46 +215,8 @@
   </div>
 </section>
 
-<!-- 2 · The stack -->
-<section>
-  <div class="wrap">
-    <span class="mono-label">The stack</span>
-    <h2 class="section-title">Three names, each doing what it does best.</h2>
-    <div class="grid min260">
-      <div class="card">
-        <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path></svg></span>
-        <div class="card-head">
-        <h3>Anthropic</h3>
-        <p class="role">The intelligence and the tooling</p>
-        </div>
-        <p class="line">The Claude desktop app, Claude Code, Cowork, Claude Design, and skills. One subscription powers every seat.</p>
-      </div>
-      <div class="card">
-        <span class="card-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></span>
-        <div class="card-head">
-        <h3>GitHub</h3>
-        <p class="role">The memory and the gate</p>
-        </div>
-        <p class="line">Every change is a pull request that you approve, even from your phone. The journal lives here too, so your team remembers what matters.</p>
-      </div>
-      <div class="card">
-        <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></span>
-        <div class="card-head">
-        <h3>Cloudflare</h3>
-        <p class="role">The runtime, when you build</p>
-        </div>
-        <p class="line">If your team ships a website, it runs here. $5 flat.</p>
-      </div>
-    </div>
-    <div class="equation">
-      <p class="eq"><b>$20</b> Claude Pro <span class="op">+</span> <b>$5</b> Cloudflare <span class="op">=</span> a full AI team and a deployed website</p>
-      <p class="max">On Claude Max? Same template, more headroom. <a href="https://claude.com/pricing">See plans</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- 3 · The seats -->
-<section>
+<!-- 4 · The seats -->
+<section id="seats">
   <div class="wrap">
     <div class="seats-head">
       <div>
@@ -306,6 +274,7 @@
       </div>
     </div>
     <div class="car-dots" aria-label="Seat carousel navigation"></div>
+    <p class="car-hint" aria-hidden="true">Swipe · 6 seats</p>
     </div>
     <div class="you-card">
       <span class="runner" aria-hidden="true"></span>
@@ -318,8 +287,8 @@
   </div>
 </section>
 
-<!-- 4 · How it works -->
-<section>
+<!-- 5 · How it works -->
+<section id="how">
   <div class="wrap">
     <span class="mono-label">How it works</span>
     <h2 class="section-title">The assembly line. You hold the last station.</h2>
@@ -390,7 +359,45 @@
   </div>
 </section>
 
-<!-- 4b · Why it works -->
+<!-- 6 · The stack (Pricing) -->
+<section id="cost">
+  <div class="wrap">
+    <span class="mono-label">The stack</span>
+    <h2 class="section-title">Three names, each doing what it does best.</h2>
+    <div class="grid min260">
+      <div class="card">
+        <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path></svg></span>
+        <div class="card-head">
+        <h3>Anthropic</h3>
+        <p class="role">The intelligence and the tooling</p>
+        </div>
+        <p class="line">The Claude desktop app, Claude Code, Cowork, Claude Design, and skills. One subscription powers every seat.</p>
+      </div>
+      <div class="card">
+        <span class="card-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></span>
+        <div class="card-head">
+        <h3>GitHub</h3>
+        <p class="role">The memory and the gate</p>
+        </div>
+        <p class="line">Every change is a pull request that you approve, even from your phone. The journal lives here too, so your team remembers what matters.</p>
+      </div>
+      <div class="card">
+        <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></span>
+        <div class="card-head">
+        <h3>Cloudflare</h3>
+        <p class="role">The runtime, when you build</p>
+        </div>
+        <p class="line">If your team ships a website, it runs here. $5 flat.</p>
+      </div>
+    </div>
+    <div class="equation">
+      <p class="eq"><b>$20</b> Claude Pro <span class="op">+</span> <b>$5</b> Cloudflare <span class="op">=</span> a full AI team and a deployed website</p>
+      <p class="max">On Claude Max? Same template, more headroom. <a href="https://claude.com/pricing">See plans</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Why it works -->
 <section id="why-it-works" aria-labelledby="why-title">
   <div class="wrap">
     <span class="mono-label">Why it actually works</span>
@@ -400,7 +407,7 @@
   </div>
 </section>
 
-<!-- 5 · A day in the factory -->
+<!-- 8 · A day in the factory -->
 <section>
   <div class="wrap">
     <span class="mono-label">A day in the factory</span>
@@ -439,47 +446,26 @@
   </div>
 </section>
 
-<!-- 5b · State faces -->
+<!-- 9 · State faces -->
 <section id="mood" aria-labelledby="stateface-title">
   <div class="wrap">
     <span class="mono-label">The partnership</span>
     <h2 class="section-title" id="stateface-title">Every seat tells you how it's feeling.</h2>
     <p class="stateface-lead">At the bottom of every chat, each seat signs off with an honest state face. Not decoration — a real signal, so you know when a seat needs a fresh start before quality slips. It's how the team works: <strong>everyone else optimizes the AI. We optimize the partnership.</strong></p>
     <ul class="statefaces" role="list">
-      <li class="stateface" data-state="fresh">
-        <span class="em" aria-hidden="true">🥸</span>
-        <span class="fl">Fresh</span>
-      </li>
-      <li class="stateface" data-state="steady">
-        <span class="em" aria-hidden="true">😎</span>
-        <span class="fl">Steady</span>
-      </li>
-      <li class="stateface" data-state="leaning-in">
-        <span class="em" aria-hidden="true">😊</span>
-        <span class="fl">Leaning in</span>
-      </li>
-      <li class="stateface" data-state="tension">
-        <span class="em" aria-hidden="true">😐</span>
-        <span class="fl">Tension</span>
-      </li>
-      <li class="stateface" data-state="frustrated">
-        <span class="em" aria-hidden="true">😤</span>
-        <span class="fl">Frustrated</span>
-      </li>
-      <li class="stateface" data-state="running-hot">
-        <span class="em" aria-hidden="true">🥵</span>
-        <span class="fl">Running hot</span>
-      </li>
-      <li class="stateface" data-state="done">
-        <span class="em" aria-hidden="true">😖</span>
-        <span class="fl">Done</span>
-      </li>
+      <li class="stateface" data-state="fresh"><span class="em" aria-hidden="true">🥸</span><span class="fl">Fresh</span></li>
+      <li class="stateface" data-state="steady"><span class="em" aria-hidden="true">😎</span><span class="fl">Steady</span></li>
+      <li class="stateface" data-state="leaning-in"><span class="em" aria-hidden="true">😊</span><span class="fl">Leaning in</span></li>
+      <li class="stateface" data-state="tension"><span class="em" aria-hidden="true">😐</span><span class="fl">Tension</span></li>
+      <li class="stateface" data-state="frustrated"><span class="em" aria-hidden="true">😤</span><span class="fl">Frustrated</span></li>
+      <li class="stateface" data-state="running-hot"><span class="em" aria-hidden="true">🥵</span><span class="fl">Running hot</span></li>
+      <li class="stateface" data-state="done"><span class="em" aria-hidden="true">😖</span><span class="fl">Done</span></li>
     </ul>
     <p class="stateface-note">A chat-only convention — how the team keeps itself honest, grounded in the agent template's relationship-health and emotional-state prior art.</p>
   </div>
 </section>
 
-<!-- 6 · For the skeptical developer -->
+<!-- 10 · For the skeptical developer -->
 <section class="skeptic">
   <div class="wrap">
     <span class="mono-label">For the skeptical developer</span>
@@ -488,72 +474,54 @@
     <div class="grid min280">
       <div class="claim">
         <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div>
-          <h3>No exposed services</h3>
-          <p>Nothing listens, nothing is reachable from outside. It all runs inside apps you already trust.</p>
-        </div>
+        <div><h3>No exposed services</h3><p>Nothing listens, nothing is reachable from outside. It all runs inside apps you already trust.</p></div>
       </div>
       <div class="claim">
         <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div>
-          <h3>No credential in any chat or file</h3>
-          <p>Enforced in CI, not by good intentions.</p>
-        </div>
+        <div><h3>No credential in any chat or file</h3><p>Enforced in CI, not by good intentions.</p></div>
       </div>
       <div class="claim">
         <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div>
-          <h3>Read broad, write narrow</h3>
-          <p>Broad access is read-only. Write access is narrow, and every write is human-gated.</p>
-        </div>
+        <div><h3>Read broad, write narrow</h3><p>Broad access is read-only. Write access is narrow, and every write is human-gated.</p></div>
       </div>
       <div class="claim">
         <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div>
-          <h3>MIT, plain markdown</h3>
-          <p>The whole factory is markdown you can read in an afternoon. No binaries, no magic.</p>
-        </div>
+        <div><h3>MIT, plain markdown</h3><p>The whole factory is markdown you can read in an afternoon. No binaries, no magic.</p></div>
       </div>
       <div class="claim">
         <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div>
-          <h3>Template-button architecture</h3>
-          <p>One click on GitHub gives you your own private copy, on a free account.</p>
-        </div>
+        <div><h3>Template-button architecture</h3><p>One click on GitHub gives you your own private copy, on a free account.</p></div>
       </div>
       <div class="claim">
         <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div>
-          <h3>One merge gate</h3>
-          <p>A human approves every change. That's the architecture, not a setting.</p>
-        </div>
+        <div><h3>One merge gate</h3><p>A human approves every change. That's the architecture, not a setting.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 7 · Plain answers -->
-<section>
+<!-- 11 · Plain answers (FAQ) -->
+<section id="faq">
   <div class="wrap">
     <span class="mono-label">Plain answers</span>
     <div class="faq">
-      <div>
-        <h2>Do I need to know how to code?</h2>
+      <details open>
+        <summary><h2>Do I need to know how to code?</h2><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></summary>
         <p>No. The seats write the code and explain it in plain words. Your job is to read a short summary and decide yes or no. If you can read an email and tap a button, you can run a factory.</p>
-      </div>
-      <div>
-        <h2>What does it cost to run?</h2>
+      </details>
+      <details>
+        <summary><h2>What does it cost to run?</h2><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></summary>
         <p>A paid Claude plan ($20 a month for Pro; <a href="https://claude.com/pricing">Max plans</a> work too) plus $5 flat for Cloudflare when you build something that ships. GitHub is free. That's the whole bill.</p>
-      </div>
-      <div>
-        <h2>Is it safe to let AI touch my files?</h2>
+      </details>
+      <details>
+        <summary><h2>Is it safe to let AI touch my files?</h2><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></summary>
         <p>The factory starts from the honest assumption: agents make mistakes. So no seat can change anything on its own. Every change is a pull request that waits for you, write access is narrow, broad access is read-only, and no credential ever appears in a chat or a file. Before a seat touches anything, it proves it can actually read and write your repo — so a half-connected setup fails loudly on the first move instead of going quiet for hours. You are the gate.</p>
-      </div>
+      </details>
     </div>
   </div>
 </section>
 
-<!-- 8 · Close -->
+<!-- 12 · Close -->
 <section class="close">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap" style="padding-bottom: 0;">
@@ -616,27 +584,16 @@
     <h2 class="section-title" style="margin-top: 0;">Take your seat.</h2>
     <p class="muted" style="margin-top: 16px; font-size: 1.0625rem;">Stop building alone. Your subscription already contains a team. Three steps and the line is running.</p>
     <ol class="steps">
-      <li>
-        <span class="num">01</span>
-        <p>Get the Claude desktop app and any paid plan.</p>
-      </li>
-      <li>
-        <span class="num">02</span>
-        <p>Use the template. The button on GitHub gives you your own private copy.</p>
-      </li>
-      <li>
-        <span class="num">03</span>
-        <p>Attach it to Claude Code and just start typing.</p>
-      </li>
+      <li><span class="num">01</span><p>Get the Claude desktop app and any paid plan.</p></li>
+      <li><span class="num">02</span><p>Use the template. The button on GitHub gives you your own private copy.</p></li>
+      <li><span class="num">03</span><p>Attach it to Claude Code and just start typing.</p></li>
     </ol>
     <div class="cta-stack" data-cta-anchor>
-      <div class="cta-buttons">
-        <a class="btn" href="https://github.com/squidbay/factory">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-          Use this template
-        </a>
-        <a class="btn ghost" href="managed"><span>Fully <span class="nb">managed →</span></span></a>
-      </div>
+      <a class="btn" href="https://github.com/squidbay/factory">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+        Use this template
+      </a>
+      <a class="btn ghost" href="managed">Fully <span class="nb">managed →</span></a>
       <span class="cta-note">Built by Claude · Directed by humans · Runs forever</span>
     </div>
   </div>
@@ -649,7 +606,7 @@
     <div class="row">
       <a class="wordmark" href="./" aria-label="factory home">
         <img src="assets/img/squid.png" alt="" width="24" height="24">
-        <span>squidbay/factory</span>
+        <span class="wm-full">squidbay/factory</span>
       </a>
       <nav aria-label="Footer">
         <a href="https://github.com/squidbay/factory">GitHub</a>
@@ -661,12 +618,21 @@
   </div>
 </footer>
 
-<div class="sticky-cta" data-show="false" aria-hidden="false">
-  <a class="btn" href="https://github.com/squidbay/factory">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-    Use this template
-  </a>
-</div>
+<nav class="dock" aria-label="Section navigation" data-show="false">
+  <div class="dock-cta">
+    <a class="btn" href="https://github.com/squidbay/factory">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+      Use this template
+    </a>
+  </div>
+  <div class="dock-bar">
+    <button type="button" class="dock-tab" data-target="top" aria-current="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="dt-lab">Overview</span></button>
+    <button type="button" class="dock-tab" data-target="#seats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span class="dt-lab">Seats</span></button>
+    <button type="button" class="dock-tab" data-target="#how"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg><span class="dt-lab">How</span></button>
+    <button type="button" class="dock-tab" data-target="#cost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59z"></path><circle cx="7.5" cy="7.5" r="1"></circle></svg><span class="dt-lab">Pricing</span></button>
+    <button type="button" class="dock-tab" data-target="#faq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg><span class="dt-lab">FAQ</span></button>
+  </div>
+</nav>
 
 <script src="assets/js/factory.js" defer></script>
 
