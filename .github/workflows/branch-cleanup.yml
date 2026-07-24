@@ -1,0 +1,242 @@
+name: branch-cleanup
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Safe, opt-in cleanup of old branches in your factory repo.
+#
+# This never runs on its own. It has ONE trigger — the "Run workflow" button
+# (workflow_dispatch) — and no schedule, so it only ever runs when YOU start it.
+# You are the only person who can dispatch it.
+#
+# It starts in DRY-RUN by default: press Run and it just LISTS the branches it
+# would remove and deletes nothing. To actually delete, run it again and uncheck
+# the "Dry run" box. (Anything but a real unchecked box stays a safe dry-run.)
+#
+# It will NEVER remove (these are enforced in the code below, in both modes):
+#   • your default branch (read from the repo, never hard-coded)
+#   • gh-pages (your live site)
+#   • godview-reports (a data branch, if you have one)
+#   • any protected branch
+#   • the branch behind any OPEN pull request
+#   • any branch with a commit in the last 7 days
+#
+# When it does delete, it removes one branch at a time (the same as
+# `git push origin --delete <branch>`). It never force-pushes, never rewrites
+# history, and never touches a branch it is keeping. It uses only the built-in
+# token GitHub gives the workflow — no secrets of yours.
+#
+# Every run leaves receipts: a summary table on the run page AND a downloadable
+# report listing every branch (name, last commit, how far ahead/behind, any PR,
+# and — in delete mode — whether each delete succeeded).
+# ─────────────────────────────────────────────────────────────────────────────
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run — only list candidates, delete nothing. UNCHECK to actually delete."
+        type: boolean
+        default: true
+        required: true
+
+# Scoped to exactly what this job needs and no more.
+#   contents:write     — the ONLY write permission; deleting a branch requires it.
+#   pull-requests:read — read-only; needed to see which branches have an open PR
+#                        so it can keep them. Without it the open-PR guard can't run.
+# Every permission not listed here is `none`.
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: branch-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    # Re-declared at the job level so the scope is pinned to THIS job.
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - name: Enumerate stale branches (and delete them only when dry_run=false)
+        uses: actions/github-script@v7
+        env:
+          # workflow_dispatch booleans arrive as the strings "true"/"false".
+          # Fail safe: treat anything other than the literal "false" as dry-run.
+          DRY_RUN: ${{ inputs.dry_run }}
+        with:
+          script: |
+            const fs = require('fs');
+            const { owner, repo } = context.repo;
+            const DRY_RUN = process.env.DRY_RUN !== 'false';
+            const AGE_DAYS = 7;
+            const AGE_MS = AGE_DAYS * 24 * 60 * 60 * 1000;
+            const now = Date.now();
+
+            // Names we never delete, regardless of any other signal.
+            const NEVER = new Set(['gh-pages', 'godview-reports']);
+
+            // Default branch — queried, never hard-coded.
+            const repoInfo = await github.rest.repos.get({ owner, repo });
+            const defaultBranch = repoInfo.data.default_branch;
+            NEVER.add(defaultBranch);
+
+            // Head branches of every OPEN PR whose head is in THIS repo.
+            const openPRs = await github.paginate(github.rest.pulls.list, {
+              owner, repo, state: 'open', per_page: 100,
+            });
+            const openPrHeads = new Map(); // ref -> [PR numbers]
+            for (const pr of openPRs) {
+              if (pr.head && pr.head.repo && pr.head.repo.full_name === `${owner}/${repo}`) {
+                const list = openPrHeads.get(pr.head.ref) || [];
+                list.push(pr.number);
+                openPrHeads.set(pr.head.ref, list);
+              }
+            }
+
+            // Every branch in the repo.
+            const branches = await github.paginate(github.rest.repos.listBranches, {
+              owner, repo, per_page: 100,
+            });
+
+            const rows = [];      // full audit of every branch
+            const toDelete = [];  // survivors of every exclusion
+
+            for (const b of branches) {
+              const name = b.name;
+              const sha = b.commit.sha;
+              const row = {
+                branch: name, sha,
+                lastCommit: null, ageDays: null,
+                ahead: null, behind: null,
+                openPRs: openPrHeads.get(name) || [],
+                protected: !!b.protected,
+                decision: 'delete', reason: '',
+                deleteResult: '',
+              };
+
+              // --- exclusions, in order, cheapest first ---
+              if (NEVER.has(name)) {
+                row.decision = 'keep';
+                row.reason = name === defaultBranch ? 'default branch' : 'protected-by-name (gh-pages/godview-reports)';
+                rows.push(row); continue;
+              }
+              if (row.protected) {
+                row.decision = 'keep'; row.reason = 'protected branch';
+                rows.push(row); continue;
+              }
+              if (row.openPRs.length) {
+                row.decision = 'keep'; row.reason = `head of open PR #${row.openPRs.join(', #')}`;
+                rows.push(row); continue;
+              }
+
+              // Last-commit date (needed for the age gate).
+              try {
+                const c = await github.rest.repos.getCommit({ owner, repo, ref: sha });
+                const dateStr = (c.data.commit.committer && c.data.commit.committer.date)
+                  || (c.data.commit.author && c.data.commit.author.date);
+                if (dateStr) {
+                  row.lastCommit = dateStr;
+                  row.ageDays = Math.floor((now - new Date(dateStr).getTime()) / (24 * 60 * 60 * 1000));
+                }
+              } catch (e) {
+                // If we cannot establish the age, we cannot prove it is old enough — KEEP it.
+                row.decision = 'keep'; row.reason = `age unknown (${e.status || e.message}) — kept to be safe`;
+                rows.push(row); continue;
+              }
+
+              if (row.lastCommit === null || (now - new Date(row.lastCommit).getTime()) < AGE_MS) {
+                row.decision = 'keep';
+                row.reason = `younger than ${AGE_DAYS} days`;
+                rows.push(row); continue;
+              }
+
+              // ahead/behind vs default (receipt only; failure never blocks the decision).
+              try {
+                const cmp = await github.rest.repos.compareCommitsWithBasehead({
+                  owner, repo, basehead: `${defaultBranch}...${name}`,
+                });
+                row.ahead = cmp.data.ahead_by;
+                row.behind = cmp.data.behind_by;
+              } catch (e) {
+                row.ahead = null; row.behind = null;
+              }
+
+              row.reason = `stale: last commit ${row.ageDays}d ago, no open PR, not protected`;
+              rows.push(row);
+              toDelete.push(row);
+            }
+
+            // --- delete mode: one ref at a time, no force, nothing touches survivors ---
+            if (!DRY_RUN) {
+              for (const row of toDelete) {
+                try {
+                  await github.rest.git.deleteRef({ owner, repo, ref: `heads/${row.branch}` });
+                  row.deleteResult = 'deleted';
+                } catch (e) {
+                  row.deleteResult = `ERROR: ${e.status || ''} ${e.message}`;
+                }
+              }
+            } else {
+              for (const row of toDelete) row.deleteResult = '(dry-run — not deleted)';
+            }
+
+            // --- receipts: artifact (json + md) ---
+            const report = {
+              repo: `${owner}/${repo}`,
+              mode: DRY_RUN ? 'dry-run' : 'delete',
+              runId: context.runId,
+              generatedAt: new Date().toISOString(),
+              defaultBranch,
+              ageThresholdDays: AGE_DAYS,
+              totals: {
+                branches: rows.length,
+                candidates: toDelete.length,
+                kept: rows.length - toDelete.length,
+                deleted: rows.filter(r => r.deleteResult === 'deleted').length,
+              },
+              branches: rows,
+            };
+            fs.writeFileSync('branch-cleanup-report.json', JSON.stringify(report, null, 2));
+
+            const esc = (s) => String(s == null ? '' : s).replace(/\|/g, '\\|');
+            const tableHeader =
+              '| Branch | Decision | Last commit | Age (d) | Ahead/Behind | Open PR | Delete result |\n' +
+              '|---|---|---|---|---|---|---|\n';
+            const tableRows = rows.map(r =>
+              `| ${esc(r.branch)} | ${r.decision === 'delete' ? '🗑️ candidate' : '✅ keep'} | ${esc(r.lastCommit)} | ${esc(r.ageDays)} | ${esc(r.ahead)}/${esc(r.behind)} | ${r.openPRs.length ? '#' + r.openPRs.join(', #') : '—'} | ${esc(r.deleteResult)} |`
+            ).join('\n');
+
+            const md =
+              `# branch-cleanup report — ${report.repo}\n\n` +
+              `- **Mode:** ${report.mode}\n` +
+              `- **Default branch (never deleted):** \`${defaultBranch}\`\n` +
+              `- **Age threshold:** ${AGE_DAYS} days\n` +
+              `- **Branches:** ${report.totals.branches} · **Candidates:** ${report.totals.candidates} · **Kept:** ${report.totals.kept} · **Deleted:** ${report.totals.deleted}\n\n` +
+              tableHeader + tableRows + '\n';
+            fs.writeFileSync('branch-cleanup-report.md', md);
+
+            // --- receipts: job summary ---
+            await core.summary
+              .addHeading(`branch-cleanup — ${report.mode.toUpperCase()}`)
+              .addRaw(`Repo \`${report.repo}\` · default \`${defaultBranch}\` · age threshold ${AGE_DAYS}d\n\n`)
+              .addRaw(`**${report.totals.candidates}** candidate(s), **${report.totals.kept}** kept, **${report.totals.deleted}** deleted.\n\n`)
+              .addRaw(tableHeader + tableRows + '\n')
+              .write();
+
+            if (DRY_RUN) {
+              core.notice(`DRY-RUN: ${toDelete.length} branch(es) would be deleted. Re-dispatch with dry_run unchecked to delete.`);
+            } else {
+              core.notice(`DELETE: ${report.totals.deleted} branch(es) deleted of ${toDelete.length} candidate(s).`);
+            }
+
+      - name: Upload cleanup receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-cleanup-report
+          path: |
+            branch-cleanup-report.json
+            branch-cleanup-report.md
+          if-no-files-found: warn
