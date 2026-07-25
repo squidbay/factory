@@ -24,6 +24,8 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 
 **And you.** You are the only person who merges. Ever. That single fact is the whole safety model: however fast the team moves, nothing becomes real without your eyes and your click — and the click works from your phone (see [`onboarding/MOBILE.md`](onboarding/MOBILE.md)).
 
+**Your connectors are read-or-stage-only for the seats.** A seat may *read* anything a connector exposes and *stage* a change for you to approve — but any action that changes something outside the office repo (deploying, publishing, sending, paying, writing to an outside service) is **human-sanctioned, one action at a time**. This holds even for connectors that technically *could* write on their own: the gate is the discipline, not the tool's limit. The seats propose the mutation; you sanction it. Same shape as the merge gate — nothing outward-facing happens without your say-so.
+
 ## Your team, your names
 
 During onboarding you pick an **anchor emoji** for your factory and — if you want — a **name and persona for each seat**. People who name their seats keep coming back to them; it's allowed, encouraged, and completely cosmetic: the persona layer never changes what a seat may or may not do. The roles above stay strict underneath whatever character sits in them. Record your choices in this section by PR — it's the team roster:
@@ -37,7 +39,7 @@ During onboarding you pick an **anchor emoji** for your factory and — if you w
 
 1. Something needs doing (your idea, a Mobile Scout report, a retro finding).
 2. **Cowork** settles the frame with you and writes the spec. For anything non-trivial, the spec is merged by you *before* the build — so the plan itself passed your gate.
-3. **Code** executes the spec: branch, build, verify its own work (RULE 1), open the PR with a description that teaches (what changed, why, and one thing worth learning from it).
+3. **The work fans out to the seat(s) it needs — Design for visual work, Code for code, often both.** Code executes the spec: branch, build, verify its own work (RULE 1), open the PR with a description that teaches (what changed, why, and one thing worth learning from it). Design produces the visual pieces on the canvas, and Code lands them by PR. Design and Code are both execution — the job picks the lane, not a footnote.
 4. **Cowork** audits the PR and tells you plainly: safe to merge or not, and why.
 5. **You merge.** Or you ask questions right on the PR — decisions stay attached to the work they're about.
 6. The session writes its **journal entry**. If it isn't in the journal, it didn't happen.

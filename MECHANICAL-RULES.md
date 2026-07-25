@@ -67,7 +67,7 @@ They are mechanical, not aspirational: each one exists because the default behav
 *Do it now, assign it (named owner + named when), or consciously close it (with the reason). "Noted for later" with no owner and no date is how a month of harmless residuals becomes a recovery operation.*
 
 ## RULE 21 — Repo access is proven in THIS session, or it isn't claimed.
-*A seat asserts it can reach the repo only from a fresh proof in the current session — a live file-list read plus a branch create/delete. Never from the connector picker showing the repo, never from chat flowing normally (a seat with zero access chats just fine), never from a previous session's access. Connections break between sessions and old sessions hold dead credentials; the proof is now or it's nothing.*
+*A seat asserts it can reach the repo only from a fresh proof in the current session — a live file-list read plus **creating a branch** (create-only: the seat doesn't need to be able to delete it — a cleanup workflow sweeps the throwaway later, and the delete step isn't something every surface can even do). Never from the connector picker showing the repo, never from chat flowing normally (a seat with zero access chats just fine), never from a previous session's access. Connections break between sessions and old sessions hold dead credentials; the proof is now or it's nothing.*
 
 ---
 

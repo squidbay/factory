@@ -41,6 +41,8 @@ This is the verified surface, stated plainly so nobody (you *or* a seat) has to 
 
 Notice the shape: the connection covers the *data plane* of your workshop completely, and the two things it can't do are exactly the two things you'd want a deliberate gate on anyway.
 
+**Checking a D1 database for real.** One honest gotcha worth knowing before it bites you: the dashboard's (and the list view's) *table count* for a D1 database can read **zero even when the database has tables** — that count is metadata that lags. So when a seat needs to know whether a database actually has its schema and data, it doesn't trust the count — it **asks the database directly** with a schema query (`SELECT name FROM sqlite_master`). If you ever hear "the dashboard says 0 tables," that's the cue to check the real thing, not to assume the database is empty.
+
 ## Deploying — the two shapes
 
 When a mission reaches its first deploy, there are exactly two ways through, and the seat will recommend one for your situation:
