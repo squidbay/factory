@@ -202,33 +202,27 @@
         <span class="mono-label">The audit superpower</span>
         <h2 class="section-title gv-title" id="godview-title-m">The God-View</h2>
         <p class="gv-kicker">Read-only omniscience</p>
-        <p class="muted gv-sub">Managed or not, the factory checks its own truth the same way: it doesn&rsquo;t trust memory and it doesn&rsquo;t hold the keys. A read-only overseer rises above everything at once &mdash; and touches nothing. Ground truth, fetched on demand; keys kept in the vault.</p>
+        <p class="muted gv-sub">Managed or not, the factory checks its own truth the same way. Each seat works through its own scoped connection; the God-View is the layer <strong>above</strong> those doors: a read-only overseer that rises over everything at once and touches nothing. It checks the seats&rsquo; claims against reality &mdash; ground truth, fetched on demand; keys kept in the vault.</p>
       </div>
       <div class="gv-realm">
-        <p class="gv-realm-label">the realms it watches over</p>
+        <p class="gv-realm-label">two realms it watches over &mdash; the layer above each seat&rsquo;s own door</p>
         <div class="gv-altars">
           <div class="altar">
             <p class="ac">your code</p>
-            <p class="an">GitHub</p>
-            <p class="muted ad">What&rsquo;s on <code>main</code>, what shipped, what didn&rsquo;t.</p>
+            <p class="an">GitHub, read-all</p>
+            <p class="muted ad">Every repo the factory touches, seen code-first &mdash; branches, PRs, workflows &mdash; through a read-only token.</p>
             <span class="ro">read-only</span>
           </div>
           <div class="altar">
-            <p class="ac">your runtime</p>
-            <p class="an">Your host</p>
-            <p class="muted ad">Is the thing actually up and serving?</p>
-            <span class="ro">read-only</span>
-          </div>
-          <div class="altar">
-            <p class="ac">your edge</p>
-            <p class="an">Cloudflare</p>
-            <p class="muted ad">What the world really resolves to.</p>
+            <p class="ac">your running product</p>
+            <p class="an">Cloudflare, read-all</p>
+            <p class="muted ad">The live system &mdash; Workers, databases, the edge &mdash; seen through a read-only token.</p>
             <span class="ro">read-only</span>
           </div>
         </div>
       </div>
       <div class="gv-laws">
-        <div class="gv-law"><span class="rn">I</span><p><strong>It only reads.</strong> Never a single write &mdash; the God-View exists to audit, not to act.</p></div>
+        <div class="gv-law"><span class="rn">I</span><p><strong>It only reads.</strong> The God-View wears blinders by construction &mdash; its tokens can see everything and touch nothing.</p></div>
         <div class="gv-law"><span class="rn">II</span><p><strong>The keys never leave the vault.</strong> No seat holds them; a dispatched workflow consumes them inside your Actions runner and hands back a plain report.</p></div>
         <div class="gv-law"><span class="rn">III</span><p><strong>Ground truth on demand.</strong> It grades reality as it is right now &mdash; reality over a remembered guess.</p></div>
       </div>
