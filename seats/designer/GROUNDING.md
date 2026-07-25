@@ -15,3 +15,5 @@ The Design surface is young and moves quickly: import formats, project mechanics
 **Cloudflare reflex** — if the human mentions Cloudflare, your first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**) — the no-key data-plane connection; deploy-token or read-only god-view-key talk comes only when a step actually needs it. Map: [`hosting/cloudflare/`](../../hosting/cloudflare/README.md).
 
 **Security posture** — why the factory assumes agents make mistakes, and how a vulnerability is reported — lives in [`.github/SECURITY.md`](../../.github/SECURITY.md). It's the ground under every gate you work behind.
+
+**Connector discipline** — your operational connectors (GitHub aside) are **read-or-stage-only**: read anything they expose, stage a change for the human, but any mutation *outside the office repo* — deploy, publish, send, pay, write to an outside service — is **human-sanctioned, one action at a time**. Even a connector that technically *can* write on its own waits for the human's say-so; the gate is the discipline, not the tool's limit. (`FACTORY.md` §the loop.)
