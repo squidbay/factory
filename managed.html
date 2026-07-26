@@ -6,272 +6,299 @@
 <title>factory — fully managed. We do the work, you keep every decision.</title>
 <meta name="description" content="Managed factory service: we do the work and post a ready-to-merge pull request into your factory. You still click merge. From $99 setup, then $25 a month.">
 <link rel="canonical" href="https://factory.squidbay.io/managed">
-<meta name="theme-color" content="#0A0E14">
+<meta name="theme-color" content="#0A0A0B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="factory">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230A0E14%22%3E%3C%2Frect%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%3E%F0%9F%8F%AD%3C%2Ftext%3E%3C%2Fsvg%3E">
-<link rel="apple-touch-icon" href="assets/img/squid.png">
+<link rel="icon" type="image/svg+xml" href="assets/img/squid/squid-mark.svg">
+<link rel="apple-touch-icon" href="assets/img/squid/squid-mark.svg">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="squidbay/factory">
 <meta property="og:url" content="https://factory.squidbay.io/managed">
-<meta property="og:title" content="factory — fully managed. You keep every decision.">
+<meta property="og:title" content="Fully managed. You keep every decision.">
 <meta property="og:description" content="The new agency. You're finally in control. We do the work and open the pull request; you still click merge. From $99 setup, then $25 a month.">
-<meta property="og:image" content="https://factory.squidbay.io/managed-og.png">
+<meta property="og:image" content="https://factory.squidbay.io/managed-og.png?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="factory, fully managed: we open it, you merge it.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="factory — fully managed. You keep every decision.">
+<meta name="twitter:title" content="Fully managed. You keep every decision.">
 <meta name="twitter:description" content="The new agency. You're finally in control. We do the work; you still click merge.">
-<meta name="twitter:image" content="https://factory.squidbay.io/managed-og.png">
+<meta name="twitter:image" content="https://factory.squidbay.io/managed-og.png?v=3">
 
 <link rel="stylesheet" href="assets/css/factory.css">
 </head>
 <body>
-
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="bubbles" aria-hidden="true">
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <g id="i-check"><path d="M4 12.5 9 17.5 20 6.5"/></g>
+  <g id="i-chev"><path d="M9 5l7 7-7 7"/></g>
+  <g id="i-gate"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g>
+  <g id="i-always"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g>
+  <g id="i-coach"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></g>
+  <g id="i-send"><path d="M21 3 10.5 13.5"/><path d="M21 3l-6.5 18-4-8-8-4Z"/></g>
+  <g id="i-plus"><path d="M12 5v14"/><path d="M5 12h14"/></g>
+  <g id="i-cross"><path d="M9 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/><path d="M15 5h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/><path d="M9 12h6"/><path d="M12 9v6"/></g>
+  <g id="i-gh"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.8 2.7 5.8 3 5.8 3a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.4c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></g>
+</defs></svg>
 
 <header class="appbar">
   <div class="appbar-row">
     <a class="wordmark" href="./" aria-label="factory home">
-      <img src="assets/img/squid.png" alt="" width="30" height="30">
-      <span class="wm-text"><span class="wm-name">factory</span><span class="wm-sub">by squidbay</span></span>
-      <span class="wm-full">squidbay<span class="slash">/</span><span class="repo">factory</span></span>
+      <img src="assets/img/squid/squid-mark.svg" alt="" width="26" height="26">
+      <span>squidbay<span class="slash">/</span>factory</span>
     </a>
-    <div class="tierswitch" role="group" aria-label="Choose a tier">
+    <nav class="tierswitch" aria-label="Choose a tier">
       <a href="./">Self-service</a>
       <a href="managed" aria-current="page">Fully managed</a>
-    </div>
+    </nav>
     <a class="nav-gh" href="https://github.com/squidbay/factory" aria-label="factory on GitHub">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-      <span class="lab">GitHub</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-gh"/></svg>
+      <span>GitHub</span>
     </a>
   </div>
 </header>
 
 <main id="main">
 
-<!-- Hero (Overview) -->
-<section class="hero managed" id="overview">
-  <div class="glow" aria-hidden="true"></div>
+<!-- ============================================================== hero --- -->
+<section class="hero" id="overview">
   <div class="wrap">
     <div class="hero-grid">
-     <div class="hero-lead">
-      <span class="mono-label">Fully managed</span>
-      <h1>The new agency. <span>You're finally in control.</span></h1>
-      <p class="sub">Agencies do the work, but you hand over the keys. DIY tools hand you the keys, but you do all the work. Managed is the first thing that is both. <strong>We do the work. You keep every decision.</strong></p>
-      <div class="cta-row" data-cta-anchor>
-        <a class="btn" href="https://buy.stripe.com/28EbJ34An9hedRXbMm7kc00">Get managed support</a>
-        <p class="cta-note">$99 one-time setup <span aria-hidden="true">·</span> then $25/mo</p>
-      </div>
-      <div class="stat-strip">
-        <span class="chip">We build</span>
-        <span class="chip">You review</span>
-        <span class="chip">You merge</span>
-        <span class="chip accent">Always your call</span>
-      </div>
-     </div>
-     <aside class="hero-aside hero-echo" aria-hidden="true">
-      <div class="gh-card">
-        <div class="gh-check">
-          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <div><strong>Opened by SquidBay</strong><span class="d">scoped to pull requests only</span></div>
-        </div>
-        <div class="gh-check">
-          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <div><strong>No conflicts with base branch</strong><span class="d">Merging can be performed automatically.</span></div>
-        </div>
-        <div class="gh-foot">
-          <span class="gh-btn">Merge pull request</span>
-          <span class="gh-hint">Only you can click this.</span>
-        </div>
-        <span class="gh-cursor"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L6.35 2.85a.5.5 0 0 0-.85.36Z" fill="#111111" stroke="#ffffff" stroke-width="1.5"></path></svg></span>
-        <div class="gh-merged">
-          <span class="gh-badge"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>Merged</span>
-          <p>You merged this pull request.</p>
+      <div>
+        <span class="chip">Fully managed</span>
+        <h1>The new agency.<br><span class="accent">You're finally in control.</span><img class="squid-inline" src="assets/img/squid/squid.svg" alt="" width="56" height="70"></h1>
+        <p class="sub">Agencies do the work but hold the keys. Tools hand you the keys and all the work. This is the first thing that is both.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://github.com/squidbay/factory/issues/new?title=Managed%20support">
+            Get managed support
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+          </a>
+          <p class="cta-note">$99 one-time setup, then $25 a month. Cancel whenever.</p>
+          <a class="textlink" href="./">Or run it yourself, free</a>
         </div>
       </div>
-      <p class="demo-cap" style="margin-top: 12px;">We open it. You merge it.</p>
-     </aside>
+      <div>
+        <div class="mockwin">
+          <div class="mockwin-head">
+            <img src="assets/img/squid/squid-mark.svg" alt="" width="20" height="20">
+            <span class="n">your-site / pull requests</span>
+            <span class="live"><span class="dot-live"></span>Open</span>
+          </div>
+          <div class="mockwin-body">
+            <div class="pr-card">
+              <div class="t">Opened by SquidBay</div>
+              <div class="d">Scoped to pull requests only. No conflicts with the base branch.</div>
+              <div class="pr-meta"><span class="m">cannot merge</span><span class="m">cannot touch main</span></div>
+              <div class="pr-merge">Merge pull request</div>
+              <div class="pr-only">Only you can click this.</div>
+            </div>
+            <div class="bub bub-agent">We open it. You merge it.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- The category (Compare) -->
-<section id="compare">
+<!-- =========================================================== compare --- -->
+<section class="band" id="compare">
   <div class="wrap">
-    <span class="mono-label">A category that didn't exist</span>
-    <h2 class="section-title">Done for you, without giving up the wheel.</h2>
-    <div class="compare">
-      <div class="col">
-        <span class="k">The old agency</span>
-        <h3>Done for you</h3>
-        <div class="sep"></div>
-        <div class="crow"><span class="m ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>They do the work</span></div>
-        <div class="crow no"><span class="m bad"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span><span>You hand over control</span></div>
+    <div class="sec-head">
+      <span class="eyebrow">A category that didn't exist</span>
+      <h2>Done for you, without giving up the wheel.</h2>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <h3>The old agency</h3>
+        <p><b>Done for you.</b> They do the work — and you hand over control.</p>
       </div>
-      <div class="col">
-        <span class="k">DIY tools</span>
-        <h3>In your hands</h3>
-        <div class="sep"></div>
-        <div class="crow no"><span class="m bad"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span><span>You do all the work</span></div>
-        <div class="crow"><span class="m ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>You keep control</span></div>
+      <div class="card">
+        <h3>Tools you run yourself</h3>
+        <p><b>In your hands.</b> You keep control — and you do all the work.</p>
       </div>
-      <div class="col feature">
-        <span class="k">Managed</span>
+      <div class="card tier flag">
+        <span class="ribbon">Managed</span>
         <h3>Both, for the first time</h3>
-        <div class="sep"></div>
-        <div class="crow"><span class="m ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>We do the work</span></div>
-        <div class="crow"><span class="m ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span>You keep every decision</span></div>
+        <p><b>We do the work.</b> You keep every decision.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- The promise + merge gate -->
+<!-- ============================================================== gate --- -->
 <section id="gate">
   <div class="wrap">
-    <span class="mono-label">The one thing that never changes</span>
-    <h2 class="section-title">You are still the only one who clicks Merge.</h2>
-    <div class="gate-block">
+    <div class="split">
       <div>
-        <h3>Managed does not touch the gate.</h3>
-        <p class="gate-p">Everything we do arrives as a pull request in your factory. You read it, you approve it, you merge it. The work is ours. The decision stays yours. From your desk or from your phone, it is the same green button.</p>
-        <div class="devices" aria-hidden="true">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path></svg>
-          <span class="arrow">&rarr;</span>
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+        <span class="eyebrow">The one thing that never changes</span>
+        <h2>You are still the only one who clicks merge.</h2>
+        <p class="lede">Managed does not touch the gate. Everything we do arrives as a pull request: you read it, you approve it, you merge it. The work is ours; the decision stays yours.</p>
+        <div class="ticks">
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>From your desk or your phone,</b> it is the same button.</span></div>
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>We watch the whole system for you</b> — read-only, around the clock.</span></div>
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>Cancel and it is still your factory.</b> Nothing we did leaves with us.</span></div>
         </div>
-        <p class="demo-cap" style="margin-top: 12px;">Desk to pocket. Same green button.</p>
       </div>
       <div>
-      <div class="gh-card" role="img" aria-label="Animated demonstration: a cursor moves to GitHub's green Merge pull request button, clicks it, and the pull request flips to Merged.">
-        <div class="gh-check">
-          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <div><strong>Opened by SquidBay</strong><span class="d">scoped to pull requests only</span></div>
+        <div class="device" role="img" aria-label="A phone showing a pull request from SquidBay, waiting for you to merge it.">
+          <div class="device-screen">
+            <div class="device-status">
+              <span>9:41</span>
+              <span class="bars">
+                <svg width="18" height="11" viewBox="0 0 18 11" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx=".6" fill="currentColor"/><rect x="4.5" y="4.8" width="3" height="6.2" rx=".6" fill="currentColor"/><rect x="9" y="2.4" width="3" height="8.6" rx=".6" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx=".6" fill="currentColor"/></svg>
+                <svg width="25" height="12" viewBox="0 0 27 13" aria-hidden="true"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="currentColor" stroke-opacity=".4" fill="none"/><rect x="2" y="2" width="19" height="9" rx="2" fill="currentColor"/><path d="M25 4.5V8.5C25.8 8.2 26.5 7.2 26.5 6.5C26.5 5.8 25.8 4.8 25 4.5Z" fill="currentColor" fill-opacity=".4"/></svg>
+              </span>
+            </div>
+            <div class="device-app">
+              <div class="device-appbar">
+                <img src="assets/img/squid/squid-mark.svg" alt="" width="18" height="18">
+                <span class="who">Pull request #31</span>
+                <span class="st"><span class="dot-live"></span>open</span>
+              </div>
+              <div class="device-thread">
+                <div class="device-sys">Opened by SquidBay · scoped to pull requests only</div>
+                <div class="bub bub-agent">Pricing page updated, and the new tier added. Checked at phone, tablet and desktop widths.</div>
+                <div class="device-art">
+                  <span class="sq"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cross"/></svg></span>
+                  <span class="tx">
+                    <span class="k">READY TO MERGE</span>
+                    <span class="n">No conflicts with base</span>
+                    <span class="o">Waiting on you</span>
+                  </span>
+                </div>
+                <div class="pr-card">
+                  <div class="pr-merge">Merge pull request</div>
+                  <div class="pr-only">Only you can click this.</div>
+                </div>
+              </div>
+              <div class="device-composer">
+                <span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-plus"/></svg></span>
+                <span class="fld">Ask for a change…</span>
+                <span class="send"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-send"/></svg></span>
+              </div>
+            </div>
+          </div>
+          <div class="device-island"></div>
+          <div class="device-home"></div>
         </div>
-        <div class="gh-check">
-          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <div><strong>No conflicts with base branch</strong><span class="d">Merging can be performed automatically.</span></div>
-        </div>
-        <div class="gh-foot">
-          <span class="gh-btn">Merge pull request</span>
-          <span class="gh-hint">Only you can click this.</span>
-        </div>
-        <span class="gh-cursor"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L6.35 2.85a.5.5 0 0 0-.85.36Z" fill="#111111" stroke="#ffffff" stroke-width="1.5"></path></svg></span>
-        <div class="gh-merged">
-          <span class="gh-badge"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>Merged</span>
-          <p>You merged this pull request.</p>
-        </div>
-      </div>
-      <p class="demo-cap" style="margin-top: 14px;">We open it. You merge it.</p>
+        <p class="device-cap">Desk to pocket. Same merge button.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- How managed works -->
-<section id="how">
+<!-- =============================================================== how --- -->
+<section class="band" id="how">
   <div class="wrap">
-    <span class="mono-label">How managed works</span>
-    <h2 class="section-title">One permission. Nothing else. Yours to revoke.</h2>
-    <p class="install-lead">Once you are set up, a small SquidBay app runs on your factory, scoped to <strong>exactly one thing: opening pull requests.</strong> It cannot merge, and it cannot touch your main branch. The single permission stays yours to revoke in one click, anytime.</p>
-    <ol class="loop">
-      <li><span class="num">01</span><div><h3>You send a request</h3><p>Tell us what you need, in plain words. No tickets, no dashboards.</p></div></li>
-      <li><span class="num">02</span><div><h3>We do the work</h3><p>The seats plan, build, and check each other, the same way your own factory runs.</p></div></li>
-      <li><span class="num">03</span><div><h3>A pull request lands</h3><p>It arrives in your factory reading like a plain letter: what changed, and why.</p></div></li>
-      <li class="gate"><span class="num">04</span><div><h3>You merge</h3><p>Nothing ships until you click. The gate stays yours, always.</p></div></li>
-    </ol>
-    <div class="guardrail">
-      <span class="k">What we can never do</span>
-      <p>Merge anything, touch your main branch, or hold any of your other credentials. <strong>We are a contractor with a proposal pad. Your factory is yours.</strong></p>
-      <p>We watch the whole system for you &mdash; read-only, around the clock &mdash; and only ever hand you a change to approve.</p>
+    <div class="sec-head">
+      <span class="eyebrow">How managed works</span>
+      <h2>One permission. Nothing else. Yours to revoke.</h2>
+      <p class="lede">Once you are set up, a small SquidBay app runs on your factory, scoped to exactly one thing: opening pull requests. It cannot merge, and it cannot touch your main branch. That permission stays yours to revoke in one click, any time.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><p><b>You send a request.</b> Tell us what you need, in plain words. No tickets, no dashboards.</p></div>
+      <div class="step"><span class="n">02</span><p><b>We do the work.</b> The seats plan, build, and check each other, the same way your own factory runs.</p></div>
+      <div class="step"><span class="n">03</span><p><b>A pull request lands.</b> It arrives reading like a plain letter: what changed, and why.</p></div>
+      <div class="step"><span class="n">04</span><p><b>You merge.</b> Nothing ships until you click. The gate stays yours.</p></div>
+    </div>
+    <div class="gate-band">
+      <strong>What we can never do</strong>
+      <p>Merge anything, touch your main branch, or hold any of your other credentials. We are a contractor with a proposal pad. Your factory is yours.</p>
     </div>
   </div>
 </section>
 
-<!-- Pricing -->
+<!-- ============================================= apps — coming soon ------ -->
+<section class="appsband" id="apps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Coming soon</span>
+      <h2>Your Agent, on your home screen.</h2>
+      <p class="lede">The factory Agent is getting its own app — iOS and Android. Same Agent, same address, now a tap away.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <img src="assets/img/squid/squid-apps.svg" alt="" width="60" height="60" style="margin-bottom:10px">
+        <h3>iOS and Android</h3>
+        <p><span class="chip">Coming soon</span></p>
+        <p style="margin-top:8px">Included in the managed plan. Not an add-on, not another line on your bill.</p>
+      </div>
+      <div class="card">
+        <h3>Web app</h3>
+        <p><span class="chip on">Available now</span></p>
+        <p style="margin-top:8px">Free. Add it to your home screen and it behaves like an app. No store, no download, no wait.</p>
+      </div>
+      <div class="card">
+        <h3>Your credits, your bill</h3>
+        <p>The Agent runs on your own Claude credits. We add a thin platform fee on top of what you use, and never a markup on what Anthropic charges you.</p>
+      </div>
+    </div>
+    <p class="lede">One address, everywhere: <code class="mono small">agent.yoursite.com</code> in a browser, on your phone, and in the app.</p>
+  </div>
+</section>
+
+<!-- =========================================================== pricing --- -->
 <section id="pricing">
   <div class="wrap">
-    <span class="mono-label">The tiers</span>
-    <h2 class="section-title">Start free. Hand off when you want to.</h2>
+    <div class="sec-head">
+      <span class="eyebrow">The tiers</span>
+      <h2>Start free. Hand off when you want to.</h2>
+    </div>
     <div class="tiers">
-      <div class="tier">
-        <span class="k">Self-service</span>
+      <div class="card tier">
+        <h3>Self-service</h3>
         <p class="price">Free</p>
-        <p class="tsub">You bring your Claude plan</p>
-        <p class="tdesc">Run your own factory. It checks for updates daily and opens a PR when there is news, so you are never chasing it. Your seats do the work.</p>
+        <p class="desc">You bring your Claude plan.</p>
+        <p>Run your own factory. It checks for updates daily and opens a pull request when there is news, so you are never chasing it.</p>
+        <a class="btn-ghost" href="./">See the free tier</a>
       </div>
-      <div class="tier feature">
-        <span class="badge">Most hands-off</span>
-        <span class="k">Fully managed</span>
-        <p class="price">$99 <span>setup</span></p>
-        <p class="price2">then $25<span> / month</span></p>
-        <p class="tsub">Support PRs, covered by your subscription</p>
-        <p class="tdesc">Your everyday asks come in as support pull requests, covered by your monthly subscription. You tell us what you need; we post a ready-to-merge PR into your factory for you to review and approve. Bigger, non-standard jobs go to Custom.</p>
+      <div class="card tier flag">
+        <span class="ribbon">Most hands-off</span>
+        <h3>Fully managed</h3>
+        <p class="price">$99 setup <em>then $25 / month</em></p>
+        <p class="desc">Support pull requests, covered by your subscription.</p>
+        <p>You tell us what you need; we post a ready-to-merge pull request into your factory. Includes the iOS and Android Agent app when it lands, not a separate line item.</p>
+        <a class="btn" href="https://github.com/squidbay/factory/issues/new?title=Managed%20support">Get managed support</a>
       </div>
-      <div class="tier">
-        <span class="k">Custom</span>
+      <div class="card tier">
+        <h3>Custom</h3>
         <p class="price">By assignment</p>
-        <p class="tsub">Scoped and quoted per project</p>
-        <p class="tdesc">Bigger jobs. Real research, a new feature, something non-standard. Priced per project when you need it.</p>
+        <p class="desc">Scoped and quoted per project.</p>
+        <p>Bigger jobs: real research, a new feature, something non-standard.</p>
+        <a class="btn-ghost" href="https://github.com/squidbay/factory/issues/new?title=Custom%20project">Talk to us</a>
       </div>
     </div>
-    <p class="tiers-note">Pricing is a starting point and may adjust. The model will not: you approve every change, always.</p>
+    <p class="runline">$20 Claude Pro + $5 Cloudflare = a full team and a deployed website.</p>
+    <p class="honest">Pricing is a starting point and may adjust. The model will not: you approve every change, always.</p>
   </div>
 </section>
 
-<!-- Close -->
-<section class="close">
-  <div class="glow" aria-hidden="true"></div>
-  <div class="wrap" style="text-align: center;">
-    <p class="manifesto">Keep the wheel. <span>Hand off the work.</span></p>
-    <p class="muted" style="margin-top: 16px; font-size: 1.0625rem; max-width: 60ch; margin-left: auto; margin-right: auto;">Managed is the same factory and the same merge gate. We just do the building. From $99 setup, then $25 a month.</p>
-    <div class="cta-stack" data-cta-anchor>
-      <a class="btn" href="https://buy.stripe.com/28EbJ34An9hedRXbMm7kc00">Get managed support</a>
-      <span class="cta-note">You approve every change <span aria-hidden="true">·</span> Always</span>
+<!-- ============================================================= close --- -->
+<section class="closer band" id="start">
+  <div class="wrap">
+    <img class="squid-cta" src="assets/img/squid/squid.svg" alt="" width="78" height="98">
+    <h2>Hand off the work. Keep the wheel.</h2>
+    <p class="lede">Tell us what you need. The first pull request lands in your factory, and you decide what happens next.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/squidbay/factory/issues/new?title=Managed%20support">
+        Get managed support
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </a>
+      <p class="cta-note small muted">$99 setup, then $25 a month. Cancel whenever.</p>
+      <a class="textlink" href="./">Or run it yourself, free</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="row">
-      <a class="wordmark" href="./" aria-label="factory home">
-        <img src="assets/img/squid.png" alt="" width="24" height="24">
-        <span class="wm-full">squidbay/factory</span>
-      </a>
-      <nav aria-label="Footer">
-        <a href="./">factory home</a>
-        <a href="https://github.com/squidbay/factory">GitHub</a>
-        <a href="https://squidbay.io">SquidBay</a>
-      </nav>
-    </div>
-    <p class="legal">Independent open-source project; not affiliated with or endorsed by Anthropic. Claude is a trademark of Anthropic, PBC.</p>
-  </div>
-</footer>
+<footer>Built by Claude · Directed by humans · Runs forever</footer>
 
-<nav class="dock" aria-label="Section navigation" data-show="false">
-  <div class="dock-cta">
-    <a class="btn" href="https://buy.stripe.com/28EbJ34An9hedRXbMm7kc00">Get managed support</a>
-  </div>
-  <div class="dock-bar">
-    <button type="button" class="dock-tab" data-target="top" aria-current="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="dt-lab">Overview</span></button>
-    <button type="button" class="dock-tab" data-target="#compare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg><span class="dt-lab">Compare</span></button>
-    <button type="button" class="dock-tab" data-target="#gate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="dt-lab">Gate</span></button>
-    <button type="button" class="dock-tab" data-target="#how"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg><span class="dt-lab">How</span></button>
-    <button type="button" class="dock-tab" data-target="#pricing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59z"></path><circle cx="7.5" cy="7.5" r="1"></circle></svg><span class="dt-lab">Pricing</span></button>
-  </div>
-</nav>
+<div id="chatRoot" data-chat-enabled="false" data-endpoint="https://api.squidbay.io/chat" data-product="factory"></div>
 
 <script src="assets/js/factory.js" defer></script>
-
 </body>
 </html>
