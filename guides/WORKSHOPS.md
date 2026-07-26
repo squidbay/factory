@@ -99,6 +99,15 @@ Repeat steps 2–6 for each workshop: one narrow write key, one secret, one mani
 
 ---
 
+## Write it on the map
+
+The moment you add a workshop, your factory has more than one place things live — and the branch
+your host actually serves may not be the branch you edit. **Add a row to
+[`THE-MAP.md`](THE-MAP.md)**: the repo, the serving branch, and where the styles and scripts sit.
+That file also carries the reachability table — which of your sessions can see your live site and
+which can't — so a seat never reports "I can't find it" or "I can't reach it" as if something
+were broken. A workshop that isn't on the map is a workshop a seat will get lost in.
+
 ## What stays true, always
 
 - **Every workshop change is a pull request you merge.** No workflow here merges anything or writes `main` — the guards are in the workflow itself, not just the convention.
