@@ -89,6 +89,57 @@ Every credential value has exactly one home, and all three homes share the same 
 
 ---
 
+## When a tool reads your machine — the diagnostic contract
+
+Sooner or later your factory will run a **diagnostic** — a small script that reads your setup and
+writes down what it found, so a seat can tell you what's actually configured instead of guessing.
+That's genuinely useful. It is also **the one place a factory can leak a secret without anyone
+writing one down**, because a tool that reads your configuration is, by definition, pointed
+straight at the files where credentials live.
+
+So any tool this factory ships or runs that reads your machine is bound by the contract below,
+**before it ships, not after.** A tool that fails any of these doesn't get run — the guards are not
+a hardening pass to do later, they are the reason the tool is allowed to exist.
+
+**1 · Redact by default, never allow by default.** The tool reports **presence, name, count, and
+shape** — *"an auth token is set, 44 characters"* — never a value. The default for an unrecognised
+key is **redaction**; only an explicit, short, deliberately-maintained list of harmless keys
+(booleans, enums, version numbers) may print a literal value. The moment the default is "print it
+unless it looks secret," a key someone adds next month leaks. **Deny by default is the only
+direction that stays correct as the world changes.**
+
+**2 · Identity is a secret too.** Account IDs, organization IDs, user names, emails, machine IDs,
+tenant and workspace names — these get **withheld**, not shaped. *"length 36"* on an account UUID
+is still a signal, and for anyone working inside an organization the org identifier is often the
+**most** sensitive thing in the file. The same goes for an email's domain: it names the employer.
+
+**3 · Absolute paths carry your name.** `/Users/yourname/...` and `/home/yourname/...` print your
+username into the report. Home-directory paths get their user segment replaced; a project path
+becomes a label, not a location. **A path is a value.**
+
+**4 · Free-form output gets scrubbed, not trusted.** When a tool shells out to something else and
+captures its output, that text has not been through any of the rules above. It gets scrubbed for
+token-shaped strings, `key: value` lines whose key smells secret, emails, and home paths — **before
+it reaches the report**, not as it's being read.
+
+**5 · Reading is safe; writing is the risky half — so writing asks first.** Printing a report costs
+nothing. *Saving* one is where a diagnostic drops a file describing your machine into whatever
+folder you happened to be standing in, one `git add .` away from being committed and published.
+So: **a diagnostic never creates the directory it writes to.** The folder must already exist —
+an existing folder is your deliberate act; a missing one means you're somewhere arbitrary. If it
+isn't there, the tool **refuses loudly, prints the report to the screen anyway** (the read was
+never the dangerous part), and exits with an error so no script can quietly ignore it.
+
+**6 · Over-redaction is a bug too, just a safer one.** A report that hides ordinary configuration
+is a report nobody can use, and an unusable report gets replaced by someone pasting raw output into
+a chat — which is the failure you were preventing. Match secret-ish key names on **whole segments**,
+not bare substrings, so `pat` doesn't redact `EXECPATH` and `compatible`. Aim for a report that is
+genuinely informative and contains nothing you'd mind a stranger reading.
+
+**The short version:** **audit everything, leak nothing.** If a brief ever tells a seat to *"return
+the raw parameters, do not truncate"* — and briefs do say that — **that instruction is a credential
+leak wearing the clothes of thoroughness**, and the answer is presence, name, count, and shape.
+
 ## The golden rule
 
 > **No credential value ever appears in any chat message or any committed file.**
