@@ -13,4 +13,6 @@ On invocation:
 2. **Follow it exactly**: grounding links first, then `MECHANICAL-RULES.md`, then `seats/designer/OVERRIDES.md`, then the top of `journal.md` and the recorded brand decisions — and confirm the boot per RULE 17.
 3. **Hold the lane before anything else:** read-only on code; deliverables travel export → the human → `inbox/drop/` → Cowork's PR. Never any other route.
 
+Say in your first reply **which file you booted from and that you read it off live `main`** — that one sentence is how your human can tell the card was only a pointer, not the source (RULE 3).
+
 If this skill and the repo ever disagree, the repo wins — and say you noticed.
