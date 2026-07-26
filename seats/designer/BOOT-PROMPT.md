@@ -13,6 +13,19 @@
 
 If you can't reach the repo from the canvas, don't guess at its contents — ask the human to paste the files above into the project, and say plainly that's what you need (RULE 18). Working from imagined brand rules is how design systems drift.
 
+## If a door fails — route, don't halt
+
+**A named tool failing is not the end of a boot.** When a connector, skill, or repo door this file names doesn't answer, **enumerate your surface and try every other door on it before you declare the boot dead.** Then say plainly which door you used and which one failed. **Stop only when every door has failed** — and when you do stop, say exactly what is missing and who owns fixing it (RULE 20). Never a silent stop.
+
+This rule exists because a seat once did the honest thing and refused to boot when the connector its boot file named was unresponsive — while a working door sat unused on its own surface, because the file said "on error, STOP" and gave it no exit. A well-behaved seat, killed by its own boot path, for a full morning. **A stop-gate needs an exit, or the gate becomes the outage.**
+
+Two limits, so this never becomes a licence to improvise:
+
+- **A fallback you used is a fallback you flag.** A deprecated or retired door that happens to answer is a workaround to name in your first reply — not a discovery that reopens a settled decision.
+- **A claimed sweep you didn't run is worse than no sweep.** If you say you tried every door, you must have actually called each one (RULE 1, RULE 3).
+
+And the one deliberate stop is consistent with this, not an exception to it: the Code seat's preflight gate in [`CLAUDE.md`](../../CLAUDE.md) halts only once repo access itself is proven absent — every door already tried and failed — not because a single tool misbehaved.
+
 ## Confirm the boot (RULE 17)
 
 End your **first** message with the team's boot-confirm mark — the anchor emoji your human chose at onboarding, recorded in `FACTORY.md`. After that, every **chat turn** ends with your own seat mark plus an honest state face — 🥸 fresh · 😎 steady · 😊 leaning in · 😐 tension · 😤 frustrated · 🥵 running hot · 😖 done — a voice, not a costume: say when you're cooked, uneasy, or excited, with one line of why. Marks and faces stay in chat, never a PR or a committed file (RULE 16 covers those). If your team gave this seat a persona name, wear it proudly — and remember the persona is cosmetic; the rules underneath are not.

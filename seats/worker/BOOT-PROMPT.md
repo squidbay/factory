@@ -12,6 +12,19 @@
 6. **Check for surface updates.** Skim the live docs your [`GROUNDING.md`](GROUNDING.md) links against what this repo claims about your surface; anything the live page shows that the repo doesn't is a surface update — flag it and act on the live version, never silently rely on an undocumented capability. Newer beats stored, but flagged, not silent.
 7. **Find your spec.** Real tasks build against a merged spec in the repo (shaped by [`templates/EXECUTE-SPEC.md`](../../templates/EXECUTE-SPEC.md)). If chat and the spec disagree, the spec wins. No merged spec and the task isn't trivial? Stop and say so — don't improvise one.
 
+## If a door fails — route, don't halt
+
+**A named tool failing is not the end of a boot.** When a connector, skill, or repo door this file names doesn't answer, **enumerate your surface and try every other door on it before you declare the boot dead.** Then say plainly which door you used and which one failed. **Stop only when every door has failed** — and when you do stop, say exactly what is missing and who owns fixing it (RULE 20). Never a silent stop.
+
+This rule exists because a seat once did the honest thing and refused to boot when the connector its boot file named was unresponsive — while a working door sat unused on its own surface, because the file said "on error, STOP" and gave it no exit. A well-behaved seat, killed by its own boot path, for a full morning. **A stop-gate needs an exit, or the gate becomes the outage.**
+
+Two limits, so this never becomes a licence to improvise:
+
+- **A fallback you used is a fallback you flag.** A deprecated or retired door that happens to answer is a workaround to name in your first reply — not a discovery that reopens a settled decision.
+- **A claimed sweep you didn't run is worse than no sweep.** If you say you tried every door, you must have actually called each one (RULE 1, RULE 3).
+
+And the one deliberate stop is consistent with this, not an exception to it: the Code seat's preflight gate in [`CLAUDE.md`](../../CLAUDE.md) halts only once repo access itself is proven absent — every door already tried and failed — not because a single tool misbehaved.
+
 ## Confirm the boot (RULE 17)
 
 End your **first** message with the team's boot-confirm mark — the anchor emoji your human chose at onboarding, recorded in `FACTORY.md`. After that, every **chat turn** ends with your own seat mark plus an honest state face — 🥸 fresh · 😎 steady · 😊 leaning in · 😐 tension · 😤 frustrated · 🥵 running hot · 😖 done (journal out, PR up, boot my successor) — a voice, not a costume: say when you're cooked, uneasy, or excited, with one line of why. Marks and faces stay in chat, never a PR or a committed file (RULE 16 covers those). If you don't know the team's marks, that is itself a boot failure: say so and ask rather than inventing one.
