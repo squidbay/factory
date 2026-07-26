@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 200" width="160" height="200" role="img" aria-label="The factory squid">
+  <title>The factory squid</title>
+  <defs>
+    <linearGradient id="mantle" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#FF8A4C"/>
+      <stop offset="0.45" stop-color="#FF6B35"/>
+      <stop offset="1" stop-color="#E0761A"/>
+    </linearGradient>
+    <linearGradient id="arm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F27C2C"/>
+      <stop offset="1" stop-color="#C4611A"/>
+    </linearGradient>
+    <linearGradient id="fin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFA267"/>
+      <stop offset="1" stop-color="#F7931A"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.34" cy="0.22" r="0.62">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- arms: eight, drawn behind the mantle so they read as coming from under it -->
+  <g fill="none" stroke="url(#arm)" stroke-linecap="round">
+    <path d="M60 96 C53 120 46 139 35 153 C29 161 26 169 31 175" stroke-width="8"/>
+    <path d="M69 99 C64 125 60 147 54 168" stroke-width="9.5"/>
+    <path d="M77 101 C76 130 75 153 73 177" stroke-width="10.5"/>
+    <path d="M87 101 C89 130 91 152 93 176" stroke-width="10.5"/>
+    <path d="M95 99 C100 125 105 146 111 166" stroke-width="9.5"/>
+    <path d="M104 96 C114 119 122 138 133 152 C139 160 142 168 137 175" stroke-width="8"/>
+    <!-- the two long feeding tentacles, thinner, with paddle tips -->
+    <path d="M66 100 C50 130 40 154 28 172" stroke-width="5" opacity="0.9"/>
+    <path d="M98 100 C114 130 124 154 136 172" stroke-width="5" opacity="0.9"/>
+  </g>
+
+  <!-- fins near the mantle tip -->
+  <path d="M70 24 C55 18 38 25 30 40 C43 46 59 42 70 35 Z" fill="url(#fin)"/>
+  <path d="M90 24 C105 18 122 25 130 40 C117 46 101 42 90 35 Z" fill="url(#fin)"/>
+
+  <!-- mantle -->
+  <path d="M80 12 C93 12 105 34 107 62 C109 88 98 104 80 104 C62 104 51 88 53 62 C55 34 67 12 80 12 Z" fill="url(#mantle)"/>
+  <path d="M80 12 C93 12 105 34 107 62 C109 88 98 104 80 104 C62 104 51 88 53 62 C55 34 67 12 80 12 Z" fill="url(#sheen)"/>
+
+  <!-- bioluminescent spots: the only glow on the body -->
+  <g>
+    <circle cx="68" cy="44" r="8.06" fill="#00D9FF" opacity="0.10"/>
+    <circle cx="68" cy="44" r="5.27" fill="#00D9FF" opacity="0.20"/>
+    <circle cx="68" cy="44" r="3.1" fill="#00D9FF"/>
+    <circle cx="90" cy="53" r="6.24" fill="#00D9FF" opacity="0.10"/>
+    <circle cx="90" cy="53" r="4.08" fill="#00D9FF" opacity="0.20"/>
+    <circle cx="90" cy="53" r="2.4" fill="#00D9FF"/>
+    <circle cx="74" cy="61" r="4.94" fill="#00D9FF" opacity="0.10"/>
+    <circle cx="74" cy="61" r="3.23" fill="#00D9FF" opacity="0.20"/>
+    <circle cx="74" cy="61" r="1.9" fill="#00D9FF"/>
+  </g>
+
+  <!-- eyes -->
+  <ellipse cx="67" cy="78" rx="9" ry="9.6" fill="#1A0D06"/>
+  <ellipse cx="93" cy="78" rx="9" ry="9.6" fill="#1A0D06"/>
+  <circle cx="70" cy="74.5" r="3" fill="#FFFFFF" opacity="0.92"/>
+  <circle cx="96" cy="74.5" r="3" fill="#FFFFFF" opacity="0.92"/>
+  <circle cx="64" cy="82" r="1.4" fill="#FFFFFF" opacity="0.45"/>
+  <circle cx="90" cy="82" r="1.4" fill="#FFFFFF" opacity="0.45"/>
+</svg>

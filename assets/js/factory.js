@@ -1,164 +1,258 @@
-/* factory.js — shared behavior for the factory public pages.
-   Every module guards on its element, so one file serves both pages. */
+/* ============================================================================
+   factory.js — factory.squidbay.io
+
+   Three jobs, and nothing else:
+     1. the abyss bubbles (ported from squidbay/squidbay, motion-gated)
+     2. the hero chat mock's demo tabs
+     3. the real chat widget, behind a flag
+
+   What used to be here and is deliberately gone: the `rise` decorative
+   particle layer and the two oversized `.glow` blobs. Neither carried any
+   meaning, and both are the recognisable signature of a generated page.
+   ============================================================================ */
 (function () {
   'use strict';
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Assembly-line arrow run (index) ---------- */
-  (function () {
-    var line = document.getElementById('flowLine');
-    if (line && !reduce) {
-      new IntersectionObserver(function (es) { es.forEach(function (e) { line.classList.toggle('run', e.isIntersecting); }); }, { threshold: 0.4 }).observe(line);
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ------------------------------------------------------------ bubbles ---
+     Port of squidbay/squidbay js/components.js initAbyssBubbles, with one
+     addition the source does not have: it does not run at all when the
+     visitor has asked for reduced motion. */
+  function initBubbles() {
+    if (reduced) return;
+    if (document.getElementById('abyssBubbles')) return;
+
+    var container = document.createElement('div');
+    container.className = 'abyss-bubbles';
+    container.id = 'abyssBubbles';
+    container.setAttribute('aria-hidden', 'true');
+    document.body.prepend(container);
+
+    function createBubble() {
+      if (document.hidden) return;
+      var bubble = document.createElement('div');
+      bubble.className = 'abyss-bubble';
+
+      var size = 4 + Math.random() * 28;
+      var duration = 6 + Math.random() * 12;
+      var delay = Math.random() * 0.5;
+      var drift = -40 + Math.random() * 80;
+
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = (Math.random() * 100) + '%';
+      bubble.style.animationDuration = duration + 's';
+      bubble.style.animationDelay = delay + 's';
+      bubble.style.setProperty('--drift', drift + 'px');
+      bubble.style.setProperty('--drift-end', (drift + (-20 + Math.random() * 40)) + 'px');
+      bubble.style.setProperty('--scale-end', 0.6 + Math.random() * 0.5);
+
+      container.appendChild(bubble);
+      setTimeout(function () {
+        if (bubble.parentNode) bubble.remove();
+      }, (duration + delay) * 1000 + 200);
     }
-  })();
 
-  /* ---------- Dispatch chat demo (index) ---------- */
-  (function () {
-    var root = document.getElementById('dispatchChat');
-    if (!root) return;
-    var body = root.querySelector('.phone-body');
-    var CHK = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-    var UAVA = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
-    var DAVA = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg>';
-    var PR = '<div class="pr-card"><div class="h"><span>Pull request #128</span></div><div class="pt">Add testimonials section</div><div class="chk"><span>' + CHK + ' Mobile layout passes down to 380px</span><span>' + CHK + ' Guardrails: clean</span><span>' + CHK + ' No conflicts with main</span></div></div>';
-    var convo = [
-      { t: 'user', m: 'Add a testimonials section to the site, and make sure it looks right on a phone.', d: 1275 },
-      { t: 'dispatch', m: 'On it. Sending this down the line to the team.', d: 1500 },
-      { t: 'sys', m: 'Dispatched · Cowork plans → Code builds → Design draws', d: 1425 },
-      { t: 'dispatch', m: "Plan's approved and the seats are building. I'll ping you the moment there's something to look at. Go live your day.", d: 1800 },
-      { t: 'sys', m: '20 minutes later', d: 1275 },
-      { t: 'dispatch', m: 'Pull request is ready. The browser seat and I checked it on real phones. Here is the gist:', pr: true, d: 2475 },
-      { t: 'user', m: 'Nice, reads well. Merging now.', d: 1500 },
-      { t: 'merged', m: 'Merged by you · live in ~1 min', d: 1500 },
-      { t: 'dispatch', m: 'Done. The journal is updated, so tomorrow’s shift starts where this one ended.', d: 1950 },
-      { t: 'sys', m: 'You held the gate. The team did the work.', d: 2250 }
-    ];
-    var i = 0, timer = null, running = false, started = false;
-    var START_INDEX = 2;
+    for (var i = 0; i < 12; i++) setTimeout(createBubble, i * 250);
+    setInterval(createBubble, 1000);
+  }
 
-    function bubble(item) {
-      var d = document.createElement('div');
-      d.className = 'msg ' + item.t;
-      var ava = item.t === 'user' ? UAVA : DAVA;
-      d.innerHTML = '<span class="m-ava">' + ava + '</span><div class="b"><span>' + item.m + '</span>' + (item.pr ? PR : '') + '</div>';
-      return d;
+  /* --------------------------------------------------------- demo tabs ---
+     Swaps the three bubbles in the hero mock. No navigation, no network,
+     no state beyond the DOM. */
+  var DEMOS = [
+    {
+      ask: 'Add a testimonials section to the site, and make sure it looks right on a phone.',
+      ack: 'On it. Sending this down the line.',
+      title: 'Pull request #14 is ready for you.',
+      detail: 'Testimonials section added. Checked at phone, tablet and desktop widths.',
+      meta: ['3 files changed', 'checks passed']
+    },
+    {
+      ask: 'The pricing page is squashed on my phone. Can someone look at it?',
+      ack: 'Looking now. The Inspector will drive it on a real phone before anything comes back.',
+      title: 'Pull request #15 is ready for you.',
+      detail: 'Pricing cards stack below 768px. Checked in portrait and landscape.',
+      meta: ['2 files changed', 'no overflow']
+    },
+    {
+      ask: 'Write this week’s post about what we shipped, and keep it short.',
+      ack: 'Drafting from the journal, so it only claims what actually shipped.',
+      title: 'Pull request #16 is ready for you.',
+      detail: 'Draft post, 380 words, every claim traced to a merged change.',
+      meta: ['1 file changed', 'sources listed']
     }
-    function sysLine(item) { var d = document.createElement('div'); d.className = 'msg-sys'; d.textContent = item.m; return d; }
-    function mergedLine(item) { var d = document.createElement('div'); d.className = 'msg-merged'; d.innerHTML = CHK + '<span>' + item.m + '</span>'; return d; }
-    function toBottom() { body.scrollTop = body.scrollHeight; }
-    function render(item) {
-      if (item.t === 'sys') body.appendChild(sysLine(item));
-      else if (item.t === 'merged') body.appendChild(mergedLine(item));
-      else body.appendChild(bubble(item));
-      toBottom();
-    }
-    function showTyping() {
-      var d = document.createElement('div');
-      d.className = 'msg dispatch'; d.id = 'ds-typing';
-      d.innerHTML = '<span class="m-ava">' + DAVA + '</span><div class="b typing"><span></span><span></span><span></span></div>';
-      body.appendChild(d); toBottom();
-    }
-    function clearTyping() { var t = document.getElementById('ds-typing'); if (t) t.remove(); }
-    function next() {
-      if (i >= convo.length) { timer = setTimeout(restart, 5000); return; }
-      var item = convo[i];
-      if (item.t === 'dispatch') {
-        showTyping();
-        timer = setTimeout(function () { clearTyping(); render(item); i++; timer = setTimeout(next, item.d); }, 720);
-      } else {
-        render(item); i++; timer = setTimeout(next, item.d);
-      }
-    }
-    function seed() { body.innerHTML = ''; render(convo[0]); render(convo[1]); }
-    function restart() { seed(); i = START_INDEX; next(); }
-    function start() {
-      if (running) return; running = true;
-      if (reduce) { for (var k = START_INDEX; k < convo.length; k++) render(convo[k]); return; }
-      i = START_INDEX; timer = setTimeout(next, 400);
-    }
-    seed();
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting && !started) { started = true; start(); io.unobserve(e.target); } });
-    }, { threshold: 0.25 });
-    io.observe(root);
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) { if (timer) { clearTimeout(timer); timer = null; } }
-      else if (started && !reduce) { if (timer) clearTimeout(timer); restart(); }
-    });
-  })();
+  ];
 
-  /* ---------- App-shell dock: scroll-to tabs + scroll-spy + floating CTA (both pages) ---------- */
-  (function () {
-    var dock = document.querySelector('.dock');
-    if (!dock) return;
-    var appbar = document.querySelector('.appbar');
-    var tabs = Array.prototype.slice.call(dock.querySelectorAll('.dock-tab'));
+  function renderDemo(i) {
+    var thread = document.getElementById('heroThread');
+    if (!thread) return;
+    var d = DEMOS[i] || DEMOS[0];
+    var cells = d.meta.map(function () { return '<span class="m"></span>'; }).join('');
 
-    /* map each tab to its target section element ("top" => document top) */
-    var targets = tabs.map(function (t) {
-      var sel = t.getAttribute('data-target');
-      if (!sel || sel === 'top') return { tab: t, el: null };
-      return { tab: t, el: document.querySelector(sel) };
-    });
+    thread.innerHTML =
+      '<div class="bub bub-user"></div>' +
+      '<div class="bub bub-agent"></div>' +
+      '<div class="pr-card">' +
+        '<div class="t"></div>' +
+        '<div class="d"></div>' +
+        '<div class="pr-meta">' + cells + '</div>' +
+        '<div class="pr-merge">Merge pull request</div>' +
+        '<div class="pr-only">Only you can click this.</div>' +
+      '</div>';
 
-    function barOffset() { return (appbar ? appbar.offsetHeight : 56) + 12; }
+    // textContent everywhere: no copy on this page is ever written as HTML.
+    thread.querySelector('.bub-user').textContent = d.ask;
+    thread.querySelector('.bub-agent').textContent = d.ack;
+    thread.querySelector('.pr-card .t').textContent = d.title;
+    thread.querySelector('.pr-card .d').textContent = d.detail;
+    var ms = thread.querySelectorAll('.pr-meta .m');
+    for (var k = 0; k < ms.length; k++) ms[k].textContent = d.meta[k];
+  }
 
-    tabs.forEach(function (t) {
-      t.addEventListener('click', function () {
-        var sel = t.getAttribute('data-target');
-        if (!sel || sel === 'top') {
-          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-        } else {
-          var el = document.querySelector(sel);
-          if (el) {
-            var y = el.getBoundingClientRect().top + window.pageYOffset - barOffset();
-            window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
-          }
-        }
-        setActive(t);
+  function initDemoTabs() {
+    var tabs = document.querySelectorAll('.demo-tab');
+    if (!tabs.length) return;
+    Array.prototype.forEach.call(tabs, function (tab) {
+      tab.addEventListener('click', function () {
+        Array.prototype.forEach.call(tabs, function (t) {
+          t.setAttribute('aria-selected', String(t === tab));
+        });
+        renderDemo(parseInt(tab.getAttribute('data-demo'), 10) || 0);
       });
     });
+  }
 
-    function setActive(active) {
-      tabs.forEach(function (t) { t.setAttribute('aria-current', t === active ? 'true' : 'false'); });
+  /* -------------------------------------------------------- chat widget ---
+     Ported from squidbay/squidbay components/chatbot.js. The rules carried
+     over unchanged: the page talks to a server-side proxy and never holds a
+     key, messages are rate-limited, input is capped, and the conversation is
+     remembered in sessionStorage only.
+
+     If the proxy is not yet serving this product, data-chat-enabled stays
+     "false" and the launcher is never rendered — a launcher that opens an
+     error is worse than no launcher. */
+  var MAX_INPUT = 500;
+  var RATE_LIMIT_MS = 2000;
+  var MAX_MESSAGES = 10;
+  var STORE_KEY = 'factory-chat';
+
+  function initChat() {
+    var root = document.getElementById('chatRoot');
+    if (!root || root.getAttribute('data-chat-enabled') !== 'true') return;
+
+    var endpoint = root.getAttribute('data-endpoint');
+    var product = root.getAttribute('data-product') || 'factory';
+    var lastSent = 0;
+    var sent = 0;
+
+    var launcher = document.createElement('button');
+    launcher.id = 'chatLauncher';
+    launcher.type = 'button';
+    launcher.setAttribute('aria-label', 'Ask the factory');
+    launcher.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-coach"/></svg>';
+
+    var panel = document.createElement('div');
+    panel.id = 'chatPanel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-label', 'Ask the factory');
+    panel.innerHTML =
+      '<div class="cw-head">' +
+        '<img src="assets/img/squid/squid-mark.svg" alt="" width="22" height="22">' +
+        '<span class="n">Ask the factory</span>' +
+        '<button class="cw-close" type="button" aria-label="Close">✕</button>' +
+      '</div>' +
+      '<div class="cw-log" id="cwLog" role="log" aria-live="polite"></div>' +
+      '<form class="cw-foot">' +
+        '<input type="text" maxlength="' + MAX_INPUT + '" placeholder="Ask a question…" aria-label="Your question">' +
+        '<button type="submit" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-send"/></svg></button>' +
+      '</form>';
+
+    document.body.appendChild(launcher);
+    document.body.appendChild(panel);
+
+    var log = panel.querySelector('#cwLog');
+    var form = panel.querySelector('form');
+    var input = panel.querySelector('input');
+
+    function say(who, text) {
+      var el = document.createElement('div');
+      el.className = 'bub ' + (who === 'you' ? 'bub-user' : 'bub-agent');
+      el.textContent = text;
+      log.appendChild(el);
+      log.scrollTop = log.scrollHeight;
     }
 
-    /* scroll-spy: the last section whose top has passed the app-bar line wins */
-    var spyRaf;
-    function spy() {
-      var line = barOffset() + 8;
-      var current = targets[0].tab;
-      for (var k = 0; k < targets.length; k++) {
-        var el = targets[k].el;
-        if (!el) { if (window.pageYOffset < 40) current = targets[k].tab; continue; }
-        if (el.getBoundingClientRect().top <= line) current = targets[k].tab;
-      }
-      /* near the very bottom, light the last tab */
-      if ((window.innerHeight + window.pageYOffset) >= (document.body.scrollHeight - 4)) {
-        current = targets[targets.length - 1].tab;
-      }
-      setActive(current);
+    function restore() {
+      try {
+        var prior = JSON.parse(sessionStorage.getItem(STORE_KEY) || '[]');
+        prior.forEach(function (m) { say(m.who, m.text); });
+        sent = prior.filter(function (m) { return m.who === 'you'; }).length;
+      } catch (e) { /* a blocked or full sessionStorage is not worth a failure */ }
     }
-    window.addEventListener('scroll', function () { cancelAnimationFrame(spyRaf); spyRaf = requestAnimationFrame(spy); }, { passive: true });
-    window.addEventListener('resize', function () { cancelAnimationFrame(spyRaf); spyRaf = requestAnimationFrame(spy); });
-    spy();
 
-    /* floating CTA pill: show only while no inline CTA anchor is on screen */
-    if ('IntersectionObserver' in window) {
-      var anchors = document.querySelectorAll('[data-cta-anchor]');
-      if (!anchors.length) { dock.setAttribute('data-show', 'true'); }
-      else {
-        var visible = 0, seen = new WeakMap();
-        var cio = new IntersectionObserver(function (es) {
-          es.forEach(function (e) {
-            var was = seen.get(e.target) || false;
-            if (e.isIntersecting && !was) { visible++; seen.set(e.target, true); }
-            else if (!e.isIntersecting && was) { visible--; seen.set(e.target, false); }
-          });
-          dock.setAttribute('data-show', visible === 0 ? 'true' : 'false');
-        }, { threshold: 0.1 });
-        Array.prototype.forEach.call(anchors, function (a) { cio.observe(a); });
-      }
+    function remember(who, text) {
+      try {
+        var prior = JSON.parse(sessionStorage.getItem(STORE_KEY) || '[]');
+        prior.push({ who: who, text: text });
+        sessionStorage.setItem(STORE_KEY, JSON.stringify(prior));
+      } catch (e) { /* same */ }
     }
-  })();
+
+    launcher.addEventListener('click', function () {
+      var open = panel.getAttribute('data-open') === 'true';
+      panel.setAttribute('data-open', String(!open));
+      if (!open) input.focus();
+    });
+    panel.querySelector('.cw-close').addEventListener('click', function () {
+      panel.setAttribute('data-open', 'false');
+      launcher.focus();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var text = input.value.trim().slice(0, MAX_INPUT);
+      if (!text) return;
+      if (Date.now() - lastSent < RATE_LIMIT_MS) return;
+      if (sent >= MAX_MESSAGES) {
+        say('factory', 'That’s as far as this window goes. Reload the page to start again.');
+        return;
+      }
+      lastSent = Date.now();
+      sent++;
+      say('you', text);
+      remember('you', text);
+      input.value = '';
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product: product, message: text })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var reply = (data && data.reply) || 'Something went wrong on our side. Try again in a moment.';
+          say('factory', reply);
+          remember('factory', reply);
+        })
+        .catch(function () {
+          say('factory', 'I couldn’t reach the factory just now. Try again in a moment.');
+        });
+    });
+
+    restore();
+  }
+
+  function start() {
+    initBubbles();
+    initDemoTabs();
+    initChat();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 })();

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200" width="260" height="200" role="img" aria-label="The factory squid resting a tentacle on a chat window">
+  <title>The always-on Agent</title>
+  <defs>
+    <linearGradient id="a-mantle" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#FF8A4C"/>
+      <stop offset="0.45" stop-color="#FF6B35"/>
+      <stop offset="1" stop-color="#E0761A"/>
+    </linearGradient>
+    <linearGradient id="a-arm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F27C2C"/>
+      <stop offset="1" stop-color="#C4611A"/>
+    </linearGradient>
+    <linearGradient id="a-fin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFA267"/>
+      <stop offset="1" stop-color="#F7931A"/>
+    </linearGradient>
+    <radialGradient id="a-sheen" cx="0.34" cy="0.22" r="0.62">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- the chat window the Agent keeps watch over -->
+  <g>
+    <rect x="150" y="86" width="98" height="86" rx="10" fill="#18181A" stroke="rgba(255,255,255,.14)"/>
+    <rect x="150" y="86" width="98" height="20" rx="10" fill="#232326"/>
+    <rect x="150" y="96" width="98" height="10" fill="#232326"/>
+    <circle cx="161" cy="96" r="3" fill="#00D9FF"/>
+    <rect x="170" y="93" width="30" height="5" rx="2.5" fill="rgba(255,255,255,.28)"/>
+    <rect x="160" y="118" width="52" height="8" rx="4" fill="#232326"/>
+    <rect x="160" y="132" width="66" height="8" rx="4" fill="#232326"/>
+    <rect x="186" y="146" width="52" height="8" rx="4" fill="#00D9FF" opacity="0.75"/>
+    <rect x="160" y="160" width="78" height="4" rx="2" fill="rgba(255,255,255,.10)"/>
+  </g>
+
+  <!-- arms -->
+  <g fill="none" stroke="url(#a-arm)" stroke-linecap="round">
+    <path d="M62 96 C54 120 46 140 34 154 C28 162 25 170 30 176" stroke-width="8"/>
+    <path d="M71 99 C66 125 62 147 56 168" stroke-width="9.5"/>
+    <path d="M79 101 C78 130 77 153 75 177" stroke-width="10.5"/>
+    <path d="M89 101 C91 128 94 148 98 168" stroke-width="10.5"/>
+    <path d="M97 99 C104 122 112 138 124 148" stroke-width="9"/>
+    <!-- the tentacle that comes to rest on the window's edge -->
+    <path d="M104 94 C124 100 142 104 158 100" stroke-width="7.5"/>
+    <path d="M68 100 C52 130 42 154 30 172" stroke-width="5" opacity="0.9"/>
+  </g>
+
+  <!-- fins -->
+  <path d="M72 24 C57 18 40 25 32 40 C45 46 61 42 72 35 Z" fill="url(#a-fin)"/>
+  <path d="M92 24 C107 18 124 25 132 40 C119 46 103 42 92 35 Z" fill="url(#a-fin)"/>
+
+  <!-- mantle -->
+  <path d="M82 12 C95 12 107 34 109 62 C111 88 100 104 82 104 C64 104 53 88 55 62 C57 34 69 12 82 12 Z" fill="url(#a-mantle)"/>
+  <path d="M82 12 C95 12 107 34 109 62 C111 88 100 104 82 104 C64 104 53 88 55 62 C57 34 69 12 82 12 Z" fill="url(#a-sheen)"/>
+
+  <g>
+    <circle cx="70" cy="44" r="8.06" fill="#00D9FF" opacity="0.10"/>
+    <circle cx="70" cy="44" r="5.27" fill="#00D9FF" opacity="0.20"/>
+    <circle cx="70" cy="44" r="3.1" fill="#00D9FF"/>
+    <circle cx="92" cy="53" r="6.24" fill="#00D9FF" opacity="0.10"/>
+    <circle cx="92" cy="53" r="4.08" fill="#00D9FF" opacity="0.20"/>
+    <circle cx="92" cy="53" r="2.4" fill="#00D9FF"/>
+    <circle cx="76" cy="61" r="4.94" fill="#00D9FF" opacity="0.10"/>
+    <circle cx="76" cy="61" r="3.23" fill="#00D9FF" opacity="0.20"/>
+    <circle cx="76" cy="61" r="1.9" fill="#00D9FF"/>
+  </g>
+
+  <ellipse cx="69" cy="78" rx="9" ry="9.6" fill="#1A0D06"/>
+  <ellipse cx="95" cy="78" rx="9" ry="9.6" fill="#1A0D06"/>
+  <circle cx="72" cy="74.5" r="3" fill="#FFFFFF" opacity="0.92"/>
+  <circle cx="98" cy="74.5" r="3" fill="#FFFFFF" opacity="0.92"/>
+</svg>

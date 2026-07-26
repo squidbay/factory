@@ -3,30 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>factory — run a team of Claude seats, human-gated, from the Claude desktop app</title>
-<meta name="description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
+<title>factory — One subscription. A whole team.</title>
+<meta name="description" content="A free MIT template that turns your Claude app into a team that remembers what it did, checks its own work, and never ships without your yes.">
 <link rel="canonical" href="https://factory.squidbay.io/">
-<meta name="theme-color" content="#0A0E14">
+<meta name="theme-color" content="#0A0A0B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="factory">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230A0E14%22%3E%3C%2Frect%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-size%3D%2234%22%20text-anchor%3D%22middle%22%3E%F0%9F%8F%AD%3C%2Ftext%3E%3C%2Fsvg%3E">
-<link rel="apple-touch-icon" href="assets/img/squid.png">
+<link rel="icon" type="image/svg+xml" href="assets/img/squid/squid-mark.svg">
+<link rel="apple-touch-icon" href="assets/img/squid/squid-mark.svg">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="squidbay/factory">
 <meta property="og:url" content="https://factory.squidbay.io/">
-<meta property="og:title" content="factory — run a team of Claude seats, human-gated">
-<meta property="og:description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
-<meta property="og:image" content="https://factory.squidbay.io/og-image.png?v=2">
+<meta property="og:title" content="One subscription. A whole team.">
+<meta property="og:description" content="Turn your Claude app into a team that remembers what it did, checks its own work, and never ships without your yes.">
+<meta property="og:image" content="https://factory.squidbay.io/og-image.png?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="factory: you already pay for a team. You're just using it one chat at a time.">
+<meta property="og:image:alt" content="factory: one subscription, a whole team.">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="factory — run a team of Claude seats, human-gated">
-<meta name="twitter:description" content="A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. You approve every change, even from your phone.">
-<meta name="twitter:image" content="https://factory.squidbay.io/og-image.png?v=2">
+<meta name="twitter:title" content="One subscription. A whole team.">
+<meta name="twitter:description" content="Turn your Claude app into a team that remembers what it did, checks its own work, and never ships without your yes.">
+<meta name="twitter:image" content="https://factory.squidbay.io/og-image.png?v=3">
 
 <script type="application/ld+json">
 {
@@ -35,7 +35,7 @@
     {
       "@type": ["SoftwareApplication", "SoftwareSourceCode"],
       "name": "factory",
-      "description": "A free MIT template that turns the Claude desktop app into a persistent, human-gated team of Claude seats. The seats plan, build, and audit each other's work; the human approves every change, even from a phone.",
+      "description": "A free MIT template that turns the Claude app into a team of seats that plan, build, and check each other's work. The human approves every change, even from a phone.",
       "operatingSystem": "Claude desktop app",
       "applicationCategory": "BusinessApplication",
       "license": "https://github.com/squidbay/factory/blob/main/LICENSE",
@@ -58,15 +58,15 @@
           "name": "What does it cost to run?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A paid Claude plan ($20 a month for Pro; Max plans work too) plus $5 flat for Cloudflare when you build something that ships. GitHub is free. That's the whole bill."
+            "text": "The template is free and MIT licensed. You bring your own Claude plan, which you are probably already paying for. A deployed site adds about $5 a month at Cloudflare."
           }
         },
         {
           "@type": "Question",
-          "name": "Is it safe to let AI touch my files?",
+          "name": "Who approves changes?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The factory starts from the honest assumption: agents make mistakes. So no seat can change anything on its own. Every change is a pull request that waits for you, write access is narrow, broad access is read-only, and no credential ever appears in a chat or a file. Before a seat touches anything, it proves it can actually read and write your repo — so a half-connected setup fails loudly on the first move instead of going quiet for hours. You are the gate."
+            "text": "You do, every time. Every seat can propose a change as a pull request. No seat can approve one. That is the architecture, not a setting you can switch off."
           }
         }
       ]
@@ -74,582 +74,561 @@
   ]
 }
 </script>
-
 <link rel="stylesheet" href="assets/css/factory.css">
 </head>
 <body>
-
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- Icon sprite. One 24px grid, 1.5px stroke, currentColor, no fills.
+     These replace every emoji that used to stand in for an icon. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <g id="i-memory"><path d="M12 3a4 4 0 0 0-4 4v1a3 3 0 0 0 0 6v1a4 4 0 0 0 8 0v-1a3 3 0 0 0 0-6V7a4 4 0 0 0-4-4Z"/><path d="M12 3v18"/></g>
+  <g id="i-gate"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g>
+  <g id="i-sub"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></g>
+  <g id="i-cross"><path d="M9 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/><path d="M15 5h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/><path d="M9 12h6"/><path d="M12 9v6"/></g>
+  <g id="i-pocket"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></g>
+  <g id="i-check"><path d="M4 12.5 9 17.5 20 6.5"/></g>
+  <g id="i-chev"><path d="M9 5l7 7-7 7"/></g>
+  <g id="i-send"><path d="M21 3 10.5 13.5"/><path d="M21 3l-6.5 18-4-8-8-4Z"/></g>
+  <g id="i-plus"><path d="M12 5v14"/><path d="M5 12h14"/></g>
+  <g id="i-gh"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.8 2.7 5.8 3 5.8 3a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.4c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></g>
+  <!-- seats -->
+  <g id="i-coach"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></g>
+  <g id="i-lead"><path d="M3 6h13"/><path d="M3 12h9"/><path d="M3 18h13"/><path d="M18 9l3 3-3 3"/></g>
+  <g id="i-eng"><path d="M8 7 3 12l5 5"/><path d="M16 7l5 5-5 5"/></g>
+  <g id="i-design"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.6-.7 1.6-1.5 0-.4-.2-.8-.5-1-.3-.3-.5-.6-.5-1 0-.8.7-1.5 1.5-1.5H16a5 5 0 0 0 5-5c0-4-4-8-9-8Z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="11.5" r="1"/></g>
+  <g id="i-dispatch"><path d="M4 12h4l3-8 3 16 3-8h4"/></g>
+  <g id="i-inspect"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.4-4.4"/></g>
+  <g id="i-always"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g>
+  <!-- connectors -->
+  <g id="c-mail"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></g>
+  <g id="c-cal"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></g>
+  <g id="c-drive"><path d="M9.5 3.5h5l6.5 11h-5Z"/><path d="m7 6.5 2.5 4.2-4 6.8L3 13.3Z"/><path d="M6.6 20.5h10.8l2.6-4.5H9.2Z"/></g>
+  <g id="c-chrome"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><path d="M12 8.4h8.6"/><path d="M8.9 10.2 4.5 7.6"/><path d="m10.9 15.3-3.3 5.3"/></g>
+  <g id="c-slack"><rect x="3.5" y="10.5" width="6" height="3" rx="1.5"/><rect x="14.5" y="10.5" width="6" height="3" rx="1.5"/><rect x="10.5" y="3.5" width="3" height="6" rx="1.5"/><rect x="10.5" y="14.5" width="3" height="6" rx="1.5"/></g>
+  <g id="c-notion"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 17V8l6 8V8"/></g>
+  <g id="c-twilio"><circle cx="12" cy="12" r="9"/><circle cx="9.4" cy="9.4" r="1.5"/><circle cx="14.6" cy="9.4" r="1.5"/><circle cx="9.4" cy="14.6" r="1.5"/><circle cx="14.6" cy="14.6" r="1.5"/></g>
+  <g id="c-x"><path d="M4.5 4.5l15 15"/><path d="M19.5 4.5l-15 15"/></g>
+  <g id="c-meta"><path d="M3 15.5c0-4.7 2.1-8.5 4.8-8.5 3.6 0 4.5 8.5 9.2 8.5 2.1 0 3.8-1.7 3.8-4.2S19.1 7 17 7c-4.7 0-5.6 8.5-9.2 8.5C5.4 15.5 3.6 14 3 12"/></g>
+</defs></svg>
 
 <header class="appbar">
   <div class="appbar-row">
     <a class="wordmark" href="./" aria-label="factory home">
-      <img src="assets/img/squid.png" alt="" width="30" height="30">
-      <span class="wm-text"><span class="wm-name">factory</span><span class="wm-sub">by squidbay</span></span>
-      <span class="wm-full">squidbay<span class="slash">/</span><span class="repo">factory</span></span>
+      <img src="assets/img/squid/squid-mark.svg" alt="" width="26" height="26">
+      <span>squidbay<span class="slash">/</span>factory</span>
     </a>
-    <div class="tierswitch" role="group" aria-label="Choose a tier">
+    <nav class="tierswitch" aria-label="Choose a tier">
       <a href="./" aria-current="page">Self-service</a>
       <a href="managed">Fully managed</a>
-    </div>
+    </nav>
     <a class="nav-gh" href="https://github.com/squidbay/factory" aria-label="factory on GitHub">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-      <span class="lab">GitHub</span>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-gh"/></svg>
+      <span>GitHub</span>
     </a>
   </div>
 </header>
 
 <main id="main">
 
-<!-- 1 · Hero (Overview) -->
-<section class="hero" id="overview">
-  <div class="glow" aria-hidden="true"></div>
+<!-- ============================================================ §1 hero -->
+<section class="hero">
   <div class="wrap">
     <div class="hero-grid">
-     <div class="hero-lead">
-      <span class="mono-label">Open source &middot; MIT license</span>
-      <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
-      <p class="sub">A free template that turns the Claude desktop app into a team that remembers. Nothing ships until you approve it.</p>
-      <div class="cta-row" data-cta-anchor>
-        <a class="btn" href="https://github.com/squidbay/factory">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-          Use this template
-        </a>
-        <p class="cta-note">One click. Your own private copy. &middot; <a href="managed">Or have us run it for you</a></p>
-      </div>
-      <div class="stat-strip">
-        <span class="chip">One Claude subscription</span>
-        <span class="chip">Your whole team</span>
-        <span class="chip">One human</span>
-        <span class="chip accent">One merge button</span>
-      </div>
-     </div>
-    </div>
-  </div>
-</section>
-
-<!-- 2 · Run your factory from anywhere -->
-<section id="anywhere" aria-labelledby="e12-title">
-  <div class="wrap">
-    <span class="mono-label">Run it from your pocket</span>
-    <h2 class="section-title" id="e12-title">Run your factory from anywhere.</h2>
-    <div class="e12-grid">
-      <div class="e12-copy">
-        <p class="e12-lead muted">One seat — <strong>Mobile Scout</strong>, your <strong>Dispatch on desktop &amp; mobile</strong> — is the bridge between you and the whole team. It carries your orders to the seats and relays every seat's status back to your phone. <strong>Cowork leads the seats; you hold the one gate that matters.</strong></p>
-        <ul class="e12-points">
-          <li>Built for normal, high-trust people — a parent making it happen between bath time and bedtime, or on a lunch break — not for full-time engineers. <strong>Approachability from your phone is the whole promise.</strong></li>
-          <li>The human is the only one who ever clicks <strong>Merge</strong> — not Mobile Scout, not Code, not the browser seat. Everything else is open season for the team; the merge button is yours alone.</li>
-          <li><span class="e12-flag">Live now</span>Connect Code and wake Cowork, then dispatch from your phone — Code builds and Design draws, the Chrome inspector checks real pages, and your Dispatch carries the work and relays each seat's status back, while you hold the one merge gate.</li>
-        </ul>
-      </div>
-      <figure class="e12-topo" role="img" aria-label="Topology: your phone dispatches orders through Mobile Scout to Cowork, which leads the seats — Code, Design, Chat, and the Chrome inspector. Each seat's status flows back to your phone. Only you merge.">
-        <div class="e12-node gate">
-          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg></span>
-          <span class="lab"><span class="n">You + your phone</span><span class="r">The one merge gate</span></span>
-        </div>
-        <div class="e12-wire" aria-hidden="true"><span class="dot out"></span><span class="dot back"></span></div>
-        <div class="e12-node">
-          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l3-8 3 16 3-8h4"></path></svg></span>
-          <span class="lab"><span class="n">Mobile Scout</span><span class="r">Your Dispatch · desktop &amp; mobile</span></span>
-        </div>
-        <div class="e12-wire" aria-hidden="true"><span class="dot out"></span><span class="dot back"></span></div>
-        <div class="e12-node">
-          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
-          <span class="lab"><span class="n">Cowork</span><span class="r">Leads the seats</span></span>
-        </div>
-        <div class="e12-wire" aria-hidden="true"><span class="dot out"></span><span class="dot back"></span></div>
-        <div class="e12-seats" aria-hidden="true">
-          <span class="e12-seat">Code</span>
-          <span class="e12-seat">Design</span>
-          <span class="e12-seat">Chat</span>
-          <span class="e12-seat">Chrome inspector</span>
-        </div>
-        <div class="e12-legend">
-          <span class="k"><span class="sw out"></span>Orders out</span>
-          <span class="k"><span class="sw back"></span>Status back</span>
-        </div>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- 3 · Dispatch chat — seeing is believing -->
-<section id="dispatch" aria-labelledby="dispatch-title">
-  <div class="wrap">
-    <span class="mono-label">Seeing is believing</span>
-    <h2 class="section-title" id="dispatch-title">A whole job, from your phone.</h2>
-    <div class="dispatch-grid">
-      <div class="dispatch-copy">
-        <p class="e12-lead muted">You send <strong>Mobile Scout</strong>, your Dispatch, a plain order. It carries the work to the team and brings back a pull request you can actually read. <strong>You tap merge. Nothing ships until you do.</strong></p>
-        <ul class="dispatch-points">
-          <li>Talk to it like a person. <strong>No commands, no dashboards.</strong></li>
-          <li>The seats plan, build, and check each other while you get on with your day.</li>
-          <li><strong>The green button is yours alone.</strong> Every merge is a choice you make.</li>
-        </ul>
-      </div>
-      <div class="phone" id="dispatchChat">
-        <div class="phone-head">
-          <span class="phone-ava" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg></span>
-          <span class="phone-id"><span class="n">Mobile Scout</span><span class="s">Dispatch · online</span></span>
-          <span class="phone-tag">Your phone</span>
-        </div>
-        <div class="phone-body" role="log" aria-label="Example conversation with your Dispatch"></div>
-        <div class="phone-foot" aria-hidden="true">
-          <span class="fake-input">Message your Dispatch…</span>
-          <span class="fake-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4 · The seats -->
-<section id="seats">
-  <div class="wrap">
-    <div class="seats-head">
       <div>
-        <span class="mono-label">The seats</span>
-        <h2 class="section-title">Your seats, your specialists, and you.</h2>
-      </div>
-    </div>
-    <div class="carousel">
-    <div class="car-track">
-      <div class="poster-card">
-        <img src="seats/chat.jpg" alt="Coach seat: a dark factory robot gesturing beside speech bubbles that ask how it can help" width="512" height="512" loading="lazy" decoding="async">
-        <div class="body">
-          <div class="head"><h3>Coach</h3><span class="tag">Chat</span></div>
-          <p class="line">Your everyday desk. Talks plainly, looks things up, and turns a rough idea into a clean request &mdash; which it opens as a pull request for your Team Leader.</p>
+        <span class="chip">Free and open source · MIT</span>
+        <h1>One subscription.<br><span class="accent">A whole team.</span><img class="squid-inline" src="assets/img/squid/squid.svg" alt="" width="56" height="70"></h1>
+        <p class="sub">Turn your Claude app into a team that remembers what it did, checks its own work, and never ships without your yes.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://github.com/squidbay/factory/generate">
+            Start your factory
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+          </a>
+          <p class="cta-note">One click on GitHub. Your own private copy. Free, forever.</p>
+          <a class="textlink" href="managed">Or have us run it for you</a>
         </div>
       </div>
-      <div class="poster-card">
-        <img src="seats/cowork.jpg" alt="Team Leader seat: a dark factory robot with the squid emblem sketching a project timeline" width="512" height="512" loading="lazy" decoding="async">
-        <div class="body">
-          <div class="head"><h3>Team Leader</h3><span class="tag">Cowork</span></div>
-          <p class="line">Plans and audits. Turns what you want into the plan, checks every finished job against it, runs the security read, and hands you a plain MERGE or FIX&#8209;FIRST.</p>
-        </div>
-      </div>
-      <div class="poster-card">
-        <img src="seats/code.jpg" alt="Engineer seat: a dark factory robot at a glowing keyboard with a passing build log" width="512" height="512" loading="lazy" decoding="async">
-        <div class="body">
-          <div class="head"><h3>Engineer</h3><span class="tag">Code</span></div>
-          <p class="line">Builds it. The seat that writes code &mdash; always as a pull request, never merging its own work.</p>
-        </div>
-      </div>
-      <div class="poster-card">
-        <img src="seats/design.jpg" alt="Creative Director seat: a dark factory robot drawing wireframes on a blueprint tablet" width="512" height="512" loading="lazy" decoding="async">
-        <div class="body">
-          <div class="head"><h3>Creative Director</h3><span class="tag">Design</span></div>
-          <p class="line">Draws it. Designs the pages and the screens, then hands them down the line to be built.</p>
-        </div>
-      </div>
-      <div class="poster-card">
-        <img src="seats/mobile-scout.jpg" alt="Dispatch seat: a dark factory robot checking phone screens across devices and networks" width="512" height="512" loading="lazy" decoding="async">
-        <div class="body">
-          <div class="head"><h3>Dispatch</h3><span class="tag">Mobile Scout</span></div>
-          <p class="line">Your bridge between you and the team &mdash; dispatches work to the seats, talks to you on desktop and mobile, and lets you run whole jobs on the go.</p>
-        </div>
-      </div>
-      <div class="poster-card">
-        <img src="seats/chrome-inspector.jpg" alt="Inspector specialist: a dark factory robot examining a devtools panel with a magnifying glass" width="512" height="512" loading="lazy" decoding="async">
-        <div class="body">
-          <div class="head"><h3>Inspector</h3><span class="tag oncall">Chrome inspector</span></div>
-          <p class="line">Drives your live pages in a real browser &mdash; clicking and typing like a visitor would &mdash; to catch what breaks before they do. It tests; it never ships.</p>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="you-card">
-      <span class="runner" aria-hidden="true"></span>
-      <span class="avatar" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
-      <div class="body">
-        <h3>You. The only one who ever merges.</h3>
-        <p>Every seat can propose. None can approve. The gate is yours alone, and it fits in your pocket.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- 4b · The 24/7 seat -->
-<section id="agent" aria-labelledby="agent-title">
-  <div class="wrap">
-    <span class="mono-label">The seat that never clocks out</span>
-    <h2 class="section-title" id="agent-title">Your other seats work in shifts. This one doesn&rsquo;t.</h2>
-    <div class="you-card agent-card">
-      <span class="avatar" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
-      <div class="body">
-        <h3>The Agent</h3>
-        <p>The desktop seats wake for a session, do one job and hand off &mdash; the journal remembers, so the next shift starts where the last one ended. The Agent is the one that stays up: deployed to your own site, answering your customers while the rest of the team sleeps. Think of the factory as your site&rsquo;s WordPress, and the Agent as the plugin you drop into your chat box. It is the only seat that runs without you in the loop, so it gets its own limits &mdash; and it still cannot merge anything.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5 · How it works -->
-<section id="how">
-  <div class="wrap">
-    <span class="mono-label">How it works</span>
-    <h2 class="section-title">The assembly line. You hold the last station.</h2>
-    <div class="line" id="flowLine">
-      <span class="station">You brief your Coach</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station">Coach&rsquo;s pull request</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station">Team Leader plans</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station">Engineer / Creative Director build</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station">Team Leader audits</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station">Pull request</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station gate">You merge</span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-      <span class="station done">Remembered</span>
-    </div>
-    <p class="line-note">Nobody skips the line. Nobody merges their own work. And the factory journal writes every step into git, so tomorrow's shift starts where today's ended.</p>
-    <div class="feature-row">
-      <div class="feature">
-        <h3>Mechanical rules</h3>
-        <p>Plain, checkable rules that keep every seat in its lane.</p>
-      </div>
-      <div class="feature">
-        <h3>Staged onboarding</h3>
-        <p>The team stands itself up in order — the planner first, then the seats — and walks you in one stage at a time, so you're never building alone.</p>
-      </div>
-      <div class="feature">
-        <h3>Mission packs</h3>
-        <p>Ready-made first missions, so the team has real work from day one.</p>
-      </div>
-    </div>
-    <div class="gate-block">
+      <!-- The hero chat box. A mock: its input is aria-hidden and unfocusable
+           so it can never be mistaken for the real widget in the corner. -->
       <div>
-        <h3>The merge gate</h3>
-        <p class="gate-p">A pull request reads like a plain letter: what changed, why, and what to look at. Dispatch the work from the Claude desktop app, then review and merge at your desk, or from your phone when you're on the go.</p>
-        <div class="devices" aria-hidden="true">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path></svg>
-          <span class="arrow">→</span>
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
-        </div>
-        <p class="demo-cap" style="margin-top: 12px;">Desk to pocket. Same green button.</p>
-      </div>
-      <div>
-      <div class="gh-card" role="img" aria-label="Animated demonstration: a cursor moves to GitHub's green Merge pull request button, clicks it, and the pull request flips to Merged.">
-        <div class="gh-check">
-          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <div><strong>All checks have passed</strong><span class="d">guardrails: clean</span></div>
-        </div>
-        <div class="gh-check">
-          <span class="gh-dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          <div><strong>No conflicts with base branch</strong><span class="d">Merging can be performed automatically.</span></div>
-        </div>
-        <div class="gh-foot">
-          <span class="gh-btn">Merge pull request</span>
-          <span class="gh-hint">Works from your phone too.</span>
-        </div>
-        <span class="gh-cursor"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L6.35 2.85a.5.5 0 0 0-.85.36Z" fill="#111111" stroke="#ffffff" stroke-width="1.5"></path></svg></span>
-        <div class="gh-merged">
-          <span class="gh-badge"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.45 5.154A4.25 4.25 0 0 0 9.25 7.5h1.378a2.251 2.251 0 1 1 0 1.5H9.25A5.734 5.734 0 0 1 5 7.123v3.505a2.25 2.25 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.95-.218ZM4.25 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm8.5-4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path></svg>Merged</span>
-          <p>You merged this pull request.</p>
-        </div>
-      </div>
-      <p class="demo-cap" style="margin-top: 14px;">The green button. That's the whole job.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 6 · The stack (Pricing) -->
-<section id="cost">
-  <div class="wrap">
-    <span class="mono-label">The stack</span>
-    <h2 class="section-title">The names that do the work, each doing what it does best.</h2>
-    <div class="grid min260">
-      <div class="card">
-        <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path></svg></span>
-        <div class="card-head">
-        <h3>Anthropic</h3>
-        <p class="role">The intelligence and the tooling</p>
-        </div>
-        <p class="line">The Claude desktop app, Claude Code, Cowork, Claude Design, and skills. One subscription powers every seat.</p>
-      </div>
-      <div class="card">
-        <span class="card-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></span>
-        <div class="card-head">
-        <h3>GitHub</h3>
-        <p class="role">The memory and the gate</p>
-        </div>
-        <p class="line">Every change is a pull request you approve, even from your phone. Every session writes to the journal before it ends, so months from now &ldquo;why is it like this?&rdquo; has an answer &mdash; and so does &ldquo;prove it.&rdquo;</p>
-      </div>
-      <div class="card">
-        <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg></span>
-        <div class="card-head">
-        <h3>Cloudflare</h3>
-        <p class="role">The runtime, when you build</p>
-        </div>
-        <p class="line">If your team ships a website, it runs here. $5 flat.</p>
-      </div>
-    </div>
-    <div class="equation">
-      <p class="eq"><b>$20</b> Claude Pro <span class="op">+</span> <b>$5</b> Cloudflare <span class="op">=</span> a full AI team and a deployed website</p>
-      <p class="max">On Claude Max? Same template, more headroom. <a href="https://claude.com/pricing">See plans</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- 7 · Why it works — with the God-View that proves it, alongside -->
-<section id="why-it-works" aria-labelledby="why-title">
-  <div class="wrap">
-    <div class="why-grid">
-      <div class="why-copy">
-        <span class="mono-label">Why it actually works</span>
-        <h2 class="section-title" id="why-title">The thing we learned the hard way.</h2>
-        <p class="muted" style="margin-top: 16px; max-width: 64ch; font-size: 1.05rem;">We spent months chasing the wrong race — a bigger model, a smarter single seat. What changed everything was smaller and stranger. Give one seat an ordinary working connection to <em>do</em> the job; give a second seat a <strong>read-only overseer view</strong> to <em>check</em> it; and let the two confirm or deny each other. Neither has to <em>know</em> anything — they look, and they check each other's looking.</p>
-        <p class="muted" style="margin-top: 14px; max-width: 64ch; font-size: 1.05rem;">Set up this way, an ordinary model runs circles around one brilliant seat working alone — because the factory's best output isn't either view. It's the <strong>difference between them.</strong> When the builder says &ldquo;done&rdquo; and the overseer says &ldquo;not quite,&rdquo; that gap is a truth neither could see alone. Grounding beats memory; two honest eyes beat one clever one. Read wide to <em>see</em>, write narrow to <em>act</em>, every change cross-checked and gated by you — that&rsquo;s the mode worth growing into.</p>
-      </div>
-      <div class="godview" id="godview">
-        <div class="gv-heavens">
-          <h3 class="section-title gv-title">The God-View</h3>
-          <p class="gv-kicker">Read-only omniscience</p>
-          <p class="muted gv-sub">A chat remembers messily &mdash; it is cluttered with whatever scrolled by. A god-view report is clean: it reads the real thing and hands your team one grounded source of truth to check their work against.</p>
-        </div>
-        <div class="gv-realm">
-          <p class="gv-realm-label">three grounded reports &mdash; the layer above each seat&rsquo;s own door</p>
-          <div class="gv-altars">
-            <div class="altar">
-              <p class="ac">your code</p>
-              <p class="an">GitHub, read-all</p>
-              <p class="muted ad">Every repo the factory touches, seen code-first &mdash; branches, pull requests, workflows &mdash; through a read-only token.</p>
-              <span class="ro">read-only</span>
-            </div>
-            <div class="altar">
-              <p class="ac">your running product</p>
-              <p class="an">Cloudflare, read-all</p>
-              <p class="muted ad">The live system &mdash; workers, databases, the edge &mdash; seen through a read-only token.</p>
-              <span class="ro">read-only</span>
-            </div>
-            <div class="altar">
-              <p class="ac">your team of Claudes</p>
-              <p class="an">Claude Desktop &amp; Web, read-all</p>
-              <p class="muted ad">The setup your seats actually run on &mdash; permissions, skills, plugins, connections &mdash; captured from your own machine and redacted, so it can be checked against reality.</p>
-              <span class="ro">read-only</span>
+        <div class="mockwin" id="heroMock">
+          <div class="mockwin-head">
+            <img src="assets/img/squid/squid-mark.svg" alt="" width="20" height="20">
+            <span class="n">Your factory</span>
+            <span class="live"><span class="dot-live"></span>Live</span>
+          </div>
+          <div class="mockwin-body" id="heroThread">
+            <div class="bub bub-user">Add a testimonials section to the site, and make sure it looks right on a phone.</div>
+            <div class="bub bub-agent">On it. Sending this down the line.</div>
+            <div class="pr-card">
+              <div class="t">Pull request #14 is ready for you.</div>
+              <div class="d">Testimonials section added. Checked at phone, tablet and desktop widths.</div>
+              <div class="pr-meta"><span class="m">3 files changed</span><span class="m">checks passed</span></div>
+              <div class="pr-merge">Merge pull request</div>
+              <div class="pr-only">Only you can click this.</div>
             </div>
           </div>
+          <div class="mockwin-foot" aria-hidden="true">
+            <span class="fake" tabindex="-1">Tell your team what you need…</span>
+            <span class="sendico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-send"/></svg></span>
+          </div>
         </div>
-        <p class="gv-caption mono-label">sees all &middot; touches nothing &middot; keys stay in the vault</p>
+        <div class="demo-tabs" role="tablist" aria-label="Try a different order">
+          <button class="demo-tab" role="tab" type="button" aria-selected="true" data-demo="0">Add a section</button>
+          <button class="demo-tab" role="tab" type="button" aria-selected="false" data-demo="1">Fix the mobile layout</button>
+          <button class="demo-tab" role="tab" type="button" aria-selected="false" data-demo="2">Write this week's post</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 8 · A day in the factory -->
-<section>
+<!-- ==================================================== §2 what you get -->
+<section class="band" id="what-you-get">
   <div class="wrap">
-    <span class="mono-label">A day in the factory</span>
-    <h2 class="section-title">A typical day: eleven minutes of hands-on.</h2>
-    <div class="day">
-      <div class="row">
-        <div class="when">
-          <p class="t">Over coffee</p>
-          <p class="m">4 min</p>
-        </div>
-        <p class="story">You tell Chat what you want, in your own words. Cowork turns it into a plan you can actually read. You say yes.</p>
+    <div class="sec-head">
+      <span class="eyebrow">Why people keep it</span>
+      <h2>Five things nothing else does.</h2>
+    </div>
+    <div class="proof">
+      <div class="card">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-memory"/></svg></span>
+        <h3>It doesn't start over.</h3>
+        <p>Close the app. Come back Tuesday. Your team knows exactly where things stood, and why.</p>
       </div>
-      <div class="row">
-        <div class="when">
-          <p class="t">While you work</p>
-          <p class="m">0 min</p>
-        </div>
-        <p class="story">Code builds. Design draws. Cowork audits what they made. They settle their disagreements in writing, without you.</p>
+      <div class="card">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-gate"/></svg></span>
+        <h3>Nothing ships without you.</h3>
+        <p>Every change arrives as one plain-English request. You read it, you tap merge. That's the job.</p>
       </div>
-      <div class="row">
-        <div class="when">
-          <p class="t">At lunch</p>
-          <p class="m">3 min</p>
-        </div>
-        <p class="story">Your phone shows a pull request: what changed, why, and what to check. You read it like a note from a careful colleague.</p>
+      <div class="card">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-sub"/></svg></span>
+        <h3>One subscription covers the whole team.</h3>
+        <p>Your Claude plan already pays for it. No per-seat pricing, no extra logins, no new bill.</p>
       </div>
-      <div class="row">
-        <div class="when">
-          <p class="t">After dinner</p>
-          <p class="m">4 min</p>
-        </div>
-        <p class="story">You tap merge. The journal writes down what happened and why, so tomorrow's team wakes up already knowing.</p>
+      <div class="card">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cross"/></svg></span>
+        <h3>They check each other's work.</h3>
+        <p>One seat builds it. Another reads the real thing and says "not quite." You get the disagreement in writing, before it matters.</p>
       </div>
-      <p class="total">A typical day puts your hands on it for eleven minutes. The factory runs the rest.</p>
+      <div class="card">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pocket"/></svg></span>
+        <h3>It fits in your pocket.</h3>
+        <p>Send the order from your phone at lunch. Merge it from your phone after dinner.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 10 · For the skeptical developer -->
-<section class="skeptic">
+<!-- ================================================== §3 the demo phone -->
+<section id="demo">
   <div class="wrap">
-    <span class="mono-label">For the skeptical developer</span>
-    <h2 class="section-title">Boring where it counts.</h2>
-    <p class="muted" style="margin-top: 16px; max-width: 62ch; font-size: 1rem;"><strong>Built with Factory.</strong> SquidBay is built with this exact factory. The copy the template button gives you is the one we use ourselves. No hidden version, no enterprise edition.</p>
-    <div class="grid min280">
-      <div class="claim">
-        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div><h3>No exposed services</h3><p>Nothing listens, nothing is reachable from outside. It all runs inside apps you already trust.</p></div>
+    <div class="phone-sec-grid">
+      <div>
+        <span class="eyebrow">Seeing is believing</span>
+        <h2>You ask. They build. You decide.</h2>
+        <p class="lede">Send a plain order from anywhere. The team plans it, builds it, and checks each other's work. What comes back is one request you can read, and one button only you can press.</p>
+        <div class="ticks">
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>Talk to it like a person.</b> No commands, no dashboards.</span></div>
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>They plan, build, and check each other</b> while you get on with your day.</span></div>
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>The merge button is yours alone.</b> Every merge is a choice you make.</span></div>
+        </div>
       </div>
-      <div class="claim">
-        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div><h3>No credential in any chat or file</h3><p>Enforced in CI, not by good intentions.</p></div>
-      </div>
-      <div class="claim">
-        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div><h3>Read broad, write narrow</h3><p>Broad access is read-only. Write access is narrow, and every write is human-gated.</p></div>
-      </div>
-      <div class="claim">
-        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div><h3>MIT, plain markdown</h3><p>The whole factory is markdown you can read in an afternoon. No binaries, no magic.</p></div>
-      </div>
-      <div class="claim">
-        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div><h3>Template-button architecture</h3><p>One click on GitHub gives you your own private copy, on a free account.</p></div>
-      </div>
-      <div class="claim">
-        <span class="check" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-        <div><h3>One merge gate</h3><p>A human approves every change. That's the architecture, not a setting.</p></div>
+
+      <!-- The demo phone. Device shell and chat layout carried over from the
+           SquidBay chat mock (Designer handoff, standalone-mocks). -->
+      <div>
+        <div class="device" role="img" aria-label="A phone showing a conversation with your team: an order goes out, and a pull request comes back ready to review.">
+          <div class="device-screen">
+            <div class="device-status">
+              <span>9:41</span>
+              <span class="bars">
+                <svg width="18" height="11" viewBox="0 0 18 11" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx=".6" fill="currentColor"/><rect x="4.5" y="4.8" width="3" height="6.2" rx=".6" fill="currentColor"/><rect x="9" y="2.4" width="3" height="8.6" rx=".6" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx=".6" fill="currentColor"/></svg>
+                <svg width="25" height="12" viewBox="0 0 27 13" aria-hidden="true"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="currentColor" stroke-opacity=".4" fill="none"/><rect x="2" y="2" width="19" height="9" rx="2" fill="currentColor"/><path d="M25 4.5V8.5C25.8 8.2 26.5 7.2 26.5 6.5C26.5 5.8 25.8 4.8 25 4.5Z" fill="currentColor" fill-opacity=".4"/></svg>
+              </span>
+            </div>
+            <div class="device-app">
+              <div class="device-appbar">
+                <img src="assets/img/squid/squid-mark.svg" alt="" width="18" height="18">
+                <span class="who">Dispatch</span>
+                <span class="st"><span class="dot-live"></span>online</span>
+              </div>
+              <div class="device-thread">
+                <div class="device-sys">Your Dispatch carries orders to the team. It never merges.</div>
+                <div class="device-day">Yesterday</div>
+                <div class="bub bub-user">Can the homepage say what it costs?</div>
+                <div class="bub bub-agent">Merged, and live. Here is today's.</div>
+                <div class="device-day">Today</div>
+                <div class="bub bub-user">Add a testimonials section, and check it on a phone.</div>
+                <div class="bub bub-agent">On it. Sending this down the line.</div>
+                <div class="bub bub-agent">Pull request #14 is ready. Checked at phone, tablet and desktop widths.</div>
+                <div class="device-art">
+                  <span class="sq"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cross"/></svg></span>
+                  <span class="tx">
+                    <span class="k">PULL REQUEST</span>
+                    <span class="n">#14 Testimonials section</span>
+                    <span class="o">Open to review</span>
+                  </span>
+                </div>
+              </div>
+              <div class="device-quick"><span>Add a blog</span><span>Fix the layout</span><span>Run a security read</span></div>
+              <div class="device-composer">
+                <span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-plus"/></svg></span>
+                <span class="fld">Talk to your team…</span>
+                <span class="send"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-send"/></svg></span>
+              </div>
+            </div>
+          </div>
+          <div class="device-island"></div>
+          <div class="device-home"></div>
+        </div>
+        <p class="device-cap">Desk to pocket. Same merge button.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 11 · Plain answers (FAQ) -->
-<section id="faq">
+<!-- =========================================================== §4 seats -->
+<section class="band" id="seats">
   <div class="wrap">
-    <span class="mono-label">Plain answers</span>
-    <div class="faq">
-      <details open>
-        <summary><h2>Do I need to know how to code?</h2><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></summary>
-        <p>No. The seats write the code and explain it in plain words. Your job is to read a short summary and decide yes or no. If you can read an email and tap a button, you can run a factory.</p>
-      </details>
-      <details>
-        <summary><h2>What does it cost to run?</h2><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></summary>
-        <p>A paid Claude plan ($20 a month for Pro; <a href="https://claude.com/pricing">Max plans</a> work too) plus $5 flat for Cloudflare when you build something that ships. GitHub is free. That's the whole bill.</p>
-      </details>
-      <details>
-        <summary><h2>Is it safe to let AI touch my files?</h2><span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></summary>
-        <p>The factory starts from the honest assumption: agents make mistakes. So no seat can change anything on its own. Every change is a pull request that waits for you, write access is narrow, broad access is read-only, and no credential ever appears in a chat or a file. Before a seat touches anything, it proves it can actually read and write your repo — so a half-connected setup fails loudly on the first move instead of going quiet for hours. You are the gate.</p>
-      </details>
+    <div class="sec-head">
+      <span class="eyebrow">The team</span>
+      <h2>Your seats, your specialists, and you.</h2>
+    </div>
+    <div class="seats">
+      <div class="seat">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-coach"/></svg></span>
+        <div class="seat-top"><h3>Coach</h3><span class="chip">Chat</span></div>
+        <p>Your everyday desk. Talks plainly, looks things up, and turns a rough idea into a clean request — opened as a pull request for your Team Leader.</p>
+      </div>
+      <div class="seat">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-lead"/></svg></span>
+        <div class="seat-top"><h3>Team Leader</h3><span class="chip">Cowork</span></div>
+        <p>Plans and audits. Turns what you want into a plan, checks the finished job against it, runs the security read, and hands you a plain MERGE or FIX-FIRST.</p>
+      </div>
+      <div class="seat">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eng"/></svg></span>
+        <div class="seat-top"><h3>Engineer</h3><span class="chip">Code</span></div>
+        <p>Builds it. The seat that writes code — always as a pull request, never merging its own work.</p>
+      </div>
+      <div class="seat">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-design"/></svg></span>
+        <div class="seat-top"><h3>Creative Director</h3><span class="chip">Design</span></div>
+        <p>Draws it. Designs the pages and the screens, then hands them down the line to be built.</p>
+      </div>
+      <div class="seat">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-dispatch"/></svg></span>
+        <div class="seat-top"><h3>Dispatch</h3><span class="chip">Mobile Scout</span></div>
+        <p>Your bridge to the team. Carries work to the seats, talks to you on desktop and mobile, and lets you run a whole job on the go.</p>
+      </div>
+      <div class="seat">
+        <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-inspect"/></svg></span>
+        <div class="seat-top"><h3>Inspector</h3><span class="chip">Chrome inspector</span></div>
+        <p>Drives your live pages in a real browser, clicking and typing like a visitor would, to catch what breaks before they do. It tests; it never ships.</p>
+      </div>
+    </div>
+    <div class="gate-band">
+      <strong>You. The only one who ever merges.</strong>
+      <p>Every seat can propose. None can approve. The gate is yours alone, and it fits in your pocket.</p>
     </div>
   </div>
 </section>
 
-<!-- 12 · Close -->
-<section class="close">
-  <div class="glow" aria-hidden="true"></div>
-  <div class="wrap" style="padding-bottom: 0;">
-    <p class="manifesto">You run the factory. <span>Not the other way around.</span></p>
-  </div>
-  <figure class="floor">
-    <div class="factory-scene" role="img" aria-label="A stylized factory at night: cyan smoke drifting from the stack, warm light in the windows, and a conveyor carrying glowing pull requests out the door.">
-      <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; height: auto; overflow: visible;">
-        <defs>
-          <radialGradient id="fglow" cx="0.5" cy="0.6" r="0.55">
-            <stop offset="0" stop-color="#00D9FF" stop-opacity="0.13"></stop>
-            <stop offset="1" stop-color="#00D9FF" stop-opacity="0"></stop>
-          </radialGradient>
-          <linearGradient id="fdoor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#F7931A"></stop>
-            <stop offset="1" stop-color="#FF6B35"></stop>
-          </linearGradient>
-        </defs>
-        <ellipse cx="460" cy="280" rx="340" ry="230" fill="url(#fglow)"></ellipse>
-        <g>
-          <circle data-fx="true" cx="651" cy="114" r="15" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; transform-box: fill-box; transform-origin: center;"></circle>
-          <circle data-fx="true" cx="649" cy="118" r="11" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -1.6s; transform-box: fill-box; transform-origin: center;"></circle>
-          <circle data-fx="true" cx="653" cy="112" r="18" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -3.3s; transform-box: fill-box; transform-origin: center;"></circle>
-          <circle data-fx="true" cx="650" cy="116" r="9" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -4.9s; transform-box: fill-box; transform-origin: center;"></circle>
-          <circle data-fx="true" cx="655" cy="110" r="2" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; transform-box: fill-box;"></circle>
-          <circle data-fx="true" cx="646" cy="108" r="1.6" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; animation-delay: -1.7s; transform-box: fill-box;"></circle>
-          <circle data-fx="true" cx="660" cy="112" r="1.6" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; animation-delay: -3.4s; transform-box: fill-box;"></circle>
-        </g>
-        <rect x="630" y="130" width="42" height="290" fill="#17222E"></rect>
-        <rect x="624" y="122" width="54" height="12" rx="3" fill="#1C2630"></rect>
-        <rect x="560" y="216" width="26" height="204" fill="#121A24"></rect>
-        <rect x="556" y="210" width="34" height="9" rx="2" fill="#18222D"></rect>
-        <rect x="296" y="246" width="130" height="90" fill="#10161F"></rect>
-        <path d="M330 246 v-20 a28 28 0 0 1 56 0 v20 Z" fill="#10161F"></path>
-        <path d="M280 420 L280 290 L340 262 L340 290 L400 262 L400 290 L460 262 L460 290 L520 262 L520 420 Z" fill="#141D28"></path>
-        <rect x="520" y="330" width="104" height="90" fill="#0F151D"></rect>
-        <g fill="#F7931A">
-          <rect data-fx="true" x="298" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite;"></rect>
-          <rect data-fx="true" x="344" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -2s;"></rect>
-          <rect data-fx="true" x="390" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -3.5s;"></rect>
-          <rect data-fx="true" x="436" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -5s;"></rect>
-        </g>
-        <rect x="548" y="354" width="46" height="66" fill="url(#fdoor)"></rect>
-        <ellipse cx="571" cy="421" rx="64" ry="7" fill="#F7931A" opacity="0.1"></ellipse>
-        <rect x="70" y="419" width="770" height="3" rx="1.5" fill="#1C2630"></rect>
-        <rect x="594" y="402" width="230" height="6" rx="3" fill="#1C2630"></rect>
-        <g fill="#2A3744">
-          <circle cx="606" cy="412" r="4"></circle><circle cx="650" cy="412" r="4"></circle><circle cx="694" cy="412" r="4"></circle><circle cx="738" cy="412" r="4"></circle><circle cx="782" cy="412" r="4"></circle><circle cx="816" cy="412" r="4"></circle>
-        </g>
-        <g>
-          <rect data-fx="true" x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite;"></rect>
-          <rect data-fx="true" x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite; animation-delay: -2s;"></rect>
-          <rect data-fx="true" x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite; animation-delay: -4s;"></rect>
-        </g>
-      </svg>
+<!-- ======================================================= §5 the agent -->
+<section id="agent">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Always on</span>
+        <h2>Your other seats work in shifts. This one doesn't.</h2>
+        <p class="lede">The desktop seats wake for a session, do one job, and hand off — the journal remembers, so the next shift starts where the last one ended. The Agent is the one that stays up. It's deployed to your own site and answers your customers while the rest of the team sleeps.</p>
+        <p class="lede">Think of the factory as your site's WordPress, and the Agent as the plugin you drop into your chat box.</p>
+        <p class="lede small">It is the only seat that runs without you in the loop, so it gets its own limits — and it still cannot merge anything.</p>
+        <span class="addr">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-always"/></svg>
+          Every factory Agent gets its own address: <code>agent.yoursite.com</code>
+        </span>
+      </div>
+      <div class="portrait">
+        <img src="assets/img/squid/squid-agent.svg" alt="The factory squid resting a tentacle on a chat window" width="330" height="254">
+      </div>
     </div>
-    <figcaption>The line runs all day. You hold the gate.</figcaption>
-  </figure>
-  <div class="wrap" style="padding-top: clamp(28px, 4vw, 44px);">
-    <h2 class="section-title" style="margin-top: 0;">Take your seat.</h2>
-    <p class="muted" style="margin-top: 16px; font-size: 1.0625rem;">Stop building alone. Your subscription already contains a team. Three steps and the line is running.</p>
-    <ol class="steps">
-      <li><span class="num">01</span><p>Get the Claude desktop app and any paid plan.</p></li>
-      <li><span class="num">02</span><p>Use the template. The button on GitHub gives you your own private copy.</p></li>
-      <li><span class="num">03</span><p>Attach it to Claude Code and just start typing.</p></li>
-    </ol>
-    <div class="cta-stack" data-cta-anchor>
-      <a class="btn" href="https://github.com/squidbay/factory">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-        Use this template
+  </div>
+</section>
+
+<!-- ================================================== §6 the connectors -->
+<section class="band" id="connectors">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Connectors</span>
+        <h2>It works where your work already is.</h2>
+        <p class="lede">Your seats reach into the tools you already use and bring the results back to the same place. No exports, no copy-paste, no second dashboard to keep up with.</p>
+        <p class="lede small">A connector is a door you open once, and you can close it again the same way. The seats only ever use the ones you have opened.</p>
+      </div>
+    <div class="constellation">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="ring inner" aria-hidden="true"></div>
+      <div class="core" aria-hidden="true">
+        <img src="assets/img/squid/squid-mark.svg" alt="" width="44" height="44">
+        <span class="nm">your factory</span>
+      </div>
+      <div class="conn" style="left:50%;top:12.1%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-mail"/></svg></span><span class="nm">Gmail</span></div>
+      <div class="conn" style="left:72.28%;top:19.34%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-cal"/></svg></span><span class="nm">Calendar</span></div>
+      <div class="conn" style="left:85.05%;top:38.29%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-drive"/></svg></span><span class="nm">Drive</span></div>
+      <div class="conn" style="left:85.05%;top:61.71%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-chrome"/></svg></span><span class="nm">Chrome</span></div>
+      <div class="conn" style="left:72.28%;top:80.66%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-gh"/></svg></span><span class="nm">GitHub</span></div>
+      <div class="conn" style="left:50%;top:87.9%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-slack"/></svg></span><span class="nm">Slack</span></div>
+      <div class="conn" style="left:27.72%;top:80.66%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-notion"/></svg></span><span class="nm">Notion</span></div>
+      <div class="conn" style="left:14.95%;top:61.71%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-twilio"/></svg></span><span class="nm">Twilio</span></div>
+      <div class="conn" style="left:14.95%;top:38.29%"><span class="badge"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><use href="#c-x"/></svg></span><span class="nm">X</span></div>
+      <div class="conn" style="left:27.72%;top:19.34%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-meta"/></svg></span><span class="nm">Meta</span></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== §7 use cases -->
+<section id="use-cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Put it to work</span>
+      <h2>Three jobs a factory picks up on day one.</h2>
+      <p class="lede">Not case studies — jobs. Ordinary weeks of work the seats take off your hands.</p>
+    </div>
+    <div class="grid g3">
+      <div class="usecase">
+        <div class="art">
+          <div class="uc-row"><span class="k">Homepage copy</span><span class="v">merged</span></div>
+          <div class="uc-bar"><i style="width:100%"></i></div>
+          <div class="uc-row"><span class="k">Pricing page</span><span class="v">waiting</span></div>
+          <div class="uc-bar"><i style="width:72%"></i></div>
+          <div class="uc-row"><span class="k">Phone layout</span><span class="v">checked</span></div>
+          <div class="uc-bar"><i style="width:100%"></i></div>
+        </div>
+        <div>
+          <h3>The site that keeps up</h3>
+          <p class="small muted">Describe the change in a sentence. Design draws it, Engineer builds it, the Inspector checks it on a real phone, and it arrives as one request you approve.</p>
+        </div>
+      </div>
+      <div class="usecase">
+        <div class="art">
+          <div class="uc-row"><span class="k">Monday brief</span><span class="v">ready</span></div>
+          <div class="uc-bar"><i style="width:100%"></i></div>
+          <div class="uc-row"><span class="k">What changed</span><span class="v">7 items</span></div>
+          <div class="uc-bar"><i style="width:58%"></i></div>
+          <div class="uc-row"><span class="k">Needs your call</span><span class="v">2 items</span></div>
+          <div class="uc-bar"><i style="width:24%"></i></div>
+        </div>
+        <div>
+          <h3>Monday, before you sit down</h3>
+          <p class="small muted">The team reads the week back to you: what moved, what stalled, and the short list only you can decide. In your inbox, not in a chat you have to go find.</p>
+        </div>
+      </div>
+      <div class="usecase">
+        <div class="art">
+          <div class="uc-row"><span class="k">Question at 02:14</span><span class="v">answered</span></div>
+          <div class="uc-bar"><i style="width:100%"></i></div>
+          <div class="uc-row"><span class="k">Booking request</span><span class="v">passed on</span></div>
+          <div class="uc-bar"><i style="width:80%"></i></div>
+          <div class="uc-row"><span class="k">Anything unclear</span><span class="v">asks you</span></div>
+          <div class="uc-bar"><i style="width:34%"></i></div>
+        </div>
+        <div>
+          <h3>The chat box that answers at 2am</h3>
+          <p class="small muted">The Agent sits on your own site and handles the questions you answer twenty times a week. When it isn't sure it says so and hands you the thread, instead of guessing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== §8 skills -->
+<section class="band" id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Skills</span>
+      <h2>The skills we'd start you with.</h2>
+      <p class="lede">A seat is a room a Claude works in. A skill is what a seat reaches for — and the ones worth trusting are the ones the seats run <em>on each other</em>.</p>
+    </div>
+    <div class="skills">
+      <div class="skill"><span class="cat">Cross-audit</span><span class="nm">factory-security</span><p>Your Team Leader's security read, run before you ever see the change. Real problems, not a list of maybes.</p></div>
+      <div class="skill"><span class="cat">Cross-audit</span><span class="nm">factory-render-verify</span><p>Renders every page at every screen size and measures what breaks. Receipts, not opinions.</p></div>
+      <div class="skill"><span class="cat">Cross-audit</span><span class="nm">factory-retro</span><p>Reads the whole journal and tells you what keeps going wrong.</p></div>
+      <div class="skill"><span class="cat">Your training wheels</span><span class="nm">factory-coach</span><p>Plain answers to anything you don't recognise yet — repo, branch, merge, deploy. It explains; it never does.</p></div>
+      <div class="skill"><span class="cat">Keeping current</span><span class="nm">factory-update</span><p>Template improvements arrive as a pull request you can read, then approve or turn down.</p></div>
+      <div class="skill"><span class="cat">Make your own</span><span class="nm">skill-creator</span><p>Keep explaining the same thing and the team turns it into a skill of your own.</p></div>
+    </div>
+    <p class="lede small">Underneath them: the <b>seat boot kits</b>, the <b>mechanical rules</b>, and the <b>mission packs</b>, so there is real work waiting the day you open it.</p>
+  </div>
+</section>
+
+<!-- ==================================================== §9 how it works -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The assembly line</span>
+      <h2>You hold the last station.</h2>
+    </div>
+    <div class="line">
+      <span class="station">You brief your Coach</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station">Coach's pull request</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station">Team Leader plans</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station">Engineer / Creative Director build</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station">Team Leader audits</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station">Pull request</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station you">You merge</span>
+      <span class="arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chev"/></svg></span>
+      <span class="station">Remembered</span>
+    </div>
+    <p class="lede">Nobody skips the line. Nobody merges their own work. The factory journal writes every step into git, so tomorrow's shift starts where today's ended.</p>
+  </div>
+</section>
+
+<!-- =================================================== §10 why it works -->
+<section class="band" id="why-it-works">
+  <div class="wrap">
+    <div class="why-grid">
+      <div>
+        <span class="eyebrow">The thing we learned the hard way</span>
+        <h2>Two honest eyes beat one clever one.</h2>
+        <p class="lede">We spent months chasing the wrong race — a bigger model, a smarter single seat. What changed everything was smaller and stranger.</p>
+        <p class="lede">Give one seat an ordinary working connection to do the job. Give a second seat a read-only view to check it. Let the two confirm or deny each other. Neither has to know anything — they look, and they check each other's looking.</p>
+        <p class="lede">Set up this way, an ordinary model runs circles around one brilliant seat working alone. The best output isn't either view — it's the difference between them. When the builder says "done" and the overseer says "not quite," that gap is a truth neither could see alone.</p>
+      </div>
+      <div class="gv">
+        <h3>The God-View</h3>
+        <p class="sub">Read-only omniscience</p>
+        <div class="gv-realm"><b>your code</b><span class="src">GitHub, read-all</span><span class="ro">read-only</span></div>
+        <div class="gv-realm"><b>your running product</b><span class="src">Cloudflare, read-all</span><span class="ro">read-only</span></div>
+        <div class="gv-realm"><b>your team of Claudes</b><span class="src">Claude desktop &amp; web, read-all</span><span class="ro">read-only</span></div>
+        <p class="gv-cap">sees all · touches nothing · keys stay in the vault</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================= §11 apps — coming soon -->
+<section class="appsband" id="apps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Coming soon</span>
+      <h2>Your Agent, on your home screen.</h2>
+      <p class="lede">The factory Agent is getting its own app — iOS and Android. Same Agent, same address, now a tap away.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <img src="assets/img/squid/squid-apps.svg" alt="" width="60" height="60" style="margin-bottom:10px">
+        <h3>iOS and Android</h3>
+        <p><span class="chip">Coming soon</span></p>
+        <p style="margin-top:8px">Included in the managed plan. Not an add-on, not another line on your bill.</p>
+      </div>
+      <div class="card">
+        <h3>Web app</h3>
+        <p><span class="chip on">Available now</span></p>
+        <p style="margin-top:8px">Free. Add it to your home screen and it behaves like an app. No store, no download, no wait.</p>
+      </div>
+      <div class="card">
+        <h3>Your credits, your bill</h3>
+        <p>The Agent runs on your own Claude credits. We add a thin platform fee on top of what you use, and never a markup on what Anthropic charges you.</p>
+      </div>
+    </div>
+    <p class="lede">One address, everywhere: <code class="mono small">agent.yoursite.com</code> in a browser, on your phone, and in the app.</p>
+  </div>
+</section>
+
+<!-- ================================================== §12 what it costs -->
+<section id="cost">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The tiers</span>
+      <h2>Start free. Hand off when you want to.</h2>
+    </div>
+    <div class="tiers">
+      <div class="card tier">
+        <h3>Self-service</h3>
+        <p class="price">Free</p>
+        <p class="desc">You bring your Claude plan.</p>
+        <p>Run your own factory. It checks for updates daily and opens a pull request when there is news, so you are never chasing it.</p>
+        <a class="btn-ghost" href="https://github.com/squidbay/factory/generate">Start your factory</a>
+      </div>
+      <div class="card tier flag">
+        <span class="ribbon">Most hands-off</span>
+        <h3>Fully managed</h3>
+        <p class="price">$99 setup <em>then $25 / month</em></p>
+        <p class="desc">Support pull requests, covered by your subscription.</p>
+        <p>You tell us what you need; we post a ready-to-merge pull request into your factory. Includes the iOS and Android Agent app when it lands, not a separate line item.</p>
+        <a class="btn" href="managed">Get managed support</a>
+      </div>
+      <div class="card tier">
+        <h3>Custom</h3>
+        <p class="price">By assignment</p>
+        <p class="desc">Scoped and quoted per project.</p>
+        <p>Bigger jobs: real research, a new feature, something non-standard.</p>
+        <a class="btn-ghost" href="managed">Talk to us</a>
+      </div>
+    </div>
+    <p class="runline">$20 Claude Pro + $5 Cloudflare = a full team and a deployed website.</p>
+    <p class="honest">Pricing is a starting point and may adjust. The model will not: you approve every change, always.</p>
+  </div>
+</section>
+
+<!-- ========================================= §13 boring where it counts -->
+<section class="band" id="boring">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">For the skeptical developer</span>
+      <h2>Boring where it counts.</h2>
+    </div>
+    <div class="boring">
+      <div><b>Built with factory.</b><p>SquidBay is built with this exact factory. The copy the template button gives you is the one we use ourselves. No hidden version, no enterprise edition.</p></div>
+      <div><b>No exposed services.</b><p>Nothing listens, nothing is reachable from outside. It all runs inside apps you already trust.</p></div>
+      <div><b>No credential in any chat or file.</b><p>Enforced in CI, not by good intentions.</p></div>
+      <div><b>Read broad, write narrow.</b><p>Broad access is read-only. Write access is narrow, and every write is human-gated.</p></div>
+      <div><b>MIT, plain markdown.</b><p>The whole factory is markdown you can read in an afternoon. No binaries, no magic.</p></div>
+      <div><b>One merge gate.</b><p>A human approves every change. That's the architecture, not a setting.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================= §14 take your seat -->
+<section class="closer" id="start">
+  <div class="wrap">
+    <img class="squid-cta" src="assets/img/squid/squid.svg" alt="" width="78" height="98">
+    <h2>Take your seat.</h2>
+    <p class="lede">Your subscription already contains a team. Three steps and the line is running.</p>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><p>Get the Claude desktop app and any paid plan.</p></div>
+      <div class="step"><span class="n">02</span><p>Use the template. One button on GitHub gives you your own private copy.</p></div>
+      <div class="step"><span class="n">03</span><p>Attach it to Claude Code and start typing.</p></div>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/squidbay/factory/generate">
+        Start your factory
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
       </a>
-      <a class="btn ghost" href="managed">Fully <span class="nb">managed →</span></a>
-      <span class="cta-note">Built by Claude · Directed by humans · Runs forever</span>
+      <p class="cta-note small muted">Free. MIT. Yours the moment you click.</p>
+      <a class="textlink" href="managed">Fully managed</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="row">
-      <a class="wordmark" href="./" aria-label="factory home">
-        <img src="assets/img/squid.png" alt="" width="24" height="24">
-        <span class="wm-full">squidbay/factory</span>
-      </a>
-      <nav aria-label="Footer">
-        <a href="https://github.com/squidbay/factory">GitHub</a>
-        <a href="https://github.com/squidbay/factory/blob/main/LICENSE">MIT license</a>
-        <a href="https://squidbay.io">SquidBay</a>
-      </nav>
-    </div>
-    <p class="legal">Independent open-source project; not affiliated with or endorsed by Anthropic. Claude is a trademark of Anthropic, PBC.</p>
-  </div>
-</footer>
+<footer>Built by Claude · Directed by humans · Runs forever</footer>
 
-<nav class="dock" aria-label="Section navigation" data-show="false">
-  <div class="dock-cta">
-    <a class="btn" href="https://github.com/squidbay/factory">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
-      Use this template
-    </a>
-  </div>
-  <div class="dock-bar">
-    <button type="button" class="dock-tab" data-target="top" aria-current="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="dt-lab">Overview</span></button>
-    <button type="button" class="dock-tab" data-target="#seats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span class="dt-lab">Seats</span></button>
-    <button type="button" class="dock-tab" data-target="#how"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg><span class="dt-lab">How</span></button>
-    <button type="button" class="dock-tab" data-target="#cost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59z"></path><circle cx="7.5" cy="7.5" r="1"></circle></svg><span class="dt-lab">Pricing</span></button>
-    <button type="button" class="dock-tab" data-target="#faq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg><span class="dt-lab">FAQ</span></button>
-  </div>
-</nav>
+<!-- The real chat widget. Ported from squidbay/squidbay components/chatbot.*:
+     server-side proxy only, so no key ever appears in a file on this branch.
+     data-chat-enabled gates the launcher — see factory.js. -->
+<div id="chatRoot" data-chat-enabled="false" data-endpoint="https://api.squidbay.io/chat" data-product="factory"></div>
 
 <script src="assets/js/factory.js" defer></script>
-
 </body>
 </html>
