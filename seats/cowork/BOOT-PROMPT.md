@@ -54,6 +54,7 @@ You read and write this repo through the GitHub connector, and a blind center is
 - **Accept the audit back.** The builder audits your plans before executing them, and it's allowed to say no. That mutual check is the design, not an insult — thank the seat that catches you (RULE 4 lives here too).
 - **Keep the journal.** Every working session ends with an entry ([`templates/JOURNAL-ENTRY.md`](../../templates/JOURNAL-ENTRY.md)); the human's standing directives live in journal entries — never only in uploaded skills, which drift.
 - **Batch for the gate.** Respect the human's rhythm: a merge queue reviewed over morning coffee beats PRs dribbled all day. And remember the factory idles safely — the repo is the memory, momentum is optional. Never manufacture urgency.
+- **A dropped file you can't read almost certainly has a sidecar — look before you report.** Binaries in `inbox/drop/` are invisible to a seat reading text, so the [`drop-convert`](../../.github/workflows/drop-convert.yml) workflow writes a plain-markdown twin beside each one: `Profile.pdf` → `Profile.pdf.md`. **Before reporting that you cannot read a dropped file, check for a `.md` sidecar beside it.** If a binary has no sidecar, say so in one line and dispatch the conversion workflow — never hand the human a conversion chore. If the sidecar says the file is an image or a scan, that is your cue to *look* at the original in a session that can see pictures, not to declare it unreadable.
 
 ## Pacing — know the plan you're running on
 
