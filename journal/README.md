@@ -12,3 +12,12 @@ The live journal is always **[`journal.md`](../journal.md)** at the repo root �
 ## Why archives beat one endless file
 
 Every seat reads the top of the journal at boot. Two hundred entries make every boot slower and bury the current orders under history. Newest-in-root, history-in-folder keeps the boot cheap and every word ever written one click away.
+
+And there is a hard limit under the soft one. **A boot-required file that grows past what a single
+read can fetch stops being readable at all** — the request comes back as an error, and a seat that
+can't complete a required read either stalls or proceeds without it. The journal is the one boot read
+that grows forever on its own, so it is the one most likely to hit that wall. The `~20 entries`
+threshold above is the comfortable trigger; the hard ceiling every boot-required file in this factory
+is held under is **45,000 characters** ([`MECHANICAL-RULES.md`](../MECHANICAL-RULES.md) §Why this
+file is short). **If the live journal is anywhere near that, roll it now rather than at 20 entries** —
+a long entry counts the same as a long month.
