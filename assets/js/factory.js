@@ -4,69 +4,6 @@
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Seats carousel (index) ---------- */
-  (function () {
-    var car = document.getElementById('seatsCarousel');
-    if (!car) return;
-    var scope = car.closest('section') || car.parentNode;
-    var track = car.querySelector('.car-track');
-    var cards = Array.prototype.slice.call(track.querySelectorAll('.poster-card'));
-    var prev = scope.querySelector('.car-btn.prev');
-    var next = scope.querySelector('.car-btn.next');
-    var dotsWrap = car.querySelector('.car-dots');
-    if (!dotsWrap) return;
-    if (cards.length < 2) { if (prev) prev.style.display = 'none'; if (next) next.style.display = 'none'; return; }
-
-    var dots = cards.map(function (_, i) {
-      var d = document.createElement('button');
-      d.type = 'button';
-      d.className = 'car-dot';
-      d.setAttribute('aria-label', 'Go to seat ' + (i + 1));
-      d.addEventListener('click', function () { go(i, false); });
-      dotsWrap.appendChild(d);
-      return d;
-    });
-
-    function step() {
-      return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left || track.clientWidth;
-    }
-    function maxIndex() {
-      return Math.max(0, Math.round((track.scrollWidth - track.clientWidth) / step()));
-    }
-    function activeIndex() {
-      return Math.min(maxIndex(), Math.round(track.scrollLeft / step()));
-    }
-    function go(i, instant) {
-      var m = maxIndex();
-      if (i < 0) i = 0; else if (i > m) i = m;
-      track.scrollTo({ left: i * step(), behavior: (instant || reduce) ? 'auto' : 'smooth' });
-    }
-    function advance(dir, auto) {
-      var m = maxIndex(), t = activeIndex() + dir, wrap = false;
-      if (t > m) { t = 0; wrap = true; } else if (t < 0) { t = m; wrap = true; }
-      go(t, auto && wrap);
-    }
-    function update() {
-      var a = activeIndex();
-      dots.forEach(function (d, i) { d.setAttribute('aria-current', i === a ? 'true' : 'false'); });
-    }
-
-    if (prev) prev.addEventListener('click', function () { advance(-1, false); });
-    if (next) next.addEventListener('click', function () { advance(1, false); });
-    var raf;
-    track.addEventListener('scroll', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
-    window.addEventListener('resize', function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); });
-    update();
-
-    var timer = null, inView = false;
-    function play() { if (reduce || timer || !inView) return; timer = setInterval(function () { advance(1, true); }, 4500); }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    ['mouseenter', 'focusin', 'touchstart', 'pointerdown'].forEach(function (e) { scope.addEventListener(e, stop, { passive: true }); });
-    ['mouseleave', 'focusout'].forEach(function (e) { scope.addEventListener(e, play); });
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else play(); });
-    new IntersectionObserver(function (es) { es.forEach(function (e) { inView = e.isIntersecting; if (inView) play(); else stop(); }); }, { threshold: 0.3 }).observe(car);
-  })();
-
   /* ---------- Assembly-line arrow run (index) ---------- */
   (function () {
     var line = document.getElementById('flowLine');

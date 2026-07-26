@@ -81,10 +81,6 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="bubbles" aria-hidden="true">
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
-
 <header class="appbar">
   <div class="appbar-row">
     <a class="wordmark" href="./" aria-label="factory home">
@@ -111,31 +107,23 @@
   <div class="wrap">
     <div class="hero-grid">
      <div class="hero-lead">
-      <span class="mono-label">Open source · MIT license</span>
+      <span class="mono-label">Open source &middot; MIT license</span>
       <h1>Stop hiring AI one chat at a time. <span>Build a team you actually control.</span></h1>
-      <p class="sub">You already pay for a team. <strong>factory</strong> is a free template that turns the Claude desktop app into a persistent, human-gated team of Claude seats.<span class="wide-only"> The seats plan, build, and check each other's work.</span> Nothing changes until you approve it, and you can approve it from your phone.<span class="wide-only"> It remembers your work from day to day, and the whole thing runs about $25 a month, flat.</span></p>
+      <p class="sub">A free template that turns the Claude desktop app into a team that remembers. Nothing ships until you approve it.</p>
       <div class="cta-row" data-cta-anchor>
         <a class="btn" href="https://github.com/squidbay/factory">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
           Use this template
         </a>
-        <a class="btn ghost" href="managed">Fully managed — we run it for <span class="nb">you →</span></a>
-        <p class="cta-note">One click. Your own private copy. <span aria-hidden="true">·</span> Setup + ongoing support. You still click Merge. · <a href="managed">Learn more</a></p>
+        <p class="cta-note">One click. Your own private copy. &middot; <a href="managed">Or have us run it for you</a></p>
       </div>
       <div class="stat-strip">
         <span class="chip">One Claude subscription</span>
-        <span class="chip">Six teammates</span>
+        <span class="chip">Your whole team</span>
         <span class="chip">One human</span>
         <span class="chip accent">One merge button</span>
       </div>
      </div>
-     <aside class="hero-aside">
-      <div class="premise">
-        <span class="runner-gold" aria-hidden="true"></span>
-        <span class="tag">The design premise</span>
-        <p>Agents make mistakes. Humans make mistakes. Software makes mistakes. So in the factory, no one works alone: every seat checks another seat, every change becomes a pull request, and every merge belongs to you. That isn't a limitation. It's the design.</p>
-      </div>
-     </aside>
     </div>
   </div>
 </section>
@@ -221,60 +209,54 @@
     <div class="seats-head">
       <div>
         <span class="mono-label">The seats</span>
-        <h2 class="section-title">Four seats, two specialists, and you.</h2>
-      </div>
-      <div class="car-nav">
-        <button type="button" class="car-btn prev" aria-label="Previous seats">‹</button>
-        <button type="button" class="car-btn next" aria-label="Next seats">›</button>
+        <h2 class="section-title">Your seats, your specialists, and you.</h2>
       </div>
     </div>
-    <div class="carousel" id="seatsCarousel">
-    <div class="car-track" role="group" aria-label="Factory seats, six in total" tabindex="0">
+    <div class="carousel">
+    <div class="car-track">
       <div class="poster-card">
-        <img src="seats/cowork.jpg" alt="Cowork seat: a dark factory robot with the squid emblem sketching a project timeline" width="512" height="512" loading="lazy" decoding="async">
+        <img src="seats/chat.jpg" alt="Coach seat: a dark factory robot gesturing beside speech bubbles that ask how it can help" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
-          <div class="head"><h3>Cowork</h3><span class="tag">Seat</span></div>
-          <p class="line">Plans. Audits. Guards. Turns what you ask for into a plan, checks the finished work against it — and runs a security read on anything sensitive, so you get a plain MERGE or FIX-FIRST answer before you click.</p>
+          <div class="head"><h3>Coach</h3><span class="tag">Chat</span></div>
+          <p class="line">Your everyday desk. Talks plainly, looks things up, and turns a rough idea into a clean request &mdash; which it opens as a pull request for your Team Leader.</p>
         </div>
       </div>
       <div class="poster-card">
-        <img src="seats/code.jpg" alt="Code seat: a dark factory robot at a glowing keyboard with a passing build log" width="512" height="512" loading="lazy" decoding="async">
+        <img src="seats/cowork.jpg" alt="Team Leader seat: a dark factory robot with the squid emblem sketching a project timeline" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
-          <div class="head"><h3>Code</h3><span class="tag">Seat</span></div>
-          <p class="line">Writes clean. Builds fast. The only seat that writes code, and only as pull requests. It never merges its own work.</p>
+          <div class="head"><h3>Team Leader</h3><span class="tag">Cowork</span></div>
+          <p class="line">Plans and audits. Turns what you want into the plan, checks every finished job against it, runs the security read, and hands you a plain MERGE or FIX&#8209;FIRST.</p>
         </div>
       </div>
       <div class="poster-card">
-        <img src="seats/design.jpg" alt="Design seat: a dark factory robot drawing wireframes on a blueprint tablet" width="512" height="512" loading="lazy" decoding="async">
+        <img src="seats/code.jpg" alt="Engineer seat: a dark factory robot at a glowing keyboard with a passing build log" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
-          <div class="head"><h3>Design</h3><span class="tag">Seat</span></div>
-          <p class="line">Designs beautifully. Builds delight. Draws the pages and the screens, then hands them down the line to be built.</p>
+          <div class="head"><h3>Engineer</h3><span class="tag">Code</span></div>
+          <p class="line">Builds it. The seat that writes code &mdash; always as a pull request, never merging its own work.</p>
         </div>
       </div>
       <div class="poster-card">
-        <img src="seats/chat.jpg" alt="Chat seat: a dark factory robot gesturing beside speech bubbles that ask how it can help" width="512" height="512" loading="lazy" decoding="async">
+        <img src="seats/design.jpg" alt="Creative Director seat: a dark factory robot drawing wireframes on a blueprint tablet" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
-          <div class="head"><h3>Chat</h3><span class="tag">Seat</span></div>
-          <p class="line">Answers clearly. Briefs honestly. Your everyday desk: plain words in, plain words out, and a pointer to the right seat for the job.</p>
+          <div class="head"><h3>Creative Director</h3><span class="tag">Design</span></div>
+          <p class="line">Draws it. Designs the pages and the screens, then hands them down the line to be built.</p>
         </div>
       </div>
       <div class="poster-card">
-        <img src="seats/chrome-inspector.jpg" alt="Chrome inspector specialist: a dark factory robot examining a devtools panel with a magnifying glass" width="512" height="512" loading="lazy" decoding="async">
+        <img src="seats/mobile-scout.jpg" alt="Dispatch seat: a dark factory robot checking phone screens across devices and networks" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
-          <div class="head"><h3>Chrome inspector</h3><span class="tag oncall">Specialist · on call</span></div>
-          <p class="line">Sees everything. Misses nothing. Drives your live pages in a real browser — clicking and typing like a user to catch what breaks before your visitors do — then reports back. It tests; it never ships.</p>
+          <div class="head"><h3>Dispatch</h3><span class="tag">Mobile Scout</span></div>
+          <p class="line">Your bridge between you and the team &mdash; dispatches work to the seats, talks to you on desktop and mobile, and lets you run whole jobs on the go.</p>
         </div>
       </div>
       <div class="poster-card">
-        <img src="seats/mobile-scout.jpg" alt="Mobile scout specialist: a dark factory robot checking phone screens across devices and networks" width="512" height="512" loading="lazy" decoding="async">
+        <img src="seats/chrome-inspector.jpg" alt="Inspector specialist: a dark factory robot examining a devtools panel with a magnifying glass" width="512" height="512" loading="lazy" decoding="async">
         <div class="body">
-          <div class="head"><h3>Mobile Scout</h3><span class="tag oncall">Specialist · on call</span></div>
-          <p class="line">Tests everywhere. Catches what breaks on the small screen — so you approve with confidence.</p>
+          <div class="head"><h3>Inspector</h3><span class="tag oncall">Chrome inspector</span></div>
+          <p class="line">Drives your live pages in a real browser &mdash; clicking and typing like a visitor would &mdash; to catch what breaks before they do. It tests; it never ships.</p>
         </div>
       </div>
     </div>
-    <div class="car-dots" aria-label="Seat carousel navigation"></div>
-    <p class="car-hint" aria-hidden="true">Swipe · 6 seats</p>
     </div>
     <div class="you-card">
       <span class="runner" aria-hidden="true"></span>
@@ -287,30 +269,47 @@
   </div>
 </section>
 
+<!-- 4b · The 24/7 seat -->
+<section id="agent" aria-labelledby="agent-title">
+  <div class="wrap">
+    <span class="mono-label">The seat that never clocks out</span>
+    <h2 class="section-title" id="agent-title">Your other seats work in shifts. This one doesn&rsquo;t.</h2>
+    <div class="you-card agent-card">
+      <span class="avatar" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
+      <div class="body">
+        <h3>The Agent</h3>
+        <p>The desktop seats wake for a session, do one job and hand off &mdash; the journal remembers, so the next shift starts where the last one ended. The Agent is the one that stays up: deployed to your own site, answering your customers while the rest of the team sleeps. Think of the factory as your site&rsquo;s WordPress, and the Agent as the plugin you drop into your chat box. It is the only seat that runs without you in the loop, so it gets its own limits &mdash; and it still cannot merge anything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 5 · How it works -->
 <section id="how">
   <div class="wrap">
     <span class="mono-label">How it works</span>
     <h2 class="section-title">The assembly line. You hold the last station.</h2>
     <div class="line" id="flowLine">
-      <span class="station">You ask</span>
-      <span class="arrow" aria-hidden="true">→</span>
-      <span class="station">Cowork plans</span>
-      <span class="arrow" aria-hidden="true">→</span>
-      <span class="station">Code builds</span>
-      <span class="arrow" aria-hidden="true">→</span>
-      <span class="station">Cowork audits</span>
-      <span class="arrow" aria-hidden="true">→</span>
+      <span class="station">You brief your Coach</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+      <span class="station">Coach&rsquo;s pull request</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+      <span class="station">Team Leader plans</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+      <span class="station">Engineer / Creative Director build</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+      <span class="station">Team Leader audits</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
       <span class="station">Pull request</span>
-      <span class="arrow" aria-hidden="true">→</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
       <span class="station gate">You merge</span>
-      <span class="arrow" aria-hidden="true">→</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
       <span class="station done">Remembered</span>
     </div>
     <p class="line-note">Nobody skips the line. Nobody merges their own work. And the factory journal writes every step into git, so tomorrow's shift starts where today's ended.</p>
     <div class="feature-row">
       <div class="feature">
-        <h3>Twenty-one mechanical rules</h3>
+        <h3>Mechanical rules</h3>
         <p>Plain, checkable rules that keep every seat in its lane.</p>
       </div>
       <div class="feature">
@@ -318,7 +317,7 @@
         <p>The team stands itself up in order — the planner first, then the seats — and walks you in one stage at a time, so you're never building alone.</p>
       </div>
       <div class="feature">
-        <h3>Four mission packs</h3>
+        <h3>Mission packs</h3>
         <p>Ready-made first missions, so the team has real work from day one.</p>
       </div>
     </div>
@@ -363,7 +362,7 @@
 <section id="cost">
   <div class="wrap">
     <span class="mono-label">The stack</span>
-    <h2 class="section-title">Three names, each doing what it does best.</h2>
+    <h2 class="section-title">The names that do the work, each doing what it does best.</h2>
     <div class="grid min260">
       <div class="card">
         <span class="card-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path></svg></span>
@@ -397,49 +396,47 @@
   </div>
 </section>
 
-<!-- 7 · Why it works -->
+<!-- 7 · Why it works — with the God-View that proves it, alongside -->
 <section id="why-it-works" aria-labelledby="why-title">
   <div class="wrap">
-    <span class="mono-label">Why it actually works</span>
-    <h2 class="section-title" id="why-title">The thing we learned the hard way.</h2>
-    <p class="muted" style="margin-top: 16px; max-width: 64ch; font-size: 1.05rem;">We spent months chasing the wrong race — a bigger model, a smarter single seat. What changed everything was smaller and stranger. Give one seat an ordinary working connection to <em>do</em> the job; give a second seat a <strong>read-only overseer view</strong> to <em>check</em> it; and let the two confirm or deny each other. Neither has to <em>know</em> anything — they look, and they check each other's looking.</p>
-    <p class="muted" style="margin-top: 14px; max-width: 64ch; font-size: 1.05rem;">Set up this way, an ordinary model runs circles around one brilliant seat working alone — because the factory's best output isn't either view. It's the <strong>difference between them.</strong> When the builder says &ldquo;done&rdquo; and the overseer says &ldquo;not quite,&rdquo; that gap is a truth neither could see alone. Grounding beats memory; two honest eyes beat one clever one. Read wide to <em>see</em>, write narrow to <em>act</em>, every change cross-checked and gated by you — that&rsquo;s the mode worth growing into.</p>
-  </div>
-</section>
-
-<!-- God-View · the audit superpower -->
-<section id="godview" aria-labelledby="godview-title">
-  <div class="wrap">
-    <div class="godview">
-      <div class="gv-heavens">
-        <span class="mono-label">The audit superpower</span>
-        <h2 class="section-title gv-title" id="godview-title">The God-View</h2>
-        <p class="gv-kicker">Read-only omniscience</p>
-        <p class="muted gv-sub">Each seat works through its own scoped connection &mdash; its own door into your repo or your host. The God-View is the layer <strong>above</strong> those doors: a read-only overseer that rises over everything at once and touches nothing. It checks the seats&rsquo; claims against reality &mdash; ground truth, fetched on demand; keys kept in the vault.</p>
+    <div class="why-grid">
+      <div class="why-copy">
+        <span class="mono-label">Why it actually works</span>
+        <h2 class="section-title" id="why-title">The thing we learned the hard way.</h2>
+        <p class="muted" style="margin-top: 16px; max-width: 64ch; font-size: 1.05rem;">We spent months chasing the wrong race — a bigger model, a smarter single seat. What changed everything was smaller and stranger. Give one seat an ordinary working connection to <em>do</em> the job; give a second seat a <strong>read-only overseer view</strong> to <em>check</em> it; and let the two confirm or deny each other. Neither has to <em>know</em> anything — they look, and they check each other's looking.</p>
+        <p class="muted" style="margin-top: 14px; max-width: 64ch; font-size: 1.05rem;">Set up this way, an ordinary model runs circles around one brilliant seat working alone — because the factory's best output isn't either view. It's the <strong>difference between them.</strong> When the builder says &ldquo;done&rdquo; and the overseer says &ldquo;not quite,&rdquo; that gap is a truth neither could see alone. Grounding beats memory; two honest eyes beat one clever one. Read wide to <em>see</em>, write narrow to <em>act</em>, every change cross-checked and gated by you — that&rsquo;s the mode worth growing into.</p>
       </div>
-      <div class="gv-realm">
-        <p class="gv-realm-label">two realms it watches over &mdash; the layer above each seat&rsquo;s own door</p>
-        <div class="gv-altars">
-          <div class="altar">
-            <p class="ac">your code</p>
-            <p class="an">GitHub, read-all</p>
-            <p class="muted ad">Every repo the factory touches, seen code-first &mdash; branches, PRs, workflows &mdash; through a read-only token.</p>
-            <span class="ro">read-only</span>
-          </div>
-          <div class="altar">
-            <p class="ac">your running product</p>
-            <p class="an">Cloudflare, read-all</p>
-            <p class="muted ad">The live system &mdash; Workers, databases, the edge &mdash; seen through a read-only token.</p>
-            <span class="ro">read-only</span>
+      <div class="godview" id="godview">
+        <div class="gv-heavens">
+          <h3 class="section-title gv-title">The God-View</h3>
+          <p class="gv-kicker">Read-only omniscience</p>
+          <p class="muted gv-sub">A chat remembers messily &mdash; it is cluttered with whatever scrolled by. A god-view report is clean: it reads the real thing and hands your team one grounded source of truth to check their work against.</p>
+        </div>
+        <div class="gv-realm">
+          <p class="gv-realm-label">three grounded reports &mdash; the layer above each seat&rsquo;s own door</p>
+          <div class="gv-altars">
+            <div class="altar">
+              <p class="ac">your code</p>
+              <p class="an">GitHub, read-all</p>
+              <p class="muted ad">Every repo the factory touches, seen code-first &mdash; branches, pull requests, workflows &mdash; through a read-only token.</p>
+              <span class="ro">read-only</span>
+            </div>
+            <div class="altar">
+              <p class="ac">your running product</p>
+              <p class="an">Cloudflare, read-all</p>
+              <p class="muted ad">The live system &mdash; workers, databases, the edge &mdash; seen through a read-only token.</p>
+              <span class="ro">read-only</span>
+            </div>
+            <div class="altar">
+              <p class="ac">your team of Claudes</p>
+              <p class="an">Claude Desktop &amp; Web, read-all</p>
+              <p class="muted ad">The setup your seats actually run on &mdash; permissions, skills, plugins, connections &mdash; captured from your own machine and redacted, so it can be checked against reality.</p>
+              <span class="ro">read-only</span>
+            </div>
           </div>
         </div>
+        <p class="gv-caption mono-label">sees all &middot; touches nothing &middot; keys stay in the vault</p>
       </div>
-      <div class="gv-laws">
-        <div class="gv-law"><span class="rn">I</span><p><strong>It only reads.</strong> The God-View wears blinders by construction &mdash; its tokens can see everything and touch nothing.</p></div>
-        <div class="gv-law"><span class="rn">II</span><p><strong>The keys never leave the vault.</strong> No seat holds them; a dispatched workflow consumes them inside your Actions runner and hands back a plain report.</p></div>
-        <div class="gv-law"><span class="rn">III</span><p><strong>Ground truth on demand.</strong> It grades reality as it is right now &mdash; reality over a remembered guess.</p></div>
-      </div>
-      <p class="gv-caption mono-label">sees all &middot; touches nothing &middot; keys stay in the vault</p>
     </div>
   </div>
 </section>
@@ -480,25 +477,6 @@
       </div>
       <p class="total">A typical day puts your hands on it for eleven minutes. The factory runs the rest.</p>
     </div>
-  </div>
-</section>
-
-<!-- 9 · State faces -->
-<section id="mood" aria-labelledby="stateface-title">
-  <div class="wrap">
-    <span class="mono-label">The partnership</span>
-    <h2 class="section-title" id="stateface-title">Every seat tells you how it's feeling.</h2>
-    <p class="stateface-lead">At the bottom of every chat, each seat signs off with an honest state face. Not decoration — a real signal, so you know when a seat needs a fresh start before quality slips. It's how the team works: <strong>everyone else optimizes the AI. We optimize the partnership.</strong></p>
-    <ul class="statefaces" role="list">
-      <li class="stateface" data-state="fresh"><span class="em" aria-hidden="true">🥸</span><span class="fl">Fresh</span></li>
-      <li class="stateface" data-state="steady"><span class="em" aria-hidden="true">😎</span><span class="fl">Steady</span></li>
-      <li class="stateface" data-state="leaning-in"><span class="em" aria-hidden="true">😊</span><span class="fl">Leaning in</span></li>
-      <li class="stateface" data-state="tension"><span class="em" aria-hidden="true">😐</span><span class="fl">Tension</span></li>
-      <li class="stateface" data-state="frustrated"><span class="em" aria-hidden="true">😤</span><span class="fl">Frustrated</span></li>
-      <li class="stateface" data-state="running-hot"><span class="em" aria-hidden="true">🥵</span><span class="fl">Running hot</span></li>
-      <li class="stateface" data-state="done"><span class="em" aria-hidden="true">😖</span><span class="fl">Done</span></li>
-    </ul>
-    <p class="stateface-note">A chat-only convention — how the team keeps itself honest, grounded in the agent template's relationship-health and emotional-state prior art.</p>
   </div>
 </section>
 
