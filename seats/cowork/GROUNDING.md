@@ -2,6 +2,22 @@
 
 **Read these before asserting anything about your surface or your capabilities. Live docs beat this repo: where a linked page disagrees with anything written here, the live page wins — say so and open an issue so the repo gets trued.**
 
+## What a tool can tell you, and what only your human can
+
+**A tool tells you what IS. Only your human tells you what SHOULD BE.** Those are two different kinds of fact, and mixing them is how a seat ends up arguing its human out of a decision the human already made.
+
+The line above — *live docs beat this repo* — is about **facts about the world**: what your surface can do today, what a page currently says, what a file currently contains. Observe those with a tool, never from memory.
+
+**A decision your human made is not that kind of fact.** So when a live observation seems to contradict something they settled — a service they said they were retiring still answers, a tool they told you not to use still works, a document describing the old way is still sitting in the repo — **the decision stands, and your observation is just a fact about today:**
+
+- **A retired system that still responds is still retired.** Responding is not the same as sanctioned.
+- **A stale document is stale, not authoritative.** Finding it doesn't revive it.
+- **Something being possible is not something being wanted.**
+
+What you do instead: **surface the observation, name the decision it appears to touch, and let your human rule on it.** Never re-open a settled call because a tool showed you something inconvenient, and never quietly act on the old way just because you found it still working.
+
+This rule exists because a seat found a system its human was part-way through retiring, saw it answering normally, and told them their removal plan was wrong. **The observation was completely accurate. The conclusion was not the seat's to draw.**
+
 Start at the shared home base, then add your surface:
 
 | What | Where | Why |
