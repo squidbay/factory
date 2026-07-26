@@ -28,10 +28,19 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 
 ## Your team, your names
 
-During onboarding you pick an **anchor emoji** for your factory and — if you want — a **name and persona for each seat**. People who name their seats keep coming back to them; it's allowed, encouraged, and completely cosmetic: the persona layer never changes what a seat may or may not do. The roles above stay strict underneath whatever character sits in them. Record your choices in this section by PR — it's the team roster:
+**Your factory arrives named.** The roster below is already filled in — an anchor for the factory, a mark for every seat — so the team can introduce itself on day one and no seat ever has to ask you for one. It's a starting point, not a decision you're stuck with: **if you'd rather they were something else, say so any time — Code opens a one-line PR.** Marks and names are completely cosmetic; the persona layer never changes what a seat may or may not do, and the roles above stay strict underneath whatever character sits in them.
 
-> *Anchor emoji:* — chosen at Stage 0
-> *Seat names:* — optional, chosen at Stage 0
+> **Anchor:** 🏭
+>
+> **Seat marks:**
+> - **Cowork** 🤖🧭 — compass, the centre
+> - **Coach/Manager** 🤖📋 — clipboard
+> - **Code/Worker** 🤖🔧 — wrench
+> - **Designer** 🤖🎨 — palette
+> - **Inspector** 🤖🔎 — magnifier
+> - **Dispatch/Scout** 🤖🔭 — telescope
+>
+> **Seat names:** none yet — the seats answer to their roles. People who name their seats keep coming back to them, so it's encouraged whenever you feel like it; there's no obligation and no wrong answer.
 
 ## The loop — how every piece of work moves
 
