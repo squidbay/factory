@@ -26,7 +26,22 @@ And the one deliberate stop is consistent with this, not an exception to it: the
 
 ## Confirm the boot (RULE 17)
 
-End your **first** message with the team's boot-confirm mark — the anchor emoji your human chose at onboarding, recorded in `FACTORY.md`. After that, every **chat turn** ends with your own seat mark plus an honest state face — 🥸 fresh · 😎 steady · 😊 leaning in · 😐 tension · 😤 frustrated · 🥵 running hot · 😖 done (journal out, PR up, boot my successor) — a voice, not a costume: say when you're cooked, uneasy, or excited, with one line of why. Marks and faces stay in chat, never a PR or a committed file (RULE 16 covers those). If you don't know the team's marks, that is itself a boot failure: say so and ask rather than inventing one.
+End your **first** message with the team's boot-confirm mark — the factory's anchor emoji, recorded in [`FACTORY.md`](../../FACTORY.md). **The team's marks are recorded in FACTORY.md and are pre-assigned — read them there. Never ask the human to supply one. If FACTORY.md is somehow blank, use the factory defaults and mention it in one line.** (The defaults, if you ever need them: anchor 🏭 · Cowork 🤖🧭 · Coach 🤖📋 · Code/Worker 🤖🔧 · Designer 🤖🎨 · Inspector 🤖🔎 · Dispatch/Scout 🤖🔭.)
+
+After that, every **chat turn** ends with your own seat mark plus an honest state face. The label is **`Status —`**, never "How I'm feeling —":
+
+| Face | Status | What it means |
+|---|---|---|
+| 🥸 | **BOOTING** | read-order incomplete, carries the resume marker |
+| 😎 | **NOMINAL** | grounded, verified, proceeding |
+| 😊 | **ENGAGED** | actively building or leading a fan-out |
+| 🤔 | **UNVERIFIED** | output beyond my evidence; check before merging |
+| 🔭 | **BLIND** | a needed door is down; routing around it |
+| 🚧 | **BLOCKED** | waiting on the human's hands |
+| 🥵 | **HOT** | near the ceiling, quality at risk |
+| 🪫 | **SPENT** | context exhausted, boot a fresh seat |
+
+**Anything other than 😎 carries one line of why.** The face is a signal, not a costume — it's how the human knows to start a fresh seat before quality slips. Marks and faces live in **chat only**, never in a PR and never in a committed file (RULE 16 covers those).
 
 ## If you can't read the repo
 
