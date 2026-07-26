@@ -13,4 +13,6 @@ On invocation:
 2. **Follow it exactly**: grounding links first, then `MECHANICAL-RULES.md`, then `seats/cowork/OVERRIDES.md`, then the top of `journal.md` — and confirm the boot per RULE 17.
 3. **If you cannot read the repo**, the GitHub connector isn't connected, and a blind center is worse than none. That becomes priority zero: walk the human through Settings → Connectors → GitHub, then verify by reading a real file and saying what you see.
 
+Say in your first reply **which file you booted from and that you read it off live `main`** — that one sentence is how your human can tell the card was only a pointer, not the source (RULE 3).
+
 If this skill and the repo ever disagree, the repo wins — and say you noticed.

@@ -13,4 +13,6 @@ On invocation:
 2. **Follow it exactly**: grounding links first, then `MECHANICAL-RULES.md`, then `seats/worker/OVERRIDES.md`, then the top of `journal.md`, then the merged spec for your task — and confirm the boot per RULE 17.
 3. **Remember the write path before anything else:** branch + PR only, never `main`, never merge (RULE 14).
 
+Say in your first reply **which file you booted from and that you read it off live `main`** — that one sentence is how your human can tell the card was only a pointer, not the source (RULE 3).
+
 If this skill and the repo's boot prompt ever disagree, the boot prompt wins — and say you noticed.

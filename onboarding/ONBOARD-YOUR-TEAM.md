@@ -96,6 +96,47 @@ Useful precisely because it's light. 🎉
 
 ---
 
+## Keeping the boot cards current — it goes both ways
+
+The four boot skills you upload in Settings are **snapshots**. The repo keeps changing; a
+snapshot doesn't. So there are two ways for your team to quietly fall out of date, and they
+need different answers.
+
+**Direction 1 — a fix that never reaches the deployed card is not a fix.** You merge an
+improvement to how a seat behaves, and the seat keeps behaving the old way, because what it
+actually loads is the copy sitting in Settings. **Your factory already closes most of this by
+design:** every boot card is a *thin loader*. It holds almost nothing — it tells the seat to go
+read `seats/{seat}/BOOT-PROMPT.md` **off live `main`, in full**, and to follow that. So when you
+merge a change to a boot prompt, the seat's grounding, or its overrides, **every already-installed
+card picks it up on its next boot.** Nothing to re-upload. That's the whole reason the cards are
+built that way, and it's worth knowing so you don't re-upload after every merge.
+
+**What that does *not* cover** is the card's own text: its `description` line (which decides when
+the skill fires at all) and its three loader steps. Those live only in the copy in Settings. **If
+a pull request changes a file under `seats/*/{seat}-boot/`, that one needs a re-upload** — merging
+it is not enough. Any PR touching those files should say so plainly; if yours doesn't, ask.
+
+**Direction 2 — a card that never reaches git is not durable.** The mirror failure, and the
+quieter one: someone tweaks a skill directly in Settings to fix a niggle. It works. It now exists
+in exactly one place — that one account's settings, invisible to the repo, invisible to every
+seat, gone the day the account changes or the skill is re-uploaded from `main`. **Nobody can
+review it, and nobody can find it later.**
+
+So the rule, both directions:
+
+> **The repo is the original; the card is a copy. Change the repo first, by pull request, then
+> re-upload the card. Never the other way round, and never only in Settings.**
+
+If you've already made a Settings-only tweak and it's a good one — bring it back: tell Code what
+you changed and it'll open a PR putting it in the repo where it belongs. That's not a telling-off,
+it's how a good idea stops being fragile.
+
+**How to check a card is current:** ask the seat, in its room — *"which file did you boot from, and
+did you read it off live `main`?"* A healthy seat names the file and says yes. A seat answering
+from the card's own memory instead is the drift, showing itself.
+
+---
+
 ## The shape, in one breath
 
 **Cowork leads → Designer shows (when needed) → Code builds → you merge.** Every
