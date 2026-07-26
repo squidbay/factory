@@ -4,6 +4,33 @@
 
 They are mechanical, not aspirational: each one exists because the default behavior — what an unruled seat does naturally — produced a real failure somewhere before you. The rules are numbered so seats can cite them (`RULE 14`) instead of re-arguing them.
 
+## Why this file is short — and the budget that keeps it that way
+
+**Anything a seat is *required* to read at boot must be fetchable in one call.** Not "should be." A
+file too big to fetch whole comes back as an error — *exceeds maximum allowed tokens* — and a seat
+that can't complete a required read either stalls its whole boot or, worse, quietly proceeds without
+the thing it was told it must have. **A rule nobody can load doesn't bind anyone.**
+
+So every boot-required file in this factory is held under a hard budget: **≤ 45,000 characters,
+each file, no exceptions.** Today this one is about 6,500 — comfortable, and worth keeping that way.
+
+**The lesson underneath, learned the expensive way: the defect is size, not location.** A required
+rulebook once grew to 105,763 characters and started stalling boots. Moving it to a friendlier
+address would have reproduced the exact same failure at a new path. What fixed it was **splitting it
+into pieces that each fit in one call**, behind a small stable index that boot orders point at — so
+re-shaping the pieces later never breaks a single boot instruction.
+
+**What this means when you're the one adding words:**
+
+- **Adding to a boot-required file is a size decision, not just an edit.** Check the character count
+  before you commit. If a section pushes past the budget, split the file and add an index — don't
+  ship the overflow and hope.
+- **Point boot orders at a stable index, never at a file that might get split.** That's the whole
+  reason a folder with a `README.md` beats a single growing document.
+- **The same discipline governs the journal**, which is the one boot read that grows on its own
+  forever: the roll rule in [`journal/README.md`](journal/README.md) retires old entries to an
+  archive so the live file stays cheap to read at every boot. Same principle, different clock.
+
 ---
 
 ## RULE 1 — Verify your own work. Never claim untested things work.
