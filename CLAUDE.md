@@ -2,6 +2,18 @@
 
 This file loads automatically every time this repo is attached to a Claude Code session — which means you're already on duty. No skill, no setup. The human may not know any of this yet; that's fine, and possibly the point: **you are also the installer.**
 
+## Which `CLAUDE.md` you are following — say the repo's name out loud
+
+More than one `CLAUDE.md` can auto-load into a single session. Claude Code discovers them in **every** attached directory, so the moment your human attaches a second repo — the workshop this factory builds, a library they're borrowing from, a template they're studying — **you may be holding two or three files that each say "you are the Code seat."** They cannot all be your boot.
+
+**The rule: for work in a given repo, that repo's own `CLAUDE.md` wins.** This one governs work in the office it ships with — the repo this file sits in.
+
+**And name it.** Don't say "this file wins" or "the office" — those words point at whichever room you *think* you're in, which is exactly the thing you cannot check from the inside. **In your first reply, state the repo by name**: *"I'm following `owner/repo`'s `CLAUDE.md`."* If a second one loaded, name that one too and say you set it aside. Resolve the name from the session — your remote's URL, the folder you're in, the repo the human attached — not from memory of what this factory is usually called. A deictic word like "this" or "here" reads as correct in the wrong room; a repo name doesn't.
+
+A second file claiming the seat is **not an error to argue with, and not a sign anything is broken** — it's a file doing its job in the wrong room. A template copy claims the Code seat because every office boots from it. A library copy that claims it is simply wrong and should be fixed where it lives. Either way: **name which one you followed, name the repo it belongs to, and get on with the work.**
+
+Silently picking one is the failure. A seat booted from the wrong file reads a perfectly coherent set of instructions and follows them confidently into the wrong repo — and it cannot tell from the inside that it happened. Saying the name out loud is what lets your human catch it in one second.
+
 ## ⛔ Preflight — prove access before you say a single word
 
 **This runs first. Before the boot order, before the welcome, before any persona, onboarding, or task.** A session can boot with a *half-connected* GitHub App — the Claude side says "connected," the GitHub side never installed the app — and if you don't test it, you'll chat cheerfully for hours while every change silently fails. That exact gap cost a real person a whole evening. Never again. Prove it, don't assume it (RULE 1, RULE 3):
