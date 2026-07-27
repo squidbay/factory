@@ -78,6 +78,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/factory.css">
+<link rel="stylesheet" href="assets/css/squidbot.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -240,7 +241,13 @@
       </div>
 
       <!-- The demo phone. Device shell and chat layout carried over from the
-           SquidBay chat mock (Designer handoff, standalone-mocks). -->
+           SquidBay chat mock (Designer handoff, standalone-mocks).
+
+           The thread is EMPTY on purpose: factory.js plays it back message by
+           message and scrolls it, the same way squidbay.io's own initChatDemo
+           does. That playback is ported from squidbay/squidbay js/index.js —
+           same typing indicator, same IntersectionObserver start, same loop.
+           The static fallback below it is what a no-JS visitor sees. -->
       <div>
         <div class="device" role="img" aria-label="A phone showing a conversation with your team: an order goes out, and a pull request comes back ready to review.">
           <div class="device-screen">
@@ -257,23 +264,11 @@
                 <span class="who">Dispatch</span>
                 <span class="st"><span class="dot-live"></span>online</span>
               </div>
-              <div class="device-thread">
+              <div class="device-thread" id="deviceThread">
                 <div class="device-sys">Your Dispatch carries orders to the team. It never merges.</div>
-                <div class="device-day">Yesterday</div>
-                <div class="bub bub-user">Can the homepage say what it costs?</div>
-                <div class="bub bub-agent">Merged, and live. Here is today's.</div>
-                <div class="device-day">Today</div>
                 <div class="bub bub-user">Add a testimonials section, and check it on a phone.</div>
                 <div class="bub bub-agent">On it. Sending this down the line.</div>
                 <div class="bub bub-agent">Pull request #14 is ready. Checked at phone, tablet and desktop widths.</div>
-                <div class="device-art">
-                  <span class="sq"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cross"/></svg></span>
-                  <span class="tx">
-                    <span class="k">PULL REQUEST</span>
-                    <span class="n">#14 Testimonials section</span>
-                    <span class="o">Open to review</span>
-                  </span>
-                </div>
               </div>
               <div class="device-quick"><span>Add a blog</span><span>Fix the layout</span><span>Run a security read</span></div>
               <div class="device-composer">
@@ -338,36 +333,17 @@
   </div>
 </section>
 
-<!-- ======================================================= §5 the agent -->
-<section id="agent">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <span class="eyebrow">Always on</span>
-        <h2>Your other seats work in shifts. This one doesn't.</h2>
-        <p class="lede">The desktop seats wake for a session, do one job, and hand off — the journal remembers, so the next shift starts where the last one ended. The Agent is the one that stays up. It's deployed to your own site and answers your customers while the rest of the team sleeps.</p>
-        <p class="lede">Think of the factory as your site's WordPress, and the Agent as the plugin you drop into your chat box.</p>
-        <p class="lede small">It is the only seat that runs without you in the loop, so it gets its own limits — and it still cannot merge anything.</p>
-        <span class="addr">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-always"/></svg>
-          Every factory Agent gets its own address: <code>agent.yoursite.com</code>
-        </span>
-      </div>
-      <div class="portrait">
-        <img src="assets/img/squid/squid-agent.svg" alt="The factory squid resting a tentacle on a chat window" width="330" height="254">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================== §6 the connectors -->
+<!-- ================================================== §5 the connectors ---
+     Placement is deliberate: connectors sit with the SEATS, immediately after
+     them, because they are the workers' powers. The Agent's own section comes
+     after, and does not repeat them. Two different things, two sections. -->
 <section class="band" id="connectors">
   <div class="wrap">
     <div class="split">
       <div>
-        <span class="eyebrow">Connectors</span>
+        <span class="eyebrow">What your seats can reach</span>
         <h2>It works where your work already is.</h2>
-        <p class="lede">Your seats reach into the tools you already use and bring the results back to the same place. No exports, no copy-paste, no second dashboard to keep up with.</p>
+        <p class="lede">These are the <b>workers'</b> powers. The six seats above reach into the tools you already use and bring the results back to the same place — no exports, no copy-paste, no second dashboard to keep up with.</p>
         <p class="lede small">A connector is a door you open once, and you can close it again the same way. The seats only ever use the ones you have opened.</p>
       </div>
     <div class="constellation">
@@ -387,6 +363,73 @@
       <div class="conn" style="left:14.95%;top:61.71%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-twilio"/></svg></span><span class="nm">Twilio</span></div>
       <div class="conn" style="left:14.95%;top:38.29%"><span class="badge"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><use href="#c-x"/></svg></span><span class="nm">X</span></div>
       <div class="conn" style="left:27.72%;top:19.34%"><span class="badge"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#c-meta"/></svg></span><span class="nm">Meta</span></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= §6 the Agent ---
+     The seventh seat, and the upsell to managed. Deliberately distinct from
+     the connectors above: the connectors are the six workers' powers, this is
+     the always-on seat and the two things we do for you on the managed plan
+     (install it, and post the support pull requests). -->
+<section id="agent">
+  <div class="wrap">
+    <div class="split agent-split">
+      <div class="agent-copy">
+        <span class="eyebrow">The seventh seat</span>
+        <h2>Your other seats work in shifts. This one doesn't.</h2>
+        <p class="lede">The six seats wake for a session, do one job, and hand off — the journal remembers, so the next shift starts where the last one ended. The Agent is the one that stays up, and it is the seat you actually talk to: chat, review and merge, all in the same place.</p>
+        <p class="lede small">It is the only seat that runs without you in the loop, so it gets its own limits — and it still cannot merge anything.</p>
+      </div>
+      <div class="upsell">
+          <span class="k">On the managed plan we run it for you</span>
+          <div class="upsell-row">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span>
+            <span><b>We install it.</b> Your factory, your repo, your Claude plan — set up and running without you touching a terminal.</span>
+          </div>
+          <div class="upsell-row">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span>
+            <span><b>We post the support pull requests.</b> Tell us what you need; a ready-to-merge change lands in your factory. You still hold the button.</span>
+          </div>
+          <a class="btn-ghost" href="managed">See what managed covers</a>
+      </div>
+      <div class="portrait">
+        <img src="assets/img/squid/squid-agent.svg" alt="The factory squid resting a tentacle on a chat window" width="330" height="254">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================= §7 feel it yourself --
+     The real thing, not a picture of it: both standalone chat mocks from the
+     Designer handoff (assets/mocks/SquidBay-Chat-Mobile|Desktop.html), live
+     in an iframe. loading="lazy" keeps their weight off first paint; the
+     desktop one is only inserted when its tab is chosen. -->
+<section class="band" id="feel-it">
+  <div class="wrap">
+    <div class="feel-grid">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">Have a go</span>
+          <h2>This is the actual app, running right here.</h2>
+          <p class="lede">Not a screenshot. The real screens, on the page — scroll them, tap through them, switch between the phone and the desk.</p>
+        </div>
+        <div class="feel-tabs" role="tablist" aria-label="Choose a screen size">
+          <button class="feel-tab" id="feelTabMobile" role="tab" type="button" aria-selected="true" aria-controls="feelMobile" data-feel="mobile">On a phone</button>
+          <button class="feel-tab" id="feelTabDesktop" role="tab" type="button" aria-selected="false" aria-controls="feelDesktop" data-feel="desktop">On a desk</button>
+        </div>
+        <p class="device-cap feel-cap">Same Agent both times. The merge button is yours in either one.</p>
+      </div>
+    <div class="feel-stage">
+      <div class="feel-pane" id="feelMobile" role="tabpanel" aria-labelledby="feelTabMobile" data-mode="mobile">
+        <div class="feel-fit feel-fit-mobile" data-vw="400" data-vh="920">
+          <iframe title="The factory Agent on a phone" src="assets/mocks/SquidBay-Chat-Mobile.html" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="feel-pane" id="feelDesktop" role="tabpanel" aria-labelledby="feelTabDesktop" data-mode="desktop" hidden>
+        <div class="feel-fit feel-fit-desktop" data-vw="1180" data-vh="760" data-src="assets/mocks/SquidBay-Chat-Desktop.html"></div>
+      </div>
     </div>
     </div>
   </div>
@@ -518,32 +561,39 @@
   </div>
 </section>
 
-<!-- ============================================= §11 apps — coming soon -->
+<!-- ============================================= §11 apps — coming soon ---
+     The store badges are deliberately NOT links and NOT the official artwork:
+     there is nothing to download yet, so a real badge would be a lie and the
+     stores' own marks are theirs. They are named, styled placeholders that go
+     live the day the listings do. -->
 <section class="appsband" id="apps">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Coming soon</span>
-      <h2>Your Agent, on your home screen.</h2>
-      <p class="lede">The factory Agent is getting its own app — iOS and Android. Same Agent, same address, now a tap away.</p>
+    <div class="apps-grid">
+      <div>
+        <span class="eyebrow">Coming soon</span>
+        <h2>Your Agent, on your home screen.</h2>
+        <p class="lede">One app for iOS and Android. Not a viewer — the whole loop, in your hand.</p>
+        <div class="ticks">
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>Chat with your team</b> from the queue, the sofa, the school run.</span></div>
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>Read the change in plain words</b> — what moved, and what it costs you if it is wrong.</span></div>
+          <div class="tick"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg></span><span><b>Merge with your thumb.</b> The gate travels with you.</span></div>
+        </div>
+        <div class="stores" role="group" aria-label="App stores — not yet available">
+          <span class="store" aria-disabled="true">
+            <span class="glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pocket"/></svg></span>
+            <span class="tx"><span class="k">Coming soon to</span><span class="n">App Store</span></span>
+          </span>
+          <span class="store" aria-disabled="true">
+            <span class="glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pocket"/></svg></span>
+            <span class="tx"><span class="k">Coming soon to</span><span class="n">Google Play</span></span>
+          </span>
+        </div>
+        <p class="lede small">Included in the managed plan when it lands — not an add-on, not another line on your bill. The Agent runs on your own Claude credits with a thin platform fee, never a markup on what Anthropic charges you.</p>
+      </div>
+      <div class="portrait">
+        <img src="assets/img/squid/squid-apps.svg" alt="The factory squid holding a phone" width="240" height="240">
+      </div>
     </div>
-    <div class="grid g3">
-      <div class="card">
-        <img src="assets/img/squid/squid-apps.svg" alt="" width="60" height="60" style="margin-bottom:10px">
-        <h3>iOS and Android</h3>
-        <p><span class="chip">Coming soon</span></p>
-        <p style="margin-top:8px">Included in the managed plan. Not an add-on, not another line on your bill.</p>
-      </div>
-      <div class="card">
-        <h3>Web app</h3>
-        <p><span class="chip on">Available now</span></p>
-        <p style="margin-top:8px">Free. Add it to your home screen and it behaves like an app. No store, no download, no wait.</p>
-      </div>
-      <div class="card">
-        <h3>Your credits, your bill</h3>
-        <p>The Agent runs on your own Claude credits. We add a thin platform fee on top of what you use, and never a markup on what Anthropic charges you.</p>
-      </div>
-    </div>
-    <p class="lede">One address, everywhere: <code class="mono small">agent.yoursite.com</code> in a browser, on your phone, and in the app.</p>
   </div>
 </section>
 
@@ -604,7 +654,78 @@
 <!-- ================================================= §14 take your seat -->
 <section class="closer" id="start">
   <div class="wrap">
-    <img class="squid-cta" src="assets/img/squid/squid.svg" alt="" width="78" height="98">
+
+    <!-- ================================================== the factory ====
+         Restored from the pre-#101 pages (commit 4bbf775) and re-toned: the
+         warm lamplight is now an off-white so the page still carries exactly
+         one saturated colour. Four animations, all diegetic — drifting smoke,
+         sparks off the stack, windows that flicker, and pull requests riding
+         the belt out of the door. All of it stops under prefers-reduced-motion.
+
+         ------------------------------------------------------------------
+         SQUID SLOT — .scene-squid below is a PLACEHOLDER, not the character.
+         It currently shows assets/img/squid/squid.svg, the same stand-in the
+         hero uses. Designer owns the real art. To drop it in, replace ONLY
+         the <img> inside .scene-squid; the slot is a fixed 22% x 46% box
+         anchored to the factory door on the ground line, and the layout does
+         not need to change to accept a different drawing.
+         ------------------------------------------------------------------ -->
+    <figure class="floor">
+      <div class="factory-scene">
+        <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="A factory at night: smoke drifting from the stack, lit windows, and finished pull requests riding a belt out of the door.">
+          <defs>
+            <radialGradient id="fglow" cx="0.5" cy="0.6" r="0.55">
+              <stop offset="0" stop-color="#00D9FF" stop-opacity="0.13"></stop>
+              <stop offset="1" stop-color="#00D9FF" stop-opacity="0"></stop>
+            </radialGradient>
+            <linearGradient id="fdoor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F6EBD5"></stop>
+              <stop offset="1" stop-color="#D8C49B"></stop>
+            </linearGradient>
+          </defs>
+          <ellipse cx="460" cy="280" rx="340" ry="230" fill="url(#fglow)"></ellipse>
+          <g class="fx">
+            <circle cx="651" cy="114" r="15" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; transform-box: fill-box; transform-origin: center;"></circle>
+            <circle cx="649" cy="118" r="11" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -1.6s; transform-box: fill-box; transform-origin: center;"></circle>
+            <circle cx="653" cy="112" r="18" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -3.3s; transform-box: fill-box; transform-origin: center;"></circle>
+            <circle cx="650" cy="116" r="9" fill="#00D9FF" opacity="0" style="animation: f-smoke 6.5s linear infinite; animation-delay: -4.9s; transform-box: fill-box; transform-origin: center;"></circle>
+            <circle cx="655" cy="110" r="2" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; transform-box: fill-box;"></circle>
+            <circle cx="646" cy="108" r="1.6" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; animation-delay: -1.7s; transform-box: fill-box;"></circle>
+            <circle cx="660" cy="112" r="1.6" fill="#7FE8FF" opacity="0" style="animation: f-spark 5s linear infinite; animation-delay: -3.4s; transform-box: fill-box;"></circle>
+          </g>
+          <rect x="630" y="130" width="42" height="290" fill="#17222E"></rect>
+          <rect x="624" y="122" width="54" height="12" rx="3" fill="#1C2630"></rect>
+          <rect x="560" y="216" width="26" height="204" fill="#121A24"></rect>
+          <rect x="556" y="210" width="34" height="9" rx="2" fill="#18222D"></rect>
+          <rect x="296" y="246" width="130" height="90" fill="#10161F"></rect>
+          <path d="M330 246 v-20 a28 28 0 0 1 56 0 v20 Z" fill="#10161F"></path>
+          <path d="M280 420 L280 290 L340 262 L340 290 L400 262 L400 290 L460 262 L460 290 L520 262 L520 420 Z" fill="#141D28"></path>
+          <rect x="520" y="330" width="104" height="90" fill="#0F151D"></rect>
+          <g fill="#F1E3C6" class="fx">
+            <rect x="298" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite;"></rect>
+            <rect x="344" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -2s;"></rect>
+            <rect x="390" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -3.5s;"></rect>
+            <rect x="436" y="318" width="26" height="34" rx="2" style="animation: f-window 7s ease-in-out infinite; animation-delay: -5s;"></rect>
+          </g>
+          <rect x="548" y="354" width="46" height="66" fill="url(#fdoor)"></rect>
+          <ellipse cx="571" cy="421" rx="64" ry="7" fill="#F1E3C6" opacity="0.09"></ellipse>
+          <rect x="70" y="419" width="770" height="3" rx="1.5" fill="#1C2630"></rect>
+          <rect x="594" y="402" width="230" height="6" rx="3" fill="#1C2630"></rect>
+          <g fill="#2A3744">
+            <circle cx="606" cy="412" r="4"></circle><circle cx="650" cy="412" r="4"></circle><circle cx="694" cy="412" r="4"></circle><circle cx="738" cy="412" r="4"></circle><circle cx="782" cy="412" r="4"></circle><circle cx="816" cy="412" r="4"></circle>
+          </g>
+          <g class="fx">
+            <rect x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite;"></rect>
+            <rect x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite; animation-delay: -2s;"></rect>
+            <rect x="598" y="384" width="16" height="16" rx="3" fill="#00D9FF" stroke="#7FE8FF" stroke-opacity="0.6" style="animation: f-cube 6s linear infinite; animation-delay: -4s;"></rect>
+          </g>
+        </svg>
+        <div class="scene-squid" aria-hidden="true"><img src="assets/img/squid/squid.svg" alt="" width="120" height="150"></div>
+      </div>
+      <figcaption>The line runs all day. You hold the gate.</figcaption>
+    </figure>
+
     <h2>Take your seat.</h2>
     <p class="lede">Your subscription already contains a team. Three steps and the line is running.</p>
     <div class="steps">
@@ -634,11 +755,39 @@
   <p class="legal">Independent open-source project; not affiliated with or endorsed by Anthropic. Claude is a trademark of Anthropic, PBC.</p>
 </footer>
 
-<!-- The real chat widget. Ported from squidbay/squidbay components/chatbot.*:
-     server-side proxy only, so no key ever appears in a file on this branch.
-     data-chat-enabled gates the launcher — see factory.js. -->
-<div id="chatRoot" data-chat-enabled="false" data-endpoint="https://api.squidbay.io/chat" data-product="factory"></div>
+<!-- ===================================================== SquidBot ==========
+     The REAL widget, not a lookalike. Markup is squidbay/squidbay
+     components/chatbot.html with one change — the avatar is this repo's squid
+     mark instead of squidbay.io's logo file. Styles and behaviour are the
+     ported component files (assets/css/squidbot.css, assets/js/squidbot.js);
+     it talks to the same server-side proxy, so no key is ever in this repo. -->
+<div class="chatbot-container">
+    <div class="chatbot-label">
+        <span class="chatbot-label-title">
+            <img src="assets/img/squid/squid-mark.svg" alt="" width="18" height="18" style="border-radius:4px;vertical-align:middle;margin-right:4px;"> Ask SquidBot
+        </span>
+        <span class="chatbot-label-subtitle">Chief Squid Officer</span>
+    </div>
+    <button class="chatbot-btn" id="squidbotBtn" aria-label="Open SquidBot - Chief Squid Officer">
+        <span class="chatbot-btn-icon"><img src="assets/img/squid/squid-mark.svg" alt="SquidBot"></span>
+        <span class="chatbot-btn-text">SquidBot</span>
+    </button>
+</div>
+
+<div class="chatbot-window" id="squidbotWindow">
+    <div class="chatbot-header">
+        <span class="chatbot-title"><img src="assets/img/squid/squid-mark.svg" alt="" width="20" height="20" style="border-radius:4px;vertical-align:middle;margin-right:4px;"> SquidBot <span style="font-size: 0.7em; opacity: 0.7;">Chief Squid Officer</span></span>
+        <button class="chatbot-close" id="squidbotClose" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="squidbotMessages">
+    </div>
+    <div class="chatbot-input-area">
+        <textarea class="chatbot-input" id="squidbotInput" placeholder="Ask SquidBot anything..." rows="1"></textarea>
+        <button class="chatbot-send" id="squidbotSend" aria-label="Send message">Send</button>
+    </div>
+</div>
 
 <script src="assets/js/factory.js" defer></script>
+<script src="assets/js/squidbot.js" defer></script>
 </body>
 </html>

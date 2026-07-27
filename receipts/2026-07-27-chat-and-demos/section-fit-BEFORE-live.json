@@ -1,0 +1,1799 @@
+{
+ "live": {
+  "_source": "https://factory.squidbay.io/",
+  "390portrait": {
+   "viewport": [
+    390,
+    844
+   ],
+   "pageHeight": 13579,
+   "screens": 16.09,
+   "horizontalOverflow": false,
+   "scrollWidth": 390,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 113,
+     "vhRatio": 0.134
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 954,
+     "vhRatio": 1.131
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 876,
+     "vhRatio": 1.038
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 1051,
+     "vhRatio": 1.245
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 1085,
+     "vhRatio": 1.286
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 1001,
+     "vhRatio": 1.186
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 669,
+     "vhRatio": 0.793
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 975,
+     "vhRatio": 1.155
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 1097,
+     "vhRatio": 1.3
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 854,
+     "vhRatio": 1.011
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 1063,
+     "vhRatio": 1.259
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 1020,
+     "vhRatio": 1.208
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 1076,
+     "vhRatio": 1.275
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 840,
+     "vhRatio": 0.995
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 720,
+     "vhRatio": 0.853
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 185,
+     "vhRatio": 0.22
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "36px",
+    "32px",
+    "19px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 342,
+     "h": 52
+    },
+    {
+     "w": 312,
+     "h": 52
+    },
+    {
+     "w": 342,
+     "h": 52
+    }
+   ],
+   "animatedElements": 10,
+   "glowSites": 6,
+   "sectionLimit": 1.25,
+   "sectionsOverLimit": [
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 1085,
+     "vhRatio": 1.286
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 1097,
+     "vhRatio": 1.3
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 1063,
+     "vhRatio": 1.259
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 1076,
+     "vhRatio": 1.275
+    }
+   ]
+  },
+  "430portrait": {
+   "viewport": [
+    430,
+    932
+   ],
+   "pageHeight": 12948,
+   "screens": 13.89,
+   "horizontalOverflow": false,
+   "scrollWidth": 430,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 113,
+     "vhRatio": 0.121
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 911,
+     "vhRatio": 0.978
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 809,
+     "vhRatio": 0.868
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 1059,
+     "vhRatio": 1.136
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 1010,
+     "vhRatio": 1.083
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 938,
+     "vhRatio": 1.006
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 669,
+     "vhRatio": 0.718
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 927,
+     "vhRatio": 0.995
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 1059,
+     "vhRatio": 1.137
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 818,
+     "vhRatio": 0.877
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 940,
+     "vhRatio": 1.008
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 969,
+     "vhRatio": 1.039
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 1038,
+     "vhRatio": 1.114
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 804,
+     "vhRatio": 0.863
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 699,
+     "vhRatio": 0.75
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 185,
+     "vhRatio": 0.199
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "36px",
+    "32px",
+    "19px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 382,
+     "h": 52
+    },
+    {
+     "w": 320,
+     "h": 52
+    },
+    {
+     "w": 382,
+     "h": 52
+    }
+   ],
+   "animatedElements": 8,
+   "glowSites": 6,
+   "sectionLimit": 1.25,
+   "sectionsOverLimit": []
+  },
+  "844landscape": {
+   "viewport": [
+    844,
+    390
+   ],
+   "pageHeight": 6098,
+   "screens": 15.64,
+   "horizontalOverflow": false,
+   "scrollWidth": 844,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.167
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 422,
+     "vhRatio": 1.082
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 368,
+     "vhRatio": 0.943
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 401,
+     "vhRatio": 1.028
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 498,
+     "vhRatio": 1.278
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 502,
+     "vhRatio": 1.287
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 316,
+     "vhRatio": 0.81
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 412,
+     "vhRatio": 1.057
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 490,
+     "vhRatio": 1.258
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 267,
+     "vhRatio": 0.684
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 463,
+     "vhRatio": 1.187
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 502,
+     "vhRatio": 1.286
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 481,
+     "vhRatio": 1.234
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 337,
+     "vhRatio": 0.864
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 441,
+     "vhRatio": 1.131
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 133,
+     "vhRatio": 0.342
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9861
+    }
+   ],
+   "distinctFontSizes": 9,
+   "fontSizes": [
+    "42.2px",
+    "37.98px",
+    "15px",
+    "14px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 1,
+   "tapTargetSamples": [
+    "GitHub 42x44"
+   ],
+   "ctaBoxes": [
+    {
+     "w": 203,
+     "h": 52
+    },
+    {
+     "w": 225,
+     "h": 52
+    },
+    {
+     "w": 203,
+     "h": 52
+    }
+   ],
+   "animatedElements": 10,
+   "glowSites": 6,
+   "sectionLimit": 1.25,
+   "sectionsOverLimit": [
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 498,
+     "vhRatio": 1.278
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 502,
+     "vhRatio": 1.287
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 490,
+     "vhRatio": 1.258
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 502,
+     "vhRatio": 1.286
+    }
+   ]
+  },
+  "932landscape": {
+   "viewport": [
+    932,
+    430
+   ],
+   "pageHeight": 5932,
+   "screens": 13.8,
+   "horizontalOverflow": false,
+   "scrollWidth": 932,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.151
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 422,
+     "vhRatio": 0.981
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 340,
+     "vhRatio": 0.79
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 401,
+     "vhRatio": 0.932
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 485,
+     "vhRatio": 1.128
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 490,
+     "vhRatio": 1.139
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 304,
+     "vhRatio": 0.707
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 396,
+     "vhRatio": 0.92
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 495,
+     "vhRatio": 1.151
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 271,
+     "vhRatio": 0.631
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 427,
+     "vhRatio": 0.993
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 485,
+     "vhRatio": 1.128
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 468,
+     "vhRatio": 1.089
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 324,
+     "vhRatio": 0.753
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 427,
+     "vhRatio": 0.992
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 133,
+     "vhRatio": 0.31
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9861
+    }
+   ],
+   "distinctFontSizes": 9,
+   "fontSizes": [
+    "46.6px",
+    "41.94px",
+    "15px",
+    "14px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 1,
+   "tapTargetSamples": [
+    "GitHub 42x44"
+   ],
+   "ctaBoxes": [
+    {
+     "w": 203,
+     "h": 52
+    },
+    {
+     "w": 254,
+     "h": 52
+    },
+    {
+     "w": 203,
+     "h": 52
+    }
+   ],
+   "animatedElements": 8,
+   "glowSites": 6,
+   "sectionLimit": 1.25,
+   "sectionsOverLimit": []
+  },
+  "834tablet": {
+   "viewport": [
+    834,
+    1112
+   ],
+   "pageHeight": 12268,
+   "screens": 11.03,
+   "horizontalOverflow": false,
+   "scrollWidth": 834,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.058
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 1044,
+     "vhRatio": 0.939
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 909,
+     "vhRatio": 0.817
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 1183,
+     "vhRatio": 1.064
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 1056,
+     "vhRatio": 0.95
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 883,
+     "vhRatio": 0.794
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 549,
+     "vhRatio": 0.494
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 899,
+     "vhRatio": 0.809
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 851,
+     "vhRatio": 0.766
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 494,
+     "vhRatio": 0.444
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 848,
+     "vhRatio": 0.763
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 885,
+     "vhRatio": 0.796
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 1188,
+     "vhRatio": 1.068
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 611,
+     "vhRatio": 0.55
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 638,
+     "vhRatio": 0.573
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 165,
+     "vhRatio": 0.148
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "41.7px",
+    "37.53px",
+    "20px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 229,
+     "h": 52
+    },
+    {
+     "w": 320,
+     "h": 52
+    },
+    {
+     "w": 229,
+     "h": 52
+    }
+   ],
+   "animatedElements": 10,
+   "glowSites": 6,
+   "sectionLimit": 1.15,
+   "sectionsOverLimit": []
+  },
+  "1024landscape": {
+   "viewport": [
+    1024,
+    768
+   ],
+   "pageHeight": 9595,
+   "screens": 12.49,
+   "horizontalOverflow": false,
+   "scrollWidth": 1024,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.085
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 728,
+     "vhRatio": 0.947
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 790,
+     "vhRatio": 1.029
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 688,
+     "vhRatio": 0.896
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 877,
+     "vhRatio": 1.142
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 740,
+     "vhRatio": 0.964
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 548,
+     "vhRatio": 0.714
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 672,
+     "vhRatio": 0.875
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 687,
+     "vhRatio": 0.894
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 414,
+     "vhRatio": 0.54
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 667,
+     "vhRatio": 0.869
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 665,
+     "vhRatio": 0.866
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 759,
+     "vhRatio": 0.988
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 522,
+     "vhRatio": 0.68
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 607,
+     "vhRatio": 0.791
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 165,
+     "vhRatio": 0.214
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "51.2px",
+    "46.08px",
+    "20px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 229,
+     "h": 52
+    },
+    {
+     "w": 213,
+     "h": 56
+    },
+    {
+     "w": 229,
+     "h": 52
+    }
+   ],
+   "animatedElements": 10,
+   "glowSites": 6,
+   "sectionLimit": 1.15,
+   "sectionsOverLimit": []
+  },
+  "1280desktop": {
+   "viewport": [
+    1280,
+    720
+   ],
+   "pageHeight": 8941,
+   "screens": 12.42,
+   "horizontalOverflow": false,
+   "scrollWidth": 1280,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.09
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 656,
+     "vhRatio": 0.912
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 694,
+     "vhRatio": 0.963
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 656,
+     "vhRatio": 0.911
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 831,
+     "vhRatio": 1.155
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 665,
+     "vhRatio": 0.924
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 527,
+     "vhRatio": 0.732
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 571,
+     "vhRatio": 0.793
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 689,
+     "vhRatio": 0.957
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 417,
+     "vhRatio": 0.578
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 590,
+     "vhRatio": 0.82
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 643,
+     "vhRatio": 0.894
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 701,
+     "vhRatio": 0.974
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 483,
+     "vhRatio": 0.67
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 589,
+     "vhRatio": 0.817
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 165,
+     "vhRatio": 0.229
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "div.abyss-bubble",
+     "left": 1272,
+     "right": 1287
+    },
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "64px",
+    "48px",
+    "20px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 229,
+     "h": 52
+    },
+    {
+     "w": 298,
+     "h": 52
+    },
+    {
+     "w": 229,
+     "h": 52
+    }
+   ],
+   "animatedElements": 10,
+   "glowSites": 6,
+   "sectionLimit": 1.15,
+   "sectionsOverLimit": [
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 831,
+     "vhRatio": 1.155
+    }
+   ]
+  },
+  "1280tall": {
+   "viewport": [
+    1280,
+    900
+   ],
+   "pageHeight": 10024,
+   "screens": 11.14,
+   "horizontalOverflow": false,
+   "scrollWidth": 1280,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.072
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 688,
+     "vhRatio": 0.765
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 758,
+     "vhRatio": 0.842
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 841,
+     "vhRatio": 0.935
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 895,
+     "vhRatio": 0.995
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 729,
+     "vhRatio": 0.81
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 688,
+     "vhRatio": 0.764
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 635,
+     "vhRatio": 0.706
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 753,
+     "vhRatio": 0.837
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 481,
+     "vhRatio": 0.534
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 654,
+     "vhRatio": 0.727
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 707,
+     "vhRatio": 0.786
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 765,
+     "vhRatio": 0.85
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 547,
+     "vhRatio": 0.607
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 653,
+     "vhRatio": 0.725
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 165,
+     "vhRatio": 0.183
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "64px",
+    "48px",
+    "20px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 229,
+     "h": 52
+    },
+    {
+     "w": 298,
+     "h": 52
+    },
+    {
+     "w": 229,
+     "h": 52
+    }
+   ],
+   "animatedElements": 8,
+   "glowSites": 6,
+   "sectionLimit": 1.15,
+   "sectionsOverLimit": []
+  },
+  "1440desktop": {
+   "viewport": [
+    1440,
+    900
+   ],
+   "pageHeight": 10024,
+   "screens": 11.14,
+   "horizontalOverflow": false,
+   "scrollWidth": 1440,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.072
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 688,
+     "vhRatio": 0.765
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 758,
+     "vhRatio": 0.842
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 841,
+     "vhRatio": 0.935
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 895,
+     "vhRatio": 0.995
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 729,
+     "vhRatio": 0.81
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 688,
+     "vhRatio": 0.764
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 635,
+     "vhRatio": 0.706
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 753,
+     "vhRatio": 0.837
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 481,
+     "vhRatio": 0.534
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 654,
+     "vhRatio": 0.727
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 707,
+     "vhRatio": 0.786
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 765,
+     "vhRatio": 0.85
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 547,
+     "vhRatio": 0.607
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 653,
+     "vhRatio": 0.725
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 165,
+     "vhRatio": 0.183
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "64px",
+    "48px",
+    "20px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 229,
+     "h": 52
+    },
+    {
+     "w": 298,
+     "h": 52
+    },
+    {
+     "w": 229,
+     "h": 52
+    }
+   ],
+   "animatedElements": 10,
+   "glowSites": 6,
+   "sectionLimit": 1.15,
+   "sectionsOverLimit": []
+  },
+  "1920desktop": {
+   "viewport": [
+    1920,
+    1080
+   ],
+   "pageHeight": 10121,
+   "screens": 9.37,
+   "horizontalOverflow": false,
+   "scrollWidth": 1920,
+   "sections": [
+    {
+     "id": "header",
+     "title": "",
+     "h": 65,
+     "vhRatio": 0.06
+    },
+    {
+     "id": "section",
+     "title": "One subscription. A whole team.",
+     "h": 688,
+     "vhRatio": 0.637
+    },
+    {
+     "id": "what-you-get",
+     "title": "Five things nothing else does.",
+     "h": 758,
+     "vhRatio": 0.701
+    },
+    {
+     "id": "demo",
+     "title": "You ask. They build. You decide.",
+     "h": 887,
+     "vhRatio": 0.821
+    },
+    {
+     "id": "seats",
+     "title": "Your seats, your specialists, and you.",
+     "h": 895,
+     "vhRatio": 0.829
+    },
+    {
+     "id": "agent",
+     "title": "Your other seats work in shifts. This one does",
+     "h": 729,
+     "vhRatio": 0.675
+    },
+    {
+     "id": "connectors",
+     "title": "It works where your work already is.",
+     "h": 740,
+     "vhRatio": 0.685
+    },
+    {
+     "id": "use-cases",
+     "title": "Three jobs a factory picks up on day one.",
+     "h": 635,
+     "vhRatio": 0.588
+    },
+    {
+     "id": "skills",
+     "title": "The skills we'd start you with.",
+     "h": 753,
+     "vhRatio": 0.697
+    },
+    {
+     "id": "how",
+     "title": "You hold the last station.",
+     "h": 481,
+     "vhRatio": 0.445
+    },
+    {
+     "id": "why-it-works",
+     "title": "Two honest eyes beat one clever one.",
+     "h": 654,
+     "vhRatio": 0.606
+    },
+    {
+     "id": "apps",
+     "title": "Your Agent, on your home screen.",
+     "h": 707,
+     "vhRatio": 0.655
+    },
+    {
+     "id": "cost",
+     "title": "Start free. Hand off when you want to.",
+     "h": 765,
+     "vhRatio": 0.708
+    },
+    {
+     "id": "boring",
+     "title": "Boring where it counts.",
+     "h": 547,
+     "vhRatio": 0.506
+    },
+    {
+     "id": "start",
+     "title": "Take your seat.",
+     "h": 653,
+     "vhRatio": 0.604
+    },
+    {
+     "id": "footer",
+     "title": "",
+     "h": 165,
+     "vhRatio": 0.152
+    }
+   ],
+   "containedOverflow": [],
+   "viewportSpill": [
+    {
+     "sel": "a.skip",
+     "left": -9999,
+     "right": -9839
+    }
+   ],
+   "distinctFontSizes": 10,
+   "fontSizes": [
+    "64px",
+    "48px",
+    "20px",
+    "17px",
+    "15px",
+    "13px",
+    "12px",
+    "11px",
+    "10px",
+    "9px"
+   ],
+   "monoSharePct": 1.73,
+   "monoNodes": [
+    "3 files changed",
+    "checks passed",
+    "PULL REQUEST",
+    "agent.yoursite.com",
+    "merged",
+    "waiting",
+    "checked",
+    "ready",
+    "7 items",
+    "2 items",
+    "answered",
+    "passed on",
+    "asks you",
+    "read-only",
+    "read-only",
+    "read-only",
+    "agent.yoursite.com",
+    "01",
+    "02",
+    "03"
+   ],
+   "upperSharePct": 0,
+   "tapTargetsUnder44": 0,
+   "tapTargetSamples": [],
+   "ctaBoxes": [
+    {
+     "w": 229,
+     "h": 52
+    },
+    {
+     "w": 298,
+     "h": 52
+    },
+    {
+     "w": 229,
+     "h": 52
+    }
+   ],
+   "animatedElements": 8,
+   "glowSites": 6,
+   "sectionLimit": 1.15,
+   "sectionsOverLimit": []
+  }
+ }
+}
