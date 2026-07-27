@@ -67,10 +67,14 @@ The template's current version is a plain date. You read it at the top of
 [`../VERSIONS.md`](../VERSIONS.md), but the check reads it from a one-line
 machine file — [`../.github/template-version.txt`](../.github/template-version.txt)
 — so editing the prose on the VERSIONS page can never break the check. The check
-is release-first: it reads the template's **latest GitHub Release** (its tag is
-the version, its notes are that update's `FROM-HQ.md` entry), and if no release
-is reachable it falls back to comparing that raw one-line file on the master. If
-the master's version is newer than yours, an update is waiting. Either way it's a
+reads **both** of the master's version signals and takes the newer: the template's
+**latest GitHub Release** (its tag is a version, its notes are that update's
+`FROM-HQ.md` entry) and the master's own raw one-line version file. Those two are
+written by two different human acts and drift in the window between a merge and a
+release cut, so reading only one of them let a factory be told it was current
+while merged improvements sat unshipped. If the master's version is newer than
+yours, an update is waiting; if neither signal can be read, the check says so
+rather than reporting "up to date." Either way it's a
 signal, not a phone-home — nothing is sent anywhere, nothing runs on its own that
 you didn't ask for. You (or your seat, when you ask) do the reading.
 
