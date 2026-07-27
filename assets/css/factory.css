@@ -49,12 +49,12 @@
   --accent-line: rgba(0, 217, 255, .28);
 
   /* Type */
-  --font: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* The whole ladder. Eight rungs per viewport, and nothing outside them. */
-  --t-display: 58px;
-  --t-h2: 42px;
+  --t-display: clamp(2.25rem, 5vw, 4rem); /* match squidbay.io h1 */
+  --t-h2: clamp(2rem, 4.5vw, 3rem); /* match squidbay.io h2 */
   --t-h3: 20px;
   --t-body: 17px;
   --t-small: 15px;
@@ -80,13 +80,13 @@
 
 @media (max-width: 1023px) {
   :root {
-    --t-display: 44px; --t-h2: 34px;
+    
     --pad-y: 88px; --pad-x: 48px; --gap: 28px;
   }
 }
 @media (max-width: 767px) {
   :root {
-    --t-display: 38px; --t-h2: 30px; --t-h3: 19px;
+    --t-h3: 19px;
     --pad-y: 60px; --pad-x: 24px; --gap: 16px;
   }
 }
@@ -98,7 +98,7 @@
    of this sheet, under "landscape phone". */
 @media (orientation: landscape) and (max-height: 540px) {
   :root {
-    --t-display: 30px; --t-h2: 22px; --t-h3: 15px;
+    --t-h3: 15px;
     --t-body: 14px; --t-small: 13px; --t-label: 12px; --t-micro: 11px;
     --pad-y: 26px; --pad-x: 28px; --gap: 12px;
   }
@@ -151,8 +151,8 @@ body::after {
 }
 
 /* -------------------------------------------------------------- bubbles --- */
-/* Ported from squidbay/squidbay (css/styles.css .abyss-bubble), retinted to
-   the one accent hue so no second colour re-enters. The spawner in
+/* Ported from squidbay/squidbay (css/styles.css .abyss-bubble) — the exact
+   green->cyan abyss gradient, matched to squidbay.io branding. The spawner in
    factory.js gates itself on prefers-reduced-motion; the source did not. */
 .abyss-bubbles {
   position: fixed; inset: 0; overflow: hidden;
@@ -161,11 +161,11 @@ body::after {
 .abyss-bubble {
   position: absolute; bottom: -20px; border-radius: 50%;
   background: radial-gradient(circle at 30% 30%,
-    rgba(0, 217, 255, .15),
+    rgba(0, 255, 136, .15),
     rgba(0, 217, 255, .08) 40%,
     rgba(0, 217, 255, .03) 70%,
     transparent 100%);
-  border: 1px solid rgba(0, 217, 255, .12);
+  border: 1px solid rgba(0, 255, 136, .12);
   animation: bubbleRise linear forwards;
   will-change: transform;
 }
@@ -296,8 +296,13 @@ h3 { font-size: var(--t-h3); font-weight: 700; line-height: 1.35; }
 footer {
   position: relative; z-index: 1;
   padding: 32px var(--pad-x); border-top: 1px solid var(--rule);
-  color: var(--text-muted); font-size: var(--t-small); text-align: center;
+  color: var(--text-muted); font-size: var(--t-small);
+  display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center;
 }
+footer nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+footer nav a { color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+footer nav a:hover { color: var(--accent); }
+footer .legal { font-size: var(--t-label); max-width: 72ch; line-height: 1.6; }
 
 /* ============================================================== §1 hero === */
 .hero { padding-top: 64px; }
