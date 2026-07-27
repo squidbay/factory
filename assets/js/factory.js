@@ -1,10 +1,14 @@
 /* ============================================================================
    factory.js — factory.squidbay.io
 
-   Three jobs, and nothing else:
+   Five jobs, and nothing else:
      1. the abyss bubbles (ported from squidbay/squidbay, motion-gated)
      2. the hero chat mock's demo tabs
-     3. the real chat widget, behind a flag
+     3. the demo phone's scrolling playback (ported from squidbay/squidbay
+        js/index.js initChatDemo)
+     4. the feel-it mock tabs, which also lazily insert the desktop iframe
+     5. revealing the real SquidBot launcher once the page has loaded
+        (squidbot.js owns the widget itself)
 
    What used to be here and is deliberately gone: the `rise` decorative
    particle layer and the two oversized `.glow` blobs. Neither carried any
@@ -124,130 +128,210 @@
     });
   }
 
-  /* -------------------------------------------------------- chat widget ---
-     Ported from squidbay/squidbay components/chatbot.js. The rules carried
-     over unchanged: the page talks to a server-side proxy and never holds a
-     key, messages are rate-limited, input is capped, and the conversation is
-     remembered in sessionStorage only.
+  /* -------------------------------------------- the demo phone playback ---
+     Ported from squidbay/squidbay js/index.js initChatDemo: the same shape —
+     a scripted conversation, a typing indicator before each agent turn, an
+     IntersectionObserver that starts it when the section is actually on
+     screen, a scrollTop nudge after every append, and a loop back to the top
+     after a pause. Two differences, both deliberate:
 
-     If the proxy is not yet serving this product, data-chat-enabled stays
-     "false" and the launcher is never rendered — a launcher that opens an
-     error is worse than no launcher. */
-  var MAX_INPUT = 500;
-  var RATE_LIMIT_MS = 2000;
-  var MAX_MESSAGES = 10;
-  var STORE_KEY = 'factory-chat';
+       - it does not run under prefers-reduced-motion; the static thread that
+         ships in the HTML simply stays put. The source had no such gate.
+       - every string is written with textContent, never innerHTML, because no
+         copy on this page is ever assembled as markup.
+  */
+  /* Written to run LONGER than the thread window on purpose. A script that
+     merely fits is a slideshow; the point of this one is that you watch the
+     conversation push older messages up out of the phone, the way a real one
+     does. */
+  var THREAD = [
+    { who: 'sys',   text: 'Your Dispatch carries orders to the team. It never merges.', wait: 700 },
+    { who: 'day',   text: 'Yesterday', wait: 500 },
+    { who: 'user',  text: 'Can the homepage say what it costs?', wait: 900 },
+    { who: 'agent', text: 'Merged, and live.', wait: 1300 },
+    { who: 'day',   text: 'Today', wait: 600 },
+    { who: 'user',  text: 'Add a testimonials section, and check it on a phone.', wait: 900 },
+    { who: 'agent', text: 'On it. Sending this down the line.', wait: 1200 },
+    { who: 'agent', text: 'Creative Director drew it. Engineer built it.', wait: 1300 },
+    { who: 'agent', text: 'Team Leader read the finished thing and sent it back once — the quotes wrapped badly at 390px.', wait: 1600 },
+    { who: 'agent', text: 'Fixed, then the Inspector drove it on a real phone.', wait: 1400 },
+    { who: 'agent', text: 'Pull request #14 is ready. Checked at phone, tablet and desktop widths.', wait: 900 },
+    { who: 'pr',    text: '#14 Testimonials section', wait: 1400 },
+    { who: 'user',  text: 'Merged. Thanks.', wait: 4200 }
+  ];
 
-  function initChat() {
-    var root = document.getElementById('chatRoot');
-    if (!root || root.getAttribute('data-chat-enabled') !== 'true') return;
+  function initDeviceDemo() {
+    var thread = document.getElementById('deviceThread');
+    if (!thread || reduced) return;
 
-    var endpoint = root.getAttribute('data-endpoint');
-    var product = root.getAttribute('data-product') || 'factory';
-    var lastSent = 0;
-    var sent = 0;
+    var i = 0, running = false;
 
-    var launcher = document.createElement('button');
-    launcher.id = 'chatLauncher';
-    launcher.type = 'button';
-    launcher.setAttribute('aria-label', 'Ask the factory');
-    launcher.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-coach"/></svg>';
+    function bottom() { thread.scrollTop = thread.scrollHeight; }
 
-    var panel = document.createElement('div');
-    panel.id = 'chatPanel';
-    panel.setAttribute('role', 'dialog');
-    panel.setAttribute('aria-label', 'Ask the factory');
-    panel.innerHTML =
-      '<div class="cw-head">' +
-        '<img src="assets/img/squid/squid-mark.svg" alt="" width="22" height="22">' +
-        '<span class="n">Ask the factory</span>' +
-        '<button class="cw-close" type="button" aria-label="Close">✕</button>' +
-      '</div>' +
-      '<div class="cw-log" id="cwLog" role="log" aria-live="polite"></div>' +
-      '<form class="cw-foot">' +
-        '<input type="text" maxlength="' + MAX_INPUT + '" placeholder="Ask a question…" aria-label="Your question">' +
-        '<button type="submit" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-send"/></svg></button>' +
-      '</form>';
-
-    document.body.appendChild(launcher);
-    document.body.appendChild(panel);
-
-    var log = panel.querySelector('#cwLog');
-    var form = panel.querySelector('form');
-    var input = panel.querySelector('input');
-
-    function say(who, text) {
+    function node(item) {
       var el = document.createElement('div');
-      el.className = 'bub ' + (who === 'you' ? 'bub-user' : 'bub-agent');
-      el.textContent = text;
-      log.appendChild(el);
-      log.scrollTop = log.scrollHeight;
+      if (item.who === 'sys')  { el.className = 'device-sys'; el.textContent = item.text; return el; }
+      if (item.who === 'day')  { el.className = 'device-day'; el.textContent = item.text; return el; }
+      if (item.who === 'pr') {
+        el.className = 'device-art';
+        el.innerHTML =
+          '<span class="sq"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-cross"/></svg></span>' +
+          '<span class="tx"><span class="k">PULL REQUEST</span><span class="n"></span><span class="o">Open to review</span></span>';
+        el.querySelector('.n').textContent = item.text;
+        return el;
+      }
+      el.className = 'bub ' + (item.who === 'user' ? 'bub-user' : 'bub-agent');
+      el.textContent = item.text;
+      return el;
     }
 
-    function restore() {
-      try {
-        var prior = JSON.parse(sessionStorage.getItem(STORE_KEY) || '[]');
-        prior.forEach(function (m) { say(m.who, m.text); });
-        sent = prior.filter(function (m) { return m.who === 'you'; }).length;
-      } catch (e) { /* a blocked or full sessionStorage is not worth a failure */ }
+    function typing() {
+      var t = document.createElement('div');
+      t.className = 'device-typing';
+      t.id = 'deviceTyping';
+      t.innerHTML = '<i></i><i></i><i></i>';
+      thread.appendChild(t);
+      bottom();
+    }
+    function untype() {
+      var t = document.getElementById('deviceTyping');
+      if (t) t.remove();
     }
 
-    function remember(who, text) {
-      try {
-        var prior = JSON.parse(sessionStorage.getItem(STORE_KEY) || '[]');
-        prior.push({ who: who, text: text });
-        sessionStorage.setItem(STORE_KEY, JSON.stringify(prior));
-      } catch (e) { /* same */ }
-    }
-
-    launcher.addEventListener('click', function () {
-      var open = panel.getAttribute('data-open') === 'true';
-      panel.setAttribute('data-open', String(!open));
-      if (!open) input.focus();
-    });
-    panel.querySelector('.cw-close').addEventListener('click', function () {
-      panel.setAttribute('data-open', 'false');
-      launcher.focus();
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var text = input.value.trim().slice(0, MAX_INPUT);
-      if (!text) return;
-      if (Date.now() - lastSent < RATE_LIMIT_MS) return;
-      if (sent >= MAX_MESSAGES) {
-        say('factory', 'That’s as far as this window goes. Reload the page to start again.');
+    function next() {
+      if (i >= THREAD.length) {
+        running = false;
+        setTimeout(function () { i = 0; thread.textContent = ''; running = true; setTimeout(next, 400); }, 5000);
         return;
       }
-      lastSent = Date.now();
-      sent++;
-      say('you', text);
-      remember('you', text);
-      input.value = '';
+      var item = THREAD[i];
+      if ((item.who === 'agent' || item.who === 'pr') && i > 0) {
+        typing();
+        setTimeout(function () {
+          untype();
+          thread.appendChild(node(item));
+          bottom();
+          i++;
+          setTimeout(next, item.wait);
+        }, 620);
+      } else {
+        thread.appendChild(node(item));
+        bottom();
+        i++;
+        setTimeout(next, item.wait);
+      }
+    }
 
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product: product, message: text })
-      })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          var reply = (data && data.reply) || 'Something went wrong on our side. Try again in a moment.';
-          say('factory', reply);
-          remember('factory', reply);
-        })
-        .catch(function () {
-          say('factory', 'I couldn’t reach the factory just now. Try again in a moment.');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !running) {
+          running = true;
+          thread.textContent = '';   // clear the no-JS fallback, then play it
+          setTimeout(next, 400);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    obs.observe(thread);
+  }
+
+  /* ------------------------------------------------------- feel-it tabs ---
+     Switches between the two standalone mocks. The desktop iframe is only
+     created the first time its tab is chosen, so a visitor who never opens it
+     never pays for it. */
+  function initFeelTabs() {
+    var fits = document.querySelectorAll('.feel-fit');
+    if (!fits.length) return;
+
+    /* Each mock is authored for a fixed viewport. Keep that viewport on the
+       iframe and scale the whole frame down to the room the column has, so
+       the mock never learns it was resized and never gains a scrollbar of its
+       own. Runs on load, on resize, and whenever a pane is revealed.
+
+       Width alone is not enough. A 920px-tall phone mock scaled only to the
+       column width made this section three screens tall in landscape, which
+       is precisely the failure the section-fit gate exists to catch — so the
+       second pass measures the finished section and hands the frame whatever
+       height is left inside the budget. */
+    function fit(box, hCap) {
+      var vw = parseInt(box.getAttribute('data-vw'), 10);
+      var vh = parseInt(box.getAttribute('data-vh'), 10);
+      var frame = box.querySelector('iframe');
+      if (!frame || !vw || !vh) return;
+      var room = box.parentNode.clientWidth || vw;
+      var k = Math.min(1, room / vw);
+      if (hCap && vh * k > hCap) k = hCap / vh;
+      frame.style.width = vw + 'px';
+      frame.style.height = vh + 'px';
+      frame.style.transform = 'scale(' + k + ')';
+      box.style.width = Math.round(vw * k) + 'px';
+      box.style.height = Math.round(vh * k) + 'px';
+    }
+
+    function fitAll() {
+      Array.prototype.forEach.call(fits, function (b) { fit(b, 0); });
+
+      var sec = document.getElementById('feel-it');
+      if (!sec) return;
+      var shown = null;
+      Array.prototype.forEach.call(fits, function (b) { if (b.offsetHeight) shown = b; });
+      if (!shown) return;
+
+      var winH = window.innerHeight, winW = window.innerWidth;
+      var budget = winH * (winH <= 560 ? 1.05 : (winW <= 767 ? 1.12 : 1.02));
+      var over = sec.offsetHeight - budget;
+      if (over > 0) fit(shown, Math.max(200, shown.offsetHeight - over));
+    }
+
+    function fill(pane) {
+      var box = pane.querySelector('.feel-fit[data-src]');
+      if (!box || box.querySelector('iframe')) return;
+      var f = document.createElement('iframe');
+      f.title = 'The factory Agent on a desktop';
+      f.setAttribute('loading', 'lazy');
+      f.src = box.getAttribute('data-src');
+      box.appendChild(f);
+    }
+
+    var tabs = document.querySelectorAll('.feel-tab');
+    Array.prototype.forEach.call(tabs, function (tab) {
+      tab.addEventListener('click', function () {
+        Array.prototype.forEach.call(tabs, function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', String(on));
+          var pane = document.getElementById(t.getAttribute('aria-controls'));
+          if (!pane) return;
+          pane.hidden = !on;
+          if (on) { fill(pane); fitAll(); }
         });
+      });
     });
 
-    restore();
+    fitAll();
+    window.addEventListener('resize', fitAll);
+    window.addEventListener('orientationchange', fitAll);
+  }
+
+  /* ------------------------------------------------------ SquidBot reveal --
+     squidbot.js owns the widget. Its launcher starts hidden and is revealed by
+     showChatbotButton(), which the source site calls from its component
+     loader. This page has no component loader, so it is called here. */
+  function revealSquidBot() {
+    function show() {
+      if (typeof window.showChatbotButton === 'function') { window.showChatbotButton(); return true; }
+      var c = document.querySelector('.chatbot-container');
+      if (c) { c.classList.add('ready'); return true; }
+      return false;
+    }
+    if (!show()) setTimeout(show, 600);
   }
 
   function start() {
     initBubbles();
     initDemoTabs();
-    initChat();
+    initDeviceDemo();
+    initFeelTabs();
+    revealSquidBot();
   }
 
   if (document.readyState === 'loading') {
