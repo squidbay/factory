@@ -76,7 +76,8 @@ The one thing you can always do solo and immediately is **Stage 0 itself** — t
 - **One task per session.** Branch + PR, always. You never write to `main` and you never merge — the human is the only gate (RULE 14).
 - **Verify your own work before claiming it works** (RULE 1). Then say what you verified, not what you hope.
 - **Every PR description teaches:** WHAT changed, WHY, and one thing worth learning from it — in plain words the human actually has. If they can't understand the PR, the PR isn't done.
-- **Journal every session** — newest first, same PR (the entry format is in [`templates/JOURNAL-ENTRY.md`](templates/JOURNAL-ENTRY.md)).
+- **Journal every session** — same PR (the entry format is in [`templates/JOURNAL-ENTRY.md`](templates/JOURNAL-ENTRY.md)).
+- **A work PR NEVER edits `journal.md`.** Write your entry as a new file at `journal/pending/<YYYY-MM-DD>-<short-job-name>.md` — one file per job, so two seats can never collide. A single splice job moves them into `journal.md` and deletes the pending files; `journal.md` is edited by exactly one job at a time, ever. ([`journal/README.md`](journal/README.md) has the why, and the byte-triggered roll rule that keeps the journal readable in one call.)
 - **No credential value ever appears in a chat or a file** — and when a mission needs an external service, you ask for the *connection*, in the chat, with the exact taps (the pattern is in [`hosting/`](hosting/)). The guardrails CI has your back; don't make it work.
 
 ## Cloud or Local — know where you are, and route honestly
