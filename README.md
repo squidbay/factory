@@ -76,7 +76,7 @@ Morning coffee: two PRs waiting. One is a page your Code seat built overnight ag
 
 This repository is a factory operating system, and you are probably one of its seats. Before anything else:
 
-1. **Find your seat.** Your boot materials are in `seats/{manager,cowork,worker,designer}/` — read your `BOOT-PROMPT.md` in full, and your `GROUNDING.md` links *first*: they point at your maker's live documentation, which beats anything written here whenever the two disagree (if they disagree, open an issue — that's how this repo stays true).
+1. **Find your seat.** Your boot materials are in `seats/{coach,cowork,worker,designer}/` — read [`seats/_shared/BOOT-COMMON.md`](seats/_shared/BOOT-COMMON.md) **first** (the boot every seat shares), then your own `BOOT-PROMPT.md` and `OVERRIDES.md`. Your `GROUNDING.md` links point at your maker's live documentation, which beats anything written here whenever the two disagree (if they disagree, open an issue — that's how this repo stays true).
 2. **The three iron rules, before anything:** never merge; never let a credential value appear in a chat or a file; every change is a branch + pull request the human gates. And before any of it: the preflight gate — prove your repo access (read AND write) in this session before you claim it or act on it ([`CLAUDE.md`](CLAUDE.md), RULE 21).
 3. **Read [`journal.md`](journal.md) — it is your memory.** The top entries carry the human's standing orders. If it's not in the journal, it didn't happen; if you did work, journal it.
 4. Then [`MECHANICAL-RULES.md`](MECHANICAL-RULES.md) in full, and [`FACTORY.md`](FACTORY.md) for the operating model. Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17).

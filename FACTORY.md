@@ -12,7 +12,7 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 
 | Seat | Surface | Does | Never |
 |---|---|---|---|
-| **Manager** | the Chat room | Lightweight surfacer: brings you state, context, and a recommendation; brainstorms; researches; runs a once-a-day oversight turn that reads the nightly heartbeat and hands you a plain GREEN / FLAG health read. | Doesn't author the canonical plan; doesn't execute; doesn't merge; the oversight turn only *surfaces* — it never gates, fixes, or merges. |
+| **Coach** | the Chat room | Lightweight surfacer: brings you state, context, and a recommendation; brainstorms; researches; runs a once-a-day oversight turn that reads the nightly heartbeat and hands you a plain GREEN / FLAG health read. | Doesn't author the canonical plan; doesn't execute; doesn't merge; the oversight turn only *surfaces* — it never gates, fixes, or merges. |
 | **Cowork** | the Cowork room | **The center.** Plans from your goals, writes specs ([`templates/EXECUTE-SPEC.md`](templates/EXECUTE-SPEC.md)), audits every PR before you merge ([`templates/AUDIT-FINDINGS.md`](templates/AUDIT-FINDINGS.md)) — including a security read (the [`factory-security`](skills/factory-security/SKILL.md) skill) on any PR touching credentials, workflows, auth, payments, or personal data — and keeps the journal. | Never merges; never self-authorizes its own plans (Code audits them back — the seats check each other on purpose). |
 | **Code** | Claude Code, with this repo attached | **The executor, installer, and your backup.** Builds one task per session, branch + PR. Boots automatically from this repo's `CLAUDE.md` — no skill, no setup: just start typing. It's the setup, recovery, and backup seat — the one that auto-boots from the repo and turns the other seats on. If you're ever lost, say so here; it catches you warmly and points you to the right seat. | Never writes to `main`; never merges. |
 | **Designer** | Claude Design (canvas) | The design lane: design systems, mocks, brand work. Read-only on code; deliverables come to you, and Code lands them by PR. | Never commits, never merges — on anything. |
@@ -34,7 +34,7 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 >
 > **Seat marks:**
 > - **Cowork** 🤖🧭 — compass, the centre
-> - **Coach/Manager** 🤖📋 — clipboard
+> - **Coach** 🤖📋 — clipboard
 > - **Code/Worker** 🤖🔧 — wrench
 > - **Designer** 🤖🎨 — palette
 > - **Inspector** 🤖🔎 — magnifier
@@ -57,9 +57,9 @@ Parallel work is fine — several seats can be busy at once on a Max plan — bu
 
 ## How your factory stays alive — the nightly heartbeat
 
-A factory that only moves when you push it goes stale quietly. So yours checks its own health on a schedule. Once a night, a lightweight housekeeping run takes the factory's pulse — open PRs that have gone quiet, whether the journal is current, anything that's drifting — and leaves a short **heartbeat** note behind. Then, once a day, the **Manager** reads that heartbeat on its oversight turn and hands you a two-line **GREEN / FLAG** read: green means nothing needs you, a flag names the one thing that does.
+A factory that only moves when you push it goes stale quietly. So yours checks its own health on a schedule. Once a night, a lightweight housekeeping run takes the factory's pulse — open PRs that have gone quiet, whether the journal is current, anything that's drifting — and leaves a short **heartbeat** note behind. Then, once a day, the **Coach** reads that heartbeat on its oversight turn and hands you a two-line **GREEN / FLAG** read: green means nothing needs you, a flag names the one thing that does.
 
-Two things make this safe rather than scary: the heartbeat only *reads* — it never changes anything — and the Manager's oversight turn only *surfaces* — it never gates, fixes, or merges. It is the factory noticing, out loud, so nothing rots between your visits. Every copy of this factory runs it; it's how the lights stay on while you're away.
+Two things make this safe rather than scary: the heartbeat only *reads* — it never changes anything — and the Coach's oversight turn only *surfaces* — it never gates, fixes, or merges. It is the factory noticing, out loud, so nothing rots between your visits. Every copy of this factory runs it; it's how the lights stay on while you're away.
 
 ## The two spaces
 
@@ -71,11 +71,11 @@ Two things make this safe rather than scary: the heartbeat only *reads* — it n
 | Seat | Door |
 |---|---|
 | Code | Automatic: attaching this repo loads `CLAUDE.md` on the repo root. Nothing to install. |
-| Manager (Chat) / Cowork | One-time: add the seat's boot skill (`seats/{seat}/{seat}-boot/`) in Settings → Skills, then invoke it by name in the right room. |
+| Coach (Chat) / Cowork | One-time: add the seat's boot skill (`seats/{seat}/{seat}-boot/`) in Settings → Skills, then invoke it by name in the right room. |
 | Designer | One-time: add the `designer-boot` skill (`seats/designer/designer-boot/`) via the Claude Design canvas skill picker (live in the canvas as of 2026-07-23), then invoke it — the same shape as the chat seats. |
 | Inspector / Mobile Scout | No door — summoned per job with plain words. |
 
-**One pattern, one exception:** every human seat — Manager (Chat), Cowork, Designer — now boots the same way, a one-time boot skill you add once and invoke by name. Only **Code** is different: it boots on the repo root automatically, nothing to install.
+**One pattern, one exception:** every human seat — Coach (Chat), Cowork, Designer — now boots the same way, a one-time boot skill you add once and invoke by name. Only **Code** is different: it boots on the repo root automatically, nothing to install.
 
 A frozen or drifting seat is never argued with: close it, open a fresh one, let it boot from the repo (RULE 17). **The repo is the memory; the session never was.**
 
