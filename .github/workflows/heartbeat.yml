@@ -1,0 +1,237 @@
+name: heartbeat
+
+# The factory's nightly pulse — every copy of this factory runs it.
+#
+# A factory that only moves when you push it goes stale quietly. Once a night
+# this job takes the pulse and leaves a short note behind: is your factory
+# current, are your seats' surfaces current, is anything drifting. Then a seat
+# reads that note on its oversight turn and hands you GREEN or FLAG.
+#
+# Three laws, same as the god-view:
+#   1. It only READS. It never opens a PR, never edits a file, never merges,
+#      never installs anything. `permissions: contents: read` enforces it.
+#   2. It phones no home. Every request it makes is to a public endpoint
+#      (npm's registry, GitHub's public API) about PUBLIC version numbers.
+#      Nothing about your repo leaves your repo.
+#   3. It never auto-acts on what it finds. A FLAG is a sentence for a human,
+#      never a trigger.
+#
+# The report lands in the run's summary page and as a downloadable artifact
+# kept for 90 days. Asking for it is a normal request to any seat:
+# "read last night's heartbeat and tell me if anything needs me."
+#
+# WHAT IT CAN AND CANNOT SEE — the honest split, because a pulse that
+# overstates its reach is worse than no pulse:
+#
+#   MACHINE LEGS  — this runner reads them directly, every night. The template
+#                   version you're on vs. the master's, and the published
+#                   version of each Anthropic surface your seats run on.
+#   SESSION LEGS  — nobody can read these from a CI runner: which Claude
+#                   desktop build you have installed, which plugins are
+#                   enabled in your app, what your Designer canvas offers.
+#                   A runner has no Claude install to inspect. The report
+#                   NAMES these as session-captured and tells each seat to
+#                   report its own at boot — it never prints a guess.
+#
+# You can add your own watches (a plugin repo, an npm package your project
+# depends on) in .github/heartbeat-watch.txt.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # every night, 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: heartbeat
+  cancel-in-progress: true
+
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Take the pulse
+        run: |
+          set -u
+          REPORT="heartbeat-report.md"
+          FLAGS=0
+
+          # A read that fails must never look like a read that found nothing.
+          # Every probe below returns either a value or the literal string
+          # "unreachable", and "unreachable" is a FLAG, not a shrug.
+          probe_npm() {
+            curl -fsSL --max-time 20 "https://registry.npmjs.org/$1/latest" 2>/dev/null \
+              | tr ',' '\n' | grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 \
+              | sed 's/.*"\([^"]*\)"$/\1/'
+          }
+          probe_release() {
+            curl -fsSL --max-time 20 "https://api.github.com/repos/$1/releases/latest" 2>/dev/null \
+              | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 \
+              | sed 's/.*"\([^"]*\)"[[:space:]]*$/\1/'
+          }
+
+          {
+            echo "# 🫀 Factory heartbeat — $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "Read-only pulse. Nothing here was changed, installed, or sent anywhere."
+            echo ""
+          } > "$REPORT"
+
+          # ── Leg 1: is your factory current? ────────────────────────────────
+          # Same both-signals-newest-wins logic as factory-update. The two
+          # signals are written by two different human acts and drift between a
+          # merge and a release cut, so reading only one reports "up to date"
+          # while real work sits unshipped.
+          LOCAL="none"
+          [ -f .github/template-version.txt ] && LOCAL="$(head -n1 .github/template-version.txt | tr -d '[:space:]')"
+          REL="$(probe_release squidbay/factory)"
+          RAW="$(curl -fsSL --max-time 20 https://raw.githubusercontent.com/squidbay/factory/main/.github/template-version.txt 2>/dev/null | head -n1 | tr -d '[:space:]')"
+          NEWEST="$(printf '%s\n%s\n' "$REL" "$RAW" | grep -v '^$' | sort -V | tail -n1)"
+
+          {
+            echo "## Your factory"
+            echo ""
+            echo "| | Version |"
+            echo "|---|---|"
+            echo "| This factory is on | \`$LOCAL\` |"
+            echo "| Master's latest Release | \`${REL:-unreachable}\` |"
+            echo "| Master's version file | \`${RAW:-unreachable}\` |"
+            echo ""
+          } >> "$REPORT"
+
+          if [ -z "$NEWEST" ]; then
+            echo "**FLAG — could not reach the master template.** This is not \"up to date\"; it is *unknown*. Try again tomorrow, or ask a Code seat to check by hand." >> "$REPORT"
+            FLAGS=$((FLAGS+1))
+          elif [ "$LOCAL" = "$NEWEST" ]; then
+            echo "**GREEN — your factory is current** (\`$LOCAL\`). Nothing to do." >> "$REPORT"
+          else
+            {
+              echo "**FLAG — a factory update is waiting.** You're on \`$LOCAL\`; the master is on \`$NEWEST\`."
+              echo ""
+              echo "> Ask your Code seat: **\"check for factory updates\"** — it opens one pull request you read and merge. Or run **Actions → factory-update → Run workflow**."
+            } >> "$REPORT"
+            FLAGS=$((FLAGS+1))
+          fi
+          if [ -n "$REL" ] && [ -n "$RAW" ] && [ "$REL" != "$RAW" ]; then
+            echo "" >> "$REPORT"
+            echo "*(Note: the master's Release tag and version file disagree — \`$REL\` vs \`$RAW\`. Expected between a merge and a release cut; the newer wins.)*" >> "$REPORT"
+          fi
+          echo "" >> "$REPORT"
+
+          # ── Leg 2: your seats' surfaces, per seat ──────────────────────────
+          CC="$(probe_npm @anthropic-ai/claude-code)"
+          SDK="$(probe_npm @anthropic-ai/claude-agent-sdk)"
+          [ -z "$CC" ] && { CC="unreachable"; FLAGS=$((FLAGS+1)); }
+          [ -z "$SDK" ] && SDK="unreachable"
+
+          {
+            echo "## Your seats"
+            echo ""
+            echo "What the published Anthropic surfaces are at tonight. Your seats run on"
+            echo "these; when one moves, capabilities move with it."
+            echo ""
+            echo "| Seat | Surface it runs on | Latest published | How it's checked |"
+            echo "|---|---|---|---|"
+            echo "| **Code** 🤖🔧 | Claude Code | \`$CC\` | machine — npm registry |"
+            echo "| **Cowork** 🤖🧭 | Claude Cowork | *session-captured* | the seat reports at boot |"
+            echo "| **Coach** 🤖📋 | Claude chat | *session-captured* | the seat reports at boot |"
+            echo "| **Designer** 🤖🎨 | Claude Design canvas | *session-captured* | the seat reports at boot |"
+            echo "| *(building on the API)* | Agent SDK | \`$SDK\` | machine — npm registry |"
+            echo ""
+            echo "**Why some rows say *session-captured*.** A CI runner has no Claude"
+            echo "installed and no session to look at, so it genuinely cannot read which"
+            echo "desktop build you have or which plugins are enabled in your app. Rather"
+            echo "than print a guess, the heartbeat names those legs and leaves them to the"
+            echo "seats: **each seat probes its own surface at boot and says what it found**"
+            echo "(that step is already in every seat's boot order). If a seat has not"
+            echo "reported in a while, that silence is the signal — ask it."
+            echo ""
+            echo "**Nothing here is installed automatically.** Updating the desktop app or"
+            echo "adding a plugin is a human action, and often a Local-session one. The"
+            echo "heartbeat's job is to make sure you *know*, not to act."
+            echo ""
+          } >> "$REPORT"
+
+          # ── Leg 3: your own watch list (optional) ──────────────────────────
+          WATCH=".github/heartbeat-watch.txt"
+          if [ -f "$WATCH" ] && grep -qv '^[[:space:]]*\(#.*\)\?$' "$WATCH"; then
+            {
+              echo "## Your watch list"
+              echo ""
+              echo "| What | Latest |"
+              echo "|---|---|"
+            } >> "$REPORT"
+            while IFS= read -r line; do
+              case "$line" in ''|'#'*) continue ;; esac
+              kind="${line%% *}"; target="${line#* }"
+              case "$kind" in
+                npm)    v="$(probe_npm "$target")" ;;
+                github) v="$(probe_release "$target")" ;;
+                *)      v="" ;;
+              esac
+              if [ -z "$v" ]; then
+                echo "| \`$kind $target\` | unreachable |" >> "$REPORT"
+                FLAGS=$((FLAGS+1))
+              else
+                echo "| \`$kind $target\` | \`$v\` |" >> "$REPORT"
+              fi
+            done < "$WATCH"
+            echo "" >> "$REPORT"
+          fi
+
+          # ── Leg 4: is the factory's own housekeeping current? ──────────────
+          {
+            echo "## Housekeeping"
+            echo ""
+          } >> "$REPORT"
+          if [ -f journal.md ]; then
+            JN=$(wc -m < journal.md | tr -d '[:space:]')
+            if [ "$JN" -ge 45000 ]; then
+              echo "- **FLAG — \`journal.md\` is $JN characters.** Past the 45,000 hard budget: a seat can no longer read it in one call, which means your standing directives are not reaching your seats. Roll it (\`journal/README.md\`)." >> "$REPORT"
+              FLAGS=$((FLAGS+1))
+            elif [ "$JN" -ge 40000 ]; then
+              echo "- **FLAG — \`journal.md\` is $JN characters**, past the 40,000 comfortable ceiling. Roll it soon (\`journal/README.md\`) — the hard wall is 45,000." >> "$REPORT"
+              FLAGS=$((FLAGS+1))
+            else
+              echo "- \`journal.md\` is $JN characters — comfortably readable in one call." >> "$REPORT"
+            fi
+          fi
+          PEND=$(ls -1 journal/pending/*.md 2>/dev/null | grep -cv 'README' || true)
+          if [ "${PEND:-0}" -gt 0 ]; then
+            echo "- $PEND journal entr$([ "$PEND" -eq 1 ] && echo "y is" || echo "ies are") waiting in \`journal/pending/\` for a splice." >> "$REPORT"
+          fi
+          echo "" >> "$REPORT"
+
+          # ── The verdict ───────────────────────────────────────────────────
+          {
+            echo "---"
+            echo ""
+            if [ "$FLAGS" -eq 0 ]; then
+              echo "## 🟢 GREEN — nothing needs you tonight."
+            else
+              echo "## 🟠 FLAG × $FLAGS — the items marked **FLAG** above want a human."
+              echo ""
+              echo "A flag is a sentence, not an alarm. Nothing was changed and nothing is broken;"
+              echo "these are the things the factory would like you to know about."
+            fi
+          } >> "$REPORT"
+
+          cat "$REPORT" >> "$GITHUB_STEP_SUMMARY"
+          cat "$REPORT"
+
+          # The pulse never fails the build. A red X on a nightly read-only job
+          # trains people to ignore it, and an ignored heartbeat is worse than
+          # none. FLAGs live in the report, where a human reads them.
+          echo "heartbeat: $FLAGS flag(s). Report published."
+
+      - name: Publish the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: heartbeat-report
+          path: heartbeat-report.md
+          retention-days: 90

@@ -55,6 +55,7 @@ versions/
 #   journal/archive/      (your history)
 #   specs/                (your plans; only its README is managed)
 #   .github/guardrails-denylist.txt  (your private-name denylist)
+#   .github/heartbeat-watch.txt      (your own nightly watch list)
 #   .github/workflows/    (a repo's automation can't be rewritten by its
 #                          own automation — workflow changes arrive as a
 #                          note in the update PR for a Code seat to apply)
