@@ -48,8 +48,8 @@ jobs:
           # note). This helper keeps the three apart: 1 is fine, 2+ is fatal.
           scan() {
             local label="$1"; shift
-            local hits rc
-            hits=$("$@" .); rc=$?
+            local hits rc=0
+            hits=$("$@" .) || rc=$?
             if [ "$rc" -ge 2 ]; then
               echo "::error::guardrails: the scan for '$label' FAILED to run (grep exit $rc). This is not a clean result — it is no result. Fix the scanner before trusting this job."
               FAIL=1
