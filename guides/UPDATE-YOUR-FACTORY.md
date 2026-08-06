@@ -18,14 +18,21 @@ plain words:
 Cloud is the right place for this — no hands needed, nothing to install. Your
 seat does the rest:
 
-1. It checks the **template's latest release** on GitHub (`releases/latest`) and
-   compares that version against your factory's own — a one-line file at
+1. It reads the master's version from **both** places it's published — the
+   latest **release** on GitHub, and a one-line version file on the master — and
+   takes whichever is **newer**. That's compared against your factory's own
+   version, a one-line file at
    [`../.github/template-version.txt`](../.github/template-version.txt). If they
    match, you're current — it says "up to date" and stops. Most months, that's
-   the answer, and that's a good answer. (If the master hasn't cut a release yet,
-   or GitHub's release API can't be reached, the seat falls back to reading that
-   same one-line version file straight from the master — the same check, one path
-   over.)
+   the answer, and that's a good answer. (If only one of the two can be read, it
+   uses that one; if neither can be reached, it tells you that instead of
+   guessing. "Up to date" is never reported from a check that failed to run.)
+
+   *Why two places?* The version gets written twice by two different steps — once
+   when an improvement is merged, once when the release announcement is cut —
+   so for a while after a merge they disagree. Reading only one of them meant a
+   factory could be told it was current while real improvements sat waiting.
+   Reading both and taking the newer closes that window.
 2. If the master is newer, it compares your **template-managed** files against
    the master's (the split is explained in
    [`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md)).
