@@ -43,9 +43,9 @@
 
 *The lightest seat, for the room you already live in.*
 
-- One skill upload for the Chat room: Manager — the seat that briefs you, researches, and recommends, without ever holding the pen on plans. Useful precisely because it's light.
+- One skill upload for the Chat room: Coach — the seat that briefs you, researches, and recommends, without ever holding the pen on plans. Useful precisely because it's light.
 
-*Done looks like: Manager boots in Chat and gives you a one-paragraph state-of-the-factory that matches reality.*
+*Done looks like: Coach boots in Chat and gives you a one-paragraph state-of-the-factory that matches reality.*
 
 ## Stage 4 — The design lane (optional) 🎉
 

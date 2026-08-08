@@ -41,7 +41,7 @@ When these disagree, **gate 4 wins.** A card that says "opens pull requests" is 
 
 ## Step 2 — give the chat rooms their hands (desktop): one shared connection
 
-On the **desktop**, the chat rooms (Manager, Cowork, and any other chat seat) don't get GitHub hands from the App above — they share **one local connection** you set up once. This is the step that makes the whole plan real on day one.
+On the **desktop**, the chat rooms (Coach, Cowork, and any other chat seat) don't get GitHub hands from the App above — they share **one local connection** you set up once. This is the step that makes the whole plan real on day one.
 
 **It's ONE server and ONE token:**
 

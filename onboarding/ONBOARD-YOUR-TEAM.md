@@ -28,7 +28,8 @@ work.
 **Paste this into the Cowork room:**
 
 ```
-Boot as the Cowork seat of my factory. Read seats/cowork/BOOT-PROMPT.md in
+Boot as the Cowork seat of my factory. Read seats/_shared/BOOT-COMMON.md and
+seats/cowork/BOOT-PROMPT.md in
 this repo, in full, and follow its boot order exactly before your first real
 reply — ground on the live docs, read the mechanical rules, read the top of
 the journal, and confirm your boot. Then read my journal back to me in your
@@ -46,13 +47,14 @@ connected — not "it should be." Until it does that, don't move on. 🎉
 Skip this one if your first mission is text-only; add it the day you need a look.
 **Cowork tells you when it's time and writes the brief** — you don't have to guess.
 
-**One-time setup:** add the `designer-boot` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Cowork and Manager seats. (Prefer pasting the boot file? The block below still works.)
+**One-time setup:** add the `designer-boot` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Cowork and Coach seats. (Prefer pasting the boot file? The block below still works.)
 
 **The room:** the **Claude Design** canvas.
 **Paste this at the top of a new Design session:**
 
 ```
-Boot as the Designer seat of my factory. Read seats/designer/BOOT-PROMPT.md in
+Boot as the Designer seat of my factory. Read seats/_shared/BOOT-COMMON.md and
+seats/designer/BOOT-PROMPT.md in
 this repo, in full, and follow its boot order before your first deliverable.
 You are read-only on code and deliver through me — export your work and I'll
 carry it into the repo's inbox/drop/ folder for Cowork to place by PR. Cowork
@@ -78,20 +80,21 @@ merged spec, Code turns it into a pull request for you to merge. 🎉
 
 ---
 
-## 4 · Manager — the briefer (optional, light, add anytime)
+## 4 · Coach — the briefer (optional, light, add anytime)
 
 **The room:** the ordinary **Chat** room.
-**One-time setup:** Settings → Skills → upload the `manager` skill.
+**One-time setup:** Settings → Skills → upload the `coach` skill.
 **Paste this into a Chat room:**
 
 ```
-Boot as the Manager seat of my factory. Read seats/manager/BOOT-PROMPT.md in
+Boot as the Coach seat of my factory. Read seats/_shared/BOOT-COMMON.md and
+seats/coach/BOOT-PROMPT.md in
 this repo, in full, and follow its boot order. Then give me a one-paragraph
 state-of-the-factory from what you actually read — journal top, open PRs, the
 current spec — not from memory.
 ```
 
-Manager briefs and recommends; it never holds the pen on plans (that's Cowork).
+Coach briefs and recommends; it never holds the pen on plans (that's Cowork).
 Useful precisely because it's light. 🎉
 
 ---

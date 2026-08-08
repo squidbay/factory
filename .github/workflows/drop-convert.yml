@@ -3,7 +3,7 @@ name: drop-convert
 # The inbox needs a translator.
 #
 # `inbox/drop/` accepts anything a human can carry — a PDF, a photo, a Word
-# document. But the chat seats (Cowork, Coach, Designer, Manager) read this
+# document. But the chat seats (Cowork, Coach, Designer) read this
 # repo as TEXT. A binary reaches them as unreadable bytes, so a person can
 # follow the drop procedure perfectly and the team still, silently, cannot see
 # the file. That happened for real: a resume PDF was merged into `inbox/drop/`
@@ -59,7 +59,7 @@ jobs:
           #!/usr/bin/env python3
           """drop-convert — write a plain-markdown sidecar beside every binary in inbox/drop/.
 
-          Why this exists: chat seats (Cowork, Coach, Designer, Manager) read the repo as
+          Why this exists: chat seats (Cowork, Coach, Designer) read the repo as
           text. A PDF, an image, or a .docx reaches them as unreadable bytes, so a human
           can follow the drop procedure perfectly and the team still cannot see the file.
           This script closes that gap by leaving a markdown twin next to the original.

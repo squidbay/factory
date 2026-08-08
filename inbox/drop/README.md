@@ -10,7 +10,7 @@ Anything sitting in this folder is unsorted by definition. Cowork's job on seein
 
 Here is the thing nobody tells you, and it cost this factory a whole evening:
 
-**Your chat seats read this repo as text.** Cowork, Coach, Designer, and Manager live in a chat window, and a chat window can only read words. A PDF, a photo, a scan, a Word document — to them that is a wall of unreadable bytes. Not "hard to read." *Invisible.* You could drop a perfect file, follow every instruction exactly, and the team would quietly have no idea what was in it.
+**Your chat seats read this repo as text.** Cowork, Coach, Designer, and Coach live in a chat window, and a chat window can only read words. A PDF, a photo, a scan, a Word document — to them that is a wall of unreadable bytes. Not "hard to read." *Invisible.* You could drop a perfect file, follow every instruction exactly, and the team would quietly have no idea what was in it.
 
 So the factory converts it for you. Within about a minute of your file landing here:
 
