@@ -41,14 +41,38 @@ jobs:
             [bearer_token]='Bearer [A-Za-z0-9_\-\.=]{30,}'
           )
 
-          for name in "${!PATTERNS[@]}"; do
-            # Exclude this workflow itself (it contains the patterns) and .git
-            HITS=$(grep -rInE --exclude-dir=.git --exclude='guardrails.yml' "${PATTERNS[$name]}" . || true)
-            if [ -n "$HITS" ]; then
-              echo "::error::guardrails: possible committed credential (pattern: $name)"
-              echo "$HITS"
+          # A scanner that can't tell "found nothing" from "didn't run" is not
+          # a scanner. grep exits 0 = match, 1 = no match, 2+ = ERROR. A bare
+          # `|| true` collapses all three into "clean", which is how the
+          # private-key check below went silently dead for months (see the -e
+          # note). This helper keeps the three apart: 1 is fine, 2+ is fatal.
+          scan() {
+            local label="$1"; shift
+            local hits rc=0
+            hits=$("$@" .) || rc=$?
+            if [ "$rc" -ge 2 ]; then
+              echo "::error::guardrails: the scan for '$label' FAILED to run (grep exit $rc). This is not a clean result — it is no result. Fix the scanner before trusting this job."
+              FAIL=1
+              return
+            fi
+            if [ -n "$hits" ]; then
+              echo "::error::guardrails: possible committed credential (pattern: $label)"
+              echo "$hits"
               FAIL=1
             fi
+          }
+
+          for name in "${!PATTERNS[@]}"; do
+            # Exclude this workflow itself (it contains the patterns) and .git
+            #
+            # The -e is load-bearing, not style. Without it, a pattern that
+            # starts with a dash is read by grep as OPTIONS, not as a pattern:
+            # the private_key_block pattern begins "-----BEGIN", so grep
+            # exited 2 with "unrecognized option" — and the old `|| true`
+            # swallowed it. That check silently never ran, and a committed
+            # private key passed guardrails clean. Always -e before a
+            # variable pattern.
+            scan "$name" grep -rInE --exclude-dir=.git --exclude='guardrails.yml' -e "${PATTERNS[$name]}"
           done
 
           # The team's own denylist: names that must never appear in this repo.
@@ -56,12 +80,7 @@ jobs:
           if [ -f "$DENYLIST" ]; then
             while IFS= read -r term; do
               case "$term" in ''|'#'*) continue ;; esac
-              HITS=$(grep -rInF --exclude-dir=.git --exclude='guardrails-denylist.txt' -- "$term" . || true)
-              if [ -n "$HITS" ]; then
-                echo "::error::guardrails: denylisted term found: $term"
-                echo "$HITS"
-                FAIL=1
-              fi
+              scan "denylisted term: $term" grep -rInF --exclude-dir=.git --exclude='guardrails-denylist.txt' -e "$term"
             done < "$DENYLIST"
           fi
 

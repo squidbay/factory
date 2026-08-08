@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Check whether the template is newer (release-first, raw-file fallback)
+      - name: Check whether the template is newer (both signals, newest wins)
         id: version
         run: |
           set -u
@@ -59,19 +59,42 @@ jobs:
           if [ -f .github/template-version.txt ]; then
             LOCAL="$(head -n1 .github/template-version.txt | tr -d '[:space:]')"
           fi
-          # Primary signal: the template's latest GitHub Release tag.
-          REMOTE="$(curl -fsSL https://api.github.com/repos/squidbay/factory/releases/latest 2>/dev/null \
+
+          # The template publishes its version in TWO places, and they are
+          # updated by two different human acts:
+          #   - .github/template-version.txt  (bumped in the PR that lands work)
+          #   - the latest GitHub Release tag (cut afterwards, by hand)
+          #
+          # So they drift, and the drift used to be silent AND one-directional
+          # in the dangerous way. The old logic was release-first with the raw
+          # file only as a fallback when no release could be read at all — so
+          # whenever the Release lagged the file (the normal state between a
+          # merge and a release cut), an office sitting on the Release tag was
+          # told "up to date" while days of merged template work sat unshipped.
+          # Observed live on 2026-07-27: Release 2026-07-23.4, raw file
+          # 2026-07-26.
+          #
+          # Fix: read BOTH, take the NEWER. Neither source can hide the other,
+          # in either direction, and no new human discipline is required. The
+          # Release stays the human-readable announcement; the raw file stays
+          # the machine anchor.
+          REL="$(curl -fsSL https://api.github.com/repos/squidbay/factory/releases/latest 2>/dev/null \
             | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 \
             | sed 's/.*"\([^"]*\)"[[:space:]]*$/\1/')"
-          VIA="release"
-          # Fallback: the template's raw one-line machine anchor (no release yet,
-          # or the release API is unreachable).
-          if [ -z "$REMOTE" ]; then
-            REMOTE="$(curl -fsSL https://raw.githubusercontent.com/squidbay/factory/main/.github/template-version.txt 2>/dev/null | head -n1 | tr -d '[:space:]')"
-            VIA="raw-file"
+          RAW="$(curl -fsSL https://raw.githubusercontent.com/squidbay/factory/main/.github/template-version.txt 2>/dev/null \
+            | head -n1 | tr -d '[:space:]')"
+
+          # sort -V, not plain sort: plain lexicographic ordering puts
+          # 2026-07-23.10 *before* 2026-07-23.2, which would quietly stop
+          # proposing updates after the ninth point release of a day.
+          REMOTE="$(printf '%s\n%s\n' "$REL" "$RAW" | grep -v '^$' | sort -V | tail -n1)"
+
+          echo "local=$LOCAL release=${REL:-unreachable} raw-file=${RAW:-unreachable} newest=${REMOTE:-unknown}"
+          if [ -n "$REL" ] && [ -n "$RAW" ] && [ "$REL" != "$RAW" ]; then
+            echo "::notice::The template's Release tag ($REL) and version file ($RAW) disagree. Using the newer ($REMOTE)."
           fi
-          echo "local=$LOCAL remote=${REMOTE:-unknown} via=$VIA"
-          # If the remote can't be read at all, don't block — fall through to the
+
+          # If neither signal can be read, don't block — fall through to the
           # sync (the diff gate below still prevents a no-op PR).
           if [ -z "$REMOTE" ] || [ "$LOCAL" != "$REMOTE" ]; then
             echo "proceed=true" >> "$GITHUB_OUTPUT"

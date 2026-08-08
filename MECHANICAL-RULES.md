@@ -29,7 +29,13 @@ re-shaping the pieces later never breaks a single boot instruction.
   reason a folder with a `README.md` beats a single growing document.
 - **The same discipline governs the journal**, which is the one boot read that grows on its own
   forever: the roll rule in [`journal/README.md`](journal/README.md) retires old entries to an
-  archive so the live file stays cheap to read at every boot. Same principle, different clock.
+  archive so the live file stays cheap to read at every boot. Same principle, different clock —
+  and its trigger is **bytes, not entry count**, because a count doesn't measure the thing that
+  breaks.
+- **The budget is checked, not trusted.** [`boot-read-budget`](.github/workflows/boot-read-budget.yml)
+  measures every boot-required file on every pull request: a warning past 40,000 characters, a red
+  check past 45,000. Written-down budgets are what failed the first time — this one arrives before
+  a seat boots blind, not after.
 
 ---
 
