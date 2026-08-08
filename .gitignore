@@ -1,0 +1,3 @@
+
+# The heartbeat writes its report at runtime; it is never committed.
+heartbeat-report.md
