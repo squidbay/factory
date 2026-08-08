@@ -1,0 +1,97 @@
+name: boot-read-budget
+
+# Every file a seat is REQUIRED to read at boot must come back in one call.
+#
+# This is not a style preference. A file too big to fetch whole returns an
+# ERROR, not a shorter file — so a seat that can't complete a required read
+# either stalls its boot or quietly proceeds without the thing it was told it
+# must have. Standing orders in an unreadable file are standing orders nobody
+# is following, and it is silent while it's happening.
+#
+# So: two lines, both in characters.
+#   WARN  at 40,000 — comfortable ceiling; time to split or roll.
+#   FAIL  at 45,000 — the hard budget in MECHANICAL-RULES.md §Why this file
+#                     is short. Past here, boots break.
+#
+# The journal is the one boot read that grows on its own forever, which makes
+# it the file most likely to hit the wall — journal/README.md carries the roll
+# rule this check enforces. Everything else on the list only grows when
+# somebody edits it, which is exactly when this check runs.
+#
+# If this job is red the fix is never "raise the limit" — it's roll the
+# journal, or split the file behind a small stable index that boot orders
+# point at (the pattern MECHANICAL-RULES.md describes).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  budget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Measure every boot-required read
+        run: |
+          set -u
+          WARN=40000
+          FAIL=45000
+          STATUS=0
+
+          # The boot-required set: what a seat is told it MUST read before it
+          # works. Globs are fine; missing files are skipped, not failed (not
+          # every office has every seat).
+          TARGETS="
+          CLAUDE.md
+          MECHANICAL-RULES.md
+          FACTORY.md
+          journal.md
+          journal/README.md
+          seats/_shared/BOOT-COMMON.md
+          seats/*/BOOT-PROMPT.md
+          seats/*/GROUNDING.md
+          seats/*/OVERRIDES.md
+          "
+
+          echo "| file | characters | budget |"  >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---:|---|"                  >> "$GITHUB_STEP_SUMMARY"
+
+          for pattern in $TARGETS; do
+            for f in $pattern; do
+              [ -f "$f" ] || continue
+              # wc -m counts characters, not bytes — the same unit the read
+              # limit is expressed in.
+              N=$(wc -m < "$f" | tr -d '[:space:]')
+              if [ "$N" -ge "$FAIL" ]; then
+                echo "::error file=$f::boot-read-budget: $f is $N characters — over the $FAIL hard budget. A seat cannot read this in one call."
+                echo "| \`$f\` | $N | ❌ over $FAIL |" >> "$GITHUB_STEP_SUMMARY"
+                STATUS=1
+              elif [ "$N" -ge "$WARN" ]; then
+                echo "::warning file=$f::boot-read-budget: $f is $N characters — past the $WARN comfortable ceiling. Split it, or roll the journal, before it reaches $FAIL."
+                echo "| \`$f\` | $N | ⚠️ past $WARN |" >> "$GITHUB_STEP_SUMMARY"
+              else
+                echo "| \`$f\` | $N | ✅ |" >> "$GITHUB_STEP_SUMMARY"
+              fi
+            done
+          done
+
+          if [ "$STATUS" -ne 0 ]; then
+            echo ""
+            echo "A boot-required file is too big to be read in one call."
+            echo ""
+            echo "If it is journal.md: roll it. The oldest entries move to"
+            echo "journal/<period>.md — see journal/README.md. Standing"
+            echo "directives stay in the live file."
+            echo ""
+            echo "If it is anything else: split it into pieces that each fit,"
+            echo "behind a small stable index the boot orders point at. Do not"
+            echo "raise the limit — the limit is the tool's, not ours."
+            exit 1
+          fi
+          echo "boot-read-budget: every boot-required file fits in one call."

@@ -1,0 +1,22 @@
+# heartbeat-watch.txt — extra things you want the nightly pulse to check
+#
+# The heartbeat already checks, every night, with no configuration:
+#   - whether your factory is behind the master template
+#   - the published version of the Anthropic surfaces your seats run on
+#   - whether your journal has grown past what a seat can read in one call
+#
+# This file is for anything ELSE you'd like to hear about. One per line:
+#
+#   npm     <package-name>      e.g.  npm @anthropic-ai/sdk
+#   github  <owner>/<repo>      e.g.  github anthropics/claude-code
+#
+# `npm` reads the package's latest published version. `github` reads the
+# repository's latest Release tag. Both are public reads — no token, no
+# credential, nothing about your repo goes anywhere.
+#
+# Lines starting with # are comments. An empty file is fine and normal.
+#
+# Useful things teams put here: a Claude plugin repo you've installed and want
+# to hear about when it ships a new version; a framework your website is built
+# on; an SDK your app depends on. If a watch can't be reached one night, the
+# report says "unreachable" and flags it — it never quietly reports nothing.
