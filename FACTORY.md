@@ -57,9 +57,20 @@ Parallel work is fine — several seats can be busy at once on a Max plan — bu
 
 ## How your factory stays alive — the nightly heartbeat
 
-A factory that only moves when you push it goes stale quietly. So yours checks its own health on a schedule. Once a night, a lightweight housekeeping run takes the factory's pulse — open PRs that have gone quiet, whether the journal is current, anything that's drifting — and leaves a short **heartbeat** note behind. Then, once a day, the **Coach** reads that heartbeat on its oversight turn and hands you a two-line **GREEN / FLAG** read: green means nothing needs you, a flag names the one thing that does.
+A factory that only moves when you push it goes stale quietly. So yours checks its own health on a schedule. Once a night, the [`heartbeat`](.github/workflows/heartbeat.yml) run takes the factory's pulse and leaves a short note behind. Then, once a day, the **Coach** reads that heartbeat on its oversight turn and hands you a two-line **GREEN / FLAG** read: green means nothing needs you, a flag names the one thing that does.
 
-Two things make this safe rather than scary: the heartbeat only *reads* — it never changes anything — and the Coach's oversight turn only *surfaces* — it never gates, fixes, or merges. It is the factory noticing, out loud, so nothing rots between your visits. Every copy of this factory runs it; it's how the lights stay on while you're away.
+**What the pulse actually checks, every night:**
+
+- **Is your factory current?** Your template version against the master's — so an improvement waiting for you is something you're *told*, not something you have to remember to go looking for.
+- **Are your seats' surfaces current?** The published version of the Anthropic surfaces your seats run on. When Claude Code moves, your Code seat's capabilities move with it.
+- **Is your journal still readable?** It's the one boot file that grows forever on its own, and past a certain size a seat can no longer read it in one call — which silently means your standing orders stop reaching your seats. The pulse measures it before that happens.
+- **Anything you add.** [`.github/heartbeat-watch.txt`](.github/heartbeat-watch.txt) takes a plugin, a package, or a repo you'd like to hear about.
+
+**And it is honest about what it cannot see.** A nightly runner has no Claude installed and no session to look at, so it genuinely cannot tell which desktop build you have or which plugins are enabled in your app. The report *names* those legs as session-captured and leaves them to the seats — each seat probes its own surface at boot and says what it found — rather than printing a guess. A pulse that overstates its reach is worse than no pulse.
+
+Three things make this safe rather than scary: the heartbeat only *reads* — it never changes anything, never installs anything, and its permissions physically forbid writing; it phones no home — every request it makes is to a public endpoint about a public version number, and nothing about your repo leaves your repo; and the Coach's oversight turn only *surfaces* — it never gates, fixes, or merges. It is the factory noticing, out loud, so nothing rots between your visits. Every copy of this factory runs it; it's how the lights stay on while you're away.
+
+You can read any night's note yourself — **Actions → heartbeat → the latest run** — or just ask a seat: *"read last night's heartbeat and tell me if anything needs me."*
 
 ## The two spaces
 
