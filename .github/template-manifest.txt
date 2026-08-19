@@ -12,6 +12,19 @@
 # Your office's copy of this file governs — to opt a path out of updates,
 # remove its line here (the update PR may propose restoring it; declining
 # that hunk is your call and the workflow respects the merged result).
+#
+# A line starting with "!" PROTECTS a path: the sync will never write it,
+# even though it sits under a managed folder listed below. Use it for a file
+# this office has deliberately made its own and does not want the template to
+# reclaim. Same shape as the rest — a trailing slash protects a whole folder.
+#
+# Two things the sync can never do to you:
+#   • It never DELETES. A file of yours the template has never heard of is
+#     left alone, not removed. (An earlier version `rm -rf`'d each managed
+#     folder and re-copied it, which silently deleted every office-only file
+#     inside.)
+#   • It never writes a "!" path. Overwrite is still how updates arrive for
+#     everything else — "!" is how you say "not this one."
 
 CLAUDE.md
 FROM-HQ.md
