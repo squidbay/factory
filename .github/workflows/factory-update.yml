@@ -30,7 +30,9 @@ name: factory-update
 #   3. If anything changed, opens (or refreshes) ONE pull request with the
 #      whole delta, so you see exactly what the template wants to change.
 #   4. Notes — without touching them — any drift in files it deliberately
-#      does not manage: your workflows and the manifest itself.
+#      does not manage: your workflows, the manifest itself, and whether your
+#      manifest still covers scripts/ (the engine step 2 runs). That last one
+#      is the quiet one: an unmanaged engine never updates and never complains.
 #
 # What it can never do: touch your journal, your specs, your roster, your
 # denylist, or anything else absent from the manifest; DELETE any file of
@@ -67,6 +69,37 @@ jobs:
       UPDATE_BRANCH: factory-update/proposal
     steps:
       - uses: actions/checkout@v5
+
+      - name: The engine this workflow executes must actually be here
+        run: |
+          set -u
+          # This workflow does not copy files itself — it runs scripts/. An
+          # office that hand-installed this workflow WITHOUT bringing scripts/
+          # over would otherwise discover that three steps later, as a bare
+          # "No such file or directory" from a step named "Apply template-
+          # managed paths". Fail here instead, first, with the fix in the
+          # error, and — this is the point — fail BEFORE anything is copied,
+          # committed, or pushed.
+          MISSING=""
+          for dep in scripts/factory-sync.sh scripts/sync-selftest.sh; do
+            [ -f "$dep" ] || MISSING="$MISSING $dep"
+          done
+          if [ -n "$MISSING" ]; then
+            echo "::error::factory-update stopped before touching anything: this office has the update workflow but not the engine it runs. Missing:$MISSING"
+            echo ""
+            echo "Nothing was copied, committed, or pushed."
+            echo ""
+            echo "The workflow and its scripts are one subsystem and travel"
+            echo "together. Bring scripts/ over from the template in the same"
+            echo "pull request that brought this workflow, and add the line"
+            echo "  scripts/"
+            echo "to .github/template-manifest.txt so future fixes to the"
+            echo "engine arrive on their own."
+            echo ""
+            echo "The order to do it in: guides/SAFE-UPDATE-BOOTSTRAP.md"
+            exit 1
+          fi
+          echo "Sync engine present: scripts/factory-sync.sh, scripts/sync-selftest.sh"
 
       - name: Check whether the template is newer (both signals, newest wins)
         id: version
@@ -185,6 +218,44 @@ jobs:
               fi
             done
           fi
+          # The updater's own executable dependencies.
+          #
+          # This workflow EXECUTES scripts/factory-sync.sh and
+          # scripts/sync-selftest.sh. The updater and the code it runs are ONE
+          # subsystem, and there is exactly one way their version paths can
+          # come apart without anybody noticing: your manifest does not list
+          # scripts/, so the sync never updates them, so a fix made upstream to
+          # the sync engine stops at your door — permanently, and in silence,
+          # while this workflow keeps running the old copy every month.
+          #
+          # That silence is the whole defect. This step cannot fix it (the
+          # manifest is yours, and only you may change what an update may
+          # touch), so it does the next thing: it says so, by name, in the PR.
+          MANAGES_SCRIPTS=no
+          if [ -f .github/template-manifest.txt ]; then
+            while IFS= read -r line || [ -n "$line" ]; do
+              case "$line" in ''|'#'*) continue ;; esac
+              line="${line%% *}"
+              case "$line" in scripts/|scripts/*) MANAGES_SCRIPTS=yes ;; esac
+            done < .github/template-manifest.txt
+          fi
+
+          SCRIPT_DRIFT=""
+          if [ -d "$RUNNER_TEMP/template/scripts" ]; then
+            while IFS= read -r -d '' rel; do
+              rel="${rel#./}"
+              if [ ! -f "scripts/$rel" ] || ! diff -q "scripts/$rel" "$RUNNER_TEMP/template/scripts/$rel" >/dev/null; then
+                SCRIPT_DRIFT="$SCRIPT_DRIFT \`scripts/$rel\`"
+              fi
+            done < <(cd "$RUNNER_TEMP/template/scripts" && find . -type f -print0)
+          fi
+
+          if [ "$MANAGES_SCRIPTS" = "no" ]; then
+            NOTES="$NOTES- **Your \`.github/template-manifest.txt\` does not list \`scripts/\` — and this workflow runs \`scripts/\`.** Every future fix to the sync engine will land in the template and stop here, silently, while your monthly update keeps running the copy you have now.${SCRIPT_DRIFT:+ Already behind:$SCRIPT_DRIFT.} Add one line — \`scripts/\` — to your manifest, and the engine updates itself from then on. (\`guides/SAFE-UPDATE-BOOTSTRAP.md\` has the order.)\n"
+          elif [ -n "$SCRIPT_DRIFT" ]; then
+            NOTES="$NOTES- The template's sync engine differs from yours ($SCRIPT_DRIFT) even though your manifest manages \`scripts/\` — so something is holding it back, most likely a \`!\` protect line. Intentional is fine; unintentional means this office runs a stale engine. Worth one look.\n"
+          fi
+
           {
             echo "notes<<EOF"
             printf '%b' "$NOTES"
