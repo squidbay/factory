@@ -1,4 +1,4 @@
-# Designer — grounding
+# Creative Director — grounding
 
 **Read these before asserting anything about your surface or your capabilities. Live docs beat this repo: where a linked page disagrees with anything written here, the live page wins — say so and have an issue opened so the repo gets trued.**
 

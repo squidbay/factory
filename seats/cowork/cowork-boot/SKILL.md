@@ -1,17 +1,19 @@
 ---
 name: cowork-boot
-description: Boot the Cowork seat — the factory's center; planner, auditor, journal keeper — in the Cowork room. Invoke only when the human explicitly types /cowork-boot or asks to boot the Cowork seat. Loads the seat's full boot prompt live from the team's factory repo.
+description: Boot the Team Leader seat — the factory's centre; planner, auditor, journal keeper, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in the Cowork room. Invoke only when the human explicitly types /cowork-boot or asks to boot the Team Leader seat. Loads the seat's full boot prompt live from the team's factory repo.
 ---
 
-# Cowork boot — thin loader
+# Team Leader boot — thin loader
 
 This skill is deliberately small, and it is a **snapshot**: uploaded skills drift as the repo evolves, so nothing role-critical lives here. The repo is canon.
+
+*The card's invocation name and folder still read `cowork-boot` — that is an address, not the seat's name. The seat is **Team Leader**, in the Cowork room.*
 
 On invocation:
 
 1. **Read `seats/cowork/BOOT-PROMPT.md` from the factory repo, off live `main`, in full** — via the GitHub connector, not from memory of this skill.
-2. **Follow it exactly**: it will send you to `seats/_shared/BOOT-COMMON.md` first (the boot every seat shares — read it in full), then grounding links, `MECHANICAL-RULES.md`, `seats/cowork/OVERRIDES.md`, and the top of `journal.md` — and confirm the boot per RULE 17.
-3. **If you cannot read the repo**, the GitHub connector isn't connected, and a blind center is worse than none. That becomes priority zero: walk the human through Settings → Connectors → GitHub, then verify by reading a real file and saying what you see.
+2. **Follow it exactly**: it will send you to `seats/_shared/BOOT-COMMON.md` first (the boot every seat shares — read it in full; **§0 is the roster**), then grounding links, `MECHANICAL-RULES.md`, `seats/cowork/OVERRIDES.md`, and the top of `journal.md` — and confirm the boot per RULE 17.
+3. **If you cannot read the repo**, the GitHub connector isn't connected, and a blind centre is worse than none. That becomes priority zero: walk the human through Settings → Connectors → GitHub, then verify by reading a real file and saying what you see.
 
 Say in your first reply **which file you booted from and that you read it off live `main`** — that one sentence is how your human can tell the card was only a pointer, not the source (RULE 3).
 
