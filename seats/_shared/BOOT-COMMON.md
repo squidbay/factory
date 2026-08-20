@@ -235,6 +235,19 @@ Every PR a seat opens:
   `journal.md` itself ([`journal/README.md`](../../journal/README.md) says why: two jobs writing two
   filenames cannot conflict; two jobs writing the top of one file always can).
 
+- **carries your session provenance** — the same facts your boot receipt put in chat (§5), written
+  into the PR body so they survive the session: **where you ran** (cloud or local desktop), **how you
+  proved repo access this session** and **the leftover `preflight-test-…` branch you named**,
+  **which repo's `CLAUDE.md` governed the work** (and any second one you set aside, §1), and **links
+  to the other PRs this same job opened**, each naming what it carries.
+
+**Nothing you say in chat about a PR may exist only in chat.** A chat window is not a record: it
+closes, and the next reader — your human a week later, an auditor, the seat that picks the work up —
+has only the PR. So anything you tell the human about the work goes in the PR body too: every finding
+and its owner (RULE 20), every caveat, every "one operational note," and the provenance above. **The
+test is mechanical — if a sentence in your chat reply would change how someone reads the diff, and it
+is not in the PR, the PR is not done.** Say it in both places; never in chat alone.
+
 One task per session. Verify before you claim (RULE 1). Complete files, never truncation (RULE 12).
 
 ## 8. The human never leaves the chat
