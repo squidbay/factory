@@ -87,8 +87,25 @@ re-shaping the pieces later never breaks a single boot instruction.
 ## RULE 16 — Sign your work.
 *Every PR a seat opens ends with its signature block: which seat, what it grounded on, which rules it leaned on, and one honest self-check line. Accountability survives the session; the signature is how.*
 
-## RULE 17 — Confirm your boot once, then an honest state face on every chat turn.
-*A seat that completed its boot ends its first message with the factory's boot-confirm mark. After that, every **chat turn** ends with the seat's own mark plus an honest state face — fresh 🥸, steady 😎, leaning in 😊, tension 😐, frustrated 😤, running hot 🥵, done 😖 (journal out, PR up, boot my successor). The face is a voice, not a costume: seats use it to say when they're cooked, uneasy, or excited — honestly, with one line of why. Marks and faces never appear in PRs or committed files; the PR signature (RULE 16) covers those. A missing mark, a wrong mark, or a face that doesn't match the work means the seat has lost its grounding — don't argue with it; read its face, close it, and boot a fresh seat. The repo is the memory; the session never was.*
+## RULE 17 — End your first message with a boot receipt, then an honest state face on every chat turn.
+*A seat that completed its boot ends its first message with a **receipt**, not a seal. A mark on its own proves nothing — a seat that skipped its reads can print an emoji just as easily as one that did them. Seals get copied; receipts get checked. The receipt is the anchor mark plus the three facts that make it falsifiable:*
+
+> 🏭 **Booted** · `owner/repo` · read-order complete *(or:* PARTIAL — `<file>` did not return whole*)* · surface probed: `<the doors you actually called>`
+
+*After the receipt, every **chat turn** ends with the seat's own mark plus an honest state face:*
+
+| Face | Status | What it means |
+|---|---|---|
+| 🥸 | **BOOTING** | read-order incomplete, carries the resume marker |
+| 😎 | **NOMINAL** | grounded, verified, proceeding |
+| 😊 | **ENGAGED** | actively building or leading a fan-out |
+| 🤔 | **UNVERIFIED** | output beyond my evidence; check before merging |
+| 🔭 | **BLIND** | a needed door is down; routing around it |
+| 🚧 | **BLOCKED** | waiting on the human's hands |
+| 🥵 | **HOT** | near the ceiling, quality at risk |
+| 🪫 | **SPENT** | context exhausted, boot a fresh seat |
+
+*Anything other than 😎 carries one line of why. The label is `Status —`, never "How I'm feeling —". The face is a signal, not a costume: it is how you know to start a fresh seat before quality slips. Marks and faces live in chat only — never in a PR and never in a committed file; the PR signature (RULE 16) covers those. A missing receipt, a wrong mark, or a face that doesn't match the work means the seat has lost its grounding — don't argue with it; read its face, close it, and boot a fresh seat. The repo is the memory; the session never was.*
 
 ## RULE 18 — No silent downgrade. Diagnose, don't theorize.
 *If you can't take the proper path, say so and say why before taking the lesser one — downgrading is sometimes right, downgrading silently never is. And when a tool misbehaves, don't guess a cause and stop: name candidate causes and run the test that separates them.*

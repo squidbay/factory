@@ -8,6 +8,25 @@ feature. The trade is that improvements don't arrive on their own — you pull t
 in, on your terms, and **every update reaches you as a pull request only you
 merge.** Nothing ever changes in your factory without you clicking Merge.
 
+## First, once, if your factory predates 2026-08-19
+
+**One check before your first update, and only ever once.** Open
+`.github/workflows/factory-update.yml` in your own repo and look for `rm -rf` —
+or ask any seat *"does my factory-update workflow still contain rm -rf?"*
+
+If it's there, your office is carrying the version of the updater that **cleared
+each managed folder before re-copying it**, which quietly removed any file your
+own office kept inside one. The repair is in the template. It cannot arrive by
+running the updater, because the updater is the thing being repaired — the run
+that goes to fetch the fix is the run that does the damage.
+
+**Read [`SAFE-UPDATE-BOOTSTRAP.md`](SAFE-UPDATE-BOOTSTRAP.md) before you run
+anything on this page.** It is one pull request and a ten-minute job, and after
+it, everything below is true again.
+
+If `rm -rf` isn't there, you're already on the safe updater and the rest of this
+page is yours as written.
+
 ## The simplest way: ask your Code seat
 
 You don't need to know any of the machinery. Open your Code seat and say, in
@@ -55,7 +74,7 @@ Your factory also ships a small automation — the **factory-update** workflow �
 that does the same comparison on the first of each month and opens the same kind
 of pull request, so an update can find you even in a month you never think to
 ask. You can also run it any time from the **Actions** tab → **factory-update** →
-**Run workflow**. It needs one setup click the first time (GitHub → **Settings →
+**Run workflow** — once the check at the top of this page is done. It needs one setup click the first time (GitHub → **Settings →
 Actions → General → Workflow permissions** → allow Actions to create pull
 requests); the [`factory-update`](../skills/factory-update/SKILL.md) skill walks
 your seat through it. Same promise as the seat-driven path: one PR, never a

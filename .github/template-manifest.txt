@@ -12,6 +12,19 @@
 # Your office's copy of this file governs — to opt a path out of updates,
 # remove its line here (the update PR may propose restoring it; declining
 # that hunk is your call and the workflow respects the merged result).
+#
+# A line starting with "!" PROTECTS a path: the sync will never write it,
+# even though it sits under a managed folder listed below. Use it for a file
+# this office has deliberately made its own and does not want the template to
+# reclaim. Same shape as the rest — a trailing slash protects a whole folder.
+#
+# Two things the sync can never do to you:
+#   • It never DELETES. A file of yours the template has never heard of is
+#     left alone, not removed. (An earlier version `rm -rf`'d each managed
+#     folder and re-copied it, which silently deleted every office-only file
+#     inside.)
+#   • It never writes a "!" path. Overwrite is still how updates arrive for
+#     everything else — "!" is how you say "not this one."
 
 CLAUDE.md
 FROM-HQ.md
@@ -22,6 +35,14 @@ VERSIONS.md
 .github/CONTRIBUTING.md
 .github/SECURITY.md
 .github/template-version.txt
+
+# The updater's own engine. .github/workflows/factory-update.yml EXECUTES
+# scripts/factory-sync.sh (the copying) and scripts/sync-selftest.sh (the proof,
+# run before every sync). The workflow and the code it runs are ONE subsystem:
+# if the scripts are not managed, a fix to the sync engine lands upstream and
+# stops at your door in silence, while your workflow keeps running the old one.
+# Managed here so the two can never drift apart.
+scripts/
 grounding/
 guides/
 hosting/
@@ -58,4 +79,9 @@ versions/
 #   .github/heartbeat-watch.txt      (your own nightly watch list)
 #   .github/workflows/    (a repo's automation can't be rewritten by its
 #                          own automation — workflow changes arrive as a
-#                          note in the update PR for a Code seat to apply)
+#                          note in the update PR for a Code seat to apply.
+#                          This is the ONE part of the updater that cannot be
+#                          synced. Its engine, scripts/, is managed above, so
+#                          the hand-carry is the workflow file alone — and
+#                          guides/SAFE-UPDATE-BOOTSTRAP.md is the order to do
+#                          it in, for an office that still has the old one.)
