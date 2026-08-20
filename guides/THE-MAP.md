@@ -1,6 +1,6 @@
 # The map — what your factory is made of, and what each seat can actually reach
 
-**Why this file exists:** a Code seat once spent a session unable to find its own team's
+**Why this file exists:** an Engineer seat once spent a session unable to find its own team's
 marketing pages, then reported it "couldn't reach" the live site. Both were true, and neither
 was a broken tool. The pages were on a branch nobody had written down, and the live URL sits
 behind a network limit that only applies to *some* sessions. Nobody had drawn a map.

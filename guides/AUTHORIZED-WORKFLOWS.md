@@ -8,8 +8,8 @@ this repo whenever the two disagree (see [`../VERSIONS.md`](../VERSIONS.md), the
 
 ## What your factory does today
 
-Every change moves through the loop one gated step at a time, and that is deliberate. Cowork plans
-and writes the spec; Code builds against it and opens a pull request; Cowork audits that PR; **you**
+Every change moves through the loop one gated step at a time, and that is deliberate. Team Leader plans
+and writes the spec; Engineer builds against it and opens a pull request; Team Leader audits that PR; **you**
 read it and merge. Visual work comes in through Design's carry pipe as its own reviewed change. Each
 hop is a place you can see what happened, ask a seat to explain it, and stop. The taps are not
 overhead — they are the audit trail, made of moments where a human could have said no.

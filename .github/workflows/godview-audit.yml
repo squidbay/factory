@@ -22,7 +22,7 @@ name: godview-audit
 #           in guides/WORKSHOPS.md.
 #
 # The report lands in two places: the run's summary page, and a downloadable
-# artifact kept for 90 days. Reading it is a normal Cowork task: "pull the
+# artifact kept for 90 days. Reading it is a normal Team Leader task: "pull the
 # latest godview report and tell me if anything drifted."
 
 on:

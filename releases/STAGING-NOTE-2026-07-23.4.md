@@ -1,5 +1,9 @@
 # Release staging note — `2026-07-23.4` (STAGING — Andrew publishes)
 
+> **📁 ARCHIVAL RECORD — a dated release staging note, preserved as written.**
+> It uses the roster generation current on 2026-07-23. The roster today is four seats —
+> **Coach · Team Leader · Engineer · Creative Director** ([`FACTORY.md`](../FACTORY.md) §The team).
+
 **This is a staging note, not a published release.** It stages the next `squidbay/factory`
 GitHub Release for Andrew's one-click publish. Publishing the Release (and, if chosen, bumping the
 machine anchor) is Andrew's hands — a seat never publishes (RULE 23). Cut the Release from `main` at

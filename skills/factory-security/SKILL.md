@@ -1,6 +1,6 @@
 ---
 name: factory-security
-description: "The Cowork seat's security read on a PR, run as part of its audit BEFORE the human merges. Explicit-invoke: run when a PR touches credentials, workflows, auth, payments, or personal data — or when the human asks 'is this safe to merge?'. Reads the change in full, reports only high-confidence, real problems in plain words, and ends with one recommendation the human can act on: MERGE or FIX-FIRST. No security theater — no theoretical noise, no best-practice lint. This is a Cowork audit capability, not a separate seat or specialist; never merges, never touches a secret."
+description: "The Team Leader seat's security read on a PR, run as part of its audit BEFORE the human merges. Explicit-invoke: run when a PR touches credentials, workflows, auth, payments, or personal data — or when the human asks 'is this safe to merge?'. Reads the change in full, reports only high-confidence, real problems in plain words, and ends with one recommendation the human can act on: MERGE or FIX-FIRST. No security theater — no theoretical noise, no best-practice lint. This is a Team Leader audit capability, not a separate seat: security is a skill, and the roster stays four. Never merges, never touches a secret."
 ---
 
 # Factory Security — read the change, find the real problem, give one verdict
@@ -13,7 +13,7 @@ The factory's standing security posture — the design premise this diff-level c
 
 ## When to run it
 
-Cowork runs this read on any **sensitive** PR before it reaches the human's merge button. A PR is sensitive if it touches:
+Team Leader runs this read on any **sensitive** PR before it reaches the human's merge button. A PR is sensitive if it touches:
 
 - **Credentials** — any token, key, password, or `.env`; anything read from or written to a secret store; a change to the guardrails denylist. (This is also where an accidentally-committed secret value gets caught.)
 - **Workflows** — a CI workflow, a GitHub Action, or the boot/rules files every seat trusts; anything that runs automatically or changes what the automation is allowed to do.
@@ -53,4 +53,4 @@ No third verdict. "Probably fine but…" is not a verdict — resolve it into ME
 
 ## Sharing what you learn
 
-A check that catches the same class of problem twice is telling you the factory needs a guardrail, not just a reviewer — a denylist line, a CI rule, a sharper invariant. Say so to Cowork; a fix that stops the whole class from recurring is worth more than any single review, and [`../../.github/CONTRIBUTING.md`](../../.github/CONTRIBUTING.md) explains how it travels upstream to every factory.
+A check that catches the same class of problem twice is telling you the factory needs a guardrail, not just a reviewer — a denylist line, a CI rule, a sharper invariant. Say so to Team Leader; a fix that stops the whole class from recurring is worth more than any single review, and [`../../.github/CONTRIBUTING.md`](../../.github/CONTRIBUTING.md) explains how it travels upstream to every factory.

@@ -1,13 +1,13 @@
 # Template — execute spec
 
-**Written by Cowork; executed by Code; merged (as a spec, before any build) by the human.** The committed spec is the single source of truth for a task: if chat and the spec disagree, the spec wins — fix the spec first, then build (RULE 3 applied to plans). A Code seat handed a task with no merged spec stops and asks, unless the task is trivial and the PR says so plainly.
+**Written by Team Leader; executed by Engineer; merged (as a spec, before any build) by the human.** The committed spec is the single source of truth for a task: if chat and the spec disagree, the spec wins — fix the spec first, then build (RULE 3 applied to plans). An Engineer seat handed a task with no merged spec stops and asks, unless the task is trivial and the PR says so plainly.
 
 ---
 
 ```markdown
 # EXECUTE — <task name>
 
-**Authored by Cowork, YYYY-MM-DD. Executor: <seat>. DRAFT until the human merges this spec.**
+**Authored by Team Leader, YYYY-MM-DD. Executor: <seat>. DRAFT until the human merges this spec.**
 
 ## Mission (one line)
 <What done looks like, in one sentence.>

@@ -1,6 +1,6 @@
 # specs/ — where tasks become buildable
 
-This folder holds your factory's **execute specs**: one file per task, named for the task (`overhaul-homepage.md`, `add-contact-form.md`). Cowork writes them, you merge them, and a Code session builds from them.
+This folder holds your factory's **execute specs**: one file per task, named for the task (`overhaul-homepage.md`, `add-contact-form.md`). Team Leader writes them, you merge them, and an Engineer session builds from them.
 
 Three rules make the folder work, and they're the same three that make the whole factory work:
 

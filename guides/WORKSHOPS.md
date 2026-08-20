@@ -82,13 +82,13 @@ Here's the one honest mechanic worth knowing: **GitHub Actions won't let a workf
           MY_SITE: ${{ secrets.WORKSHOP_MY_SITE_WRITE }}
 ```
 
-That edit is itself a pull request a Code seat opens and you merge — automation can't rewrite its own workflows, by design, so adding a workshop is a reviewed change like everything else. (It's the only file edit in the whole setup; steps 2–5 are all clicks and settings.)
+That edit is itself a pull request an Engineer seat opens and you merge — automation can't rewrite its own workflows, by design, so adding a workshop is a reviewed change like everything else. (It's the only file edit in the whole setup; steps 2–5 are all clicks and settings.)
 
 ### 7. Dispatch the edit — a proposal, never a merge
 
 When your team has a change staged for the workshop (the complete new files placed in a folder in your office, e.g. `staging/my-site/`), run the edit:
 
-- In your **office** → **Actions** tab → **workshop-edit** → **Run workflow**, or just ask Cowork to dispatch it for you.
+- In your **office** → **Actions** tab → **workshop-edit** → **Run workflow**, or just ask Team Leader to dispatch it for you.
 - Fill in which workshop (`owner/repo`, matching the manifest), the staging folder, a branch name, and a commit message + PR title.
 - The workflow clones the workshop with its own write key, copies your staged files in, opens a branch, and **opens a pull request on the workshop.** It **does not merge, and it never touches `main`.**
 - You review that PR and merge it exactly like an office PR — same gate, same click.

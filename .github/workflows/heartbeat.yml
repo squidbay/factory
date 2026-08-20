@@ -28,7 +28,7 @@ name: heartbeat
 #                   version of each Anthropic surface your seats run on.
 #   SESSION LEGS  — nobody can read these from a CI runner: which Claude
 #                   desktop build you have installed, which plugins are
-#                   enabled in your app, what your Designer canvas offers.
+#                   enabled in your app, what your Design canvas offers.
 #                   A runner has no Claude install to inspect. The report
 #                   NAMES these as session-captured and tells each seat to
 #                   report its own at boot — it never prints a guess.
@@ -104,7 +104,7 @@ jobs:
           } >> "$REPORT"
 
           if [ -z "$NEWEST" ]; then
-            echo "**FLAG — could not reach the master template.** This is not \"up to date\"; it is *unknown*. Try again tomorrow, or ask a Code seat to check by hand." >> "$REPORT"
+            echo "**FLAG — could not reach the master template.** This is not \"up to date\"; it is *unknown*. Try again tomorrow, or ask your Engineer seat to check by hand." >> "$REPORT"
             FLAGS=$((FLAGS+1))
           elif [ "$LOCAL" = "$NEWEST" ]; then
             echo "**GREEN — your factory is current** (\`$LOCAL\`). Nothing to do." >> "$REPORT"
@@ -112,7 +112,7 @@ jobs:
             {
               echo "**FLAG — a factory update is waiting.** You're on \`$LOCAL\`; the master is on \`$NEWEST\`."
               echo ""
-              echo "> Ask your Code seat: **\"check for factory updates\"** — it opens one pull request you read and merge. Or run **Actions → factory-update → Run workflow**."
+              echo "> Ask your Engineer seat: **\"check for factory updates\"** — it opens one pull request you read and merge. Or run **Actions → factory-update → Run workflow**."
             } >> "$REPORT"
             FLAGS=$((FLAGS+1))
           fi
@@ -136,10 +136,10 @@ jobs:
             echo ""
             echo "| Seat | Surface it runs on | Latest published | How it's checked |"
             echo "|---|---|---|---|"
-            echo "| **Code** 🤖🔧 | Claude Code | \`$CC\` | machine — npm registry |"
-            echo "| **Cowork** 🤖🧭 | Claude Cowork | *session-captured* | the seat reports at boot |"
             echo "| **Coach** 🤖📋 | Claude chat | *session-captured* | the seat reports at boot |"
-            echo "| **Designer** 🤖🎨 | Claude Design canvas | *session-captured* | the seat reports at boot |"
+            echo "| **Team Leader** 🤖🧭 | Claude Cowork | *session-captured* | the seat reports at boot |"
+            echo "| **Engineer** 🤖🔧 | Claude Code | \`$CC\` | machine — npm registry |"
+            echo "| **Creative Director** 🤖🎨 | Claude Design canvas | *session-captured* | the seat reports at boot |"
             echo "| *(building on the API)* | Agent SDK | \`$SDK\` | machine — npm registry |"
             echo ""
             echo "**Why some rows say *session-captured*.** A CI runner has no Claude"

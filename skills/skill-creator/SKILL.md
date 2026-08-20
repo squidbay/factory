@@ -1,6 +1,6 @@
 ---
 name: skill-creator (pointer)
-description: "Mint new custom skills for this factory, properly. Explicit-invoke: run when the human or Cowork decides a repeated task should become a skill ('make this a skill', 'we keep re-explaining this'). This is a POINTER skill: it walks the seat through fetching and using Anthropic's own skill-creator from github.com/anthropics/skills (Apache-2.0), rather than carrying a copy that would go stale."
+description: "Mint new custom skills for this factory, properly. Explicit-invoke: run when the human or Team Leader decides a repeated task should become a skill ('make this a skill', 'we keep re-explaining this'). This is a POINTER skill: it walks the seat through fetching and using Anthropic's own skill-creator from github.com/anthropics/skills (Apache-2.0), rather than carrying a copy that would go stale."
 ---
 
 # Skill Creator — mint it properly, from the source

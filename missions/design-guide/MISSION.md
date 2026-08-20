@@ -4,7 +4,7 @@
 
 ## The brief
 
-A design system is the difference between a website that looks assembled and one that looks *decided*. Agencies charge five figures for one. This mission produces the same artifact — tokens, guidelines, components, full page mocks, real assets, a handoff a builder can work from cold — using your Designer seat, your real materials, and your merge gate.
+A design system is the difference between a website that looks assembled and one that looks *decided*. Agencies charge five figures for one. This mission produces the same artifact — tokens, guidelines, components, full page mocks, real assets, a handoff a builder can work from cold — using your Creative Director seat, your real materials, and your merge gate.
 
 Two things make the result trustworthy rather than just pretty:
 
@@ -17,28 +17,28 @@ You don't need good source material to start. Real systems have been built from 
 
 - **Whatever real brand assets exist, however modest.** One old logo file, a sign photo, a business card — all usable. Don't apologize for them; hand them over.
 - **Your old site's address, if you have one.** It gets audited for facts before anything visual happens.
-- **The founders' story.** Where the business came from, what you're proud of, what your customers say when they recommend you. The gold in a brand is usually in the people, not the pixels — expect the Designer to ask about *you*.
+- **The founders' story.** Where the business came from, what you're proud of, what your customers say when they recommend you. The gold in a brand is usually in the people, not the pixels — expect Creative Director to ask about *you*.
 - **Product facts**: names, real numbers, what fits what, prices if you publish them.
-- **Optional but recommended: name your Designer.** More on this below.
+- **Optional but recommended: name your Creative Director.** More on this below.
 - **Your merges.** Every piece lands by PR; you approve everything that becomes canon (RULE 14).
 
 ## How it runs
 
 The order below is the recipe. It matters; don't reorder it.
 
-1. **PR 1 — the content audit.** Before any visual work, Cowork and Code read everything that exists — the old site end to end, your documents, your answers — into **one source-of-truth document**: product facts, real numbers, compatibility lists, video links, every asset's location. Every later file *cites this document* instead of re-deciding facts. You merge it first, because everything else stands on it.
+1. **PR 1 — the content audit.** Before any visual work, Team Leader and Engineer read everything that exists — the old site end to end, your documents, your answers — into **one source-of-truth document**: product facts, real numbers, compatibility lists, video links, every asset's location. Every later file *cites this document* instead of re-deciding facts. You merge it first, because everything else stands on it.
 2. **PR 2 — voice and content fundamentals.** How the brand talks: hooks, casing rules, what a call-to-action sounds like, texture rulings (down to details like whether emoji ever appear in your copy — some brands rule "never," and that ruling is design). No color has been chosen yet, on purpose.
 3. **PR 3 — brand architecture, stated as one sentence.** One parent frame that holds everything, then each product or line gets exactly **one** accent of its own — and no two sibling accents ever share a component. The constraint comes first; the palette is chosen to serve it.
-4. **The system itself, PR by PR.** The Designer works the canvas; deliverables come to you; Code lands them in the repo by PR; Cowork audits each one against the source-of-truth doc and the architecture sentence. (If you use a design tool like Canva for review rounds, exported pages with comment links work well — treat any untested import path as untested until a seat verifies it, per RULE 3.)
+4. **The system itself, PR by PR.** Creative Director works the canvas; deliverables come to you; Engineer lands them in the repo by PR; Team Leader audits each one against the source-of-truth doc and the architecture sentence. (If you use a design tool like Canva for review rounds, exported pages with comment links work well — treat any untested import path as untested until a seat verifies it, per RULE 3.)
 5. **PR last — the handoff.** The package below, assembled and checked against the finish-line test: *a fresh Code session, given only the handoff folder, could build the production site without asking a single question.*
 
-### The Designer persona — optional, and worth it
+### The Creative Director persona — optional, and worth it
 
-You can give your Designer seat a name and a personality, and you probably should: people who name their seats keep coming back to them, and design review is more fun with a character across the table. One **hard contract** makes it safe:
+You can give your Creative Director seat a name and a personality, and you probably should: people who name their seats keep coming back to them, and design review is more fun with a character across the table. One **hard contract** makes it safe:
 
 > **Sass lives in the chat, never in the deliverable.** The jokes end where the artboard begins. Accessibility, reduced motion, contrast standards, and the grid are sacred and unfunny — the persona never touches them, and the shipped work is indistinguishable from a top-shelf agency's.
 
-The persona is cosmetic; the roles underneath stay strict (see FACTORY.md — Designer is read-only on code, delivers through you, never commits, never merges).
+The persona is cosmetic; the roles underneath stay strict (see FACTORY.md — Creative Director is read-only on code, delivers through you, never commits, never merges).
 
 ## Done looks like
 

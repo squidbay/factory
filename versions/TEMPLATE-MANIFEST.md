@@ -45,7 +45,7 @@ see them called out in the PR, left for you to bring over by hand:
 
 - **Your workflows** (`.github/workflows/`). A repo's automation cannot rewrite
   its own automation, so when the master's workflows improve, the update tells
-  you and a Code seat brings them across in a normal PR.
+  you and an Engineer seat brings them across in a normal PR.
 - **The manifest itself.** If your copy of `template-manifest.txt` differs from
   the master's, the update says so and leaves yours in charge — because opting a
   path in or out of updates is a choice only you should make.

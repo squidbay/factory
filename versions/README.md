@@ -7,7 +7,7 @@ The live verification log is always **[`VERSIONS.md`](../VERSIONS.md)** at the r
 - When `VERSIONS.md` grows past **~20 rows**, or at the end of a **calendar quarter**, the oldest rows move here into a file named for the year they belong to: `archive/2026.md`, `archive/2027.md`, and so on. A busy year can hold many rows; a quiet one, a few.
 - Within each archive file, the same honesty holds: **newest row on top**, and never a row claiming more than was actually verified.
 - `VERSIONS.md` itself **never moves** — every link to it, and the README's "last verified" reference, keeps resolving. Only rows travel; the file stays put and stays thin.
-- Rolling is a normal, gated change: planned by Cowork, moved by Code in a pull request, merged by the human. **Nothing is ever deleted** — an archived row is the same words in a quieter room.
+- Rolling is a normal, gated change: planned by Team Leader, moved by Engineer in a pull request, merged by the human. **Nothing is ever deleted** — an archived row is the same words in a quieter room.
 - **The "last verified" line at the top of `VERSIONS.md` never rolls.** It reflects the most recent pass and stays on the live page regardless of age.
 
 ## Why an archive beats one endless file

@@ -1,6 +1,6 @@
 # Template — audit findings
 
-**Written by the auditing seat (usually Cowork auditing Code's PR, or Code auditing Cowork's plan — the seats audit each other on purpose).** Every finding is stated plainly and gets a disposition in the same document (RULES 19–20): the auditor never grades its own finding's severity to soften it, and never leaves a finding without a home.
+**Written by the auditing seat (usually Team Leader auditing Engineer's PR, or Engineer auditing Team Leader's plan — the seats audit each other on purpose).** Every finding is stated plainly and gets a disposition in the same document (RULES 19–20): the auditor never grades its own finding's severity to soften it, and never leaves a finding without a home.
 
 ---
 

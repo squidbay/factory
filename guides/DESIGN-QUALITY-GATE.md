@@ -23,12 +23,12 @@ the same layout everywhere, and forced one shape to serve two jobs.
 
 ## The pipeline
 
-The gate runs in order. Each seat has one job, and no seat blesses its own work — Cowork audits
-Code, Code audits the plan, the human merges. That cross-check is the whole safety of it.
+The gate runs in order. Each seat has one job, and no seat blesses its own work — Team Leader audits
+Engineer, Engineer audits the plan, the human merges. That cross-check is the whole safety of it.
 
 ### Step 0 — the outcome sentence
 
-Before anything else, Cowork writes the ask back to you as **one plain sentence** describing the
+Before anything else, Team Leader writes the ask back to you as **one plain sentence** describing the
 result you want — not a task list, the outcome. You confirm it in one word.
 
 That sentence is the ruler. Every later step is judged against it, and it outranks every checklist,
@@ -38,7 +38,7 @@ outcome sentence is how the team stays pointed at *your* answer.
 
 ### Step 1 — product review
 
-Cowork opens the current page and looks at it — the rendered page, not the code. Desktop, then
+Team Leader opens the current page and looks at it — the rendered page, not the code. Desktop, then
 mobile. It asks: what story is this telling, what is the one thing you want a visitor to do, what
 feels crowded, what feels empty, what repeats. The output is a short written review of the
 experience, no code proposed yet.
@@ -46,7 +46,7 @@ experience, no code proposed yet.
 *(Your page words stay frozen through this. If the review wants copy reworded, that ships to you as
 an old-wording → new-wording proposal for your gate — never quietly rewritten.)*
 
-### Step 2 — Code plans
+### Step 2 — Engineer plans
 
 Code writes an implementation plan and nothing else — no HTML, no CSS, no JavaScript yet. The plan
 has to say, separately: the desktop layout strategy, the mobile layout strategy, the component
@@ -54,31 +54,31 @@ structure, the spacing and type approach, accessibility, performance, and the ri
 
 ### Step 3 — plan audit
 
-Cowork reads the plan and rejects it if it's missing a separate desktop strategy, a separate mobile
+Team Leader reads the plan and rejects it if it's missing a separate desktop strategy, a separate mobile
 strategy, a consistent spacing system, a clear type hierarchy, component reuse, accessibility, or
 performance. A rejected plan comes back with specific feedback, not a shrug.
 
 ### Step 4 — design review
 
-When the work is visual, Designer gets the product review, the plan, and current screenshots at
-every size below — and works from those renders, not the source code, even where its tools could
-read the code. Designer returns recommendations on layout, hierarchy, type, spacing, and
+When the work is visual, Creative Director gets the product review, the plan, and current screenshots
+at every size below — and works from those renders, not the source code, even where its tools could
+read the code. Creative Director returns recommendations on layout, hierarchy, type, spacing, and
 interaction. No implementation.
 
 ### Step 5 — design audit
 
-Cowork reviews Designer's recommendations and keeps only the ones that improve clarity. Anything
+Team Leader reviews Creative Director's recommendations and keeps only the ones that improve clarity. Anything
 that adds clutter, duplicates existing UI, invents decoration, or hurts readability is cut.
 
 ### Step 6 — implementation
 
-Now Code builds — following the approved plan and the approved design. Code does not redesign
-mid-build. If building surfaces a real design decision, it stops and goes back to Designer rather
-than inventing an answer at the keyboard.
+Now Engineer builds — following the approved plan and the approved design. Engineer does not redesign
+mid-build. If building surfaces a real design decision, it stops and goes back to Creative Director
+rather than inventing an answer at the keyboard.
 
 ### Step 7 — the fresh-eye QA
 
-Code renders the finished page at every size and judges the *experience*, never the code — against
+Engineer renders the finished page at every size and judges the *experience*, never the code — against
 the Step 0 sentence. The sizes, all of them, every round:
 
 **Desktop** — `1920×1080`, `1440×900`, `1280×720`
@@ -90,7 +90,7 @@ This is where receipts come in. The [`factory-render-verify`](../skills/factory-
 skill renders each size to a screenshot and measures what a single glance misses — horizontal
 overflow, real type sizes, tap-target sizes, safe-area handling. It also pins the page source by
 hash, so once the page deploys you can prove the live site is byte-for-byte the version you
-approved. The receipts go on the pull request; Cowork audits against them; you merge. A page is
+approved. The receipts go on the pull request; Team Leader audits against them; you merge. A page is
 never signed off on a promise that it looks fine.
 
 One caution for any hands-on browser check: **before trusting a width you read in a live browser,

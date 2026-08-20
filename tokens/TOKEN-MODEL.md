@@ -36,7 +36,7 @@ None of these exist in a fresh factory, and a fresh factory is not missing anyth
 
 ### Tier A — the reading key
 
-A fine-grained GitHub token, **read-only**, covering your repos. You paste it into the Claude app's connector configuration, and from then on your chat seats (Cowork, Chat) can *read* your repos themselves — open your journal, check a plan, look at what Code shipped — without you copy-pasting files to them. It cannot write, and it cannot merge. This is the key that turns your chat seats from blind advisors into teammates who can see the same repo you do.
+A fine-grained GitHub token, **read-only**, covering your repos. You paste it into the Claude app's connector configuration, and from then on your card-booted seats (Team Leader in Cowork, Coach in Chat) can *read* your repos themselves — open your journal, check a plan, look at what Engineer shipped — without you copy-pasting files to them. It cannot write, and it cannot merge. This is the key that turns your chat seats from blind advisors into teammates who can see the same repo you do.
 
 ### Tier B — the writing key (one per repo)
 
