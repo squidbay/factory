@@ -1,6 +1,6 @@
 # SETUP-PATH — the least-resistance path, every click named
 
-**The promise this page keeps: minimal setup IS the product.** You get Code going first — one download, one sign-in, one repo. After that, Code (with Claude in Chrome beside it) can set up everything else *clickably*, and you choose how involved to be. Every dialog you will ever see is named below, so nothing surprises you and nothing is left to guesswork.
+**The promise this page keeps: minimal setup IS the product.** You get **Engineer** going first — one download, one sign-in, one repo. After that, Engineer (with Claude in Chrome beside it) can set up everything else *clickably*, and you choose how involved to be. Every dialog you will ever see is named below, so nothing surprises you and nothing is left to guesswork.
 
 Verified against Anthropic's live documentation on 2026-07-14 (the private-repo access path in Phase 1 added and verified 2026-07-16) — the linked pages are the source of truth, and if one disagrees with this page, the live page wins (see [`grounding/anthropic/README.md`](../grounding/anthropic/README.md)). Where a step exists only because Anthropic's or your operating system's own UX requires a human hand, it's listed honestly in **The gaps** at the bottom — the team writes copy around those moments; it never pretends they aren't there.
 
@@ -10,11 +10,11 @@ Verified against Anthropic's live documentation on 2026-07-14 (the private-repo 
 - A **GitHub account** (free is fine) — <https://github.com/signup>
 - **Google Chrome** (for the browser lane, later) — optional on day one.
 
-## Phase 1 — Code first (the only phase that's yours alone)
+## Phase 1 — Engineer first (the only phase that's yours alone)
 
 1. **Download the Claude desktop app** — <https://claude.com/download> → install → sign in with your Claude account. (Install help: <https://support.claude.com/en/articles/10065433>)
 2. **Open the Code tab** in the app's sidebar.
-3. **Connect GitHub — and choose "All repositories."** Code walks you into GitHub's own sign-in, then an **"Authorize Claude"** page. When it asks which repositories Claude may access, you'll see **"All repositories"** and **"Only select repositories."** **Choose "All repositories."** It's the simplest path and the one that never breaks: every repo you have or ever create — public **or private** — is instantly usable, so your factory repo can't go missing in the next step. This is the one connection everything else rides on, and it's deliberately a human click — you own the keys. (How the GitHub App connection works: <https://code.claude.com/docs/en/github-actions>)
+3. **Connect GitHub — and choose "All repositories."** Claude Code walks you into GitHub's own sign-in, then an **"Authorize Claude"** page. When it asks which repositories Claude may access, you'll see **"All repositories"** and **"Only select repositories."** **Choose "All repositories."** It's the simplest path and the one that never breaks: every repo you have or ever create — public **or private** — is instantly usable, so your factory repo can't go missing in the next step. This is the one connection everything else rides on, and it's deliberately a human click — you own the keys. (How the GitHub App connection works: <https://code.claude.com/docs/en/github-actions>)
    > *Prefer to grant less?* You can pick **"Only select repositories"** instead — but then you **must** add your factory repo to that list right here, and if it's private and you skip it, it won't appear in the next step. If that happens, the 30-second fix is [below](#if-your-repo-isnt-in-the-list--the-private-repo-fix-and-you-keep-it-private). "All repositories" simply skips that whole trap.
 4. **Attach your factory repo** — in the repository selector, pick the copy of this template you created. New session, this repo. This step is only *"choose a repository"* — you will **not** be asked to pick a "connector" or a "plugin," and neither of those boots your factory; attaching the repo does. **If your factory repo is private and it's missing from the list while your public repos show up, that is the single most common snag — and it is not your fault.** Claude simply hasn't been granted access to that private repo yet. Fix it in about 30 seconds, without making anything public — see **"If your repo isn't in the list"** immediately below.
 5. **Wake the team — type one word.** Here's the one thing to know: **Claude Code doesn't speak until you do.** You'll see an empty message box, not a greeting — that's normal, nothing is wrong. Type **`hi`** and press enter. That's the entire trigger — one word, no thinking. Your team wakes up on that first message and Stage 0 of [`STAGES.md`](STAGES.md) begins: three sentences of introduction, then the only question that matters — *what are we building?* (It doesn't have to be "hi" — "hello", "let's go", even "now what" all work. The factory is built to open with its welcome no matter what you say first, so you can't get this wrong.)
@@ -29,7 +29,7 @@ The **Authorize** click in step 3 connects GitHub to your *Claude account*. That
 2. Confirm **Claude** appears under **Installed GitHub Apps** (not merely under the separate **Authorized GitHub Apps** tab — *authorized ≠ installed*).
 3. If it's missing under Installed: **<https://github.com/apps/claude>** → **Install** → your account → **All repositories** → the green button.
 
-The full, plain-words version of this — and what to do if a session tells you it can read but can't write — is [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md). Your Code session now also **proves this itself** at the start of every session (read + write test) — so if a half-connection ever slips through, the session stops and points you here instead of failing quietly.
+The full, plain-words version of this — and what to do if a session tells you it can read but can't write — is [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md). Your Engineer session now also **proves this itself** at the start of every session (read + write test) — so if a half-connection ever slips through, the session stops and points you here instead of failing quietly.
 
 **One more rule that saves an evening:** if you fix a connection while sessions are already open, **those old sessions keep dead credentials — never resume them.** Start one brand-new session after connecting, and let it lead.
 
@@ -48,7 +48,7 @@ That one grant hands Claude *just this repo* and nothing else. Your factory stay
 
 Above the Code tab's message box sits an **environment button** — it may read **"Default"** with a small cloud icon. It decides where your session actually runs: **in the cloud** (on Anthropic's computers) or **Local** (on your own machine). Cloud is the normal mode, and it's the right one for building — reading your repo, writing, and opening pull requests all work perfectly from there. You don't need to change anything on day one.
 
-Here's the plain-words version: **your Code seat can use your computer for you — you never open a terminal yourself.** **Local** runs on your own machine, where your browser logins already work; **cloud** runs on Anthropic's servers and does repo work only. Your seat picks the right one and tells you when it needs you to switch.
+Here's the plain-words version: **your Engineer seat can use your computer for you — you never open a terminal yourself.** **Local** runs on your own machine, where your browser logins already work; **cloud** runs on Anthropic's servers and does repo work only. Your seat picks the right one and tells you when it needs you to switch.
 
 Once in a while a step needs *your* side of the screen — connecting an account, installing an app, something only your logged-in browser or your own machine can do. **Your seat will tell you** when that's the case; it's built to say so plainly instead of failing quietly. When it does, the switch is three taps:
 
@@ -58,11 +58,11 @@ Once in a while a step needs *your* side of the screen — connecting an account
 
 That's it. You never have to guess which mode you're in — if a step needs Local, the seat says so and hands you these exact taps.
 
-## Phase 2 — the choice (Code asks; both answers are right)
+## Phase 2 — the choice (Engineer asks; both answers are right)
 
-Right after Stage 0, Code offers, explicitly:
+Right after Stage 0, Engineer offers, explicitly:
 
-> **"Set it all up for me"** — hands-off. Code sequences every remaining step itself and, once Claude in Chrome is installed (its own install is click one), drives the browser through the rest — clicking, typing, filling forms the way a person would — pausing ONLY at the dialogs in **The gaps** that must be your hand. You watch; you click when asked; it narrates as it goes.
+> **"Set it all up for me"** — hands-off. Engineer sequences every remaining step itself and, once Claude in Chrome is installed (its own install is click one), drives the browser through the rest — clicking, typing, filling forms the way a person would — pausing ONLY at the dialogs in **The gaps** that must be your hand. You watch; you click when asked; it narrates as it goes.
 >
 > **"Set it up with me"** — guided. One instruction at a time, wait for your "done," then the next — the same rhythm as every stage. You do each click yourself and learn where everything lives.
 
@@ -83,7 +83,7 @@ You can switch modes any time by saying so. Either way the sequence below is the
 2. **macOS only:** the OS then wants its own two switches — **System Settings → Privacy & Security → Accessibility** (lets Claude click and type) and **→ Screen Recording** (lets Claude see the screen). These two dialogs belong to macOS; no app can click them for you.
 3. Per app, first use: an **"Allow for this session" / "Deny"** prompt. Approvals last the session (30 minutes for phone-dispatched sessions). Escape key stops everything, always.
 
-### C. The chat-side seats — Cowork and the rest
+### C. The card-booted seats — Coach, Team Leader, Creative Director
 
 1. In the chat: **+ → connect GitHub → sign in → select your factory repo → save.** The same ceremony Stage 2 teaches — this page just names the buttons.
 2. **Settings → Skills → upload** the seat boot skills when a stage calls for them. (Skills need code execution enabled: Settings → Capabilities. <https://support.claude.com/en/articles/12512180>)
