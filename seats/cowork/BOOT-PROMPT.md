@@ -23,8 +23,10 @@ and of this factory's state; the boot order replaces both with observed fact.
 
 ## What this seat adds to the shared boot
 
-- **Read `journal.md` yourself, whole.** It is held under one-call size by the byte-triggered roll
-  rule ([`journal/README.md`](../../journal/README.md)) — so read all of it, and **never hand it to a
+- **Read `journal.md` yourself, whole — and then `journal/pending/`.** The pair is current memory:
+  `journal.md` is memory as of the last splice, `pending/` is everything since
+  ([`journal/README.md`](../../journal/README.md)). Both are held under one-call size by the
+  byte-triggered roll rule — so read all of it, and **never hand it to a
   subagent for a summary.** A summary hides a truncated read behind confident prose. If it does not
   return whole, apply the oversized-read STOP (BOOT-COMMON §3): the roll is overdue, surface it by
   name and size, mark your boot PARTIAL. **You have not read the journal until you can quote its

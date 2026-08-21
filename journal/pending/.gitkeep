@@ -1,0 +1,10 @@
+This file keeps journal/pending/ present in a fresh clone.
+
+git does not track empty directories, so without it the directory disappears the
+moment a splice removes the last entry — and every seat's boot order names this
+path. A missing directory reads as an error; an empty one reads as "everything is
+spliced," which is the truth it should tell.
+
+Deliberately NOT a README.md: a splice takes every *.md in this directory, so a
+markdown file here is a file the splice would silently move into journal.md.
+The documentation lives one level up, in journal/README.md.
