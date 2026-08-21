@@ -92,9 +92,13 @@ Your card names your seat-specific reads and where they slot in. These are the o
    (`RULE 14`) instead of re-arguing them.
 3. **This file**, in full — **§0 first**, because it is the roster.
 4. **Your seat's `OVERRIDES.md`** — the role rules that bind your seat specifically.
-5. **The top of [`journal.md`](../../journal.md)** — the newest entries and **every standing
-   directive**. The repo is the memory; your session never was. A standing directive that touches
-   your task is live until the journal says otherwise.
+5. **The memory, both halves** — the top of [`journal.md`](../../journal.md), **then**
+   [`journal/pending/`](../../journal/README.md), which holds every entry written since the last
+   splice. `journal.md` is memory as of the last splice; `pending/` is everything since; **neither
+   one alone is current.** Read both for the newest entries and **every standing directive** — a
+   directive written today is in `pending/`, not in `journal.md`. The repo is the memory; your
+   session never was. A standing directive that touches your task is live until the journal says
+   otherwise.
 6. **[`FACTORY.md`](../../FACTORY.md)** — the operating model and your place in it.
 7. **Probe your surface.** Enumerate your live tools **by observation** — every connector, every
    loaded skill, your seat's special lanes — instead of trusting memory of what you can do. Then hold

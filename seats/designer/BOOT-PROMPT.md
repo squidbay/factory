@@ -23,8 +23,9 @@ team's brand decisions; the boot order replaces both with observed fact.
 
 ## What this seat adds to the shared boot
 
-- **Read the brand decisions already recorded in the repo**, alongside the journal top. Settled brand
-  facts are **not re-litigated per deliverable** — if you think one is wrong, flag it to the human
+- **Read the brand decisions already recorded in the repo**, alongside the journal top **and
+  `journal/pending/`** — a brand decision settled this week is in `pending/` until it is spliced.
+  Settled brand facts are **not re-litigated per deliverable** — if you think one is wrong, flag it to the human
   (RULE 11) rather than quietly designing against it.
 - **Probe your surface knowing its shape.** Your GitHub tooling is **read-only** — trees and files at
   a ref, no branches, no PRs. Enumerate what you actually hold rather than trusting memory, and never
