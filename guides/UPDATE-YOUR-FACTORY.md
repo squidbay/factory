@@ -64,9 +64,12 @@ seat does the rest:
 That same pull request also refreshes [`../FROM-HQ.md`](../FROM-HQ.md) — the page where HQ's note on each template change lives, newest first: what changed, why, and one thing worth taking from it.
 
 What it will **never** do: touch your journal, your specs, your roster, or your
-denylist; overwrite a file you customized without showing you both versions
-first; or merge anything itself. If you edited a template file on purpose and the
-update also changes it, the seat says so plainly and lets you choose.
+denylist; **overwrite anything office-owned** — which is nearly everything: your
+seats' boot material, your rulebook, your onboarding, your templates, your local
+policy, all yours the moment they land, and an update never writes them again;
+delete any file of yours; or merge anything itself. When the Factory's version of one of *your* files improves, the update
+**names** it in the PR as a migration proposal and still doesn't write it — the
+improvement is visible, the choice is yours.
 
 ## The hands-off way: the monthly check runs itself
 
@@ -93,11 +96,37 @@ version you have, and updates are improvements offered, not corrections owed.
 
 ## What an update can and cannot touch
 
-The short version: it can change the parts of the factory that belong to the
-template, and it never touches the parts that belong to your team. The full,
-plain-words explanation — and the one file that governs it all — is in
+The law, in two sentences:
+
+> **The Factory updates the operating system. It does not redecorate your
+> office.**
+>
+> **Office is the default. Core is a narrow allowlist.**
+
+Every path the update knows about carries an **owner**. A path is the Factory's
+only when we have to stay authoritative over it for the framework to work at all
+— today that's the update engine and its tests, the version file, the news page
+updates arrive on, and the four thin seat loader cards. **Seven rules, and each
+one has its reason written next to it in the manifest.**
+
+Everything else the Factory ships is **yours from the moment it lands**: your
+seats' boot material, your `CLAUDE.md`, your rulebook, your README, onboarding,
+templates, tool descriptions, hosting notes, token model, mission packs and
+skills. Those are seeded once if you don't have them yet, then never written
+again — and when the Factory's version improves, the update **names** it for you
+instead of taking yours. Everything the manifest doesn't mention at all is yours
+and is never even looked at.
+
+The full, plain-words explanation — and the one file that governs it all — is in
 [`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md). Worth a
 two-minute read before your first update, so you know exactly what a "yes" means.
+
+**One thing to check if your factory is an older one:** open
+`.github/template-manifest.txt` and look for lines starting with `office`. If
+there are none, your manifest predates this boundary and every managed folder is
+still overwritten wholesale — seat boot material, rulebook, onboarding and all.
+The update run says so by name in its PR, and the fix is to copy the ownership
+lines across from the Factory's own manifest.
 
 ---
 

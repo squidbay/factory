@@ -86,7 +86,9 @@ safer updater, it is a broken one. Bring all four changes in **one** pull reques
 | `.github/workflows/factory-update.yml` | [raw](https://raw.githubusercontent.com/squidbay/factory/main/.github/workflows/factory-update.yml) | the safe updater |
 | `scripts/factory-sync.sh` | [raw](https://raw.githubusercontent.com/squidbay/factory/main/scripts/factory-sync.sh) | the copying engine it runs — overwrite-only, never deletes |
 | `scripts/sync-selftest.sh` | [raw](https://raw.githubusercontent.com/squidbay/factory/main/scripts/sync-selftest.sh) | the proof, run before every sync |
-| one line — `scripts/` — added to `.github/template-manifest.txt` | — | so future engine fixes arrive on their own |
+| `scripts/ownership-rehearsal.sh` | [raw](https://raw.githubusercontent.com/squidbay/factory/main/scripts/ownership-rehearsal.sh) | the second proof — runs a real update against a copy of *your* office and checks every byte. The update workflow will not sync without it |
+| one line — `core scripts/` — added to `.github/template-manifest.txt` | — | so future engine fixes arrive on their own |
+| the **ownership lines** copied from the Factory's manifest | [raw](https://raw.githubusercontent.com/squidbay/factory/main/.github/template-manifest.txt) | so an update stops overwriting your seats' boot material, your rulebook, your onboarding and your local policy. Office is the default there; Core is seven rules with their reasons written next to them ([`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md) explains both owners) |
 
 That last row is the one people skip, and it is the one that matters in a year.
 Your manifest is the list of what an update may touch. If `scripts/` is not on
@@ -98,9 +100,9 @@ but adding it here means it never has to.
 
 **The whole job in one sentence you can hand to your Engineer seat:**
 
-> Bring `.github/workflows/factory-update.yml`, `scripts/factory-sync.sh` and
-> `scripts/sync-selftest.sh` over from the public template at
-> `github.com/squidbay/factory`, add the line `scripts/` to
+> Bring `.github/workflows/factory-update.yml`, `scripts/factory-sync.sh`,
+> `scripts/sync-selftest.sh` and `scripts/ownership-rehearsal.sh` over from the
+> public template at `github.com/squidbay/factory`, add the line `core scripts/` to
 > `.github/template-manifest.txt`, and open it as one pull request. Do **not**
 > run the `factory-update` workflow first — the copy I have still deletes.
 
@@ -112,17 +114,34 @@ From your repository root:
 
 ```
 bash scripts/sync-selftest.sh
+bash scripts/ownership-rehearsal.sh .
 ```
 
-Four lines, all `PASS`, and the last one is the one worth reading:
+Ten `PASS` lines from the first, seven from the second, and the ones worth
+reading are the **controls** — the runs that must come out the *other* way:
 
 ```
   PASS  TEST 1  office-only file SURVIVES the new sync
   PASS  TEST 3  '!' protected file NOT overwritten
-  PASS  TEST 4  the sync still syncs (updates land, new template files arrive)
+  PASS  TEST 4  the sync still syncs (core updates land, new Factory files arrive)
   PASS  TEST 2  NEGATIVE CONTROL: old logic DELETED the office-only file (as it must, or this test is blind)
+  PASS  TEST 5  customised office-owned boot material SURVIVES byte-for-byte
+  PASS  TEST 7  a default the office does not have yet is SEEDED
+  PASS  TEST 8  an office-owned default that improved upstream produced a MIGRATION PROPOSAL and no write
+  PASS  TEST 9  longest match wins: the core loader inside an office folder DID update
+  PASS  TEST 10 a bare classless manifest line still behaves as core (backward compatible)
+  PASS  TEST 6  NEGATIVE CONTROL: declared core, the SAME customisation IS clobbered
 sync-selftest: ALL PASS
 ```
+
+The second script does the same thing at full size on **your** tree: it builds a
+copy of your office, customises twenty files across its whole office-owned
+surface — seat boot material, the rulebook, onboarding, templates, local policy —
+adds arbitrary files of its own, runs a real update against it, and checks every
+byte. Then it repeats the whole thing with your manifest's ownership lines
+stripped, and **requires that run to clobber**. If your manifest has the owners
+wrong, this is what tells you, and it runs as a gate before your monthly sync is
+allowed to touch anything.
 
 TEST 2 deliberately runs the **old** logic on the same fixture and requires it to
 delete. A test that only ever shows the good outcome proves nothing — it might be

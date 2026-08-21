@@ -15,4 +15,6 @@ On invocation:
 
 Say in your first reply **which file you booted from and that you read it off live `main`** — that one sentence is how your human can tell the card was only a pointer, not the source (RULE 3).
 
+**What this card is, and what it is not.** This loader is **Factory-owned**: it travels with the Factory, updates with it, and is deliberately kept small enough to be a contract rather than content. The boot material it points at — `BOOT-PROMPT.md`, `GROUNDING.md`, `OVERRIDES.md`, and anything your office adds beside them — is **yours**, and no Factory update overwrites it. That split is declared in `.github/template-manifest.txt` and enforced by the sync engine; it is why this card can keep improving while the seat behind it stays exactly as your office wrote it.
+
 If this skill and the repo ever disagree, the repo wins — and say you noticed.

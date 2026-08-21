@@ -1,0 +1,118 @@
+name: update-engine
+
+# The updater has to update itself, and until this workflow existed nothing
+# tested it on the way in.
+#
+# scripts/factory-sync.sh is the code that decides what an update is allowed to
+# do to every office created from this Factory. scripts/sync-selftest.sh and
+# scripts/ownership-rehearsal.sh are its proofs — both of them paired with
+# negative controls, because a test that can only come out green is not a test.
+#
+# Those proofs ran only inside factory-update, which runs in the OFFICE, monthly,
+# after the change had already shipped. So a broken engine reached every office
+# before anything checked it. This job moves the check to the pull request that
+# writes the engine, which is the only place a fix is still cheap.
+#
+# The two are one subsystem and they gate together: the engine, its manifest,
+# and the workflow that runs them.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: The engine and its proofs must both be present
+        run: |
+          set -u
+          MISSING=""
+          for dep in scripts/factory-sync.sh scripts/sync-selftest.sh \
+                     scripts/ownership-rehearsal.sh .github/template-manifest.txt; do
+            [ -f "$dep" ] || MISSING="$MISSING $dep"
+          done
+          if [ -n "$MISSING" ]; then
+            echo "::error::the update subsystem is incomplete. Missing:$MISSING"
+            exit 1
+          fi
+          echo "Present: engine, both proofs, manifest."
+
+      - name: Shell syntax
+        run: |
+          set -e
+          for f in scripts/*.sh; do bash -n "$f" && echo "  syntax ok: $f"; done
+
+      - name: The engine's rules, on fixtures (with negative controls)
+        run: bash scripts/sync-selftest.sh
+
+      - name: This Factory's own manifest, on the real tree (with a negative control)
+        run: bash scripts/ownership-rehearsal.sh .
+
+      - name: Every manifest line names an owner, and Core stays an allowlist
+        run: |
+          set -u
+          # OFFICE IS THE DEFAULT. CORE IS A NARROW ALLOWLIST.
+          #
+          # The engine still reads a bare line as `core`, because manifests
+          # written before ownership existed must keep receiving updates. That
+          # fallback is a compatibility promise to OTHER repositories — it is not
+          # a licence for THIS one. A bare line here would be a Core
+          # classification nobody had to argue for, which is exactly how an
+          # allowlist stops being one: not by a bad decision, by a missing word.
+          FAIL=0
+          LINE=0
+          BARE=""
+          while IFS= read -r line || [ -n "$line" ]; do
+            LINE=$((LINE+1))
+            case "$line" in ''|'#'*) continue ;; esac
+            read -r first rest <<<"$line"
+            case "$first" in
+              core|office)
+                if [ -z "${rest:-}" ]; then
+                  echo "::error file=.github/template-manifest.txt,line=$LINE::'$first' with no path after it"
+                  FAIL=1
+                fi
+                ;;
+              '!'*) ;;
+              *)
+                echo "::error file=.github/template-manifest.txt,line=$LINE::'$line' declares no owner. The engine would read it as \`core\` — a Factory-owned path nobody argued for. Write 'office $first' if a customer could reasonably personalise it, or 'core $first' with a comment saying why SquidBay must stay authoritative over it."
+                BARE="$BARE $first"
+                FAIL=1
+                ;;
+            esac
+          done < .github/template-manifest.txt
+          if [ "$FAIL" -eq 0 ]; then
+            echo "manifest: every line names an owner explicitly. No bare lines."
+          fi
+          exit "$FAIL"
+
+      - name: Print the Core allowlist, so growth is visible in every PR
+        run: |
+          set -u
+          # Not a gate — a receipt. Core is meant to be short enough to read in
+          # one screen, and the cheapest way to keep it that way is to make every
+          # addition show up in a diff of this job's log, next to the office
+          # count it is being weighed against.
+          CORE=$(grep -c '^core '   .github/template-manifest.txt || true)
+          OFFICE=$(grep -c '^office ' .github/template-manifest.txt || true)
+          echo "Core (Factory-owned) rules:   $CORE"
+          echo "Office (yours) rules:         $OFFICE"
+          echo ""
+          echo "The Core allowlist in full:"
+          grep '^core ' .github/template-manifest.txt | sed 's/^/    /'
+          {
+            echo "### Ownership split"
+            echo ""
+            echo "| class | rules |"
+            echo "|---|---:|"
+            echo "| core (Factory-owned) | $CORE |"
+            echo "| office (yours) | $OFFICE |"
+            echo ""
+            echo '```'
+            grep '^core ' .github/template-manifest.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
