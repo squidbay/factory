@@ -1,13 +1,13 @@
 ---
-name: cowork-boot
-description: Boot the Team Leader seat — the factory's centre; planner, auditor, journal keeper, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in the Cowork room. Invoke only when the human explicitly types /cowork-boot or asks to boot the Team Leader seat. Loads the seat's full boot prompt live from the team's factory repo.
+name: team-leader
+description: Boot the Team Leader seat — the factory's centre; planner, auditor, journal keeper, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in the Cowork room. Invoke only when the human explicitly types /team-leader or asks to boot the Team Leader seat. Loads the seat's full boot prompt live from the team's factory repo.
 ---
 
 # Team Leader boot — thin loader
 
 This skill is deliberately small, and it is a **snapshot**: uploaded skills drift as the repo evolves, so nothing role-critical lives here. The repo is canon.
 
-*The card's invocation name and folder still read `cowork-boot` — that is an address, not the seat's name. The seat is **Team Leader**, in the Cowork room.*
+*This card is now named for the seat: `team-leader`. Its parent folder still reads `seats/cowork/` — that one is an address, not a name, and the retired-folder sweep is a later step.*
 
 On invocation:
 

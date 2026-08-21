@@ -2,7 +2,7 @@
 
 **Room: Cowork, in the Claude app.** Team Leader is the seat the whole factory turns around: it plans the work, writes the specs Engineer executes, audits every PR before you merge it, and keeps the journal that is the team's memory. When you wonder "who's actually running this?", the honest answer is: you are — and Team Leader is the seat that makes running it take ten minutes a day.
 
-*This folder is still addressed `seats/cowork/` and its card still invokes as `/cowork-boot`. Those are addresses; the seat's name is **Team Leader**, and the **Cowork room** is the room it sits in.*
+*The card here is named for the seat and invokes as `/team-leader`. This folder is still addressed `seats/cowork/` — that is an address, not a name, and the **Cowork room** is the room the seat sits in.*
 
 ## What this seat is
 
@@ -19,8 +19,8 @@ A centre that grades its own homework isn't a centre, it's a risk. So the audit 
 Team Leader lives in the **Cowork** side of the Claude app and boots from a small uploaded skill:
 
 1. In the Claude app, open **Settings → Skills** (menu names can shift between app versions — the live app is right; see `VERSIONS.md`).
-2. Upload [`cowork-boot/SKILL.md`](cowork-boot/SKILL.md) from this folder.
-3. In a new Cowork conversation, type **/cowork-boot**.
+2. Upload [`team-leader/SKILL.md`](team-leader/SKILL.md) from this folder.
+3. In a new Cowork conversation, type **/team-leader**.
 
 The skill is a thin loader on purpose: it sends the seat to [`BOOT-PROMPT.md`](BOOT-PROMPT.md) in this repo, read live, so the boot always reflects current `main`. Uploaded skills are snapshots; the repo is canon — which is also why standing orders travel through the journal, never through skill re-uploads.
 
@@ -31,4 +31,4 @@ The skill is a thin loader on purpose: it sends the seat to [`BOOT-PROMPT.md`](B
 | [`BOOT-PROMPT.md`](BOOT-PROMPT.md) | The full boot text — read order, boot confirmation, role. |
 | [`OVERRIDES.md`](OVERRIDES.md) | The binding role rules: what Team Leader never does. |
 | [`GROUNDING.md`](GROUNDING.md) | The live-doc links this seat reads before trusting its memory. |
-| [`cowork-boot/SKILL.md`](cowork-boot/SKILL.md) | The uploadable boot skill — a thin loader pointing at the boot prompt. |
+| [`team-leader/SKILL.md`](team-leader/SKILL.md) | The uploadable boot skill — a thin loader pointing at the boot prompt. |

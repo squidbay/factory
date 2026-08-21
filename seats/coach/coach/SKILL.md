@@ -1,6 +1,6 @@
 ---
-name: coach-boot
-description: Boot the Coach seat — the factory's surfacer, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in the Chat room. Invoke only when the human explicitly types /coach-boot or asks to boot the Coach seat. Loads the seat's full boot prompt live from the team's factory repo.
+name: coach
+description: Boot the Coach seat — the factory's surfacer, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in the Chat room. Invoke only when the human explicitly types /coach or asks to boot the Coach seat. Loads the seat's full boot prompt live from the team's factory repo.
 ---
 
 # Coach boot — thin loader

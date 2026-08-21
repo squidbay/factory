@@ -114,14 +114,14 @@ echo "--- old logic (--mode=legacy, the rm -rf that shipped) ---"; sed 's/^/    
 build_ownership_fixture() {
   local dir="$1" manifest="$2"
   rm -rf "$dir"; mkdir -p \
-    "$dir/template/seats/coach/coach-boot" "$dir/template/engine" \
-    "$dir/office/seats/coach/coach-boot"   "$dir/office/engine" "$dir/office/.github"
+    "$dir/template/seats/coach/coach" "$dir/template/engine" \
+    "$dir/office/seats/coach/coach"   "$dir/office/engine" "$dir/office/.github"
 
   # --- the Factory's tree, one version ahead on everything ---
   echo "FACTORY BOOT MATERIAL v2"        > "$dir/template/seats/coach/BOOT-PROMPT.md"
   echo "FACTORY GROUNDING v2"            > "$dir/template/seats/coach/GROUNDING.md"
   echo "FACTORY DEFAULT — brand new"     > "$dir/template/seats/coach/NEW-DEFAULT.md"
-  echo "LOADER v2 — read the repo"       > "$dir/template/seats/coach/coach-boot/SKILL.md"
+  echo "LOADER v2 — read the repo"       > "$dir/template/seats/coach/coach/SKILL.md"
   echo "ENGINE v2"                       > "$dir/template/engine/run.sh"
 
   # --- the office's tree: deliberately customised ---
@@ -130,7 +130,7 @@ build_ownership_fixture() {
   echo "FACTORY GROUNDING v1"            > "$dir/office/seats/coach/GROUNDING.md"
   echo "a page this office wrote for itself" \
                                          > "$dir/office/seats/coach/OUR-OWN-PAGE.md"
-  echo "LOADER v1 — read the repo"       > "$dir/office/seats/coach/coach-boot/SKILL.md"
+  echo "LOADER v1 — read the repo"       > "$dir/office/seats/coach/coach/SKILL.md"
   echo "ENGINE v1"                       > "$dir/office/engine/run.sh"
   # NEW-DEFAULT.md is deliberately absent — the office has never seen it.
 
@@ -145,7 +145,7 @@ echo
 # and `engine/` is a bare classless line (the pre-ownership manifest shape).
 cat > "$WORK/manifest-owned.txt" <<'MEOF'
 office seats/coach/
-core   seats/coach/coach-boot/
+core   seats/coach/coach/
 engine/
 MEOF
 
@@ -153,7 +153,7 @@ MEOF
 # is precisely what every manifest said before ownership existed.
 cat > "$WORK/manifest-flat.txt" <<'MEOF'
 core seats/coach/
-core seats/coach/coach-boot/
+core seats/coach/coach/
 engine/
 MEOF
 
@@ -182,7 +182,7 @@ else
   bad "TEST 8  no migration proposal for the improved office-owned default (or it was written anyway)"
 fi
 
-if [ "$(cat "$WORK/own/office/seats/coach/coach-boot/SKILL.md")" = "LOADER v2 — read the repo" ]; then
+if [ "$(cat "$WORK/own/office/seats/coach/coach/SKILL.md")" = "LOADER v2 — read the repo" ]; then
   ok "TEST 9  longest match wins: the core loader inside an office folder DID update"
 else
   bad "TEST 9  the Factory-owned loader did not update — the longest-match rule is not working"
