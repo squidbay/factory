@@ -1,0 +1,86 @@
+name: update-engine
+
+# The updater has to update itself, and until this workflow existed nothing
+# tested it on the way in.
+#
+# scripts/factory-sync.sh is the code that decides what an update is allowed to
+# do to every office created from this Factory. scripts/sync-selftest.sh and
+# scripts/ownership-rehearsal.sh are its proofs — both of them paired with
+# negative controls, because a test that can only come out green is not a test.
+#
+# Those proofs ran only inside factory-update, which runs in the OFFICE, monthly,
+# after the change had already shipped. So a broken engine reached every office
+# before anything checked it. This job moves the check to the pull request that
+# writes the engine, which is the only place a fix is still cheap.
+#
+# The two are one subsystem and they gate together: the engine, its manifest,
+# and the workflow that runs them.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: The engine and its proofs must both be present
+        run: |
+          set -u
+          MISSING=""
+          for dep in scripts/factory-sync.sh scripts/sync-selftest.sh \
+                     scripts/ownership-rehearsal.sh .github/template-manifest.txt; do
+            [ -f "$dep" ] || MISSING="$MISSING $dep"
+          done
+          if [ -n "$MISSING" ]; then
+            echo "::error::the update subsystem is incomplete. Missing:$MISSING"
+            exit 1
+          fi
+          echo "Present: engine, both proofs, manifest."
+
+      - name: Shell syntax
+        run: |
+          set -e
+          for f in scripts/*.sh; do bash -n "$f" && echo "  syntax ok: $f"; done
+
+      - name: The engine's rules, on fixtures (with negative controls)
+        run: bash scripts/sync-selftest.sh
+
+      - name: This Factory's own manifest, on the real tree (with a negative control)
+        run: bash scripts/ownership-rehearsal.sh .
+
+      - name: Every manifest line is parseable, and names a real owner
+        run: |
+          set -u
+          FAIL=0
+          LINE=0
+          while IFS= read -r line || [ -n "$line" ]; do
+            LINE=$((LINE+1))
+            case "$line" in ''|'#'*) continue ;; esac
+            read -r first rest <<<"$line"
+            case "$first" in
+              core|office)
+                if [ -z "${rest:-}" ]; then
+                  echo "::error file=.github/template-manifest.txt,line=$LINE::'$first' with no path after it"
+                  FAIL=1
+                fi
+                ;;
+              '!'*) ;;
+              *)
+                # A bare path is legal (it means core). But a word that LOOKS
+                # like a misspelled owner is almost certainly a typo that would
+                # silently become a path, so it is worth catching by name.
+                case "$first" in
+                  Core|CORE|Office|OFFICE|owned|factory|Factory)
+                    echo "::error file=.github/template-manifest.txt,line=$LINE::'$first' is not an owner — the two owners are 'core' and 'office', lowercase. As written this line would be read as a PATH."
+                    FAIL=1
+                    ;;
+                esac
+                ;;
+            esac
+          done < .github/template-manifest.txt
+          [ "$FAIL" -eq 0 ] && echo "manifest: every line parses, every owner is real."
+          exit "$FAIL"

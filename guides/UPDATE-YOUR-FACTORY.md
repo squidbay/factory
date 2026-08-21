@@ -64,9 +64,12 @@ seat does the rest:
 That same pull request also refreshes [`../FROM-HQ.md`](../FROM-HQ.md) — the page where HQ's note on each template change lives, newest first: what changed, why, and one thing worth taking from it.
 
 What it will **never** do: touch your journal, your specs, your roster, or your
-denylist; overwrite a file you customized without showing you both versions
-first; or merge anything itself. If you edited a template file on purpose and the
-update also changes it, the seat says so plainly and lets you choose.
+denylist; **overwrite anything office-owned** — your seats' boot prompts,
+grounding, overrides and local doctrine are yours the moment they land, and an
+update never writes them again; delete any file of yours; or merge anything
+itself. When the Factory's version of one of *your* files improves, the update
+**names** it in the PR as a migration proposal and still doesn't write it — the
+improvement is visible, the choice is yours.
 
 ## The hands-off way: the monthly check runs itself
 
@@ -93,11 +96,29 @@ version you have, and updates are improvements offered, not corrections owed.
 
 ## What an update can and cannot touch
 
-The short version: it can change the parts of the factory that belong to the
-template, and it never touches the parts that belong to your team. The full,
-plain-words explanation — and the one file that governs it all — is in
+The law, in one sentence:
+
+> **The Factory updates the operating system. It does not redecorate your
+> office.**
+
+Every path the update knows about carries an **owner**. `core` paths are the
+Factory's — the update engine, the runtime, the guides, the four thin seat
+loaders — and they arrive by overwrite, because keeping them current is the
+whole point. `office` paths are **yours from the moment they land** — your
+seats' boot material, your grounding, your mission packs — seeded once if you
+don't have them yet, and never written again. Everything the manifest doesn't
+name is yours and is never even mentioned.
+
+The full, plain-words explanation — and the one file that governs it all — is in
 [`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md). Worth a
 two-minute read before your first update, so you know exactly what a "yes" means.
+
+**One thing to check if your factory is an older one:** open
+`.github/template-manifest.txt` and look for lines starting with `office`. If
+there are none, your manifest predates this boundary and every managed folder is
+still overwritten wholesale — seat boot material included. The update run says so
+by name in its PR, and the fix is to copy the ownership lines across from the
+Factory's own manifest.
 
 ---
 

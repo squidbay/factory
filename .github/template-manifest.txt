@@ -1,78 +1,140 @@
-# template-manifest.txt — which paths the template manages in YOUR office
+# template-manifest.txt — WHO OWNS WHAT in your office
 #
-# The factory-update workflow syncs ONLY the paths listed here from the
-# template (squidbay/factory) into your office, always as a pull request
-# you review and merge. Anything NOT listed is yours alone and is never
-# touched: your journal, your specs, your roster in FACTORY.md, any
-# mission packs you added, and this repo's own denylist.
+# The law this file exists to enforce:
 #
-# One path per line. A trailing slash means "the whole folder."
-# Lines starting with # are comments.
+#     Factory updates the operating system.
+#     It does not redecorate the customer's office.
 #
-# Your office's copy of this file governs — to opt a path out of updates,
-# remove its line here (the update PR may propose restoring it; declining
-# that hunk is your call and the workflow respects the merged result).
+# The factory-update workflow reads THIS file — your copy — and syncs only what
+# it names, always as a pull request you review and merge. Every managed path
+# carries an owner, and the owner decides what an update is allowed to do to it.
 #
-# A line starting with "!" PROTECTS a path: the sync will never write it,
-# even though it sits under a managed folder listed below. Use it for a file
-# this office has deliberately made its own and does not want the template to
-# reclaim. Same shape as the rest — a trailing slash protects a whole folder.
+# ── The two owners ───────────────────────────────────────────────────────────
 #
-# Two things the sync can never do to you:
-#   • It never DELETES. A file of yours the template has never heard of is
-#     left alone, not removed. (An earlier version `rm -rf`'d each managed
-#     folder and re-copied it, which silently deleted every office-only file
-#     inside.)
-#   • It never writes a "!" path. Overwrite is still how updates arrive for
-#     everything else — "!" is how you say "not this one."
+#   core <path>     FACTORY-OWNED. The machinery: the update engine and its
+#                   tests, the runtime, the stable contracts, the four thin seat
+#                   loaders. Updates arrive by OVERWRITE, every run. Keeping
+#                   these current is the whole point of an update — if you edit
+#                   one, the next update will propose taking it back (use "!"
+#                   below if you mean to keep your version).
+#
+#   office <path>   OFFICE-OWNED AFTER CREATION. The defaults: seat boot
+#                   material, grounding, overrides, local doctrine, mission
+#                   packs. The Factory SEEDS one of these only when your office
+#                   does not have it yet, and NEVER writes it again. If the
+#                   upstream default later improves, the update PR NAMES the
+#                   file as a migration proposal — and still does not write it.
+#                   Your customisation is safe by architecture, not by your
+#                   having remembered to protect it.
+#
+#   <path>          A bare line with no owner means `core`. Manifests written
+#                   before ownership existed keep working exactly as they did.
+#
+#   !<path>         PROTECTED — never written, whatever its owner. This is your
+#                   own local opt-out for a `core` file you have deliberately
+#                   made your own.
+#
+# Anything NOT listed here is yours alone: never seeded, never touched, never
+# mentioned. Your journal, your specs, your roster, your company knowledge, and
+# any file you add.
+#
+# One path per line. A trailing slash means "the whole folder." Lines starting
+# with # are comments.
+#
+# ── Which rule applies to a file: the LONGEST match wins ─────────────────────
+# The most specific rule decides, so a broad folder can be office-owned while
+# something narrow inside it stays Factory-owned. That is exactly how the seat
+# loaders work below. Order in this file does not matter — only specificity.
+#
+# ── Two things the sync can never do to you ──────────────────────────────────
+#   • It never DELETES. A file of yours the Factory has never heard of is left
+#     alone, not removed. (An earlier version `rm -rf`'d each managed folder and
+#     re-copied it, which silently deleted every office-only file inside.)
+#   • It never overwrites an `office` path, and never writes a `!` path.
 
-CLAUDE.md
-FROM-HQ.md
-MECHANICAL-RULES.md
-README.md
-THIRD_PARTY_NOTICES.md
-VERSIONS.md
-.github/CONTRIBUTING.md
-.github/SECURITY.md
-.github/template-version.txt
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FACTORY-OWNED — the operating system
+# ─────────────────────────────────────────────────────────────────────────────
+
+core CLAUDE.md
+core FROM-HQ.md
+core MECHANICAL-RULES.md
+core README.md
+core THIRD_PARTY_NOTICES.md
+core VERSIONS.md
+core .github/CONTRIBUTING.md
+core .github/SECURITY.md
+core .github/template-version.txt
 
 # The updater's own engine. .github/workflows/factory-update.yml EXECUTES
 # scripts/factory-sync.sh (the copying) and scripts/sync-selftest.sh (the proof,
 # run before every sync). The workflow and the code it runs are ONE subsystem:
 # if the scripts are not managed, a fix to the sync engine lands upstream and
 # stops at your door in silence, while your workflow keeps running the old one.
-# Managed here so the two can never drift apart.
-scripts/
-grounding/
-guides/
-hosting/
-inbox/drop/README.md
-journal/README.md
-missions/README.md
-missions/design-guide/
-missions/first-app/
-missions/first-website/
-missions/organize-my-business/
-missions/website-overhaul/
-onboarding/
-seats/
-specialists/
-specs/README.md
-skills/factory-coach/
-skills/factory-render-verify/
-skills/factory-retro/
-skills/factory-security/
-skills/factory-update/
-skills/skill-creator/
-skills/README.md
-templates/
-tokens/
-versions/
+# Factory-owned here so the two can never drift apart.
+core scripts/
 
-# Deliberately absent — user-owned, never synced:
+core guides/
+core hosting/
+core inbox/drop/README.md
+core journal/README.md
+core missions/README.md
+core specs/README.md
+core specialists/
+core templates/
+core tokens/
+core versions/
+core onboarding/
+core skills/README.md
+core skills/factory-coach/
+core skills/factory-render-verify/
+core skills/factory-retro/
+core skills/factory-security/
+core skills/factory-update/
+core skills/skill-creator/
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OFFICE-OWNED — defaults that become yours the moment they land
+# ─────────────────────────────────────────────────────────────────────────────
+
+# The seats. Your team's boot material — the prompts, the grounding, the
+# overrides, the local doctrine — is what you adapt as your office learns, and
+# it is the single most customised material in any office. It is yours.
+#
+# The four thin LOADERS inside those folders stay Factory-owned: they are the
+# small stable cards installed in Claude's settings that do nothing but point at
+# this repo. They are a contract, not content, and they must keep working when
+# the boot material behind them changes. The longest-match rule is what lets
+# both statements be true at once — look at any pair below.
+office seats/_shared/
+office seats/coach/
+core   seats/coach/coach-boot/
+office seats/cowork/
+core   seats/cowork/cowork-boot/
+office seats/designer/
+core   seats/designer/designer-boot/
+office seats/worker/
+core   seats/worker/worker-boot/
+
+# Your grounding — what your seats read to know your world.
+office grounding/
+
+# The mission packs. A shipped mission is a starting point you rewrite for the
+# way your office actually works; an update should never take your version back.
+office missions/design-guide/
+office missions/first-app/
+office missions/first-website/
+office missions/organize-my-business/
+office missions/website-overhaul/
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Deliberately absent — never seeded, never synced, never mentioned:
 #   FACTORY.md            (carries your roster and your names)
-#   journal.md            (your team's memory — HQ's own news rides the
-#                          managed FROM-HQ.md instead, never journal.md)
+#   journal.md            (your team's memory — the Factory's own news rides
+#                          the managed FROM-HQ.md instead, never journal.md)
 #   journal/archive/      (your history)
 #   specs/                (your plans; only its README is managed)
 #   .github/guardrails-denylist.txt  (your private-name denylist)
@@ -81,7 +143,8 @@ versions/
 #                          own automation — workflow changes arrive as a
 #                          note in the update PR for an Engineer seat to apply.
 #                          This is the ONE part of the updater that cannot be
-#                          synced. Its engine, scripts/, is managed above, so
-#                          the hand-carry is the workflow file alone — and
+#                          synced. Its engine, scripts/, is Factory-owned above,
+#                          so the hand-carry is the workflow file alone — and
 #                          guides/SAFE-UPDATE-BOOTSTRAP.md is the order to do
 #                          it in, for an office that still has the old one.)
+# ─────────────────────────────────────────────────────────────────────────────

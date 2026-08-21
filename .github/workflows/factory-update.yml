@@ -9,10 +9,22 @@ name: factory-update
 #
 # What it does, monthly or whenever you run it from the Actions tab:
 #   1. Fetches the current template (it's public — no token needed).
-#   2. Reads .github/template-manifest.txt — YOUR copy of it — and copies
-#      only those template-managed paths over your office's copies. It
-#      OVERWRITES; it never deletes. A file of yours the template has never
-#      heard of is left where it is.
+#   2. Reads .github/template-manifest.txt — YOUR copy of it — and applies the
+#      ownership boundary it declares:
+#
+#          Factory updates the operating system.
+#          It does not redecorate the customer's office.
+#
+#      `core` paths (the machinery: the update engine, the runtime, the stable
+#      contracts, the four thin seat loaders) are OVERWRITTEN — keeping those
+#      current is the whole point of an update. `office` paths (the defaults:
+#      seat boot material, grounding, overrides, local doctrine, mission packs)
+#      are SEEDED only if your office does not have them yet, and are never
+#      written again. Anything unlisted is untouched. Nothing is ever deleted.
+#
+#      When an office-owned default improves upstream, the run does NOT write
+#      it — it NAMES it, as a migration proposal in this PR and in the run
+#      summary, and leaves the choice to you.
 #
 # That last sentence is the load-bearing one. An earlier version of this
 # step ran `rm -rf` on each managed folder before re-copying it, which is a
@@ -35,9 +47,9 @@ name: factory-update
 #      is the quiet one: an unmanaged engine never updates and never complains.
 #
 # What it can never do: touch your journal, your specs, your roster, your
-# denylist, or anything else absent from the manifest; DELETE any file of
-# yours; write a "!" protected path; merge; or rewrite its own workflow files
-# (the Actions token physically cannot).
+# denylist, or anything else absent from the manifest; overwrite an `office`
+# path; DELETE any file of yours; write a "!" protected path; merge; or
+# rewrite its own workflow files (the Actions token physically cannot).
 #
 # One honest mechanic worth knowing: the PRs this workflow opens use the
 # default Actions token, and GitHub does not run other workflows (your
@@ -81,7 +93,7 @@ jobs:
           # error, and — this is the point — fail BEFORE anything is copied,
           # committed, or pushed.
           MISSING=""
-          for dep in scripts/factory-sync.sh scripts/sync-selftest.sh; do
+          for dep in scripts/factory-sync.sh scripts/sync-selftest.sh scripts/ownership-rehearsal.sh; do
             [ -f "$dep" ] || MISSING="$MISSING $dep"
           done
           if [ -n "$MISSING" ]; then
@@ -163,6 +175,21 @@ jobs:
         if: steps.version.outputs.proceed == 'true'
         run: bash scripts/sync-selftest.sh
 
+      - name: Prove THIS office's ownership boundary holds (with its negative control)
+        if: steps.version.outputs.proceed == 'true'
+        run: |
+          # The self-test above proves the ENGINE's rules on fixtures. This
+          # proves YOUR MANIFEST on YOUR tree: it builds a copy of this office,
+          # customises its seat boot material, adds files of its own, runs a
+          # real update against it, and checks every byte. A manifest that has
+          # the ownership lines wrong looks exactly like one that has them
+          # right — until this runs.
+          #
+          # It is a gate, not a note. If the boundary is broken for this office,
+          # the sync does not get to run: nothing has been copied, committed or
+          # pushed at this point in the job.
+          bash scripts/ownership-rehearsal.sh .
+
       - name: Apply template-managed paths from the manifest
         id: apply
         if: steps.version.outputs.proceed == 'true'
@@ -175,10 +202,34 @@ jobs:
             exit 0
           fi
 
-          # Overwrite-only, never delete, and never touch a "!" protected path.
-          # The engine is a script so that the thing CI runs and the thing
-          # scripts/sync-selftest.sh tests are the same file.
-          bash scripts/factory-sync.sh "$RUNNER_TEMP/template" "$MANIFEST" --mode=nondestructive
+          # Core overwrites, office seeds-once, nothing deletes, "!" is never
+          # written. The engine is a script so that the thing CI runs and the
+          # thing scripts/sync-selftest.sh tests are the same file.
+          bash scripts/factory-sync.sh "$RUNNER_TEMP/template" "$MANIFEST" \
+            --mode=nondestructive --report="$RUNNER_TEMP/migrations.md"
+
+          # Migration proposals are office-owned defaults that improved
+          # upstream. Nothing was written for them — they exist to be READ.
+          # They go to the run summary unconditionally, because an update round
+          # can produce proposals and no file change at all, and a proposal
+          # nobody ever sees is the same as no proposal.
+          if [ -s "$RUNNER_TEMP/migrations.md" ]; then
+            {
+              echo "### Migration proposals — your files, improved upstream"
+              echo ""
+              echo "These are **office-owned**: the Factory did not write them."
+              echo ""
+              cat "$RUNNER_TEMP/migrations.md"
+            } >> "$GITHUB_STEP_SUMMARY"
+            {
+              echo "migrations<<MIGEOF"
+              cat "$RUNNER_TEMP/migrations.md"
+              echo "MIGEOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "migrations<<MIGEOF" >> "$GITHUB_OUTPUT"
+            echo "MIGEOF" >> "$GITHUB_OUTPUT"
+          fi
 
           # A sync must never remove a tracked file. If one ever goes missing,
           # something reintroduced destructive behaviour — stop, do not commit.
@@ -232,12 +283,25 @@ jobs:
           # manifest is yours, and only you may change what an update may
           # touch), so it does the next thing: it says so, by name, in the PR.
           MANAGES_SCRIPTS=no
+          DECLARES_OWNERSHIP=no
           if [ -f .github/template-manifest.txt ]; then
             while IFS= read -r line || [ -n "$line" ]; do
               case "$line" in ''|'#'*) continue ;; esac
+              read -r first rest <<<"$line"
+              case "$first" in office) DECLARES_OWNERSHIP=yes ;; esac
+              case "$first" in core|office) line="$rest" ;; esac
               line="${line%% *}"
               case "$line" in scripts/|scripts/*) MANAGES_SCRIPTS=yes ;; esac
             done < .github/template-manifest.txt
+          fi
+
+          # An office whose manifest declares no `office` paths is running the
+          # pre-ownership model: every managed folder is overwritten wholesale,
+          # including the seat boot material its team has been customising. That
+          # is not a bug in this run — it is a manifest that predates the
+          # boundary, and it is silent, so this step says it out loud.
+          if [ "$DECLARES_OWNERSHIP" = "no" ]; then
+            NOTES="$NOTES- **Your \`.github/template-manifest.txt\` declares no \`office\` paths.** Every path it lists is treated as Factory-owned and overwritten on every run — including your seats' boot prompts, grounding and overrides, which are the files your team actually customises. The Factory's own manifest shows the split; copying its ownership lines makes your customisation safe by architecture instead of by your remembering to add a \`!\` line for each file. (\`versions/TEMPLATE-MANIFEST.md\` explains the two owners.)\n"
           fi
 
           SCRIPT_DRIFT=""
@@ -278,19 +342,27 @@ jobs:
         uses: actions/github-script@v8
         env:
           DRIFT_NOTES: ${{ steps.drift.outputs.notes }}
+          MIGRATIONS: ${{ steps.apply.outputs.migrations }}
         with:
           script: |
             const head = process.env.UPDATE_BRANCH;
             const notes = (process.env.DRIFT_NOTES || '').trim();
+            const migrations = (process.env.MIGRATIONS || '').trim();
             const body = [
-              'The template this factory was created from has improvements on its',
-              'template-managed paths (listed in `.github/template-manifest.txt`).',
+              'The Factory this office was created from has improvements on its',
+              '**Factory-owned** paths (`core` lines in `.github/template-manifest.txt`).',
               'This PR is the whole delta — nothing outside the manifest is touched,',
-              'and nothing merges without you.',
+              'nothing office-owned is overwritten, and nothing merges without you.',
               '',
               'Review it like any other PR: read the diff, ask a seat to explain any',
               'part of it, merge when satisfied — or close it to skip this round',
               '(it will be re-proposed next run while the difference remains).',
+              migrations
+                ? '\n**Migration proposals — your files, improved upstream.**\n' +
+                  'These paths are **office-owned**, so nothing here was written and\n' +
+                  'nothing in this diff touches them. They are listed so the improvement\n' +
+                  'is visible and the choice is yours:\n\n' + migrations
+                : '',
               notes ? '\n**Also noticed, not applied:**\n' + notes : '',
             ].join('\n');
             const prs = await github.rest.pulls.list({

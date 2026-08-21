@@ -1,57 +1,110 @@
 #!/usr/bin/env bash
-# factory-sync.sh — apply the template's managed paths onto this office.
+# factory-sync.sh — apply the Factory's CORE paths onto this office, and leave
+# the office's OWN material alone.
 #
 # This script is the ENGINE behind .github/workflows/factory-update.yml. The
 # workflow calls it; scripts/sync-selftest.sh calls the same script. That is
 # deliberate: the thing under test and the thing that ships are one file, so a
 # green self-test cannot mean something different from what runs in CI.
 #
-# ── Why this file exists ──────────────────────────────────────────────────────
-# The old inline logic in factory-update.yml did this, once per managed
-# directory:
+# ── The law this file implements ──────────────────────────────────────────────
 #
-#     rm -rf "./$path" && mkdir -p "./$path" && cp -r "$SRC"/. "./$path"
+#     Factory updates the operating system. It does not redecorate the
+#     customer's office.
 #
-# That is not a sync, it is a RESTORE. Every file your office keeps under a
-# managed directory that the template has never heard of is deleted, silently,
-# because it was not in the template's copy of that directory. On 2026-08-01 a
-# run of that logic committed exactly such a deletion and pushed it to a branch.
+# Everything below is that sentence made mechanical.
 #
-# ── The two modes ─────────────────────────────────────────────────────────────
-#   nondestructive (default)  overwrite-only. Template files are copied over
-#                             yours; files of yours that the template lacks are
-#                             LEFT ALONE. Nothing is ever deleted.
-#   legacy                    the old rm -rf behaviour, reproduced exactly.
-#                             It exists for ONE reason: the self-test's negative
-#                             control needs to demonstrate that the old logic
-#                             really does delete, or "the new logic keeps the
-#                             file" proves nothing. Never use it for a real sync.
+# ── Ownership: two classes, declared in the manifest ──────────────────────────
+# Every managed path carries an owner. The manifest says which:
 #
-# ── Protected paths ───────────────────────────────────────────────────────────
-# A manifest line beginning with "!" marks a path the sync must never WRITE,
-# even though it sits under a managed directory. Use it for files this office
-# has deliberately customised and does not want the template to reclaim.
-#   !seats/_shared/BOOT-COMMON.md   -> that exact file is never overwritten
-#   !seats/cowork/doctrine/         -> nothing under that directory is written
+#   core <path>     FACTORY-OWNED. Machinery: the updater and its tests, the
+#                   runtime, stable contracts, the thin seat loaders. Updates
+#                   arrive by OVERWRITE, every run, because keeping this current
+#                   is the entire point of an update.
+#
+#   office <path>   OFFICE-OWNED AFTER CREATION. Defaults: seat boot material,
+#                   grounding, overrides, local doctrine, mission packs. The
+#                   Factory SEEDS these when the office does not have them yet,
+#                   and NEVER writes them again. If the upstream default later
+#                   improves, the sync says so — a migration proposal named in
+#                   the update PR — and still does not write.
+#
+#   <path>          A bare line with no class means `core`. Every manifest
+#                   written before ownership existed keeps working unchanged.
+#
+#   !<path>         PROTECTED. The sync never writes it, whatever its class.
+#                   This is the office's own local opt-out, and it is now a
+#                   convenience rather than a load-bearing defence: material
+#                   that is office-owned by architecture no longer needs an
+#                   office-by-office exception line to stay safe.
+#
+# Anything not named in the manifest at all is the office's, is never seeded,
+# and is never mentioned.
+#
+# ── Which rule applies to a file: the LONGEST match wins ──────────────────────
+# Rules are matched against the destination path, and the most specific one
+# decides. That is what lets a broad folder be office-owned while a narrow thing
+# inside it stays Factory-owned:
+#
+#     office  seats/coach/                  <- the boot material is the office's
+#     core    seats/coach/coach-boot/       <- the thin loader stays ours
+#
+# `seats/coach/coach-boot/SKILL.md` matches both; the longer pattern wins, so
+# the loader updates and the boot material behind it does not. Order in the file
+# does not matter — only specificity — so a manifest cannot be broken by moving
+# a line.
+#
+# ── Why ownership had to become explicit ──────────────────────────────────────
+# Before this, the manifest answered one question: "which upstream paths get
+# copied?" A whole folder like `seats/` was listed, so every file under it was
+# overwritten on every run — including the four seats' boot prompts, grounding
+# and overrides, which are the exact files an office customises. The only escape
+# was for each office to discover the problem and add its own `!` line, which
+# means the protection existed only where somebody had already been burned.
+#
+# The manifest now answers a different question: "who owns this path after
+# installation?" That single reframe is the boundary.
+#
+# ── The two things this sync can never do ─────────────────────────────────────
+#   • It never DELETES. A file of yours the Factory has never heard of is left
+#     alone. (An earlier version `rm -rf`'d each managed folder and re-copied
+#     it, which silently deleted every office-only file inside. On 2026-08-01 a
+#     run of that logic committed such a deletion and pushed it to a branch.)
+#   • It never writes a `!` path, and never overwrites an `office` path.
 #
 # ── The accepted trade-off, stated plainly ────────────────────────────────────
-# Overwrite-only can never propagate a genuine upstream DELETION. If the
-# template retires a file, your office keeps its copy until a human removes it.
-# That is the cost, and it is the right side to err on: a stale file is visible
-# and reversible, a deleted one is neither.
+# Overwrite-only can never propagate a genuine upstream DELETION, and seed-once
+# can never propagate an upstream EDIT to a default. If the Factory retires or
+# improves an office-owned file, your office keeps its copy until a human acts —
+# with the improvement named in the PR so the choice is visible. That is the
+# cost, and it is the right side to err on: a stale file is visible and
+# reversible, a reclaimed one is neither.
 #
-# Usage:  factory-sync.sh <template-root> <manifest-file> [--mode=MODE]
+# ── The two modes ─────────────────────────────────────────────────────────────
+#   nondestructive (default)  the model described above.
+#   legacy                    the original rm -rf behaviour, reproduced exactly,
+#                             ignoring ownership entirely. It exists for ONE
+#                             reason: the self-test's negative control needs to
+#                             demonstrate that the old logic really does delete,
+#                             or "the new logic keeps the file" proves nothing.
+#                             Never use it for a real sync.
+#
+# Usage:  factory-sync.sh <template-root> <manifest-file> [--mode=MODE] [--report=FILE]
+#   --report=FILE   append migration proposals (office-owned defaults that
+#                   improved upstream) to FILE, as markdown bullets.
 # Run from the office root. Writes to the current directory.
 
 set -euo pipefail
 
-TEMPLATE_ROOT="${1:?usage: factory-sync.sh <template-root> <manifest-file> [--mode=nondestructive|legacy]}"
-MANIFEST="${2:?usage: factory-sync.sh <template-root> <manifest-file> [--mode=nondestructive|legacy]}"
+TEMPLATE_ROOT="${1:?usage: factory-sync.sh <template-root> <manifest-file> [--mode=nondestructive|legacy] [--report=FILE]}"
+MANIFEST="${2:?usage: factory-sync.sh <template-root> <manifest-file> [--mode=nondestructive|legacy] [--report=FILE]}"
 MODE="nondestructive"
+REPORT=""
 
 for arg in "${@:3}"; do
   case "$arg" in
-    --mode=*) MODE="${arg#--mode=}" ;;
+    --mode=*)   MODE="${arg#--mode=}" ;;
+    --report=*) REPORT="${arg#--report=}" ;;
     *) echo "factory-sync: unknown argument '$arg'" >&2; exit 2 ;;
   esac
 done
@@ -62,66 +115,167 @@ case "$MODE" in
 esac
 
 [ -d "$TEMPLATE_ROOT" ] || { echo "factory-sync: template root '$TEMPLATE_ROOT' is not a directory" >&2; exit 2; }
-[ -f "$MANIFEST" ]      || { echo "factory-sync: no manifest at '$MANIFEST' — nothing is template-managed." >&2; exit 0; }
+[ -f "$MANIFEST" ]      || { echo "factory-sync: no manifest at '$MANIFEST' — nothing is Factory-managed." >&2; exit 0; }
 
-# ── Pass 1: collect protected paths ("!" lines) ──────────────────────────────
+# ── Manifest parsing ─────────────────────────────────────────────────────────
+# A line is:  [class] path   |   !path   |   # comment   |   blank
+# Sets R_CLASS and R_PATH. Returns 1 for a line with nothing on it.
+parse_line() {
+  local line="$1" first rest
+  case "$line" in ''|'#'*) return 1 ;; esac
+  read -r first rest <<<"$line"
+  [ -n "${first:-}" ] || return 1
+  case "$first" in
+    core|office)
+      R_CLASS="$first"
+      read -r R_PATH _ <<<"${rest:-}"
+      ;;
+    *)
+      R_CLASS="core"
+      R_PATH="$first"
+      ;;
+  esac
+  [ -n "${R_PATH:-}" ] || return 1
+  return 0
+}
+
+# ── Pass 1: read every rule once ─────────────────────────────────────────────
 PROTECTED=()
+RULE_PATH=()
+RULE_CLASS=()
+
 while IFS= read -r line || [ -n "$line" ]; do
-  case "$line" in ''|'#'*) continue ;; esac
-  line="${line%% *}"
-  case "$line" in '!'*) PROTECTED+=("${line#!}") ;; esac
+  R_CLASS=""; R_PATH=""
+  parse_line "$line" || continue
+  case "$R_PATH" in
+    '!'*) PROTECTED+=("${R_PATH#!}"); continue ;;
+  esac
+  RULE_PATH+=("$R_PATH")
+  RULE_CLASS+=("$R_CLASS")
 done < "$MANIFEST"
+
+matches() {   # matches <pattern> <dest>
+  local p="$1" d="$2"
+  case "$p" in
+    */) [ "${d#"$p"}" != "$d" ] && return 0 ;;   # directory prefix
+    *)  [ "$d" = "$p" ] && return 0 ;;           # exact file
+  esac
+  return 1
+}
 
 is_protected() {
   local dest="$1" p
   for p in ${PROTECTED+"${PROTECTED[@]}"}; do
-    case "$p" in
-      */) [ "${dest#"$p"}" != "$dest" ] && return 0 ;;   # directory prefix
-      *)  [ "$dest" = "$p" ] && return 0 ;;              # exact file
-    esac
+    matches "$p" "$dest" && return 0
   done
   return 1
 }
 
-copy_one() {
+# The longest matching rule decides who owns the file.
+owner_of() {
+  local dest="$1" i best_len=-1 best_class="core"
+  for i in "${!RULE_PATH[@]}"; do
+    if matches "${RULE_PATH[$i]}" "$dest"; then
+      if [ "${#RULE_PATH[$i]}" -gt "$best_len" ]; then
+        best_len="${#RULE_PATH[$i]}"
+        best_class="${RULE_CLASS[$i]}"
+      fi
+    fi
+  done
+  printf '%s' "$best_class"
+}
+
+SEEN=""
+seen_already() {
+  case "$SEEN" in *"|$1|"*) return 0 ;; esac
+  SEEN="$SEEN|$1|"
+  return 1
+}
+
+note_migration() {
+  local dest="$1"
+  echo "  migration: $dest (office-owned, kept — the Factory's default changed upstream)"
+  if [ -n "$REPORT" ]; then
+    mkdir -p "$(dirname "$REPORT")"
+    printf -- '- `%s` — your copy differs from the Factory'"'"'s improved default. This file is **yours**, so nothing was written. Compare it with the upstream version if you want the improvement.\n' \
+      "$dest" >> "$REPORT"
+  fi
+}
+
+# ── Applying one file ────────────────────────────────────────────────────────
+apply_one() {
   local src="$1" dest="$2"
+
+  seen_already "$dest" && return 0
+
   if is_protected "$dest"; then
     echo "  protected: $dest (kept — manifest '!' entry)"
     return 0
   fi
-  mkdir -p "$(dirname "./$dest")"
-  cp "$src" "./$dest"
+
+  case "$(owner_of "$dest")" in
+    office)
+      if [ ! -e "./$dest" ]; then
+        mkdir -p "$(dirname "./$dest")"
+        cp "$src" "./$dest"
+        echo "  seeded: $dest (office-owned from now on — the Factory will not write it again)"
+      elif cmp -s "$src" "./$dest"; then
+        : # identical; nothing to say
+      else
+        note_migration "$dest"
+      fi
+      ;;
+    *)
+      mkdir -p "$(dirname "./$dest")"
+      cp "$src" "./$dest"
+      ;;
+  esac
 }
 
-# ── Pass 2: apply the managed paths ──────────────────────────────────────────
-while IFS= read -r path || [ -n "$path" ]; do
-  case "$path" in ''|'#'*) continue ;; esac
-  path="${path%% *}"
-  case "$path" in '!'*) continue ;; esac   # handled in pass 1
+# ── Pass 2: walk the rules and apply ─────────────────────────────────────────
+apply_rule() {
+  local path="$1"
+  local SRC="$TEMPLATE_ROOT/$path"
 
-  SRC="$TEMPLATE_ROOT/$path"
   if [ ! -e "$SRC" ]; then
-    # In the manifest but gone from the template: note it, and never delete the
-    # office's copy on the template's behalf.
-    echo "note: '$path' is in your manifest but not in the template (skipped)"
-    continue
+    # In the manifest but gone from the Factory: note it, and never delete the
+    # office's copy on the Factory's behalf.
+    echo "note: '$path' is in your manifest but not in the Factory (skipped)"
+    return 0
   fi
 
   case "$path" in
     */)
       if [ "$MODE" = "legacy" ]; then
         # The old behaviour, kept ONLY as the self-test's negative control.
+        # It knows nothing about ownership — that is exactly what it proves.
         rm -rf "./$path" && mkdir -p "./$path" && cp -r "$SRC"/. "./$path"
       else
         mkdir -p "./$path"
         while IFS= read -r -d '' rel; do
           rel="${rel#./}"
-          copy_one "$SRC/$rel" "$path$rel"
+          apply_one "$SRC/$rel" "$path$rel"
         done < <(cd "$SRC" && find . -type f -print0)
       fi
       ;;
     *)
-      copy_one "$SRC" "$path"
+      if [ "$MODE" = "legacy" ]; then
+        # Single files behaved the same under the old logic as under the new one
+        # except that ownership did not exist: protection was honoured, class
+        # was not. Reproduced exactly.
+        if is_protected "$path"; then
+          echo "  protected: $path (kept — manifest '!' entry)"
+        else
+          mkdir -p "$(dirname "./$path")"
+          cp "$SRC" "./$path"
+        fi
+      else
+        apply_one "$SRC" "$path"
+      fi
       ;;
   esac
-done < "$MANIFEST"
+}
+
+for i in "${!RULE_PATH[@]}"; do
+  apply_rule "${RULE_PATH[$i]}"
+done

@@ -4,10 +4,9 @@ Your factory was created from a public master template. That master keeps
 improving after you copy it, and those improvements can reach you as a pull
 request you review and merge (how to run that check is in
 [`../guides/UPDATE-YOUR-FACTORY.md`](../guides/UPDATE-YOUR-FACTORY.md)). The
-question every update has to answer first is: *which files is an update allowed
-to change, and which are yours alone and never touched?* This page is the
-plain-words answer. It explains the split so you can read an update PR and know
-exactly what you're saying yes to.
+question every update has to answer first is: *who owns this file now?* This
+page is the plain-words answer. It explains the boundary so you can read an
+update PR and know exactly what you're saying yes to.
 
 ## One list governs — this page explains it
 
@@ -19,47 +18,105 @@ of the list to avoid the two drifting apart; it teaches you how to read the one
 that governs. When they seem to disagree, the `.txt` is right and this page is
 stale — that's a normal thing to flag with an issue or a PR.
 
-## The two halves
+## The law, in one sentence
 
-**Template-managed — an update may propose changes here.** These are the parts
-of the factory that belong to the template and get better over time: the seat
-rulebooks and boot files, the onboarding path, the guides, the shipped skills
-and mission packs, the shared templates, the verification log, and the news
-from HQ (`FROM-HQ.md`, where each template change is noted for you — and now also
-the text that rides the body of each GitHub Release the template cuts). When the
-master sharpens a rule or fixes a typo in a guide, this is where it shows up in
-your update PR. Overwriting is safe *when you haven't edited the file yourself* —
-and when you have, see the next section.
+> **The Factory updates the operating system. It does not redecorate your office.**
 
-**Yours alone — never touched by an update, ever.** These are the parts that are
-your team's, not the template's: your **journal** (`journal.md` and your journal
-archive — your team's memory, kept separate from HQ's own news in the managed
-`FROM-HQ.md` so an update never writes your journal), your **specs** (`specs/`, your plans; only its
-README travels with the template), your **roster** (the *Your team, your names*
-block in `FACTORY.md` — your anchor emoji and seat names), your private
-**denylist** (`.github/guardrails-denylist.txt`), and anything else the manifest
-doesn't list. An update reads right past all of it.
+Everything below is that sentence made mechanical. Every path the manifest names
+carries an **owner**, and the owner decides what an update is allowed to do to
+it. There are exactly two owners, plus everything the manifest never mentions.
+
+## The two owners
+
+**`core` — Factory-owned. An update overwrites these, every run.** This is the
+machinery: the update engine and its tests (`scripts/`), the runtime and the
+stable contracts, the guides, the rulebook, the shipped skills, and the **four
+thin seat loaders** — the small cards installed in Claude's settings that do
+nothing but point at this repo. Keeping these current is the entire point of an
+update, so they arrive by overwrite. If you deliberately edit one and want to
+keep your version, put a `!` line in front of its path in the manifest and the
+sync will never write it again.
+
+**`office` — yours, from the moment it lands.** This is the material your team
+adapts as it learns: your **seats' boot prompts, grounding, overrides and local
+doctrine**, and the **mission packs**. The Factory **seeds** one of these only
+when your office doesn't have it yet — a brand-new default arrives the first
+time, exactly once. After that it is your file, and **no update ever writes it
+again**, however far ahead the Factory's version gets.
+
+When the Factory's version of an office-owned default *does* improve, the update
+doesn't quietly skip it and it doesn't quietly take yours. It **names** the file
+in the PR under *"Migration proposals — your files, improved upstream"*, so the
+improvement is visible and the choice is yours. That's the whole difference
+between a Factory that maintains your machinery and one that redecorates around
+you.
+
+**Unlisted — never seeded, never touched, never mentioned.** Your **journal**
+(`journal.md` and your archive), your **specs** (`specs/`; only its README
+travels with the Factory), your **roster** (the *Your team, your names* block in
+`FACTORY.md`), your private **denylist**, your company knowledge, and every file
+you add. An update reads right past all of it.
+
+### Reading a pair of lines
+
+The single most useful shape in the manifest is a broad `office` folder with a
+narrow `core` thing inside it:
+
+```
+office seats/coach/                  <- the boot material is your office's
+core   seats/coach/coach-boot/       <- the thin loader stays the Factory's
+```
+
+Both rules match `seats/coach/coach-boot/SKILL.md`. **The longest match wins**,
+so the loader updates and the boot material behind it does not. Order in the
+file doesn't matter — only specificity — so a manifest can't be broken by moving
+a line around.
+
+### What the sync can never do
+
+- **It never deletes.** A file of yours the Factory has never heard of is left
+  where it is. (An earlier version wiped each managed folder and re-copied it,
+  which silently removed every office-only file inside.)
+- **It never overwrites an `office` path**, and never writes a `!` path.
+
+Both claims are tested on every change to the engine, each paired with a
+**negative control** — a run that must come out the *other* way, or the test
+proves nothing. `scripts/sync-selftest.sh` proves the engine's rules on
+fixtures; `scripts/ownership-rehearsal.sh` builds a copy of your actual office,
+customises its seat boot material, adds files of its own, runs a real update
+against it, and checks every byte. That second one runs *before* your monthly
+sync is allowed to touch anything.
+
+### If your manifest has no `office` lines
+
+Then your office predates this boundary and is running the old flat model: every
+managed folder is overwritten wholesale, seat boot material included. The update
+run says so by name in its PR rather than leaving you to discover it. The fix is
+to copy the ownership lines from the Factory's own manifest — the file this page
+describes.
 
 Two categories the update deliberately **reports but does not apply** — you'll
 see them called out in the PR, left for you to bring over by hand:
 
 - **Your workflows** (`.github/workflows/`). A repo's automation cannot rewrite
-  its own automation, so when the master's workflows improve, the update tells
+  its own automation, so when the Factory's workflows improve, the update tells
   you and an Engineer seat brings them across in a normal PR.
 - **The manifest itself.** If your copy of `template-manifest.txt` differs from
-  the master's, the update says so and leaves yours in charge — because opting a
-  path in or out of updates is a choice only you should make.
+  the Factory's, the update says so and leaves yours in charge — because
+  deciding who owns a path is a choice only you should make.
 
-## When you've customized a template-managed file
+## When you've customized a Factory-owned file
 
 This is the case worth understanding, because it's where a careless update would
-do harm. Say you edited a guide or a seat file on purpose, and the master later
-changes that same file. A good update **never silently overwrites your version.**
-It surfaces the collision in plain words — *"you've customized this file, and
-this update also changes it; here's both, you choose"* — and lets you decide.
-If you want to keep your version permanently, remove that file's line from
-[`../.github/template-manifest.txt`](../.github/template-manifest.txt); from then
-on it's yours and no update proposes changes to it again.
+do harm. Say you edited a guide on purpose, and the Factory later changes that
+same file. The update proposes its version in the diff, where you can see it and
+say no. If you want to keep your version permanently, add a `!` line for it in
+[`../.github/template-manifest.txt`](../.github/template-manifest.txt) — from
+then on no update writes it again.
+
+For **office-owned** paths you don't have to do any of this. That was the point
+of the boundary: the protection used to exist only where somebody had already
+been burned once and remembered to add a line.
 
 ## The one-line signal: template version
 
