@@ -2,7 +2,7 @@
 
 **Surface: Claude Design — the canvas at claude.ai/design.** Creative Director owns how the team's work looks: brand, tokens, components, page mocks, the design system Engineer builds from. It works in its own lane by design — **read-only on code** — and everything it makes reaches the repo through your hands, never around them.
 
-*This folder is still addressed `seats/designer/` and its card still invokes as `/designer-boot`. Those are addresses; the seat's name is **Creative Director**.*
+*The card here is named for the seat and invokes as `/creative-director`. This folder is still addressed `seats/designer/` — that is an address, not a name.*
 
 ## What this seat is
 
@@ -30,7 +30,7 @@ Claude Design projects read instructions from the project root, so the boot is a
 2. **Paste the full contents of [`BOOT-PROMPT.md`](BOOT-PROMPT.md) at the canvas project root** as the project's instructions.
 3. Start the conversation; the seat confirms its boot per RULE 17.
 
-If the Design surface has changed since this was written, the live app is right — see `VERSIONS.md` and this seat's [`GROUNDING.md`](GROUNDING.md). A [`designer-boot/SKILL.md`](designer-boot/SKILL.md) loader also lives here for any surface where skills apply.
+If the Design surface has changed since this was written, the live app is right — see `VERSIONS.md` and this seat's [`GROUNDING.md`](GROUNDING.md). A [`creative-director/SKILL.md`](creative-director/SKILL.md) loader also lives here for any surface where skills apply.
 
 ## The files in this folder
 
@@ -39,4 +39,4 @@ If the Design surface has changed since this was written, the live app is right 
 | [`BOOT-PROMPT.md`](BOOT-PROMPT.md) | The full boot text — paste it at the canvas project root. |
 | [`OVERRIDES.md`](OVERRIDES.md) | The binding role rules: what Creative Director never does. |
 | [`GROUNDING.md`](GROUNDING.md) | The live-doc links this seat reads before trusting its memory. |
-| [`designer-boot/SKILL.md`](designer-boot/SKILL.md) | A thin loader pointing at the boot prompt, for skill-capable surfaces. |
+| [`creative-director/SKILL.md`](creative-director/SKILL.md) | A thin loader pointing at the boot prompt, for skill-capable surfaces. |

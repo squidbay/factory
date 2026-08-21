@@ -18,8 +18,8 @@ It never plans canonically, never builds, and never merges — see [`OVERRIDES.m
 The Coach lives in the **Chat** side of the Claude app and boots from a small uploaded skill:
 
 1. In the Claude app, open **Settings → Skills** (the exact menu name can shift between app versions — if it's moved, the live app is right; see `VERSIONS.md`).
-2. Upload [`coach-boot/SKILL.md`](coach-boot/SKILL.md) from this folder.
-3. In a new Chat conversation, type **/coach-boot**.
+2. Upload [`coach/SKILL.md`](coach/SKILL.md) from this folder.
+3. In a new Chat conversation, type **/coach**.
 
 The skill is a thin loader on purpose: it sends the seat back to [`BOOT-PROMPT.md`](BOOT-PROMPT.md) in this repo, read live, so the boot always reflects current `main` even when the uploaded copy ages. Uploaded skills are snapshots; the repo is canon.
 
@@ -30,4 +30,4 @@ The skill is a thin loader on purpose: it sends the seat back to [`BOOT-PROMPT.m
 | [`BOOT-PROMPT.md`](BOOT-PROMPT.md) | The full boot text — read order, boot confirmation, role. |
 | [`OVERRIDES.md`](OVERRIDES.md) | The binding role rules: what the Coach never does. |
 | [`GROUNDING.md`](GROUNDING.md) | The live-doc links this seat reads before trusting its memory. |
-| [`coach-boot/SKILL.md`](coach-boot/SKILL.md) | The uploadable boot skill — a thin loader pointing at the boot prompt. |
+| [`coach/SKILL.md`](coach/SKILL.md) | The uploadable boot skill — a thin loader pointing at the boot prompt. |

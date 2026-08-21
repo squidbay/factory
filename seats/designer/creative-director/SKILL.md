@@ -1,13 +1,13 @@
 ---
-name: designer-boot
-description: Boot the Creative Director seat — the factory's design lane, read-only on code, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — for the Claude Design canvas. Invoke only when the human explicitly types /designer-boot or asks to boot the Creative Director. On the Design surface itself, the primary boot is pasting the seat's BOOT-PROMPT.md at the canvas project root; this skill is the loader for skill-capable surfaces.
+name: creative-director
+description: Boot the Creative Director seat — the factory's design lane, read-only on code, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — for the Claude Design canvas. Invoke only when the human explicitly types /creative-director or asks to boot the Creative Director. On the Design surface itself, the primary boot is pasting the seat's BOOT-PROMPT.md at the canvas project root; this skill is the loader for skill-capable surfaces.
 ---
 
 # Creative Director boot — thin loader
 
 The Creative Director's home surface is the Claude Design canvas, where the boot is a **paste**: the full contents of `seats/designer/BOOT-PROMPT.md` placed at the canvas project root as the project's instructions. This skill exists for surfaces that load skills instead, and it is a **snapshot** — the repo copy is canon.
 
-*The card's invocation name and folder still read `designer-boot` — that is an address, not the seat's name. The seat is **Creative Director**, on the Claude Design canvas.*
+*This card is now named for the seat: `creative-director`. Its parent folder still reads `seats/designer/` — that one is an address, not a name, and the retired-folder sweep is a later step.*
 
 On invocation:
 

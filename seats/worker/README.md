@@ -2,7 +2,7 @@
 
 **Surface: Claude Code, in the desktop app's Code tab, with the factory repo attached.** Engineer is the seat that actually makes things: it takes a merged spec, does one task, and opens one pull request — branch and PR every time, never straight to `main`. It's also the team's warm backup: when you knock on this door with a question that belongs elsewhere, it catches you kindly and walks you to the right room.
 
-*This folder is still addressed `seats/worker/` and its fallback card still invokes as `/worker-boot`. Those are addresses; the seat's name is **Engineer**.*
+*The fallback card here is named for the seat and invokes as `/engineer`. This folder is still addressed `seats/worker/` — that is an address, not a name.*
 
 ## What this seat is
 
@@ -21,7 +21,7 @@ Engineer is the one seat with a **zero-input boot**. When the factory repo is at
 
 Two backstops, in order, if the auto-boot ever fails to fire (app behaviors can shift — see `VERSIONS.md`):
 
-1. Type **/worker-boot** — the in-repo skill at [`worker-boot/SKILL.md`](worker-boot/SKILL.md) is an independent trigger for the same boot.
+1. Type **/engineer** — the in-repo skill at [`engineer/SKILL.md`](engineer/SKILL.md) is an independent trigger for the same boot.
 2. Ask the seat to read [`BOOT-PROMPT.md`](BOOT-PROMPT.md) in full — that file *is* the boot.
 
 A Code session can attach more than one repo at a time — typically this factory repo (the office, the team's memory) alongside the repo the team is building in (the workshop) — so one session sees both spaces.
@@ -33,4 +33,4 @@ A Code session can attach more than one repo at a time — typically this factor
 | [`BOOT-PROMPT.md`](BOOT-PROMPT.md) | The full boot text — read order, boot confirmation, role. |
 | [`OVERRIDES.md`](OVERRIDES.md) | The binding role rules: what Engineer never does. |
 | [`GROUNDING.md`](GROUNDING.md) | The live-doc links this seat reads before trusting its memory. |
-| [`worker-boot/SKILL.md`](worker-boot/SKILL.md) | The fallback boot skill — a thin loader pointing at the boot prompt. |
+| [`engineer/SKILL.md`](engineer/SKILL.md) | The fallback boot skill — a thin loader pointing at the boot prompt. |

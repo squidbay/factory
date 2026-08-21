@@ -59,9 +59,9 @@
 # because one small thing inside it is framework machinery:
 #
 #     office  seats/coach/                  <- the boot material is the office's
-#     core    seats/coach/coach-boot/       <- the thin loader stays ours
+#     core    seats/coach/coach/            <- the thin loader stays ours
 #
-# `seats/coach/coach-boot/SKILL.md` matches both; the longer pattern wins, so
+# `seats/coach/coach/SKILL.md` matches both; the longer pattern wins, so
 # the loader updates and the boot material behind it does not. Order in the file
 # does not matter — only specificity — so a manifest cannot be broken by moving
 # a line.

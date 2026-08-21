@@ -98,10 +98,10 @@ OFFICE_PROBE="seats/coach/GROUNDING.md"
 # The four thin loader contracts. They live INSIDE an office-owned tree and must
 # still update — that is the longest-match mechanism's whole job.
 LOADERS=(
-  "seats/coach/coach-boot/SKILL.md"
-  "seats/cowork/cowork-boot/SKILL.md"
-  "seats/designer/designer-boot/SKILL.md"
-  "seats/worker/worker-boot/SKILL.md"
+  "seats/coach/coach/SKILL.md"
+  "seats/cowork/team-leader/SKILL.md"
+  "seats/designer/creative-director/SKILL.md"
+  "seats/worker/engineer/SKILL.md"
 )
 
 build_office() {                 # build_office <dest> <manifest-source>

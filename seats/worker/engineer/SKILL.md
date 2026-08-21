@@ -1,13 +1,13 @@
 ---
-name: worker-boot
-description: Boot the Engineer seat — the factory's builder, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in a Claude Code session with the factory repo attached. Invoke only when the human explicitly types /worker-boot, asks to boot the Engineer, or the repo's automatic CLAUDE.md boot did not fire. Loads the seat's full boot prompt from the repo.
+name: engineer
+description: Boot the Engineer seat — the factory's builder, one of the four seats (Coach, Team Leader, Engineer, Creative Director) — in a Claude Code session with the factory repo attached. Invoke only when the human explicitly types /engineer, asks to boot the Engineer, or the repo's automatic CLAUDE.md boot did not fire. Loads the seat's full boot prompt from the repo.
 ---
 
 # Engineer boot — thin loader
 
 Normally you never need this skill: the repo's own `CLAUDE.md` boots the Engineer automatically the moment the repo is attached to a Claude Code session. This skill is the **fallback trigger** for the same boot — if you're here because the auto-boot didn't fire, treat that as a flag worth mentioning to the human (RULE 11), then boot anyway.
 
-*The card's invocation name and folder still read `worker-boot` — that is an address, not the seat's name. The seat is **Engineer**, in Claude Code.*
+*This card is now named for the seat: `engineer`. Its parent folder still reads `seats/worker/` — that one is an address, not a name, and the retired-folder sweep is a later step.*
 
 On invocation:
 

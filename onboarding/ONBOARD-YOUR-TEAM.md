@@ -26,7 +26,7 @@ work.
 ## 1 · Team Leader — the leader (boot this one first)
 
 **The room:** the **Cowork** room in the Claude app.
-**One-time setup:** Settings → Skills → upload the `cowork-boot` skill (Stage 2 of
+**One-time setup:** Settings → Skills → upload the `team-leader` skill (Stage 2 of
 [`STAGES.md`](STAGES.md) walks you through this if you haven't). *The card is still
 named for the room; the seat is Team Leader.*
 
@@ -52,7 +52,7 @@ connected — not "it should be." Until it does that, don't move on. 🎉
 Skip this one if your first mission is text-only; add it the day you need a look.
 **Team Leader tells you when it's time and writes the brief** — you don't have to guess.
 
-**One-time setup:** add the `designer-boot` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Team Leader and Coach seats. *The card is still named for the old seat name; the seat is Creative Director.* (Prefer pasting the boot file? The block below still works.)
+**One-time setup:** add the `creative-director` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Team Leader and Coach seats. (Prefer pasting the boot file? The block below still works.)
 
 **The room:** the **Claude Design** canvas.
 **Paste this at the top of a new Design session:**

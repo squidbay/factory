@@ -103,13 +103,14 @@ core FROM-HQ.md
 # your office adds beside them) is yours under `office seats/` below. This pair
 # of rules is the longest-match mechanism doing the job it exists for.
 #
-# (These four directories still carry their original names. The campaign's card
-# rename to coach / team-leader / engineer / creative-director moves these four
-# lines with them; it is a later step and deliberately not done here.)
-core seats/coach/coach-boot/
-core seats/cowork/cowork-boot/
-core seats/designer/designer-boot/
-core seats/worker/worker-boot/
+# (These four directories carry the seats' advertised names. They were renamed
+# from coach-boot / cowork-boot / designer-boot / worker-boot, and these four
+# lines moved with them in the same commit — a manifest line pointing at a path
+# that no longer exists is a Factory-owned file that silently stops updating.)
+core seats/coach/coach/
+core seats/cowork/team-leader/
+core seats/designer/creative-director/
+core seats/worker/engineer/
 
 
 # ═════════════════════════════════════════════════════════════════════════════

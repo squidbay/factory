@@ -89,10 +89,10 @@ narrow `core` thing inside it:
 
 ```
 office seats/                        <- every seat's boot material is yours
-core   seats/coach/coach-boot/       <- the thin loader stays the Factory's
+core   seats/coach/coach/            <- the thin loader stays the Factory's
 ```
 
-Both rules match `seats/coach/coach-boot/SKILL.md`. **The longest match wins**,
+Both rules match `seats/coach/coach/SKILL.md`. **The longest match wins**,
 so the loader updates and the boot material behind it does not. Order in the
 file doesn't matter — only specificity — so a manifest can't be broken by moving
 a line around.
