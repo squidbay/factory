@@ -21,41 +21,66 @@ stale — that's a normal thing to flag with an issue or a PR.
 ## The law, in one sentence
 
 > **The Factory updates the operating system. It does not redecorate your office.**
+>
+> **Office is the default. Core is a narrow allowlist.**
 
-Everything below is that sentence made mechanical. Every path the manifest names
-carries an **owner**, and the owner decides what an update is allowed to do to
-it. There are exactly two owners, plus everything the manifest never mentions.
+Everything below is that made mechanical. Every path the manifest names carries
+an **owner**, and the owner decides what an update may do to it.
 
-## The two owners
+## The bar a path has to clear to be the Factory's
 
-**`core` — Factory-owned. An update overwrites these, every run.** This is the
-machinery: the update engine and its tests (`scripts/`), the runtime and the
-stable contracts, the guides, the rulebook, the shipped skills, and the **four
-thin seat loaders** — the small cards installed in Claude's settings that do
-nothing but point at this repo. Keeping these current is the entire point of an
-update, so they arrive by overwrite. If you deliberately edit one and want to
-keep your version, put a `!` line in front of its path in the manifest and the
-sync will never write it again.
+A path is `core` **only when SquidBay must stay authoritative over that exact
+material for the Factory framework to work correctly across every
+installation.** Not "it's important." Not "we wrote it." Not "it would be nice
+if everyone had the current one." Mechanical necessity, or it's yours.
 
-**`office` — yours, from the moment it lands.** This is the material your team
-adapts as it learns: your **seats' boot prompts, grounding, overrides and local
-doctrine**, and the **mission packs**. The Factory **seeds** one of these only
-when your office doesn't have it yet — a brand-new default arrives the first
-time, exactly once. After that it is your file, and **no update ever writes it
-again**, however far ahead the Factory's version gets.
+That bar is deliberately hard to clear, and today it leaves **seven** Core rules:
 
-When the Factory's version of an office-owned default *does* improve, the update
+| Core rule | Why SquidBay has to stay authoritative |
+|---|---|
+| `scripts/` | The sync engine and its two proofs. The update workflow *executes* these. If they aren't Factory-owned, a fix to the engine lands upstream and stops at your door in silence while your monthly run keeps using the old one |
+| `.github/template-version.txt` | How your office knows which Factory version it's on. A stale or edited copy makes the update check lie |
+| `FROM-HQ.md` | The update system's own delivery channel — the release note for each update, written for you. Seeded-once would be a news feed that delivers news exactly once |
+| the four `*-boot/` loader folders | The thin cards installed in Claude's settings that do nothing but point at this repo. A contract, not content: they have to keep working when the boot material behind them changes |
+
+**Everything else the Factory ships is `office`** — yours from the moment it
+lands. Your seats' boot prompts, grounding, overrides and local doctrine. Your
+`CLAUDE.md`. Your rulebook. Your README, onboarding, templates, tool
+descriptions, hosting notes, token model, mission packs, shipped skills, and
+your own local SECURITY and CONTRIBUTING policy. The Factory **seeds** one of
+these only when your office doesn't have it yet — exactly once — and then never
+writes it again.
+
+When the Factory's version of an office-owned file *does* improve, the update
 doesn't quietly skip it and it doesn't quietly take yours. It **names** the file
-in the PR under *"Migration proposals — your files, improved upstream"*, so the
-improvement is visible and the choice is yours. That's the whole difference
-between a Factory that maintains your machinery and one that redecorates around
-you.
+in the PR under *"Migration proposals — your files, improved upstream,"* so the
+improvement is visible and the choice is yours.
 
 **Unlisted — never seeded, never touched, never mentioned.** Your **journal**
 (`journal.md` and your archive), your **specs** (`specs/`; only its README
 travels with the Factory), your **roster** (the *Your team, your names* block in
-`FACTORY.md`), your private **denylist**, your company knowledge, and every file
-you add. An update reads right past all of it.
+`FACTORY.md`), your private **denylist**, your company knowledge, this manifest
+itself, and every file you add. An update reads right past all of it.
+
+### Why the bar is set there
+
+An earlier pass at this boundary flipped only the paths that had already caused
+visible harm — the seats, the grounding, the mission packs — and left the rest
+Factory-owned. That rebuilds the same problem one directory over: your
+onboarding, your templates, your rulebook and your README were still being
+reclaimed on every run, just more quietly, and each one would have needed its own
+`!` line the first time somebody noticed. **A protection that only exists where
+somebody was already burned isn't a protection, it's a scar.** So Core became a
+list that has to be argued for, file by file, and everything else defaults to
+you.
+
+### A note on bare lines
+
+The engine still reads a manifest line with no owner word as `core`, so an older
+office's manifest keeps receiving updates instead of silently freezing. That is a
+compatibility promise, **not the policy** — the Factory's own manifest contains
+zero bare lines, and CI fails the build if one appears. An allowlist rarely stops
+being one through a bad decision; it stops through a missing word.
 
 ### Reading a pair of lines
 
@@ -63,7 +88,7 @@ The single most useful shape in the manifest is a broad `office` folder with a
 narrow `core` thing inside it:
 
 ```
-office seats/coach/                  <- the boot material is your office's
+office seats/                        <- every seat's boot material is yours
 core   seats/coach/coach-boot/       <- the thin loader stays the Factory's
 ```
 
@@ -71,6 +96,10 @@ Both rules match `seats/coach/coach-boot/SKILL.md`. **The longest match wins**,
 so the loader updates and the boot material behind it does not. Order in the
 file doesn't matter — only specificity — so a manifest can't be broken by moving
 a line around.
+
+This is also why a whole directory is **never** made Core just because one small
+thing inside it is framework machinery. If something narrow has to stay the
+Factory's, it gets its own narrow rule inside your broad one.
 
 ### What the sync can never do
 
@@ -83,17 +112,19 @@ Both claims are tested on every change to the engine, each paired with a
 **negative control** — a run that must come out the *other* way, or the test
 proves nothing. `scripts/sync-selftest.sh` proves the engine's rules on
 fixtures; `scripts/ownership-rehearsal.sh` builds a copy of your actual office,
-customises its seat boot material, adds files of its own, runs a real update
-against it, and checks every byte. That second one runs *before* your monthly
-sync is allowed to touch anything.
+customises twenty files across its whole office-owned surface (not just the
+seats — the rulebook, the onboarding, the templates, the local policy), adds
+arbitrary files of its own, runs a real update against it, and checks every
+byte. That second one runs *before* your monthly sync is allowed to touch
+anything.
 
 ### If your manifest has no `office` lines
 
 Then your office predates this boundary and is running the old flat model: every
-managed folder is overwritten wholesale, seat boot material included. The update
-run says so by name in its PR rather than leaving you to discover it. The fix is
-to copy the ownership lines from the Factory's own manifest — the file this page
-describes.
+managed folder is overwritten wholesale — seat boot material, rulebook,
+onboarding and all. The update run says so by name in its PR rather than leaving
+you to discover it. The fix is to copy the ownership lines from the Factory's own
+manifest — the file this page describes.
 
 Two categories the update deliberately **reports but does not apply** — you'll
 see them called out in the PR, left for you to bring over by hand:
@@ -107,16 +138,17 @@ see them called out in the PR, left for you to bring over by hand:
 
 ## When you've customized a Factory-owned file
 
-This is the case worth understanding, because it's where a careless update would
-do harm. Say you edited a guide on purpose, and the Factory later changes that
-same file. The update proposes its version in the diff, where you can see it and
-say no. If you want to keep your version permanently, add a `!` line for it in
+With Core down to seven rules this is now a rare case, but it can still happen —
+say you edited something under `scripts/` on purpose and the Factory later
+changes that same file. The update proposes its version in the diff, where you
+can see it and say no. If you want to keep your version permanently, add a `!`
+line for it in
 [`../.github/template-manifest.txt`](../.github/template-manifest.txt) — from
 then on no update writes it again.
 
-For **office-owned** paths you don't have to do any of this. That was the point
-of the boundary: the protection used to exist only where somebody had already
-been burned once and remembered to add a line.
+For **office-owned** paths — which is nearly everything — you don't have to do
+any of this, and you shouldn't have to. A pile of `!` lines is the symptom of a
+classification that wants fixing upstream, not a way to own your own office.
 
 ## The one-line signal: template version
 

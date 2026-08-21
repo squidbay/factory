@@ -14,37 +14,49 @@
 #
 # Everything below is that sentence made mechanical.
 #
-# ── Ownership: two classes, declared in the manifest ──────────────────────────
+# ── Ownership: OFFICE IS THE DEFAULT, CORE IS A NARROW ALLOWLIST ──────────────
 # Every managed path carries an owner. The manifest says which:
 #
-#   core <path>     FACTORY-OWNED. Machinery: the updater and its tests, the
-#                   runtime, stable contracts, the thin seat loaders. Updates
-#                   arrive by OVERWRITE, every run, because keeping this current
-#                   is the entire point of an update.
+#   core PATH       FACTORY-OWNED. Updates arrive by OVERWRITE, every run.
+#                   The bar for this class is mechanical necessity: SquidBay
+#                   must stay authoritative over that exact material for the
+#                   framework to work correctly across every installation. Not
+#                   "it's important," not "we wrote it." The updater engine, the
+#                   version anchor, the update system's own delivery channel,
+#                   and the four thin seat loader contracts — that is the shape
+#                   of it, and the list should stay short enough to read.
 #
-#   office <path>   OFFICE-OWNED AFTER CREATION. Defaults: seat boot material,
-#                   grounding, overrides, local doctrine, mission packs. The
-#                   Factory SEEDS these when the office does not have them yet,
-#                   and NEVER writes them again. If the upstream default later
+#   office PATH     OFFICE-OWNED AFTER INSTALLATION, and this is the DEFAULT for
+#                   anything human-editable: seat boot material, grounding,
+#                   overrides, local doctrine, onboarding, templates, tool
+#                   descriptions, hosting notes, mission packs, the rulebook,
+#                   the office's own README and local policy. The Factory SEEDS
+#                   one of these only when the office does not have it yet, and
+#                   NEVER writes it again. If the upstream default later
 #                   improves, the sync says so — a migration proposal named in
 #                   the update PR — and still does not write.
 #
-#   <path>          A bare line with no class means `core`. Every manifest
-#                   written before ownership existed keeps working unchanged.
+#   PATH            A bare line with no owner means `core`. That is a PARSER
+#                   fallback so manifests written before ownership existed do
+#                   not silently stop receiving updates — it is NOT the policy.
+#                   The Factory's own manifest carries zero bare lines and CI
+#                   fails if one appears, so the allowlist cannot grow by
+#                   accident or by forgetting a word.
 #
-#   !<path>         PROTECTED. The sync never writes it, whatever its class.
-#                   This is the office's own local opt-out, and it is now a
-#                   convenience rather than a load-bearing defence: material
-#                   that is office-owned by architecture no longer needs an
-#                   office-by-office exception line to stay safe.
+#   !PATH           PROTECTED. The sync never writes it, whatever its class.
+#                   The office's own local opt-out — a convenience, not a
+#                   defence. Ownership is the defence, and a growing pile of "!"
+#                   lines is the symptom of a classification that wants fixing
+#                   upstream instead of patching office by office.
 #
 # Anything not named in the manifest at all is the office's, is never seeded,
 # and is never mentioned.
 #
 # ── Which rule applies to a file: the LONGEST match wins ──────────────────────
 # Rules are matched against the destination path, and the most specific one
-# decides. That is what lets a broad folder be office-owned while a narrow thing
-# inside it stays Factory-owned:
+# decides. This is what keeps a narrow Factory-owned contract inside a broad
+# Office-owned tree — and why a whole directory is never declared Core merely
+# because one small thing inside it is framework machinery:
 #
 #     office  seats/coach/                  <- the boot material is the office's
 #     core    seats/coach/coach-boot/       <- the thin loader stays ours
@@ -64,6 +76,12 @@
 #
 # The manifest now answers a different question: "who owns this path after
 # installation?" That single reframe is the boundary.
+#
+# And the answer defaults to the office. An earlier pass at this flipped only
+# the paths that had already caused visible harm and left everything else Core,
+# which rebuilds the same problem one directory over: the customer's onboarding,
+# templates, rulebook and README were still being reclaimed, just more quietly.
+# Core is now an allowlist that has to be argued for, file by file.
 #
 # ── The two things this sync can never do ─────────────────────────────────────
 #   • It never DELETES. A file of yours the Factory has never heard of is left

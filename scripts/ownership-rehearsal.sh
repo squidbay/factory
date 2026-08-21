@@ -53,6 +53,10 @@ hdr()  { printf '\n\033[1m%s\033[0m\n' "$1"; }
 # The files this office deliberately makes its own. Chosen because they are the
 # ones a real office actually edits — the four seats' boot material, the shared
 # boot file, and the grounding — plus pages nobody upstream has heard of.
+# Chosen to span the WHOLE office-owned surface, not just the seats — the
+# reclassification widened Core's opposite from "the seats" to "everything
+# human-editable," and a fixture that only touches seats would pass while the
+# rest of an office was still being reclaimed.
 CUSTOMISED=(
   "seats/_shared/BOOT-COMMON.md"
   "seats/coach/BOOT-PROMPT.md"
@@ -60,6 +64,20 @@ CUSTOMISED=(
   "seats/designer/OVERRIDES.md"
   "seats/worker/GROUNDING.md"
   "grounding/github/README.md"
+  "CLAUDE.md"
+  "MECHANICAL-RULES.md"
+  "README.md"
+  "onboarding/STAGES.md"
+  "templates/JOURNAL-ENTRY.md"
+  "specialists/inspector.md"
+  "hosting/github/README.md"
+  "tokens/TOKEN-MODEL.md"
+  "versions/TEMPLATE-MANIFEST.md"
+  "guides/UPDATE-YOUR-FACTORY.md"
+  ".github/SECURITY.md"
+  ".github/CONTRIBUTING.md"
+  "skills/factory-update/SKILL.md"
+  "missions/first-website/MISSION.md"
 )
 ADDED=(
   "seats/cowork/doctrine/14-STANDING-OPERATOR-CORRECTIONS.md"
@@ -69,10 +87,22 @@ ADDED=(
   "business/THE-PLAN.md"
 )
 # One Factory-owned file we expect to update, and one office-owned default we
-# expect NOT to update but to be named instead.
+# expect NOT to update but to be named instead. CORE_PROBE must be a path the
+# manifest actually classifies `core` — it was MECHANICAL-RULES.md until the
+# rulebook became office-owned, which is exactly the kind of drift a fixture
+# hides if nobody re-checks it.
 PRESENT=()
-CORE_PROBE="MECHANICAL-RULES.md"
+CORE_PROBE="FROM-HQ.md"
 OFFICE_PROBE="seats/coach/GROUNDING.md"
+
+# The four thin loader contracts. They live INSIDE an office-owned tree and must
+# still update — that is the longest-match mechanism's whole job.
+LOADERS=(
+  "seats/coach/coach-boot/SKILL.md"
+  "seats/cowork/cowork-boot/SKILL.md"
+  "seats/designer/designer-boot/SKILL.md"
+  "seats/worker/worker-boot/SKILL.md"
+)
 
 build_office() {                 # build_office <dest> <manifest-source>
   local office="$1" manifest="$2" f
@@ -115,6 +145,11 @@ build_next_factory() {           # the Factory moves on
     >> "$next/$CORE_PROBE"
   printf '\n<!-- FACTORY improved this DEFAULT. It must NOT be written into a live office. -->\n' \
     >> "$next/$OFFICE_PROBE"
+  local l
+  for l in "${LOADERS[@]}"; do
+    [ -f "$next/$l" ] || continue
+    printf '\n<!-- LOADER CONTRACT UPDATED UPSTREAM. This one MUST land. -->\n' >> "$next/$l"
+  done
 }
 
 snapshot() {                     # snapshot <tree> <out>
@@ -184,6 +219,20 @@ if ! grep -q 'FACTORY improved this DEFAULT' "$WORK/office/$OFFICE_PROBE" \
   ok "the improved office-owned default was NAMED as a migration proposal, not written"
 else
   bad "the improved office-owned default was written into the office (or never reported)"
+fi
+
+# 5b — the four thin loaders, inside an office-owned tree, MUST still update
+loaders_seen=0; loaders_landed=0
+for l in "${LOADERS[@]}"; do
+  [ -f "$WORK/office/$l" ] || continue
+  loaders_seen=$((loaders_seen+1))
+  grep -q 'LOADER CONTRACT UPDATED UPSTREAM' "$WORK/office/$l" && loaders_landed=$((loaders_landed+1)) \
+    || echo "        did not update: $l"
+done
+if [ "$loaders_seen" -gt 0 ] && [ "$loaders_landed" -eq "$loaders_seen" ]; then
+  ok "all $loaders_seen thin loaders updated, inside an office-owned tree (clause 3 / longest match)"
+else
+  bad "$loaders_landed of $loaders_seen thin loaders updated — the Factory-owned contract is not reaching the office"
 fi
 
 # 6 — the general guarantee: no PRE-EXISTING file under an `office` folder was

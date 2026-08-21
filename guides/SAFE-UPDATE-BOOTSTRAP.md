@@ -88,7 +88,7 @@ safer updater, it is a broken one. Bring all four changes in **one** pull reques
 | `scripts/sync-selftest.sh` | [raw](https://raw.githubusercontent.com/squidbay/factory/main/scripts/sync-selftest.sh) | the proof, run before every sync |
 | `scripts/ownership-rehearsal.sh` | [raw](https://raw.githubusercontent.com/squidbay/factory/main/scripts/ownership-rehearsal.sh) | the second proof — runs a real update against a copy of *your* office and checks every byte. The update workflow will not sync without it |
 | one line — `core scripts/` — added to `.github/template-manifest.txt` | — | so future engine fixes arrive on their own |
-| the **ownership lines** copied from the Factory's manifest | [raw](https://raw.githubusercontent.com/squidbay/factory/main/.github/template-manifest.txt) | so an update stops overwriting your seats' boot material ([`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md) explains the two owners) |
+| the **ownership lines** copied from the Factory's manifest | [raw](https://raw.githubusercontent.com/squidbay/factory/main/.github/template-manifest.txt) | so an update stops overwriting your seats' boot material, your rulebook, your onboarding and your local policy. Office is the default there; Core is seven rules with their reasons written next to them ([`../versions/TEMPLATE-MANIFEST.md`](../versions/TEMPLATE-MANIFEST.md) explains both owners) |
 
 That last row is the one people skip, and it is the one that matters in a year.
 Your manifest is the list of what an update may touch. If `scripts/` is not on
@@ -135,11 +135,13 @@ sync-selftest: ALL PASS
 ```
 
 The second script does the same thing at full size on **your** tree: it builds a
-copy of your office, customises its seat boot material, adds files of its own,
-runs a real update against it, and checks every byte — then repeats the whole
-thing with your manifest's ownership lines stripped, and requires that run to
-clobber. If your manifest has the owners wrong, this is what tells you, and it
-runs as a gate before your monthly sync is allowed to touch anything.
+copy of your office, customises twenty files across its whole office-owned
+surface — seat boot material, the rulebook, onboarding, templates, local policy —
+adds arbitrary files of its own, runs a real update against it, and checks every
+byte. Then it repeats the whole thing with your manifest's ownership lines
+stripped, and **requires that run to clobber**. If your manifest has the owners
+wrong, this is what tells you, and it runs as a gate before your monthly sync is
+allowed to touch anything.
 
 TEST 2 deliberately runs the **old** logic on the same fixture and requires it to
 delete. A test that only ever shows the good outcome proves nothing — it might be
