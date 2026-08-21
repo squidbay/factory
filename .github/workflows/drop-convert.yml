@@ -3,7 +3,7 @@ name: drop-convert
 # The inbox needs a translator.
 #
 # `inbox/drop/` accepts anything a human can carry — a PDF, a photo, a Word
-# document. But the chat seats (Cowork, Coach, Designer) read this
+# document. But the card-booted seats (Coach, Team Leader, Creative Director) read this
 # repo as TEXT. A binary reaches them as unreadable bytes, so a person can
 # follow the drop procedure perfectly and the team still, silently, cannot see
 # the file. That happened for real: a resume PDF was merged into `inbox/drop/`
@@ -59,7 +59,8 @@ jobs:
           #!/usr/bin/env python3
           """drop-convert — write a plain-markdown sidecar beside every binary in inbox/drop/.
 
-          Why this exists: chat seats (Cowork, Coach, Designer) read the repo as
+          Why this exists: the card-booted seats (Coach, Team Leader, Creative
+          Director) read the repo as
           text. A PDF, an image, or a .docx reaches them as unreadable bytes, so a human
           can follow the drop procedure perfectly and the team still cannot see the file.
           This script closes that gap by leaving a markdown twin next to the original.
@@ -212,7 +213,7 @@ jobs:
                           "only so no seat reports it as \"unreadable bytes\" and stops.",
                           "",
                           "**To actually see it, a seat has to open the image in a session that "
-                          "can view pictures** — the Code seat in Claude Code, or any chat seat "
+                          "can view pictures** — the Engineer seat in Claude Code, or any chat seat "
                           "the human attaches the image to directly. A seat that does that should "
                           "replace this section with what it saw and say which seat looked.",
                           "",
@@ -241,7 +242,7 @@ jobs:
                           "It handles PDFs and Word documents, and flags images for a seat to "
                           "look at; anything else lands here.",
                           "",
-                          "**What to do:** ask the Code seat to open the original directly — it "
+                          "**What to do:** ask the Engineer seat to open the original directly — it "
                           "can often read formats the workflow can't — or ask the human for the "
                           "same content in a format the team can read. Either way, say which "
                           "file you're stuck on. Do not ask the human to convert it themselves "

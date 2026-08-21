@@ -6,7 +6,7 @@ Your factory exists to build things you care about. A **mission pack** is a read
 
 Day 1 sets the team up. Day 2 asks the only question that matters: **"what are we building?"**
 
-Code asks it at Stage 0 of onboarding (see [`onboarding/STAGES.md`](../onboarding/STAGES.md)). Your answer picks a mission from this folder, and that mission becomes the factory's first real work — Cowork reads the pack's `MISSION.md`, plans from it, and the loop starts turning on something that's actually yours. A factory with no mission is a very organized empty room; pick one early.
+Engineer asks it at Stage 0 of onboarding (see [`onboarding/STAGES.md`](../onboarding/STAGES.md)). Your answer picks a mission from this folder, and that mission becomes the factory's first real work — Team Leader reads the pack's `MISSION.md`, plans from it, and the loop starts turning on something that's actually yours. A factory with no mission is a very organized empty room; pick one early.
 
 You don't have to pick perfectly. Missions compose: most people who start with [`first-website/`](first-website/MISSION.md) grow into [`website-overhaul/`](website-overhaul/MISSION.md) discipline, and [`organize-my-business/`](organize-my-business/MISSION.md) runs happily alongside anything.
 
@@ -16,7 +16,7 @@ Every mission pack has the same anatomy, so every seat knows where to look:
 
 | Part | What it's for |
 |---|---|
-| **`MISSION.md`** | The brief. Cowork plans directly from it — no interpretation layer. It always carries five sections: **The brief** (what and why), **What the team needs from you** (your inputs, in plain words), **How it runs** (which seats do what, PR by PR), **Done looks like** (observable, honest — no vibes), and **The celebration** (small, genuine, specific). |
+| **`MISSION.md`** | The brief. Team Leader plans directly from it — no interpretation layer. It always carries five sections: **The brief** (what and why), **What the team needs from you** (your inputs, in plain words), **How it runs** (which seats do what, PR by PR), **Done looks like** (observable, honest — no vibes), and **The celebration** (small, genuine, specific). |
 | **Skills** | Any working discipline the mission needs — a checklist, a done-gate, a picker table. Small ones live inside `MISSION.md` itself; bigger ones ship as files alongside it that seats load when the mission is active. |
 | **Done-looks-like** | The finish line, written so you can check it yourself. If you can't observe it, it isn't in the section. |
 | **The celebration** | Yes, really. Finishing things is the habit this whole system runs on, and naming the moment is how the habit sticks. Every celebration in these packs is something real you can do in under five minutes. |

@@ -6,23 +6,23 @@ A **skill** is a set of instructions a Claude seat loads to get better at one sp
 
 | Seat | How its skills load |
 |---|---|
-| Chat-family seats (Coach, Cowork) | One-time upload: Claude app → **Settings → Skills** → upload the skill's folder. Invoke by name in the right room. |
+| Card-booted seats (Coach in Chat, Team Leader in Cowork) | One-time upload: Claude app → **Settings → Skills** → upload the skill's folder. Invoke by name in the right room. |
 | Code | No upload — Code reads skills straight from this repo (and boots from `CLAUDE.md` without any skill at all). |
-| Designer | No skills; its boot text is pasted at the canvas project root. |
+| Creative Director | No skills; its boot text is pasted at the canvas project root. |
 
 **Update habit:** an uploaded skill is a snapshot. When a skill's folder changes in the repo, re-upload it (two minutes — [`../onboarding/RECOVERY.md`](../onboarding/RECOVERY.md) has the exact clicks).
 
 ## Shipped skills
 
-- [`factory-coach/`](factory-coach/SKILL.md) — the **Coach seat's teaching mode**: plain-English coaching for the human, one concept at a time. The Coach's own capability, not a separate seat — the same way `factory-security` is Cowork's. Offer it to the Chat room at Stage 2.
+- [`factory-coach/`](factory-coach/SKILL.md) — the **Coach seat's teaching mode**: plain-English coaching for the human, one concept at a time. The Coach's own capability, not a separate seat — the same way `factory-security` is Team Leader's. Offer it to the Chat room at Stage 2.
 - [`factory-render-verify/`](factory-render-verify/SKILL.md) — the render half of the design quality gate: Code renders any page your factory builds at every screen size, measures what a glance misses (overflow, type sizes, tap targets, safe-area), and pins the source by hash so live can be proven byte-identical to what you approved. Receipts for the PR — a page never ships on trust. Pairs with [`../guides/DESIGN-QUALITY-GATE.md`](../guides/DESIGN-QUALITY-GATE.md).
 - [`factory-retro/`](factory-retro/SKILL.md) — the factory learning to run itself better: reads the journal, finds friction, proposes fixes as PRs you gate.
-- [`factory-security/`](factory-security/SKILL.md) — the security read Cowork folds into its audit on any PR touching credentials, workflows, auth, payments, or personal data: reads the change, reports only real problems in plain words, ends with one recommendation — **MERGE** or **FIX-FIRST**. Cowork's own capability, not a separate seat.
+- [`factory-security/`](factory-security/SKILL.md) — the security read Team Leader folds into its audit on any PR touching credentials, workflows, auth, payments, or personal data: reads the change, reports only real problems in plain words, ends with one recommendation — **MERGE** or **FIX-FIRST**. Team Leader's own capability, not a separate seat — security is a skill, and the roster stays four.
 - [`factory-update/`](factory-update/SKILL.md) — explains and drives the update PRs opened by the workflow of the same name: what changed upstream, hunk by hunk, and how to adopt only the parts you want.
 - [`skill-creator/`](skill-creator/SKILL.md) — a pointer skill for minting NEW custom skills properly, using Anthropic's own skill-creator from [github.com/anthropics/skills](https://github.com/anthropics/skills).
 
 ## When to mint a new skill
 
-When your team does the same kind of task a third time and re-explains it a third time — that smell is a skill asking to exist. Say so to Cowork; it will use [`skill-creator/`](skill-creator/SKILL.md) to mint one, and the skill lands here by PR like everything else.
+When your team does the same kind of task a third time and re-explains it a third time — that smell is a skill asking to exist. Say so to Team Leader; it will use [`skill-creator/`](skill-creator/SKILL.md) to mint one, and the skill lands here by PR like everything else.
 
 Made a skill other factories would want? That's exactly what [`../.github/CONTRIBUTING.md`](../.github/CONTRIBUTING.md) is for.

@@ -1,6 +1,6 @@
 # Mobile Simulator Setup for Claude Code
 
-**Owner:** Cowork  
+**Owner:** Team Leader  
 **Priority:** High  
 **Status:** Setup Guide  
 **Applies to:** React Native development on macOS
@@ -294,7 +294,7 @@ Capture build errors, runtime logs, and screenshots
     ↓
 Correct platform-specific defects
     ↓
-Cowork and Designer audit desktop-visible simulator results
+Team Leader and Creative Director audit desktop-visible simulator results
     ↓
 Publish iOS candidate through TestFlight
     ↓
@@ -413,4 +413,4 @@ Each developer Mac is ready when:
 
 Simulators accelerate development, but they do not change Factory governance.
 
-Claude Code may build, test, diagnose, and propose changes. Cowork and Designer may review. Andrew remains the sole merge gate, and no seat merges production code.
+Claude Code may build, test, diagnose, and propose changes. Team Leader and Creative Director may review. Andrew remains the sole merge gate, and no seat merges production code.

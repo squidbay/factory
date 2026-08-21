@@ -214,7 +214,7 @@ jobs:
             for wf in "$RUNNER_TEMP/template/.github/workflows"/*; do
               name=$(basename "$wf")
               if [ ! -f ".github/workflows/$name" ] || ! diff -q ".github/workflows/$name" "$wf" >/dev/null; then
-                NOTES="$NOTES- The template's workflow \`$name\` differs from (or is missing in) your office. Automation can't rewrite automation — ask a Code seat to bring it over by PR.\n"
+                NOTES="$NOTES- The template's workflow \`$name\` differs from (or is missing in) your office. Automation can't rewrite automation — ask your Engineer seat to bring it over by PR.\n"
               fi
             done
           fi

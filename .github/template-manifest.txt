@@ -79,7 +79,7 @@ versions/
 #   .github/heartbeat-watch.txt      (your own nightly watch list)
 #   .github/workflows/    (a repo's automation can't be rewritten by its
 #                          own automation — workflow changes arrive as a
-#                          note in the update PR for a Code seat to apply.
+#                          note in the update PR for an Engineer seat to apply.
 #                          This is the ONE part of the updater that cannot be
 #                          synced. Its engine, scripts/, is managed above, so
 #                          the hand-carry is the workflow file alone — and

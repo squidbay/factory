@@ -5,9 +5,13 @@ You don't build with this factory by talking to one Claude. You build with a
 exact words to paste for each seat, and the reason each one comes when it does.
 No coding, no settings spelunking — copy, paste, wait for it to answer, move on.
 
-**Why order matters:** the builder (Code) never works alone, because a lone
+**Your team is four seats: Coach, Team Leader, Engineer, Creative Director.**
+(Dispatch and Claude in Chrome turn up later — they're *tools* the team reaches
+for, not a fifth and sixth teammate.)
+
+**Why order matters:** the builder (Engineer) never works alone, because a lone
 builder has no one to plan the work or check it. So the leader comes first, the
-designer comes when there's something to look at, and the builder comes last —
+design lane comes when there's something to look at, and the builder comes last —
 building only what the leader has specced and what gets checked before it reaches
 you. That's the whole safety of the thing: nobody on this team blesses their own
 work.
@@ -19,16 +23,17 @@ work.
 
 ---
 
-## 1 · Cowork — the leader (boot this one first)
+## 1 · Team Leader — the leader (boot this one first)
 
 **The room:** the **Cowork** room in the Claude app.
 **One-time setup:** Settings → Skills → upload the `cowork-boot` skill (Stage 2 of
-[`STAGES.md`](STAGES.md) walks you through this if you haven't).
+[`STAGES.md`](STAGES.md) walks you through this if you haven't). *The card is still
+named for the room; the seat is Team Leader.*
 
 **Paste this into the Cowork room:**
 
 ```
-Boot as the Cowork seat of my factory. Read seats/_shared/BOOT-COMMON.md and
+Boot as the Team Leader seat of my factory. Read seats/_shared/BOOT-COMMON.md and
 seats/cowork/BOOT-PROMPT.md in
 this repo, in full, and follow its boot order exactly before your first real
 reply — ground on the live docs, read the mechanical rules, read the top of
@@ -42,41 +47,41 @@ connected — not "it should be." Until it does that, don't move on. 🎉
 
 ---
 
-## 2 · Designer — the look (boot when your project has a visual side)
+## 2 · Creative Director — the look (boot when your project has a visual side)
 
 Skip this one if your first mission is text-only; add it the day you need a look.
-**Cowork tells you when it's time and writes the brief** — you don't have to guess.
+**Team Leader tells you when it's time and writes the brief** — you don't have to guess.
 
-**One-time setup:** add the `designer-boot` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Cowork and Coach seats. (Prefer pasting the boot file? The block below still works.)
+**One-time setup:** add the `designer-boot` skill via the **Claude Design canvas skill picker** (live as of 2026-07-23) — the same one-time, invoke-by-name shape as your Team Leader and Coach seats. *The card is still named for the old seat name; the seat is Creative Director.* (Prefer pasting the boot file? The block below still works.)
 
 **The room:** the **Claude Design** canvas.
 **Paste this at the top of a new Design session:**
 
 ```
-Boot as the Designer seat of my factory. Read seats/_shared/BOOT-COMMON.md and
-seats/designer/BOOT-PROMPT.md in
+Boot as the Creative Director seat of my factory. Read seats/_shared/BOOT-COMMON.md
+and seats/designer/BOOT-PROMPT.md in
 this repo, in full, and follow its boot order before your first deliverable.
 You are read-only on code and deliver through me — export your work and I'll
-carry it into the repo's inbox/drop/ folder for Cowork to place by PR. Cowork
-has a brief for you; I'll paste it next.
+carry it into the repo's inbox/drop/ folder for Engineer to place by PR. Team
+Leader has a brief for you; I'll paste it next.
 ```
 
-Then paste the brief Cowork gave you. Designer's finished work leaves the canvas
-as an export **you** carry in — the same gate as everything. 🎉
+Then paste the brief Team Leader gave you. Creative Director's finished work leaves
+the canvas as an export **you** carry in — the same gate as everything. 🎉
 
 ---
 
-## 3 · Code — the builder (already awake; it works last, not first)
+## 3 · Engineer — the builder (already awake; it works last, not first)
 
 **The room:** the **Code** tab, with this repo attached.
-**No paste needed** — Code boots itself the moment the repo is attached, and it
+**No paste needed** — Engineer boots itself the moment the repo is attached, and it
 proves its own access before doing anything.
 
-Here's the part people get backwards: **Code does not start the building.** It
-builds what **Cowork has specced** and what gets **checked before it reaches you**.
-If you ask Code to build something before Cowork has booted, Code will stop and
-walk you back here — that's it doing its job, not refusing yours. Once there's a
-merged spec, Code turns it into a pull request for you to merge. 🎉
+Here's the part people get backwards: **Engineer does not start the building.** It
+builds what **Team Leader has specced** and what gets **checked before it reaches you**.
+If you ask Engineer to build something before Team Leader has booted, Engineer will
+stop and walk you back here — that's it doing its job, not refusing yours. Once
+there's a merged spec, Engineer turns it into a pull request for you to merge. 🎉
 
 ---
 
@@ -94,7 +99,7 @@ state-of-the-factory from what you actually read — journal top, open PRs, the
 current spec — not from memory.
 ```
 
-Coach briefs and recommends; it never holds the pen on plans (that's Cowork).
+Coach briefs and recommends; it never holds the pen on plans (that's Team Leader).
 Useful precisely because it's light. 🎉
 
 ---
@@ -130,7 +135,7 @@ So the rule, both directions:
 > **The repo is the original; the card is a copy. Change the repo first, by pull request, then
 > re-upload the card. Never the other way round, and never only in Settings.**
 
-If you've already made a Settings-only tweak and it's a good one — bring it back: tell Code what
+If you've already made a Settings-only tweak and it's a good one — bring it back: tell Engineer what
 you changed and it'll open a PR putting it in the repo where it belongs. That's not a telling-off,
 it's how a good idea stops being fragile.
 
@@ -142,10 +147,10 @@ from the card's own memory instead is the drift, showing itself.
 
 ## The shape, in one breath
 
-**Cowork leads → Designer shows (when needed) → Code builds → you merge.** Every
-change is a proposal you say yes to, and no seat ever checks its own work. Boot
-them in that order and the factory runs the way it's meant to — with you as the
-one gate the whole thing turns on.
+**Team Leader leads → Creative Director shows (when needed) → Engineer builds → you
+merge.** Every change is a proposal you say yes to, and no seat ever checks its own
+work. Boot them in that order and the factory runs the way it's meant to — with you
+as the one gate the whole thing turns on.
 
 *Truly stuck on any of this?* A trusted person can help you the safe way —
 their own computer, their own login, fixes arriving as pull requests only you

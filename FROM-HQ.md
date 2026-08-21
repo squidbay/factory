@@ -13,6 +13,12 @@ The notes below began life in that journal, back when template news and your tea
 
 **How this page rolls.** This file keeps roughly the ten most recent notes — enough to see where the template has been lately without the page growing without end. The permanent record of every update from **2026-07-23.1 (#12)** onward *is* the template's [GitHub Releases](https://github.com/squidbay/factory/releases) history: each release is one of these notes, dated and tagged, kept for good. The notes that shipped *before* the update lane moved onto Releases — the **pre-Release backlog (#2–#11)** — have no release of their own, so the full history is mirrored in the one correct in-repo home: [`versions/FROM-HQ-ARCHIVE.md`](versions/FROM-HQ-ARCHIVE.md). So when a note ages past the recent window it simply rolls off here, already preserved (in Releases, in the archive, or both). Two hard rules on that roll: it never touches your own [`journal.md`](journal.md) — that page is your team's memory, and HQ never writes or files there — and the in-repo archive home is [`versions/`](versions/README.md), never your journal.
 
+- **The notes below are dated history, kept as written.** A note from July says "Cowork," "Code
+  seat," or "Designer" because that is what the seats were called the day it shipped. Your live
+  roster is four — **Coach · Team Leader · Engineer · Creative Director**, with Dispatch and Claude
+  in Chrome as *tools* rather than seats — and [`FACTORY.md`](FACTORY.md) §The team is where you read
+  it. Nothing here is routing; it is a changelog.
+
 ---
 
 ## #15 — 2026-07-26 — Your factory arrives named, and every seat reports status the same way

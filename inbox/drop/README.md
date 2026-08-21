@@ -1,16 +1,16 @@
 # inbox/drop — where you hand the team a file
 
-This folder is where **you** (the human) drop things that arrive from outside the repo — most often the Designer seat's exports from the canvas, since the design lane deliberately has no write path of its own, but really anything you want the team to see: a PDF, a photo, a contract, a screenshot, a Word document.
+This folder is where **you** (the human) drop things that arrive from outside the repo — most often Creative Director's exports from the canvas, since the design lane deliberately has no write path of its own, but really anything you want the team to see: a PDF, a photo, a contract, a screenshot, a Word document.
 
-The route, always: **you drop it here → Cowork relocates it home by PR → you merge.** The carry step isn't friction to optimize away — it *is* the gate, applied to the lanes that produce files outside the repo.
+The route, always: **you drop it here → Engineer relocates it home by PR, under Team Leader's audit → you merge.** The carry step isn't friction to optimize away — it *is* the gate, applied to the lanes that produce files outside the repo.
 
-Anything sitting in this folder is unsorted by definition. Cowork's job on seeing something here: open the PR that moves it to its real home (a design system folder, a mission's assets, wherever it belongs) and leave this folder empty again.
+Anything sitting in this folder is unsorted by definition. The team's job on seeing something here: Team Leader specs it, Engineer opens the PR that moves it to its real home (a design system folder, a mission's assets, wherever it belongs) and leave this folder empty again.
 
 ## Drop anything. A readable copy appears beside it.
 
 Here is the thing nobody tells you, and it cost this factory a whole evening:
 
-**Your chat seats read this repo as text.** Cowork, Coach, Designer, and Coach live in a chat window, and a chat window can only read words. A PDF, a photo, a scan, a Word document — to them that is a wall of unreadable bytes. Not "hard to read." *Invisible.* You could drop a perfect file, follow every instruction exactly, and the team would quietly have no idea what was in it.
+**Your card-booted seats read this repo as text.** Coach, Team Leader and Creative Director live in a chat window, and a chat window can only read words. A PDF, a photo, a scan, a Word document — to them that is a wall of unreadable bytes. Not "hard to read." *Invisible.* You could drop a perfect file, follow every instruction exactly, and the team would quietly have no idea what was in it.
 
 So the factory converts it for you. Within about a minute of your file landing here:
 
@@ -31,7 +31,7 @@ So the factory converts it for you. Within about a minute of your file landing h
 | **Scanned PDF** (photographs of pages) | A note saying it was scanned, so nobody reports it as broken |
 | **Anything already text** (`.md`, `.txt`, `.csv`, …) | Nothing — the seats can already read those |
 
-For the two "a note instead" cases: that note is not a failure, it's a handoff. It tells whichever seat picks the file up that **somebody has to look at it with their eyes** — the Code seat can open images directly, and you can attach an image straight into a chat seat's conversation. The whole point is that no seat ever says "I can't read this" and stops there.
+For the two "a note instead" cases: that note is not a failure, it's a handoff. It tells whichever seat picks the file up that **somebody has to look at it with their eyes** — the Engineer seat can open images directly, and you can attach an image straight into a chat seat's conversation. The whole point is that no seat ever says "I can't read this" and stops there.
 
 ## Three things worth knowing
 

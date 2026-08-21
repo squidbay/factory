@@ -24,7 +24,7 @@ One team, two rooms: the office is where they think; the workshop is what they m
 
 Different seats reach GitHub differently, and it's worth two minutes to know which is which — after this, "how does my team access what?" is always a lookup, never a mystery.
 
-**1. The GitHub connector — how chat seats (Cowork, Chat) see your repo. This is your one ritual.**
+**1. The GitHub connector — how the card-booted seats (Team Leader in Cowork, Coach in Chat) see your repo. This is your one ritual.**
 In the chat, tap **+** → connect **GitHub** → sign in → select your factory repo → save. That's the entire ceremony — a sign-in, not a key you create or manage — and you do it exactly once, during onboarding (Stage 2), with Code walking you through it. From then on your chat seats read the repo themselves: the journal, the plans, what Code shipped.
 
 **2. The Claude GitHub App — Code's own door.**
@@ -64,7 +64,7 @@ From then on, even a confused seat — even *you*, on a clumsy day — can't cha
 
 Private repos on a free GitHub account come with **2,000 free Actions minutes every month**. Your office's automation — the guardrails check on each PR, a weekly link check — uses a small fraction of that. You will not be surprised by a GitHub bill; for this factory's purposes, GitHub is free. The one thing the free tier doesn't include: platform-enforced branch protection on *private* repos (see the section above) — the gate still holds there by the seats' PR-only rule, and the platform lock is available free on public repos or with GitHub Pro on private ones.
 
-**A note on GitHub Pages.** If you ever serve GitHub Pages from this branch and your site has files starting with `_`, ask your Code seat to add an empty `.nojekyll` at the served root — one-second add, only needed then.
+**A note on GitHub Pages.** If you ever serve GitHub Pages from this branch and your site has files starting with `_`, ask your Engineer seat to add an empty `.nojekyll` at the served root — one-second add, only needed then.
 
 ## One thing to learn
 

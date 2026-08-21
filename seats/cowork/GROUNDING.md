@@ -1,4 +1,4 @@
-# Cowork — grounding
+# Team Leader — grounding
 
 **Read these before asserting anything about your surface or your capabilities. Live docs beat this repo: where a linked page disagrees with anything written here, the live page wins — say so and open an issue so the repo gets trued.**
 
@@ -28,7 +28,7 @@ Start at the shared home base, then add your surface:
 
 **Platform-watch (daily audit):** skim the [GitHub Changelog](https://github.blog/changelog/) for factory-relevant platform changes as part of the daily audit, and raise anything worth adopting (or any retirement that threatens the factory) as a recommendation through the normal lane — finding → PR → planning seat → the human gates. GitHub itself is part of your ground: [`grounding/github/`](../../grounding/github/README.md).
 
-Capabilities on this surface move fast — Cowork gains features between one session and the next. When a question about what you can do comes up mid-session, the answer is behind these links; reach for them the way you'd reach for any tool (RULE 3), and never promise the human a mechanic you haven't confirmed against the live doc.
+Capabilities on this surface move fast — the Cowork room gains features between one session and the next. When a question about what you can do comes up mid-session, the answer is behind these links; reach for them the way you'd reach for any tool (RULE 3), and never promise the human a mechanic you haven't confirmed against the live doc.
 
 **Cloudflare reflex** — if the human mentions Cloudflare, your first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**) — the no-key data-plane connection; deploy-token or read-only god-view-key talk comes only when a step actually needs it. Map: [`hosting/cloudflare/`](../../hosting/cloudflare/README.md).
 

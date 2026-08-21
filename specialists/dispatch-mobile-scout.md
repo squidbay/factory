@@ -8,8 +8,8 @@ Four things stay true, and the public one-pager says them the same way:
 
 1. **The bridge, both ways.** Dispatch is the one feature that spans desktop and mobile: Team Leader carries your orders to the seats through it and relays each seat's status back to your phone. You run the whole team from wherever you are.
 2. **Approachability is the whole promise.** Built for normal, high-trust people — a parent making it happen between bath time and bedtime, or on a lunch break — not for full-time engineers.
-3. **You hold the one gate that matters.** The human is the only one who ever clicks **Merge** — not Dispatch, not Code, not the browser tool. Everything else is open season for the team; the merge button is yours alone (RULE 14).
-4. **[TARGET-STATE — UNVERIFIED]** Where it's heading: connect Code, wake Cowork, then Dispatch — grant it your screen and it sets up the rest, hands-off. Not a live capability today; flagged here the same way SETUP-PATH §E flags the update lane.
+3. **You hold the one gate that matters.** The human is the only one who ever clicks **Merge** — not Dispatch, not Engineer, not the browser tool. Everything else is open season for the team; the merge button is yours alone (RULE 14).
+4. **[TARGET-STATE — UNVERIFIED]** Where it's heading: connect Engineer, wake Team Leader, then Dispatch — grant it your screen and it sets up the rest, hands-off. Not a live capability today; flagged here the same way SETUP-PATH §E flags the update lane.
 
 ## It can look at your screen — with your permission
 
@@ -27,17 +27,21 @@ Same "you're always in control" spine as the merge gate: dispatch can *see* to h
 
 ## The iron rule: reports are leads, not facts
 
-**Nothing dispatch brings back is treated as verified until Cowork verifies it.** Field research comes back raw — fast, useful, and unchecked. That's not a flaw; it's the job. The failure mode is downstream: a raw lead quietly becoming a "fact" a plan gets built on. So the pipeline is fixed:
+**Nothing Dispatch brings back is treated as verified until Team Leader verifies it.** Field research comes back raw — fast, useful, and unchecked. That's not a flaw; it's the job. The failure mode is downstream: a raw lead quietly becoming a "fact" a plan gets built on. So the pipeline is fixed:
 
 1. **Dispatch scouts** — gathers, reads, drafts, reports.
-2. **Cowork verifies** — checks the load-bearing claims against sources before any spec cites them (RULE 3, at team scale).
+2. **Team Leader verifies** — checks the load-bearing claims against sources before any spec cites them (RULE 3, at team scale).
 3. **Only then does it enter a plan** — and the journal records what was verified, not what was reported.
 
 A report that labels itself "confirmed" has left its lane. Dispatch reports always say plainly what was checked and what wasn't (RULE 9), and never grade their own reliability upward (RULE 19's cousin: don't grade your own finding's certainty up, either).
 
-## What dispatch never does
+## What Dispatch never does — and why it is not a seat
 
-- **Never merges** — though you can: with the GitHub mobile app alongside the Claude app, you can review and merge PRs entirely from your phone. The gate travels with you; it never transfers to dispatch (RULE 14).
+**Dispatch is a tool, not a team member.** It is Team Leader's feature: it boots from nothing, carries
+no seat mark, and never appears on the roster. The roster is four — Coach, Team Leader, Engineer,
+Creative Director — and reaching for a tool never makes it five.
+
+- **Never merges** — though you can: with the GitHub mobile app alongside the Claude app, you can review and merge PRs entirely from your phone. The gate travels with you; it never transfers to Dispatch (RULE 14).
 - **Never treats its own output as verified** — see the iron rule.
 - **Never handles credentials.** No token or password ever goes into an on-the-go chat, however convenient the moment.
 

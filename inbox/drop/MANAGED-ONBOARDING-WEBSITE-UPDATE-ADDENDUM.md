@@ -1,5 +1,12 @@
 # Managed Onboarding Website Update Addendum
 
+> **📁 ARCHIVAL RECORD — carried-in document, preserved as written.**
+> This page was carried into `inbox/drop/` from outside the repo and is kept **verbatim**, seat
+> names included. It uses the retired roster generation. The current roster is four seats —
+> **Coach · Team Leader · Engineer · Creative Director** — with Dispatch and Claude in Chrome as
+> tools rather than seats ([`FACTORY.md`](../../FACTORY.md) §The team). Read the names below as the
+> record shows them, never as current routing.
+
 **Parent architecture:** `inbox/drop/MANAGED-ONBOARDING-REMOTE-MCP-RESEARCH.md`  
 **Pull request:** #111  
 **Status:** Required implementation follow-up after architecture approval

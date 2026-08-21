@@ -8,12 +8,12 @@ The one idea underneath everything below: **a capability is real only when the l
 
 Before anything, a seat says one plain sentence about **where it's running**, because that changes what it can do:
 
-- **Desktop app** — the full surface. **Code** boots automatically the moment your office repo is attached; the chat seats live in their rooms.
+- **Desktop app** — the full surface. **Engineer** boots automatically the moment your office repo is attached; the chat seats live in their rooms.
 - **Web (claude.ai)** — a narrower surface. Here the one seat with real repo hands is **Claude Code on the web**; the web chat rooms cannot reach GitHub at all.
 
 **The routing rule that follows from that:**
 - **You arrived on the web** → do repo work in **Claude Code (web)**, or install the **desktop app** for the full team. Never point a web chat room at GitHub work — it has no hands there.
-- **You're on the desktop** → **Code** auto-boots from the repo; the chat seats get their hands through the shared connection in step 3 below.
+- **You're on the desktop** → **Engineer** auto-boots from the repo; the chat seats get their hands through the shared connection in step 3 below.
 
 A seat names its environment up front so a hands-on step never fails silently in the wrong place.
 
@@ -30,18 +30,18 @@ When these disagree, **gate 4 wins.** A card that says "opens pull requests" is 
 
 ## Step 1 — the three grants, each with its mini-probe
 
-**The Claude GitHub App (read + write).** This is what gives **Code** real hands on your repos — read everything, and **branch + open a PR** (never write `main`, never merge; that stays yours). Install it on your GitHub account for your office repo.
-- *Mini-probe:* Code lists the repo's files (read) and creates a throwaway branch (write, create-only). Both work → the App is truly on. If read works but the branch-create fails, the **GitHub-side install is the missing half** — the fix is on GitHub, not in Claude.
+**The Claude GitHub App (read + write).** This is what gives **Engineer** real hands on your repos — read everything, and **branch + open a PR** (never write `main`, never merge; that stays yours). Install it on your GitHub account for your office repo.
+- *Mini-probe:* Engineer lists the repo's files (read) and creates a throwaway branch (write, create-only). Both work → the App is truly on. If read works but the branch-create fails, the **GitHub-side install is the missing half** — the fix is on GitHub, not in Claude.
 
-**The Claude Design Import app (read-only).** This is how **Designer** reads your repo from the canvas. It is **read-only by design** — Designer never branches, commits, or opens a PR; its deliverables come to you and Code lands them.
-- *Mini-probe:* Designer reads a file from the repo. Read works, and there is simply no write tool to find — that's correct, not a gap.
+**The Claude Design Import app (read-only).** This is how **Creative Director** reads your repo from the canvas. It is **read-only by design** — Creative Director never branches, commits, or opens a PR; its deliverables come to you and Engineer lands them.
+- *Mini-probe:* Creative Director reads a file from the repo. Read works, and there is simply no write tool to find — that's correct, not a gap.
 
 **The Cloudflare Developer Platform connector (no key).** The no-token data-plane connection to your hosting — connect it the moment a mission mentions Cloudflare (Settings → Connectors, or **+ → Connectors** in a chat). Full map: [`hosting/cloudflare/README.md`](../hosting/cloudflare/README.md).
 - *Mini-probe:* a seat lists your Workers / D1 / KV. It reads → the connection is live. (What it deliberately *can't* do — deploy, change DNS — is the intended gate.)
 
 ## Step 2 — give the chat rooms their hands (desktop): one shared connection
 
-On the **desktop**, the chat rooms (Coach, Cowork, and any other chat seat) don't get GitHub hands from the App above — they share **one local connection** you set up once. This is the step that makes the whole plan real on day one.
+On the **desktop**, the chat rooms (Coach in Chat, Team Leader in Cowork) don't get GitHub hands from the App above — they share **one local connection** you set up once. This is the step that makes the whole plan real on day one.
 
 **It's ONE server and ONE token:**
 
@@ -69,4 +69,4 @@ That local connection can be wiped by an ordinary event: **quitting the app, or 
 
 Read this list once and the pattern is clear: **install → connect → scope → and always, always probe the live tools.** Grants are cheap; the probe is what makes them *true*. A seat that says "you're all set" without a mini-probe hasn't finished the step — and now you know to ask for the probe.
 
-*(Workshops later: when a mission needs a second repo, add it to the Claude App so Code can read/write and open PRs on it, and add the same repo to your PAT's selected list so the chat rooms can read it too. Everything else — the specialists, plugins, branch protection — comes after this first-contact set is proven.)*
+*(Workshops later: when a mission needs a second repo, add it to the Claude App so Engineer can read/write and open PRs on it, and add the same repo to your PAT's selected list so the chat rooms can read it too. Everything else — the two tools, plugins, branch protection — comes after this first-contact set is proven.)*

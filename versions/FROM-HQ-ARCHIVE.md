@@ -1,5 +1,10 @@
 # Archive — HQ update notes (complete history)
 
+> **📁 ARCHIVAL RECORD — dated template news, preserved as written.**
+> These notes use the seat names current on the day each one shipped. Your live roster is four —
+> **Coach · Team Leader · Engineer · Creative Director**, with Dispatch and Claude in Chrome as
+> tools rather than seats ([`../FACTORY.md`](../FACTORY.md) §The team). Nothing below is routing.
+
 This file is the **in-repo permanent archive** of every [`FROM-HQ.md`](../FROM-HQ.md)
 update note, oldest kept here so the live page can stay at its ~ten-note window
 without any note being lost.

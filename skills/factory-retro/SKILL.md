@@ -1,6 +1,6 @@
 ---
 name: factory-retro
-description: "The factory learning to run itself better. Explicit-invoke: run when the human asks for a retro ('how are we doing?', 'what keeps going wrong?', '/factory-retro'), or on a schedule the human sets. Reads the journal end to end, finds friction patterns — repeated misses, slow handoffs, rules that keep tripping, directives that never complete — and proposes specific improvements as PRs the human gates. Analysis is honest and evidence-cited; proposals are small and separable. Usually run by Cowork."
+description: "The factory learning to run itself better. Explicit-invoke: run when the human asks for a retro ('how are we doing?', 'what keeps going wrong?', '/factory-retro'), or on a schedule the human sets. Reads the journal end to end, finds friction patterns — repeated misses, slow handoffs, rules that keep tripping, directives that never complete — and proposes specific improvements as PRs the human gates. Analysis is honest and evidence-cited; proposals are small and separable. Usually run by Team Leader."
 ---
 
 # Factory Retro — read the memory, find the friction, propose the fix

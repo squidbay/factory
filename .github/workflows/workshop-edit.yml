@@ -22,7 +22,7 @@ name: workshop-edit
 #   - GitHub won't let a workflow choose a secret by a name it builds at run
 #     time (a safety limit), so the write keys are listed explicitly in the
 #     WIRING BLOCK below — one line per workshop. Adding a workshop means
-#     adding one line here, which is itself a pull request a Code seat opens.
+#     adding one line here, which is itself a pull request an Engineer seat opens.
 #   - Each workshop's write key is its OWN key, scoped to that ONE repo, kept
 #     as an Actions secret named WORKSHOP_<NAME>_WRITE and nowhere else. The
 #     full click-by-click is in guides/WORKSHOPS.md.

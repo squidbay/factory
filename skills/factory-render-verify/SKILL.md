@@ -1,6 +1,6 @@
 ---
 name: factory-render-verify
-description: "Render-and-measure receipts for any HTML page your factory builds — the render half of the design quality gate. Code runs it to screenshot every screen size and MEASURE what a source read or a single screenshot only guesses at: horizontal overflow, computed type sizes, tap-target sizes, safe-area presence, mono misuse. It pins the page source by hash so the exact bytes you approved can be re-checked after deploy. Invoke when Code has built or changed a page, when verifying a Designer return, or before a page ships. Produces receipts (a JPG per size + report.json) so a page is never shipped on trust."
+description: "Render-and-measure receipts for any HTML page your factory builds — the render half of the design quality gate. Engineer runs it to screenshot every screen size and MEASURE what a source read or a single screenshot only guesses at: horizontal overflow, computed type sizes, tap-target sizes, safe-area presence, mono misuse. It pins the page source by hash so the exact bytes you approved can be re-checked after deploy. Invoke when Engineer has built or changed a page, when verifying a Creative Director return, or before a page ships. Produces receipts (a JPG per size + report.json) so a page is never shipped on trust."
 ---
 
 # factory-render-verify — receipts, not vibes
@@ -9,7 +9,7 @@ A page can look right in one browser window and fall apart on a phone, in landsc
 wide monitor — and you would never know from reading the code. This skill renders the real page
 at every screen size, measures the things that actually break, and writes the results to disk as
 **receipts**: a screenshot per size plus a `report.json` of hard numbers. Code attaches those to
-the pull request; Cowork audits against them; you merge. Receipts are the gate, not the claim.
+the pull request; Team Leader audits against them; you merge. Receipts are the gate, not the claim.
 
 This is the **render half of the design quality gate** — [`guides/DESIGN-QUALITY-GATE.md`](../../guides/DESIGN-QUALITY-GATE.md) is the contract that says what "done" means; this skill is how STEP 7's visual QA gets proven instead of asserted.
 
@@ -107,4 +107,4 @@ have to guess which library.
 
 - **Render the actual page, never assert layout from source.** A tool that observes the runtime beats any amount of reading the code.
 - **Every size, every round.** Do not declare "mobile is fixed" from one screenshot — the whole point is the sizes you weren't looking at.
-- **Receipts inform the PR; the merge stays yours.** Code renders and attaches; Cowork audits against the receipts; you click merge. Nothing lands on trust.
+- **Receipts inform the PR; the merge stays yours.** Engineer renders and attaches; Team Leader audits against the receipts; you click merge. Nothing lands on trust.

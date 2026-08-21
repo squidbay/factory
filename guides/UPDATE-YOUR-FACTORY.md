@@ -27,9 +27,9 @@ it, everything below is true again.
 If `rm -rf` isn't there, you're already on the safe updater and the rest of this
 page is yours as written.
 
-## The simplest way: ask your Code seat
+## The simplest way: ask your Engineer seat
 
-You don't need to know any of the machinery. Open your Code seat and say, in
+You don't need to know any of the machinery. Open your Engineer seat and say, in
 plain words:
 
 > **"check for factory updates"**

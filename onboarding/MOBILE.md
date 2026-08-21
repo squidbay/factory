@@ -6,7 +6,7 @@ The gate of this whole system is a button, and the button works from a phone. Tw
 
 Sessions you start on the desktop can be picked up and steered from the Claude mobile app (and the web) — same session, same context. Dispatch a research task from the parking lot; check how a build is going from the couch. Scheduled work runs without any device of yours online.
 
-*What still wants the desktop app open:* anything touching local folders or a live browser (the Inspector). The chat-side seats travel with you.
+*What still wants the desktop app open:* anything touching local folders or a live browser (Claude in Chrome). The chat-side seats travel with you.
 
 ## GitHub Mobile — review and merge from anywhere
 
